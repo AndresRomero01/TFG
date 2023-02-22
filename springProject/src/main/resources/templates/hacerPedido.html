@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <title>Restaurant.es: Pedir</title>
+    <link rel="stylesheet" href="css/hacerPedido.css" />
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+    <main class="flex-shrink-0">
+        <div class="container">
+            <h1 class="mt-5">Hacer pedido</h1>
+        </div>
+        
+    </main>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row row-Elegir" >
+                    <h2>Elige tus platos</h2>
+                </div>
+                
+                <div class="row row-Mostrar" >
+                    <div id="mostrarListaCompletaPlatos">
+
+                        <th:block th:each="cat,iter: ${categorias}"><!-- Se recorre la lista de categorias -->
+                            <h3 th:text="${cat.nombre}">Entrantes</h3>
+
+                            <div th:each="plato: ${cat.platos}" class="row cartita">
+                                <div class="col-md-2">
+                                    <img class="img caratula" th:src="@{/img/platos/{id}.jpg(id=${plato.id})}" src="/img/logo.png" alt="carta IW" width="80" height="80">
+                                    </div>
+                                    <div class="col">
+                                    <div class="titulo-plato"  th:text="${plato.nombre}" >Ensalada</div>
+                                    <div th:text="${plato.descripcion}">
+                                        <p>Descripción</p>
+                                    </div>  
+                                </div>
+                                <div class="col">
+
+
+                                    <div style="text-align: right;">
+                                        
+                                        <div class="col divcantidad">
+                                            <input class='cantidad-plato' type="number" value="1"  min="0" max="99" >
+                                            </div>
+
+                                         <!-- Escribimos el precio por separado para poder sumar los numeros y no tener que recortar -->
+                                         <div class="precio" th:text="${plato.precio} + '€'">9.90</div>
+   
+
+                                        <button type="button" th:value="${plato.id}" class="btn btn-primary button btn-Second">Comprar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </th:block>
+
+                    </div>
+                </div>
+            </div>
+        
+
+            <!-- AQUI EMPIEZA EL CARRITO -->
+            <div class="col-md-4 offset-1">
+                <div class="row row-Carrito" >
+                    <h2>Carrito</h2>
+                </div>
+
+                
+                <div class="row row-CarroEntero" >
+                <div class="CarroEntero">
+                <div class="mostrarCarrito">
+                       
+
+                   </div>
+                        <div class="row">
+                            <div class="col totalCarrito">Total: 0€</div>
+                            
+                            <div class="col-9">
+                                <div style="text-align: right;">
+                                        <button type="button" class="btn btn-primary btn-sm botonfinalizar btn-Second" >Finalizar</button>
+                                </div>
+                                <div style="text-align: right" class="divOpciones">
+                                    <div class="row align-items-center divExpress justify-content-end">
+                                        <div class="check">
+                                        <input type="checkbox" class="servExpress" id="expressCheckbox">
+                                        <label for="expressCheckbox"> Pedido express: 1.99€ </label>
+                                    </div>
+                                        <div class="masInfo" data-toggle="tooltip" id="tooltipdiv" data-placement="top" title="Marca tu pedido como express e intentaremos dar prioridad a tu pedido a la hora de prepararlo">
+                                            ❔
+                                            <div>Mas Info</div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center divExpress justify-content-end">
+                                        <div class="check">
+                                        <input type="checkbox" class="isTakeAway" id="isTakeAwayCheckbox">
+                                        <label for="isTakeAwayCheckbox" > Recoger en tienda </label>
+                                        </div>
+                                        <div class="masInfo" data-toggle="tooltip" id="tooltipdiv" data-placement="top" title="Marca tu pedido para recoger y podras venir a recogerlo. Te avisaremos en su estado en cuanto este listo para recoger">
+                                            ❔
+                                            <div>Mas Info</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>      
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:replace="fragments/footer.html :: footer" />
+
+        <!-- custom js Eros  -->
+        <script src="js/hacerPedido.js"></script>
+</body>
+
+</html>

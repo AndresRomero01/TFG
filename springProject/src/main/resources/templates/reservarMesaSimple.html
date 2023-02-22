@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <title>Restaurant.es: Reservar</title>
+    <link rel="stylesheet" href="css/reservarMesaSimple.css" />
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+    <main class="flex-shrink-0">
+        <div class="container">
+            <h1 class="mt-5">Pagina para reservar mesa</h1>
+        </div>
+        
+    </main>
+
+    <div class="container">
+        <!-- Aqui lo que hago es crear una columna dinamica (flex-column) que tendra tamaño segun su contenido -->
+        <div class="d-flex flex-column" id="contenido">
+            <!-- Primero creo la fila para la cabecera, para cada item se utiliza p-2 -->
+            <div class="p-2 align-self-stretch" id="cabecera">
+                <h3>Elige fecha y dia</h3>
+            </div>
+            <!-- Aqui lo que hago es crear la fila con el calendario y el numero de comensales -->
+            <div class="d-flex p-2" id="calendarPicker">
+                <div class="p-2">
+                    <p>Número de personas: </p>                    
+                </div>
+                <div class="p-2">
+                    <form onsubmit="return false;" id="formComensales">
+                        <input id="comensales" type="number" min="1" max="15" value="1">
+                    </form>
+                </div>
+                <div class="p-2">
+                    <p>Dia: </p>
+                </div>
+                <div class="p-2" id="calendario">
+                    <input type="date" class="fechaReserva" id="start" name="trip-start" min="2022-01-01" max="2025-12-31">                
+                </div>               
+            </div>
+
+            <div class="row justify-content-center" id="horasBody"></div>
+
+            <!-- Creo una fila con otro d-flex que ponga su contenido al final para poner el boton -->
+            <div class="d-flex p-2 justify-content-end" id="aceptar">
+                <div class="p-2">
+                    <button type="button" id="botonElegir">Elegir</button>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <th:block th:replace="fragments/footer.html :: footer" />
+
+    <!-- custom js Eros  -->
+    <script src="js/reservarMesaSimple.js"></script>
+</body>
+
+</html>

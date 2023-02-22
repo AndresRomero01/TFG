@@ -1,0 +1,133 @@
+/* Este margen es para que los campos input del modal queden espaciados
+(excluyendo al primer input)*/
+.modalLabel{
+    margin-top: 1em;
+}
+
+#botonAnadirEmpleado{
+    margin-top: 3%;
+}
+
+
+/* Cuadro de la parte superior izquierda con los parametros del restaurante */
+.paramsrow{
+    background-color: #783848;
+    height: 20em;
+    border-radius: 10px;
+    color:#F2E4D8;
+}
+
+/* Cuadro grande de las categorias */
+.paramsCategorias{
+    background-color:#783848;
+    margin-top: 5%;
+    border-radius: 10px;
+}
+
+/* Cada fila de las categorias */
+.categoriarow{
+    background-color: #ffffff;
+    margin-top: 1%;
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-bottom: 1%;
+    border-radius: 10px;
+}
+
+.categoTitle{
+    margin-top: 2%;
+    margin-left: 0.1%;
+    color:#F2E4D8
+}
+
+.emplist{
+    height: 42em;
+    background-color:#783848;
+    overflow: auto;
+    border-radius: 10px;
+    color:#F2E4D8
+}
+
+.emprow{
+    color:#000000;
+    background-color: #ffffff;
+    margin-top: 2%; 
+    margin-right: 2%; 
+    margin-left: 2%; 
+    margin-bottom: 2%; 
+    border-radius: 10px;
+}
+
+#modalAnadirEmpleado{
+    color:black
+}
+
+.divImg{
+    background-color:#783848;
+    margin-top: 5%;
+    border-radius: 10px;
+}
+
+.divImg img{
+    width: 90%;
+    object-fit: cover;
+    margin:auto;   
+    background-color: transparent;
+    border-color: transparent;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em; 
+}
+
+.divImg input{
+    margin:auto;
+    margin-top: 0.5em;
+    width: 50%;
+    margin-bottom: 0.5em;
+   
+}
+
+.divImg button{
+    margin:auto;
+    width: auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em; 
+}
+
+.subTitle{
+    color:#F2E4D8;
+    margin-top: 0.2em;
+}
+
+.listPlatos{
+    margin-top:1em;
+    height: 300px;
+    background-color:#783848;
+    border-radius: 10px;
+    overflow-y: scroll;
+
+    margin-bottom: 3em;
+}
+
+.popu{
+    text-align: center;
+}
+
+.headerTablaPlatos div{
+    color:#F2E4D8;
+    font-size: x-large;
+}
+
+.contentTablaPlatos div{
+    color:#F2E4D8;
+    margin-top: 0.5em;
+    margin-bottom: 0.5;
+    padding-bottom: 0.2em;
+    border-bottom: #502630;
+    border-bottom-style: solid;
+    border-bottom-width: 0.1em;
+}
+
+.contentTablaPlatos a{
+    color:#F2E4D8;
+    text-decoration: none;
+}
