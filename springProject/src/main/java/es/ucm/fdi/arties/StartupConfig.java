@@ -1,4 +1,4 @@
-package es.ucm.fdi.iw;
+package es.ucm.fdi.arties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

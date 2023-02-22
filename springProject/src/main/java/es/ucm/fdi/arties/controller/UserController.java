@@ -1,8 +1,4 @@
-package es.ucm.fdi.iw.controller;
-
-import es.ucm.fdi.iw.LocalData;
-import es.ucm.fdi.iw.model.User;
-import es.ucm.fdi.iw.model.User.Role;
+package es.ucm.fdi.arties.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,6 +27,11 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
+import es.ucm.fdi.arties.LocalData;
+import es.ucm.fdi.arties.model.User;
+import es.ucm.fdi.arties.model.User.Role;
+
 import java.io.*;
 import java.security.SecureRandom;
 import java.util.Base64;

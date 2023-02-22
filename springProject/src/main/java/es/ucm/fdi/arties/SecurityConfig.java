@@ -1,4 +1,4 @@
-package es.ucm.fdi.iw;
+package es.ucm.fdi.arties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -55,12 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/**", "/nuevoPlato", "/existeUsuario", "/anadirEmpleado").hasRole("ADMIN")	   // <-- administration
 	           // .antMatchers("method").hasAnyRole("USER", "EMPLEADO")	   // <-- logged-in users
 			   .antMatchers("/user/**").hasAnyRole("USER", "EMPLEADO")	
-				.antMatchers("/empleado/**", "/actualizarEstPed", "/historicoPedidos", "/aceptarPed").hasAnyRole("EMPLEADO", "ADMIN")	   
-				.antMatchers("/reservarMesa/**", "/realizarReserva").hasAnyRole("USER", "ADMIN", "EMPLEADO")
-				.antMatchers("/hacerPedido", "/notificacionPendiente").hasRole("USER")
-				.antMatchers("/verReservas", "/hacerComentario").hasAnyRole("ADMIN", "EMPLEADO", "USER")
-				.antMatchers("/pedidos").hasAnyRole("USER", "ADMIN", "EMPLEADO")
-				.antMatchers("/configuracion", "/borrarComentario", "anadirUsuario", "/cambiarImgRest").hasRole("ADMIN")
 	            .anyRequest().authenticated()
 	            .and()
 			.formLogin()
@@ -87,8 +81,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * This is used to translate from Spring Security users to in-application users.
 	 */
 	@Bean
-	public IwUserDetailsService springDataUserDetailsService() {
-		return new IwUserDetailsService();
+	public ArtiesUserDetailsService springDataUserDetailsService() {
+		return new ArtiesUserDetailsService();
 	} 
 	
 	/**

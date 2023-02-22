@@ -1,4 +1,4 @@
-package es.ucm.fdi.iw.model;
+package es.ucm.fdi.arties.model;
 
 /**
  * Used to json-ize objects

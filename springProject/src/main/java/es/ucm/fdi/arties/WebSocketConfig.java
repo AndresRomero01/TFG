@@ -1,4 +1,4 @@
-package es.ucm.fdi.iw;
+package es.ucm.fdi.arties;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -26,6 +26,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     // poner aquí los websockets que vas a utilizar
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic", "/queue", "/nuevoPedidoWebSocket", "/misPedidos", "/ver/misPedidos", "/ver/ranking", "/nombreResSocket");
+        config.enableSimpleBroker("/topic", "/queue", "/ver/misPedidos", "/ver/ranking", "/nombreResSocket");
     }
 }

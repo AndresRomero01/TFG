@@ -1,4 +1,4 @@
-package es.ucm.fdi.iw;
+package es.ucm.fdi.arties;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -17,8 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import es.ucm.fdi.iw.model.User;
-//import es.ucm.fdi.iw.model.User.Role;
+import es.ucm.fdi.arties.model.User;
 
 /**
  * Called when a user is first authenticated (via login).

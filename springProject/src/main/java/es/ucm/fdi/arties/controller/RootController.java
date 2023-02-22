@@ -1,4 +1,4 @@
-package es.ucm.fdi.iw.controller;
+package es.ucm.fdi.arties.controller;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -20,6 +20,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
+import es.ucm.fdi.arties.model.Transferable;
+import es.ucm.fdi.arties.model.User;
+import es.ucm.fdi.arties.model.book;
+import es.ucm.fdi.arties.model.User.Role;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.util.json.JSONParser;
@@ -36,10 +41,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.ucm.fdi.iw.model.Transferable;
-import es.ucm.fdi.iw.model.User;
-import es.ucm.fdi.iw.model.book;
-import es.ucm.fdi.iw.model.User.Role;
 import netscape.javascript.JSException;
 
 /**

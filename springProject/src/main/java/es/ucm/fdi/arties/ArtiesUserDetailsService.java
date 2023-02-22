@@ -1,4 +1,4 @@
-package es.ucm.fdi.iw;
+package es.ucm.fdi.arties;
 
 import java.util.ArrayList;
 
@@ -12,14 +12,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import es.ucm.fdi.iw.model.User;
+import es.ucm.fdi.arties.model.User;
 
 /**
  * Authenticates login attempts against a JPA database
  */
-public class IwUserDetailsService implements UserDetailsService {
+public class ArtiesUserDetailsService implements UserDetailsService {
 
-	private static Logger log = LogManager.getLogger(IwUserDetailsService.class);
+	private static Logger log = LogManager.getLogger(ArtiesUserDetailsService.class);
 
     private EntityManager entityManager;
     

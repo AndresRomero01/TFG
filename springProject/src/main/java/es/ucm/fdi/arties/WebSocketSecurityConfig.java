@@ -1,10 +1,10 @@
-package es.ucm.fdi.iw;
+package es.ucm.fdi.arties;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
 import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;
 
-import es.ucm.fdi.iw.model.User;
+import es.ucm.fdi.arties.model.User;
 
 /**
  * Similar to SecurityConfig, but for websockets that use STOMP.

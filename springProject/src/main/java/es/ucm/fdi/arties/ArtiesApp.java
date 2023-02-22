@@ -1,13 +1,13 @@
-package es.ucm.fdi.iw;
+package es.ucm.fdi.arties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IwApplication {
+public class ArtiesApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IwApplication.class, args);
+		SpringApplication.run(ArtiesApp.class, args);
 	}
 
 }
