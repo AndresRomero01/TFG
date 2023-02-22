@@ -18,29 +18,10 @@ import java.util.Arrays;
 @NamedQueries({
         @NamedQuery(name="User.byUsername",
                 query="SELECT u FROM User u "
-                        + "WHERE u.username = :username AND u.enabled = TRUE"),
-        @NamedQuery(name="User.byId",
-                query="SELECT u FROM User u "
-                        + "WHERE u.id = :idUser AND u.enabled = TRUE"),
-        @NamedQuery(name="User.hasUsername",
-                query="SELECT COUNT(u) "
-                        + "FROM User u "
-                        + "WHERE u.username = :username"),
-        @NamedQuery(name="User.existsUsername",
-                query="SELECT u "
-                        + "FROM User u "
-                        + "WHERE u.username = :username"),
-        @NamedQuery(name="User.byEmail",
-                query="SELECT u "
-                        + "FROM User u "
-                        + "WHERE u.email = :email"),
-        @NamedQuery(name="User.byRol",
-                query="SELECT u "
-                        + "FROM User u "
-                        + "WHERE u.roles = :rol AND u.enabled = TRUE")                                   
-})
+                        + "WHERE u.username = :username AND u.enabled = TRUE")                           
+        })
 
-@Table(name="IWUser")
+@Table(name="ArtiesUser")
 public class User implements Transferable<User.Transfer> {
 
     public User (String username, String password, String firstName, 
@@ -78,16 +59,9 @@ public class User implements Transferable<User.Transfer> {
     private String direccion;
     private String telefono;
 
-    /* @OneToMany (mappedBy = "cliente")
-    private List<Reserva> reservas;
-
-    @OneToMany (mappedBy = "cliente")
-    private List<Valoracion> valoraciones; */
-
     private boolean enabled;
     private String roles; // split by ',' to separate roles
 	
-
     /**
      * Checks whether this user has a given role.
      * @param role to check
