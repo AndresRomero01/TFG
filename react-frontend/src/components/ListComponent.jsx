@@ -15,24 +15,24 @@ class ListComponent extends Component {
 
     componentDidMount(){
         APIService.getBooks().then((data) => {
-           // this.setState({ books: data })
-           this.setState({result: data})
+            // this.setState({ books: data })
+            this.setState({result: data})
             //console.log(this.state.data)
-          })
-          .catch(function (ex) {
+        })
+        .catch(function (ex) {
               console.log('Response parsing failed. Error: ', ex);
-          });;
+        });;
 
 
 
-          APIService.getBooks2().then((data) => {
-             this.setState({ books: data })
-           // this.setState({result: data})
+        APIService.getBooks2().then((data) => {
+            this.setState({ books: data })
+            // this.setState({result: data})
             // console.log(this.state.data)
-           })
-           .catch(function (ex) {
+        })
+        .catch(function (ex) {
                console.log('Response parsing failed. Error: ', ex);
-           });;
+        });;
     }
 
 
@@ -42,19 +42,17 @@ class ListComponent extends Component {
                 <h2 className='text-center'>Lista Libros</h2>
                 <div className='row'>
                     
-                    
-                        <div className='row'> {this.state.result["isok"]}</div>
-                        {
-                            this.state.books.map(book =>
-                              <div className='col item'>
-                                    <p>id: {book.id}</p>
-                                    <p>name: {book.bookName}</p>
-                                  </div>
-                            
+                    <div className='row'> {this.state.result["isok"]}</div>
+                    {
+                        this.state.books.map(book =>
+                            <div className='col item'>
+                                <p>id: {book.id}</p>
+                                <p>name: {book.bookName}</p>
+                            </div>
+                        
                         )
-                        }
+                    }
                        
-                    
                 </div>
                 
             </div>
