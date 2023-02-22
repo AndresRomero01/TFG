@@ -96,7 +96,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * 
 	 * This can be used to auto-login into the site after creating new users, for example.
 	 */
-	 @Bean
+	 /*~~(Migrate manually based on https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter)~~>*/@Bean
 	 @Override
 	 public AuthenticationManager authenticationManagerBean() throws Exception {
 	     return super.authenticationManagerBean();

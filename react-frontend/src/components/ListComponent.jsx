@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import APIService from '../APIServices/APIService';
-import '../CustomCss/CustomListCss.css';
+import '../css/CustomCss/CustomListCss.css';
 
 class ListComponent extends Component {
 

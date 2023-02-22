@@ -1,10 +1,7 @@
 package es.ucm.fdi.iw.controller;
 
 import es.ucm.fdi.iw.LocalData;
-import es.ucm.fdi.iw.model.ConfiguracionRestaurante;
-import es.ucm.fdi.iw.model.Transferable;
 import es.ucm.fdi.iw.model.User;
-import es.ucm.fdi.iw.model.Pedido.Estado;
 import es.ucm.fdi.iw.model.User.Role;
 
 import org.apache.logging.log4j.LogManager;
@@ -33,18 +30,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import java.io.*;
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
 import java.util.Base64;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  *  User management.
@@ -109,7 +99,7 @@ public class UserController {
     /**
      * Landing page for a user profile
      */
-	@GetMapping("{id}")
+	/* @GetMapping("{id}")
     public String index(@PathVariable long id, Model model, HttpSession session) {
 		log.info("------en id --------@@");
         User target = entityManager.find(User.class, id);
@@ -122,7 +112,7 @@ public class UserController {
         model.addAttribute("user", target);
 		model.addAttribute("idUs", target.getId());
         return "user";
-    }
+    } */
 
     /**
      * Alter or create a user

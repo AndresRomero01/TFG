@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-import './CustomCss/CustomCommonCss.css'; //sera accesible desde todos los compoennetes por declararse aqui en la raiz
+//import logo from './logo.svg';
+/* import './App.css'; */
+import './css/CustomCss/CustomCommonCss.css'; //sera accesible desde todos los compoennetes por declararse aqui en la raiz
 //la dir de los archivos importados es relativa al dir en el que se encuentra el archivo en el que se escibe
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
