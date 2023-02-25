@@ -22,18 +22,18 @@ import java.util.List;
                         + "WHERE u.username = :username AND u.enabled = TRUE")                           
         })
 
-@Table(name="ArtiesUser")
+@Table(name="ARTIESUser")
 public class User implements Transferable<User.Transfer> {
 
     public User (String username, String password, String firstName, 
-    String lastName, String email, String direccion, String telf, String roles, Boolean enabled){
+    String lastName, String email, String address, String phone, String roles, Boolean enabled){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName= lastName;
         this.email=email;
-        this.direccion=direccion;
-        this.telefono=telf;
+        this.address=address;
+        this.phone= phone;
         this.roles =roles;
         this.enabled = enabled;
     }
@@ -44,7 +44,7 @@ public class User implements Transferable<User.Transfer> {
         EMPLEADO
     }
 
-    public enum ClienType {
+    public enum ClientType {
         ONLINE,			// normal users 
         ONSITE,          // admin users
         NONE
@@ -63,11 +63,11 @@ public class User implements Transferable<User.Transfer> {
     private String firstName;
     private String lastName;
     private String email;
-    private String direccion;
-    private String telefono;
+    private String address;
+    private String phone;
     private boolean enabled;
     private String roles; // split by ',' to separate roles
-    private ClienType clienType; // NONE by default
+    private ClientType clientType; // NONE by default
 
 	@OneToMany (mappedBy = "user")
     private List<RelationUserCourse> coursesList;

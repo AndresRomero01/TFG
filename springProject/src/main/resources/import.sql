@@ -1,9 +1,13 @@
 -- insert admin (username a, password aa)
-INSERT INTO IWUser (id, enabled, roles, username, password,direccion, email, telefono, first_name, last_name)
+INSERT INTO ARTIESUser (id, enabled, roles, username, password,address, email, phone, first_name, last_name, client_type)
 VALUES (1, TRUE, 'ADMIN', 'a',
-    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calla jefazo', 'admin@faq.es', '123456321', 'admin', 'admin');
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calla jefazo', 'admin@faq.es', '123456321', 'admin', 'admin', 2);
 
-INSERT INTO IWUser (id, enabled, roles, username, password,direccion, email, telefono, first_name, last_name)
+INSERT INTO ARTIESUser (id, enabled, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (2, TRUE, 'ADMIN', 'prueba',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calla jefazo', 'admin@faq.es', '123456321', 'admin', 'admin', 0);
+
+/* INSERT INTO IWUser (id, enabled, roles, username, password,direccion, email, telefono, first_name, last_name)
 VALUES (2, TRUE, 'USER', 'b',
     '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'user', 'user');
 
@@ -17,7 +21,7 @@ VALUES (4, TRUE, 'USER', 'u',
 
 INSERT INTO IWUser (id, enabled, roles, username, password,direccion, email, telefono, first_name, last_name)
 VALUES (5, TRUE, 'EMPLEADO', 'emp2',
-    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle noseque', 'emp2@emps.com', '789789789', 'empleado2', 'empleado2');
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle noseque', 'emp2@emps.com', '789789789', 'empleado2', 'empleado2'); */
 
 
 
