@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * An authorized user of the system.
@@ -43,6 +44,12 @@ public class User implements Transferable<User.Transfer> {
         EMPLEADO
     }
 
+    public enum ClienType {
+        ONLINE,			// normal users 
+        ONSITE,          // admin users
+        NONE
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen")
     @SequenceGenerator(name = "gen", sequenceName = "gen")
@@ -58,10 +65,13 @@ public class User implements Transferable<User.Transfer> {
     private String email;
     private String direccion;
     private String telefono;
-
     private boolean enabled;
     private String roles; // split by ',' to separate roles
-	
+    private ClienType clienType; // NONE by default
+
+	@OneToMany (mappedBy = "user")
+    private List<RelationUserCourse> coursesList;
+
     /**
      * Checks whether this user has a given role.
      * @param role to check
