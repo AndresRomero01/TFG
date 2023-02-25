@@ -17,6 +17,9 @@ import javax.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+@Entity
+@Data
+@AllArgsConstructor
 public class RelationUserCourse {
     @EmbeddedId private RelationUserCourseId id;
     
