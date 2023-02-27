@@ -5,11 +5,11 @@ class APIService {
     getBooks(){
         return fetch(BOOKS_REST_API,{ 
             method: 'get',
-                headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-                },
-                'credentials': 'same-origin'
+            headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            },
+            'credentials': 'same-origin'
         })
         .then(res => res.json());        
     }
@@ -17,11 +17,11 @@ class APIService {
     getBooks2(){
         return fetch(BOOKS_REST_API2,{ 
             method: 'get',
-                headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-                },
-                'credentials': 'same-origin'
+            headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            },
+            'credentials': 'same-origin'
         })
         .then(res => res.json());        
     }

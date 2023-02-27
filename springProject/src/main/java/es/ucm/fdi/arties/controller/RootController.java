@@ -37,8 +37,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import netscape.javascript.JSException;
@@ -46,7 +48,8 @@ import netscape.javascript.JSException;
 /**
  * Non-authenticated requests only.
  */
-@Controller
+@RestController
+@RequestMapping("/api")
 public class RootController {
 
     @Autowired
@@ -75,6 +78,16 @@ public class RootController {
     public List < book > getBooks2() {
         return Arrays.asList(new book(1, "Core Java"), new book(2, "Effective Java"), new book(3, "Head First Java"));
      // return "{\"isok\": \"todobien\"}";
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping(path = "/login", produces = "application/json")
+    @ResponseBody
+    public String login(@RequestBody JsonNode o) {
+        log.info("@@@@@: dentro de login");
+        log.info("####: " + o.get("username"));
+        log.info("&&&&: " + o.get("password"));
+        return "{\"isok\": \"todobien\"}";
     }
 
 }

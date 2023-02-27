@@ -1,3 +1,5 @@
+//https://reactstrap.github.io/?path=/docs/home-installation--page
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
