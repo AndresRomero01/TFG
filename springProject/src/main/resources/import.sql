@@ -7,6 +7,21 @@ INSERT INTO ARTIESUser (id, enabled, roles, username, password,address, email, p
 VALUES (2, TRUE, 'ADMIN', 'prueba',
     '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calla jefazo', 'admin@faq.es', '123456321', 'admin', 'admin', 0);
 
+INSERT INTO CATEGORY (id, name)
+VALUES (1, 'cat1');
+
+INSERT INTO CATEGORY (id, name)
+VALUES (2, 'cat2');
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (1, 'curso de prueba1', FALSE, 'cprueba1', 1);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (2, 'curso de prueba2', FALSE, 'cprueba2', 1);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (3, 'curso de prueba3', TRUE, 'cprueba3', 2);
+
 /* INSERT INTO IWUser (id, enabled, roles, username, password,direccion, email, telefono, first_name, last_name)
 VALUES (2, TRUE, 'USER', 'b',
     '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'user', 'user');

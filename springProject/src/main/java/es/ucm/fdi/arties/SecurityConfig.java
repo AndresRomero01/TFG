@@ -45,10 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//http.cors().and().csrf().disable();
 	    http
-			.csrf()
-				.ignoringAntMatchers("/api/**")
-				.and()
+			//.csrf()
+				/* .ignoringAntMatchers("/api/**")
+				.and() */
 	        .authorizeRequests()
 			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/carta", "/verPlato", "/books", "/books2", "/registro").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access

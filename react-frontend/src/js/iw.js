@@ -1,5 +1,17 @@
 "use strict"
 
+const config = {
+    //socketUrl: "[[${session.ws}?:'']]", // empty is false, will result in no WS being opened
+    //rootUrl: "[[${session.url}?:'']]",
+    csrf: {
+        name: "[[${_csrf.parameterName}]]",
+        value: "[[${_csrf.token}]]"
+    },
+    admin: "[[${session.u != null && session.u.hasRole('ADMIN')} ? true : false]]",
+    userId: +"[[${session.u != null} ? ${session.u.id} : -1]]"
+};
+config.admin = config.admin == "true"; // ensure boolean
+
 /**
  * WebSocket API, which only works once initialized
  */
@@ -108,7 +120,7 @@ const ws = {
  *     text: <describing the error>
  *  }
  */
-function go(url, method, data = {}, headers = false) {
+export function go(url, method, data = {}, headers = false) {
     let params = {
         method: method, // POST, GET, POST, PUT, DELETE, etc.
         headers: headers === false ? {

@@ -20,9 +20,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
+import es.ucm.fdi.arties.model.Course;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.book;
+import es.ucm.fdi.arties.model.DB.DBHandler;
 import es.ucm.fdi.arties.model.User.Role;
 
 import org.apache.logging.log4j.LogManager;
@@ -61,7 +63,7 @@ public class RootController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //private SAGeneralImp saGeneral = new SAGeneralImp();
+    private DBHandler db = new DBHandler();
     private static final Logger log = LogManager.getLogger(RootController.class);
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -83,11 +85,21 @@ public class RootController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(path = "/login", produces = "application/json")
     @ResponseBody
-    public String login(@RequestBody JsonNode o) {
+    public String login(HttpSession session, @RequestBody JsonNode o) { // hace falta session?
         log.info("@@@@@: dentro de login");
         log.info("####: " + o.get("username"));
         log.info("&&&&: " + o.get("password"));
         return "{\"isok\": \"todobien\"}";
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping(path = "/getCoursesList", produces = "application/json")
+    @ResponseBody
+    public List<Course> getCoursesList() {
+        List<Course> coursesList = new ArrayList<Course>();
+        coursesList = db.getCoursesList(em);
+        log.info("@@@@: " + coursesList.get(0).getName());
+        return coursesList;
     }
 
 }

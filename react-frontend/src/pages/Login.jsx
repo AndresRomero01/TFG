@@ -1,6 +1,8 @@
 import React from 'react';
 import { Input,Label,Row,Col, Button } from 'reactstrap';
 import { useState } from 'react';
+import {go} from '../js/iw';
+import stomp from '../js/stomp';
 
 const LoginApi = 'http://localhost:8080/login';
 
@@ -17,11 +19,20 @@ const Login = () => {
             password: password
         }
 
+        /* let formData = new FormData();
+        formData.append("username", username);
+        formData.append("password", password);
+
+        go("/login", "POST", formData, {}).then(d => {
+            console.log("dentro de go login");
+        }) */
+
         // si me ha hecho falta poner los headers. Cuidado q es POST
         // En IW el profe hizo algun arreglo para pasar paremetros por get y no por post?
-        fetch("api/login", {
+        fetch("/login", {
             headers: {"Content-Type": "application/json"},
             method: "post",
+            mode: 'no-cors',
             body: JSON.stringify(userData)}
         )
         .then(res => res.json())

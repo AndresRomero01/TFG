@@ -9,10 +9,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import com.fasterxml.jackson.databind.JsonNode;
+
+import es.ucm.fdi.arties.model.Course;
+
 import org.apache.logging.log4j.Logger;
 import lombok.Data;
 
 @Data
 public class DBHandler {
-    
+    public List<Course> getCoursesList(EntityManager em) {
+        List<Course> courses = null;
+
+        courses = em.createNamedQuery("course.list", Course.class).getResultList();
+        return courses;
+    }
 }
