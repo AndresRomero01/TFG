@@ -1,39 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import Course from '../components/Course';
 
-function Courses() {
+class Courses extends Component {
 
-    const [coursesList, setCoursesList] = useState(null);
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            courses: []
+        }
+    }
 
-    useEffect(() => {
-        console.log("dentro de useEffect");
+    componentDidMount(){
+
         fetch("api/getCoursesList", {})
         .then(res => res.json())
         .then(data => {
             console.log(data[0]);
             console.log("size: " + data.length);
-            setCoursesList(data);
+            this.setState({courses: data});
             data.forEach(e => {
-                console.log("Nombre del curso: " + e["name"] + ", y el curso es: " + e["isFree"]);        
+                console.log("Nombre del curso: " + e["name"] + ", y el curso es: " + e["isFree"] + " desc: " + e["description"]);        
             })
         })
-    }, [])
+    } 
     
-
-    return (
-        <div>
-            <h1>Hi, these are the private courses</h1>
-            <h1>Adios, these are the private courses</h1>
-            {<h1>{coursesList[0].name}</h1>}
-            {/* <Course 
-                name={coursesList[0].name }
-                isFree={coursesList[0].isFree}
-                desc={coursesList[0].desc}
-            >
-            </Course> */}
-        </div>
-    );
-    
+    render() {
+        return (
+            <div>
+                {this.state.courses.map(e => 
+                    <Course 
+                        key={e.name} 
+                        name={e.name}
+                        isFree={e.isFree.toString()} // si no pongo toString, no aparece
+                        desc={e.description}
+                    ></Course>
+                )}
+            </div>
+        );
+    }
     
 }
 
