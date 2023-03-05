@@ -11,13 +11,15 @@ import HomePageComponent from './components/HomePageComponent';
 import Login from './pages/Login';
 import CursosPrivados from './components/CursosPrivados';
 import Courses from './pages/Courses';
+import MainNavbar from './components/MainNavbar'
 
 
 function App() {
   return (
     <div>
       <Router>
-        <HeaderComponent></HeaderComponent>
+        {/* <HeaderComponent></HeaderComponent> */}
+        {<MainNavbar color={"dark"} dark={true} expand={true} fixed={"top"}></MainNavbar>}
 
         <div className="container">
           <Routes>
