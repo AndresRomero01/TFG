@@ -1,4 +1,4 @@
-
+import '../css/MainNavbar.css';
 import React, { useState } from 'react';
 import {
   Collapse,
@@ -23,8 +23,8 @@ function MainNavbar(args) {
 
   return (
     <div>
-      <Navbar {...args}>
-        <NavbarBrand href="/">Arties</NavbarBrand>
+      <Navbar {...args} className="mainNavbar">
+        <NavbarBrand href="/" className='brandName'>Arties</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar >
@@ -32,8 +32,8 @@ function MainNavbar(args) {
               <NavLink href="/courses">Components</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
+              <NavLink href="/Books">
+                Books
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
@@ -51,7 +51,7 @@ function MainNavbar(args) {
               <NavLink href="/courses">Courses</NavLink>
             </NavItem>
           </Nav>
-          <Button className="btn btn-primary" href="/login">Log in</Button>
+          <Button className="btn btn-primary loginButton" href="/login">Log in</Button>
         </Collapse>
       </Navbar>
     </div>

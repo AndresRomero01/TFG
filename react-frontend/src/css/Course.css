@@ -1,0 +1,12 @@
+.divCurso{
+    margin: 2em;
+    min-height: 24em;
+    width: 20em;
+}
+
+.divImagen{
+    height: 15em;
+    width: 18em;
+    margin-top: 0em;
+    background-color: cornflowerblue;
+}

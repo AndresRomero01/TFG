@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import CursosPrivados from './components/CursosPrivados';
 import Courses from './pages/Courses';
 import MainNavbar from './components/MainNavbar'
+import MainFooter from './components/MainFooter'
 
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
         
         </div>
 
-        <FooterComponent></FooterComponent>
+        {<MainFooter color={"dark"} dark={true} expand={true} fixed={"bottom"} container={true}></MainFooter>}
+        {/* <FooterComponent></FooterComponent> */}
       </Router>
       
     </div>
