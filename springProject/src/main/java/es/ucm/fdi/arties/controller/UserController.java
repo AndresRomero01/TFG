@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -54,13 +53,6 @@ public class UserController {
 	@Autowired
     private LocalData localData;
 
-	@Autowired
-	private SimpMessagingTemplate messagingTemplate;
-
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-
     /**
      * Exception to use when denying access to unauthorized users.
      * 
@@ -81,21 +73,21 @@ public class UserController {
 	 * for example, a possible encoding of "test" is 
 	 * {bcrypt}$2y$12$XCKz0zjXAP6hsFyVc8MucOzx6ER6IsC1qo5zQbclxhddR1t6SfrHm
 	 */
-	public String encodePassword(String rawPassword) {
+	/* public String encodePassword(String rawPassword) {
 		return passwordEncoder.encode(rawPassword);
-	}
+	} */
 
     /**
      * Generates random tokens. From https://stackoverflow.com/a/44227131/15472
      * @param byteLength
      * @return
      */
-    public static String generateRandomBase64Token(int byteLength) {
+/*     public static String generateRandomBase64Token(int byteLength) {
         SecureRandom secureRandom = new SecureRandom();
         byte[] token = new byte[byteLength];
         secureRandom.nextBytes(token);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(token); //base64 encoding
-    }
+    } */
 
     /**
      * Landing page for a user profile
@@ -118,7 +110,7 @@ public class UserController {
     /**
      * Alter or create a user
      */
-	@PostMapping("/{id}")
+/* 	@PostMapping("/{id}")
 	@Transactional
 	public String postUser(
 			HttpServletResponse response,
@@ -170,7 +162,7 @@ public class UserController {
 		model.addAttribute("idUs", target.getId());
 	
 		return "user";
-	}	
+	}	 */
 
     /**
      * Returns the default profile pic
@@ -261,7 +253,7 @@ public class UserController {
 		log.info(json);
 
         // url a la que te has subscrito en js y los datos a enviar (json)
-        messagingTemplate.convertAndSend("/user/"+username+"/misPedidos/updates", json);
+        //messagingTemplate.convertAndSend("/user/"+username+"/misPedidos/updates", json);
         return "{\"isok\": \"todobien\"}";// devuelve un json como un string
     }
 

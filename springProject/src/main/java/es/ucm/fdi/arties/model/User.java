@@ -17,10 +17,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @NamedQueries({
+    @NamedQuery(name="User.byUsername", query="SELECT u FROM User u WHERE u.username = :username"),
+    @NamedQuery(name="User.byId", query="SELECT u FROM User u WHERE u.id = :idUser")                           
+})
+/* @NamedQueries({
         @NamedQuery(name="User.byUsername",
                 query="SELECT u FROM User u "
                         + "WHERE u.username = :username AND u.enabled = TRUE")                           
-        })
+        }) */
 
 @Table(name="ARTIESUser")
 public class User implements Transferable<User.Transfer> {

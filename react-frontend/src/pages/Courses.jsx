@@ -29,7 +29,7 @@ class Courses extends Component {
     
     render() {
         return (
-            <div className='divCourses row'>
+            <div className='row'>
                 {this.state.courses.map(e => 
                     <Course 
                         key={e.name} 

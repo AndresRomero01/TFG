@@ -32,7 +32,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,12 +56,6 @@ public class RootController {
     @Autowired
     private EntityManager em;
 
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     private DBHandler db = new DBHandler();
     private static final Logger log = LogManager.getLogger(RootController.class);
 
@@ -86,16 +79,32 @@ public class RootController {
     @PostMapping(path = "/login", produces = "application/json")
     @ResponseBody
     public String login(HttpSession session, @RequestBody JsonNode o) { // hace falta session?
+        session.setAttribute("prueba", "pruebaSession");
+        String p = (String) session.getAttribute("prueba");
+        log.info("@@@@@: " + p);
+
+        String username = o.get("username").asText();
+        User u = db.getUserByUsername(em, username);
+        log.info("##### email: " + u.getEmail());
+        
+        /* User u = db.getUsuario(em, 2);
+        log.info("##### email: " + u.getEmail()); */
+
         log.info("@@@@@: dentro de login");
         log.info("####: " + o.get("username"));
         log.info("&&&&: " + o.get("password"));
-        return "{\"isok\": \"todobien\"}";
+
+        Boolean perm = u.hasRole(Role.ADMIN);
+        return "{\"hasPermission\": " + perm + "}";
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(path = "/getCoursesList", produces = "application/json")
     @ResponseBody
-    public List<Course> getCoursesList() {
+    public List<Course> getCoursesList(HttpSession session) {
+        String p = (String) session.getAttribute("prueba");
+        log.info("######: " + p);
+
         List<Course> coursesList = new ArrayList<Course>();
         coursesList = db.getCoursesList(em);
         log.info("@@@@: " + coursesList.get(0).getName());

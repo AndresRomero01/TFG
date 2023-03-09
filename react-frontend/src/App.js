@@ -13,6 +13,8 @@ import CursosPrivados from './components/CursosPrivados';
 import Courses from './pages/Courses';
 import MainNavbar from './components/MainNavbar'
 import MainFooter from './components/MainFooter'
+import HasPermission from './pages/HasPermission'
+import NoPermission from './pages/NoPermission'
 
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/cursosPrivados" element={<CursosPrivados />}></Route>
             <Route path="/courses" element={<Courses />}></Route>
+            <Route path="/hasPermission" element={<HasPermission />}></Route>
+            <Route path="/noPermission" element={<NoPermission />}></Route>
           </Routes>
         
         </div>

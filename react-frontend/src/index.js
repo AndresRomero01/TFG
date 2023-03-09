@@ -8,7 +8,9 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <div style={{marginTop: "7em"}}></div>
     <App />
+    <div style={{marginBottom: "7em"}}></div>
   </React.StrictMode>
 );
 
