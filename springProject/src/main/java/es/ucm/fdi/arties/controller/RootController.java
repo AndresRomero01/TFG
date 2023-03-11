@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import es.ucm.fdi.arties.model.Course;
+import es.ucm.fdi.arties.model.Message;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.book;
@@ -31,6 +32,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +58,9 @@ public class RootController {
 
     @Autowired
     private EntityManager em;
+
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     private DBHandler db = new DBHandler();
     private static final Logger log = LogManager.getLogger(RootController.class);
@@ -109,6 +115,14 @@ public class RootController {
         coursesList = db.getCoursesList(em);
         log.info("@@@@: " + coursesList.get(0).getName());
         return coursesList;
+    }
+
+
+    @MessageMapping("/private-message")
+    public Message recMessage(@Payload Message message){
+        simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private",message); // /user/David/private
+        System.out.println(message.toString());
+        return message;
     }
 
 }
