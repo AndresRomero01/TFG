@@ -18,7 +18,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import es.ucm.fdi.arties.model.User;
-//import es.ucm.fdi.arties.model.User.Role;
 
 /**
  * Called when a user is first authenticated (via login).
@@ -75,16 +74,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		session.setAttribute("ws", ws + "/ws");
 
 		// redirects to 'admin' or 'user/{id}', depending on the user
-        String nextUrl = "index";
-		/* String nextUrl = u.hasRole(User.Role.ADMIN) ? 
+		String nextUrl = "/";/*  u.hasRole(User.Role.ADMIN) ? 
 			"configuracion" :
 			"user/" + u.getId(); */
 
 		log.info("LOG IN: {} (id {}) -- session is {}, websocket is {} -- redirected to {}",
 			u.getUsername(), u.getId(), session.getId(), ws, nextUrl);
 
-   /*          boolean notificacion = false;
-            session.setAttribute("notificacion", notificacion); */
+			boolean notificacion = false;
+			session.setAttribute("notificacion", notificacion);
 
 		// note that this is a 302, and will result in a new request
 		response.sendRedirect(nextUrl);

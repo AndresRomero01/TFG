@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,26 +18,42 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @NamedQueries({
-    @NamedQuery(name="User.byUsername", query="SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name="User.byId", query="SELECT u FROM User u WHERE u.id = :idUser"),   
-    @NamedQuery(name="User.hasUsername",query="SELECT COUNT(u) " + "FROM User u " + "WHERE u.username = :username"),
-    @NamedQuery(name="User.existsUsername", query="SELECT u " + "FROM User u " + "WHERE u.username = :username"),
-    @NamedQuery(name="User.byEmail", query="SELECT u " + "FROM User u " + "WHERE u.email = :email"),
-    @NamedQuery(name="User.byRol", query="SELECT u " + "FROM User u " + "WHERE u.roles = :rol")                          
+        @NamedQuery(name="User.byUsername",
+                query="SELECT u FROM User u "
+                        + "WHERE u.username = :username AND u.enabled = TRUE"),
+        @NamedQuery(name="User.byId",
+                query="SELECT u FROM User u "
+                        + "WHERE u.id = :idUser AND u.enabled = TRUE"),
+        @NamedQuery(name="User.hasUsername",
+                query="SELECT COUNT(u) "
+                        + "FROM User u "
+                        + "WHERE u.username = :username"),
+        @NamedQuery(name="User.existsUsername",
+                query="SELECT u "
+                        + "FROM User u "
+                        + "WHERE u.username = :username"),
+        @NamedQuery(name="User.byEmail",
+                query="SELECT u "
+                        + "FROM User u "
+                        + "WHERE u.email = :email"),
+        @NamedQuery(name="User.byRol",
+                query="SELECT u "
+                        + "FROM User u "
+                        + "WHERE u.roles = :rol AND u.enabled = TRUE")                                   
 })
 
 @Table(name="ARTIESUser")
 public class User implements Transferable<User.Transfer> {
 
     public User (String username, String password, String firstName, 
-    String lastName, String email, String address, String phone, String roles, Boolean enabled){
+    String lastName, String email, String direccion, String telf, String roles, Boolean enabled){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName= lastName;
         this.email=email;
-        this.address=address;
-        this.phone= phone;
+        this.direccion=direccion;
+        this.telefono=telf;
         this.roles =roles;
         this.enabled = enabled;
     }
@@ -45,12 +62,6 @@ public class User implements Transferable<User.Transfer> {
         USER,			// normal users 
         ADMIN,          // admin users
         EMPLEADO
-    }
-
-    public enum ClientType {
-        ONLINE,			// normal users 
-        ONSITE,          // admin users
-        NONE
     }
 
     @Id
@@ -66,14 +77,14 @@ public class User implements Transferable<User.Transfer> {
     private String firstName;
     private String lastName;
     private String email;
-    private String address;
-    private String phone;
+    private String direccion;
+    private String telefono;
+
+  
+
     private boolean enabled;
     private String roles; // split by ',' to separate roles
-    private ClientType clientType; // NONE by default
-
-	@OneToMany (mappedBy = "user")
-    private List<RelationUserCourse> coursesList;
+	
 
     /**
      * Checks whether this user has a given role.

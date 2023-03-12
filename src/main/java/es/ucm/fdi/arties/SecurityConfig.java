@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 /**
  * Security configuration.
  * 
@@ -51,13 +50,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers("/api/**")
 				.and()
 	        .authorizeRequests()
-			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error",  "/registro").permitAll()
+			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/carta", "/verPlato", "/registro").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access
-				.antMatchers("/admin/**", "/existeUsuario", "/anadirEmpleado").hasRole("ADMIN")	   // <-- administration
+				.antMatchers("/admin/**", "/nuevoPlato", "/existeUsuario", "/anadirEmpleado").hasRole("ADMIN")	   // <-- administration
 	           // .antMatchers("method").hasAnyRole("USER", "EMPLEADO")	   // <-- logged-in users
 			   .antMatchers("/user/**").hasAnyRole("USER", "EMPLEADO")	
-				.antMatchers("/empleado/**").hasAnyRole("EMPLEADO", "ADMIN")	   
-				.antMatchers("/configuracion", "anadirUsuario").hasRole("ADMIN")
+				.antMatchers("/empleado/**", "/actualizarEstPed", "/historicoPedidos", "/aceptarPed").hasAnyRole("EMPLEADO", "ADMIN")	   
+				.antMatchers("/reservarMesa/**", "/realizarReserva").hasAnyRole("USER", "ADMIN", "EMPLEADO")
+				.antMatchers("/hacerPedido", "/notificacionPendiente").hasRole("USER")
+				.antMatchers("/verReservas", "/hacerComentario").hasAnyRole("ADMIN", "EMPLEADO", "USER")
+				.antMatchers("/pedidos").hasAnyRole("USER", "ADMIN", "EMPLEADO")
+				.antMatchers("/configuracion", "/borrarComentario", "anadirUsuario", "/cambiarImgRest").hasRole("ADMIN")
 	            .anyRequest().authenticated()
 	            .and()
 			.formLogin()
@@ -102,4 +105,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Autowired
 	 private LoginSuccessHandler loginSuccessHandler;
 }
-

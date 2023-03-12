@@ -1,10 +1,5 @@
 package es.ucm.fdi.arties.controller;
 
-import es.ucm.fdi.arties.LocalData;
-import es.ucm.fdi.arties.model.Transferable;
-import es.ucm.fdi.arties.model.User;
-import es.ucm.fdi.arties.model.User.Role;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +30,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import es.ucm.fdi.arties.LocalData;
+
+import es.ucm.fdi.arties.model.Transferable;
+import es.ucm.fdi.arties.model.User;
+
+import es.ucm.fdi.arties.model.User.Role;
 
 import java.io.*;
 import java.security.SecureRandom;
@@ -113,7 +115,7 @@ public class UserController {
         User target = entityManager.find(User.class, id);
 
 		long idConf = 1;
-		/* ConfiguracionRestaurante c = null;
+/* 		ConfiguracionRestaurante c = null;
         c = entityManager.find(ConfiguracionRestaurante.class, idConf);
         model.addAttribute("nombreSitio", c.getNombreSitio()); */
 
@@ -244,6 +246,32 @@ public class UserController {
 			}
 		}
 		return "{\"status\":\"photo uploaded correctly\"}";
+    }
+
+	@PostMapping(path = "/actualizarPedido", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String prueba(Model model, @RequestBody JsonNode o, HttpSession session) {
+        log.info("----PRUEBA----");
+        
+        log.info("@@@@@---");
+        log.info(o);
+
+        long idCliente = o.get("idCliente").asLong();
+		long idPedido = o.get("idPedido").asLong();
+		String username = o.get("username").asText();
+		int estado = o.get("estado").asInt();
+        log.info("idCliente: "+ idCliente);
+        
+        String json = "{\"idPedido\": " + idPedido + "," +
+                "\"estado\": " + estado + "}";
+
+
+		log.info(json);
+
+        // url a la que te has subscrito en js y los datos a enviar (json)
+        messagingTemplate.convertAndSend("/user/"+username+"/misPedidos/updates", json);
+        return "{\"isok\": \"todobien\"}";// devuelve un json como un string
     }
 
 
