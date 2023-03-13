@@ -3,7 +3,7 @@
 
 <head>
     <th:block th:replace="fragments/head :: header" />
-    <title>Restaurant.es: Registro</title>
+    <title>Sign up</title>
 
     <link rel="stylesheet" th:href="@{/css/registro.css}" />
 </head>
@@ -25,38 +25,38 @@
     
                     <div class="row">
                         <div class="col">
-                            <label for="nombreEmpleado" class="inputLabel">Nombre</label>
-                            <input type="text" id="nombreEmpleado" class="inputForm">
+                            <label for="firstName" class="inputLabel">Nombre</label>
+                            <input type="text" id="firstName" class="inputForm">
                         </div>
                         <div class="col">
-                            <label for="apellidoEmpleado"  class="inputLabel">Apellido</label>
-                            <input type="text" id="apellidoEmpleado" class="inputForm">
-                        </div>
-                    </div>
-    
-                    <div class="row">
-                        <div class="col">
-                            <label for="contrasena1Empleado"  class="inputLabel">Contraseña</label>
-                            <input type="password" id="contrasena1Empleado" class="inputForm" onchange="validatePassword()" required>
-                        </div>
-                        <div class="col">
-                            <label for="contrasena2Empleado"  class="inputLabel">Repite la contraseña</label>
-                            <input type="password" id="contrasena2Empleado" class="inputForm" onkeyup="validatePassword()" required>
+                            <label for="lastName"  class="inputLabel">Apellido</label>
+                            <input type="text" id="lastName" class="inputForm">
                         </div>
                     </div>
     
                     <div class="row">
                         <div class="col">
-                            <label for="direccion"  class="inputLabel">Direccion</label>
-                            <input type="input" id="direccion" class="inputForm" required>
+                            <label for="password1"  class="inputLabel">Contraseña</label>
+                            <input type="password" id="password1" class="inputForm" onchange="validatePassword()" required>
                         </div>
                         <div class="col">
-                            <label for="telefono"  class="inputLabel">Telefono</label>
-                            <input type="tel" id="telefono" class="inputForm" required>
+                            <label for="password2"  class="inputLabel">Repite la contraseña</label>
+                            <input type="password" id="password2" class="inputForm" onkeyup="validatePassword()" required>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col">
+                            <label for="address"  class="inputLabel">Direccion</label>
+                            <input type="input" id="address" class="inputForm" required>
+                        </div>
+                        <div class="col">
+                            <label for="phone"  class="inputLabel">Telefono</label>
+                            <input type="tel" id="phone" class="inputForm" required>
                         </div>
                     </div>
                     
-                    <button type="button" id ="crearButton" class="btn btn-primary">Crear cuenta</button>
+                    <button type="button" id ="createButton" class="btn btn-primary">Crear cuenta</button>
                     
                 </form>
             </div>

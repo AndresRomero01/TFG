@@ -1,8 +1,8 @@
-let crearCuentaButton = document.getElementById("crearButton");
-crearCuentaButton.addEventListener("click", registro);
+let createAccountButton = document.getElementById("createButton");
+createAccountButton.addEventListener("click", signUp);
 
-function registro() {
-    console.log("--- en registro() ---");
+function signUp() {
+    console.log("--- en signUp() ---");
     const myForm = document.getElementById("modificarPerfilForm");
 
     let username = document.getElementById("username");
@@ -23,21 +23,21 @@ function registro() {
     }
     else{
 
-        let nombreEmpleado = document.getElementById("nombreEmpleado");
-        let apellidoEmpleado = document.getElementById("apellidoEmpleado");
-        let contrasena1Empleado = document.getElementById("contrasena1Empleado");
-        let contrasena2Empleado = document.getElementById("contrasena2Empleado");
-        let dir = document.getElementById("direccion");
-        let tel = document.getElementById("telefono");
+        let firstName = document.getElementById("firstName");
+        let lastName = document.getElementById("lastName");
+        let password1 = document.getElementById("password1");
+        let password2 = document.getElementById("password2");
+        let address = document.getElementById("address");
+        let phone = document.getElementById("phone");
         let email = document.getElementById("email");
 
         let params = {"username" : username.value,
-                    "nombreEmpleado" : nombreEmpleado.value,
-                    "apellidoEmpleado" : apellidoEmpleado.value,
-                    "contrasena1Empleado" : contrasena1Empleado.value,
-                    "contrasena2Empleado" : contrasena2Empleado.value,
-                    "direccion" : dir.value,
-                    "telefono" : tel.value,
+                    "firstName" : firstName.value,
+                    "lastName" : lastName.value,
+                    "password1" : password1.value,
+                    "password2" : password2.value,
+                    "address" : address.value,
+                    "phone" : phone.value,
                     "email" : email.value};    
                     
         console.log("inside the else")
@@ -60,8 +60,8 @@ function registro() {
 }
 
 function validatePassword(){
-    var password = document.getElementById("contrasena1Empleado");
-    var confirm_password = document.getElementById("contrasena2Empleado");
+    var password = document.getElementById("password1");
+    var confirm_password = document.getElementById("password2");
 
     console.log("--- en validate password ---");
 

@@ -17,6 +17,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @NamedQueries({
         @NamedQuery(name="User.byUsername",
                 query="SELECT u FROM User u "
@@ -46,7 +47,7 @@ import java.util.List;
 public class User implements Transferable<User.Transfer> {
 
     public User (String username, String password, String firstName, 
-    String lastName, String email, String address, String phone, String roles){
+    String lastName, String email, String address, String phone, String roles, ClientType clientType){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -55,7 +56,7 @@ public class User implements Transferable<User.Transfer> {
         this.address=address;
        this.phone = phone;
         this.roles =roles;
-       // this.enabled = enabled;
+        this.clientType = clientType;
     }
 
     public enum Role {

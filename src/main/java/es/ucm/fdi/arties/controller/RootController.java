@@ -23,6 +23,7 @@ import es.ucm.fdi.arties.model.Course;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.DB.DBHandler;
+import es.ucm.fdi.arties.model.User.ClientType;
 import es.ucm.fdi.arties.model.User.Role;
 
 import org.apache.logging.log4j.LogManager;
@@ -63,16 +64,69 @@ public class RootController {
 
     private static final Logger log = LogManager.getLogger(RootController.class);
 
+    @GetMapping("/")
+    public String index(Model model, HttpSession session) {
+        putComundDataInModel(model, session);
+        return "index";
+    }
+
     @GetMapping("/login")
     public String login(Model model, HttpSession session) {
         putComundDataInModel(model, session);
         return "login";
     }
 
-    @GetMapping("/")
-    public String index(Model model, HttpSession session) {
-        putComundDataInModel(model, session);
-        return "index";
+    @GetMapping("/registro")
+    public String registro2(Model model, HttpSession session) {
+        return "registro";
+    }
+
+    @PostMapping(path = "/registro", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String registro(Model model, @RequestBody JsonNode o) {
+        log.info("----------- dentro de registro -------------");
+
+        String username = o.get("username").asText();
+        long idUser;
+        String rol = "USER";
+         
+
+        if (db.existeUsuario(em, username)) {
+            log.info("usuario ya existe (rootController anadirUsuario)");
+            return null;
+        } else {
+            String firstName = o.get("firstName").asText();
+            String lastName = o.get("lastName").asText();
+            String email = o.get("email").asText();
+            String phone = o.get("phone").asText();
+            String address = o.get("address").asText();
+            String password1 = o.get("password1").asText();
+            String password2 = o.get("password2").asText();
+
+
+            User u = new User(username, password1, firstName, lastName, email, address, phone, rol, ClientType.ONLINE);
+            String encodedPassword = passwordEncoder.encode(o.get("password1").asText());
+            u.setPassword(encodedPassword);
+
+            log.info("------------------------------");
+            log.info(firstName);
+            log.info(lastName);
+            log.info(email);
+            log.info(phone);
+            log.info(address);
+            log.info(password1);
+            log.info(password2);
+
+            idUser = db.crearUsuario(em, u);
+            /* idUsuario = db.crearUsuario(em, o.get("address").asText(), o.get("email").asText(),
+                    o.get("firstName").asText(), o.get("lastName").asText(),
+                    password, rol, o.get("phone").asText(), username); */
+            if (idUser == -1)
+                return null;
+        }
+
+        return "{\"isok\": \"true\", \"idUsuario\": " + idUser + "}";// devuelve un json como un string
     }
 
     @GetMapping(path = "/getCoursesList", produces = "application/json")

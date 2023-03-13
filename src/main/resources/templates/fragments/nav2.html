@@ -10,10 +10,10 @@
     
     
     <!-- barra de navegación bootstrap 5 -->
-    <header th:fragment="nav">
+    <header th:fragment="nav2">
         <th:block th:if="${session.u}">
-            <input id ="idUs"type="hidden" th:value="${idUs}">
-        </th:block>
+        <input id ="idUs"type="hidden" th:value="${idUs}">
+    </th:block>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -21,7 +21,9 @@
                 <a class="navbar-brand" th:href="@{/}" href="/">
                     <img th:src="@{/img/logo.png}" id="logoImgRest" src="/img/logo.png" alt="logo IW" width="32" height="32" class="d-inline-block align-text-top">
                 </a>
-                <a class="navbar-brand" th:href="@{/}" id="nombreSitioNavbar" th:text="Arties" href="/">  </a>
+                <a class="navbar-brand" th:href="@{/}" id="nombreSitioNavbar" th:text="${nombreSitio}" href="/">
+                   
+                </a>
                 <!-- menu hamburguesa si no cabe todo -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -32,19 +34,52 @@
                         <th:block th:if="${session.u}">
                             
                             <li class="nav-item mx-2">
-                                <a class="nav-link" th:href="@{/}">Cursos📖</a>
+                                <a class="nav-link cartaLink" th:href="@{/carta}">Carta📖
+                                </a>
                             </li>
 
                             <li th:if="${session.u.hasAnyRole('USER', 'EMPLEADO', 'ADMIN')}" class="nav-item mx-2">
-                                <a class="nav-link" th:href="@{/}">Clases🗓️</a>
+                                <a class="nav-link" th:href="@{/reservarMesa}">Reservar Mesa🗓️
+                                </a>
+                            </li>
+                            <li th:if="${session.u.hasRole('USER')}" class="nav-item mx-2">
+                                <a class="nav-link"  id="hacerPedidoLink" th:href="@{/hacerPedido}">Hacer pedido🛍️
+                                </a>
                             </li>
 
-                            <li th:if="${session.u.hasRole('USER')}" class="nav-item mx-2">
-                                <a class="nav-link"  th:href="@{/}">Perfil Malo🛍️</a>
+                            <li th:if="${session.u.hasAnyRole('USER', 'EMPLEADO', 'ADMIN')}" class="nav-item mx-2">
+                                <a class="nav-link"  th:href="@{/verReservas}">Ver Reservas🕰️
+                                </a>
+                            </li>
+
+                            <li class="nav-item mx-2">
+                                <span  class="cont">
+                                    <a class="nav-link" th:href="@{/pedidos}">Pedidos🛒
+                                    </a>
+                                    <th:block th:if="${session.notificacion == true}">
+                                        <span id ="contNot" class="contExt"> 
+                                            <div class="parent">
+                                                <span ></span>
+                                            </div>
+                                        </span>
+                                    </th:block>
+                                    <th:block th:if="${session.notificacion == false}">
+                                        <span id ="contNot" class="contExt oculto"> 
+                                            <div class="parent">
+                                                <span ></span>
+                                            </div>
+                                        </span>
+                                    </th:block>
+                                    
+                                </span>
+                               
+                                
+                               
                             </li>
 
                             <li th:if="${session.u.hasRole('ADMIN')}" class="nav-item mx-2">
-                                <a class="nav-link" th:href="@{/}">Configuracion⚙️</a>
+                                <a class="nav-link" id="configuracionLink" th:href="@{/configuracion}">Configuracion⚙️
+                                </a>
                             </li>
 
                             <li class="nav-item mx-2">
@@ -54,6 +89,11 @@
                                 </a>
                             </li>
                             
+                            <!-- <li class="nav-item align-self-center me-4">
+                                <button type="button" class="btn btn-outline-primary btn-sm position-relative">
+                                    ✉️ <span id="nav-unread" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
+                                </button>
+                            </li> -->
                             <li class="nav-item align-self-center">
                                 <form th:action="@{/logout}" method="post">
                                     <button type="submit" class="btn btn-outline-secondary btn-sm">Logout🚪</button>
@@ -63,11 +103,11 @@
                         <th:block th:unless="${session.u}">
 
                             <li class="nav-item mx-2">
-                                <a class="nav-link"  th:href="@{/}">Cursos📖</a>
+                                <a class="nav-link cartaLink"  th:href="@{/carta}">Carta📖</a>
                             </li>
 
                             <li class="nav-item mx-2">
-                                <a class="nav-link"  th:href="@{/registro}">Registro➕</a>
+                                <a class="nav-link cartaLink"  th:href="@{/registro}">Registro➕</a>
                             </li>
 
                             <li class="nav-item mx-2">
