@@ -19,10 +19,10 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
-
+import es.ucm.fdi.arties.model.Course;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
-
+import es.ucm.fdi.arties.model.DB.DBHandler;
 import es.ucm.fdi.arties.model.User.Role;
 
 import org.apache.logging.log4j.LogManager;
@@ -57,6 +57,9 @@ public class RootController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    
+    private DBHandler db = new DBHandler();
+
 
     private static final Logger log = LogManager.getLogger(RootController.class);
 
@@ -71,6 +74,19 @@ public class RootController {
         putComundDataInModel(model, session);
         return "index";
     }
+
+    @GetMapping(path = "/getCoursesList", produces = "application/json")
+    @ResponseBody
+    public List<Course> getCoursesList(HttpSession session) {
+        String p = (String) session.getAttribute("prueba");
+        log.info("######: " + p);
+
+        List<Course> coursesList = new ArrayList<Course>();
+        coursesList = db.getCoursesList(em);
+        log.info("@@@@: " + coursesList.get(0).getName());
+        return coursesList;
+    }
+
 
     
     private void putComundDataInModel(Model model, HttpSession session)

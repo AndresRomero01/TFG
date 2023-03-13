@@ -20,10 +20,10 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name="User.byUsername",
                 query="SELECT u FROM User u "
-                        + "WHERE u.username = :username AND u.enabled = TRUE"),
+                        + "WHERE u.username = :username"),
         @NamedQuery(name="User.byId",
                 query="SELECT u FROM User u "
-                        + "WHERE u.id = :idUser AND u.enabled = TRUE"),
+                        + "WHERE u.id = :idUser"),
         @NamedQuery(name="User.hasUsername",
                 query="SELECT COUNT(u) "
                         + "FROM User u "
@@ -39,29 +39,35 @@ import java.util.List;
         @NamedQuery(name="User.byRol",
                 query="SELECT u "
                         + "FROM User u "
-                        + "WHERE u.roles = :rol AND u.enabled = TRUE")                                   
+                        + "WHERE u.roles = :rol")                                   
 })
 
 @Table(name="ARTIESUser")
 public class User implements Transferable<User.Transfer> {
 
     public User (String username, String password, String firstName, 
-    String lastName, String email, String direccion, String telf, String roles, Boolean enabled){
+    String lastName, String email, String address, String phone, String roles){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName= lastName;
         this.email=email;
-        this.direccion=direccion;
-        this.telefono=telf;
+        this.address=address;
+       this.phone = phone;
         this.roles =roles;
-        this.enabled = enabled;
+       // this.enabled = enabled;
     }
 
     public enum Role {
         USER,			// normal users 
         ADMIN,          // admin users
         EMPLEADO
+    }
+
+    public enum ClientType {
+        ONLINE,			// normal users 
+        ONSITE,          // admin users
+        NONE
     }
 
     @Id
@@ -77,13 +83,14 @@ public class User implements Transferable<User.Transfer> {
     private String firstName;
     private String lastName;
     private String email;
-    private String direccion;
-    private String telefono;
+    private String address;
+    private String phone;
 
   
 
-    private boolean enabled;
+   
     private String roles; // split by ',' to separate roles
+    private ClientType clientType; // NONE by default
 	
 
     /**
