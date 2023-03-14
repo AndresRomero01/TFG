@@ -2,7 +2,17 @@
 :root{
   --red:#783848;
 }
-.iwthumb {
+
+.bodyCol{
+  margin-top: 4em;
+  margin-bottom: 4em;
+  width: 70%;
+  margin-left: 15%;
+}
+
+
+
+/* .iwthumb {
     height: 32px;
     width: 32px;
 }
@@ -39,10 +49,7 @@ body{
   width:10px;
   height:10px;
   background:#2033db;
- /*  margin:auto; */
   border-radius:100%;
- /*  margin-top:60px; */
- /*  position:relative; */
  position: absolute;
   cursor:pointer;
 }
@@ -82,7 +89,6 @@ body{
 
 
   .contExt{
-    /* background-color: #65dc16; */
     width: 1em;
     height: 1em;
    position: absolute;
@@ -99,3 +105,4 @@ body{
   }
 
 
+ */

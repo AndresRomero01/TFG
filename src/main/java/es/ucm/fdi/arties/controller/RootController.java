@@ -129,7 +129,16 @@ public class RootController {
         return "{\"isok\": \"true\", \"idUsuario\": " + idUser + "}";// devuelve un json como un string
     }
 
-    @GetMapping(path = "/getCoursesList", produces = "application/json")
+    @GetMapping("/courses")
+    public String courses(Model model, HttpSession session) {
+        List<Course> coursesList = new ArrayList<Course>();
+        coursesList = db.getCoursesList(em);
+
+        model.addAttribute("coursesList", coursesList);
+        return "courses";
+    }
+
+    /* @GetMapping(path = "/getCoursesList", produces = "application/json")
     @ResponseBody
     public List<Course> getCoursesList(HttpSession session) {
         String p = (String) session.getAttribute("prueba");
@@ -139,7 +148,7 @@ public class RootController {
         coursesList = db.getCoursesList(em);
         log.info("@@@@: " + coursesList.get(0).getName());
         return coursesList;
-    }
+    } */
 
 
     

@@ -46,4 +46,22 @@ VALUES (5, 'curso de prueba5', TRUE, 'curso de prueba5', 2);
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (6, 'curso de prueba6', TRUE, 'curso de prueba6', 2);
 
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (7, 'curso de prueba1', FALSE, 'cprueba1', 1);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (8, 'curso de prueba2', FALSE, 'cprueba2', 1);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (9, 'curso de prueba3', TRUE, 'cprueba3', 2);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (10, 'curso de prueba4 y desc mas larga para ver como se ve', TRUE, 'abdominales laterales', 2);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (11, 'curso de prueba5', TRUE, 'curso de prueba5', 2);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (12, 'curso de prueba6', TRUE, 'curso de prueba6', 2);
+
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;
