@@ -67,6 +67,19 @@ public class RootController {
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
         putComundDataInModel(model, session);
+
+        //para alimentar el carousel con 5 cursos gratis (si hay)
+        List<Course> coursesList = new ArrayList<Course>();
+        List<Course> freeCourses = new ArrayList<Course>();
+        coursesList = db.getCoursesList(em);
+        if(coursesList.size() >= 5){
+            for(int i = 0; i < 5; i++){
+                freeCourses.add(coursesList.get(i));
+            }
+            model.addAttribute("freeCourses", freeCourses);
+            /* model.addAttribute("freeCoursesCount", freeCourses.size()); */
+        } 
+
         return "index";
     }
 

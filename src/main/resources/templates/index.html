@@ -4,14 +4,69 @@
 <head>
     <th:block th:replace="fragments/head :: header" />
     <title >Arties</title>
-    <!-- <link rel="stylesheet" href="css/index.css" /> -->
+    <link rel="stylesheet" href="css/index.css" />
 </head>
 
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav"></header>
 
+    <th:div th:if="${#arrays.length(freeCourses) == 5}" class="firstDiv">
+      <!-- Codigo copiado y adaptado de https://freefrontend.com/css-carousels/ -->
+      <div class="carouselDiv">
+        <input type="radio" name="position" class="form-check-input bg-dark" checked />
+        <input type="radio" name="position" class="form-check-input bg-dark"/>
+        <input type="radio" name="position" class="form-check-input bg-dark"/>
+        <input type="radio" name="position" class="form-check-input bg-dark"/>
+        <input type="radio" name="position" class="form-check-input bg-dark"/>
+        <main id="carouselMain">
+            <div class="item" th:each="course,iter: ${freeCourses}">
+              <!-- <h1 th:text="${course.name}"></h1> -->
+              <div class="col d-flex">
+                <div class="card text-white bg-dark " style="width: 18rem;">
+                    <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
+                        <p class="forFreeTag">For free!</p>
+                    </div>
+                    <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${course.name}">Card title</h5>
+                        <p class="card-text" th:text="${course.description}">Card description</p>
+                        
+                    </div>
+                    <div class="card-footer"> <!-- style="text-align: center;" -->
+                        <a href="#" class="btn btn-light">Ver curso</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="item">
+                
+            </div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        <main>
+      </div>
+    </th:div>
 
-    <h1>index</h1>
+    <!-- <h1>adios</h1>
+
+    <div class="carouselDiv">
+      <input type="radio" name="position" class="form-check-input bg-dark" checked />
+      <input type="radio" name="position" class="form-check-input bg-dark"/>
+      <input type="radio" name="position" class="form-check-input bg-dark"/>
+      <input type="radio" name="position" class="form-check-input bg-dark"/>
+      <input type="radio" name="position" class="form-check-input bg-dark"/>
+      <main id="carouselMain">
+          <div class="item">
+              
+          </div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+      <main>
+    </div> -->
 
 
     <!-- Pie de pagina -->
