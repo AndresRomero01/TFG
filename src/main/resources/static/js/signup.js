@@ -42,7 +42,7 @@ function signUp() {
                     
         console.log("inside the else")
 
-        go(config.rootUrl + "/registro", 'POST', params)
+        go(config.rootUrl + "/signup", 'POST', params)
         .then(d => {console.log("todo ok") // va ok si el username no existe
                     username.setCustomValidity("");
                     console.log("------" + d["idUsuario"]);

@@ -89,23 +89,38 @@ public class RootController {
         return "login";
     }
 
-    @GetMapping("/registro")
-    public String registro2(Model model, HttpSession session) {
-        return "registro";
+    @GetMapping("/subscriptions")
+    public String subscriptionsPage(Model model, HttpSession session) {
+        return "subscriptions";
     }
 
-    @PostMapping(path = "/registro", produces = "application/json")
+    @GetMapping("/lessons")
+    public String lessonsPage(Model model, HttpSession session) {
+        return "lessons";
+    }
+
+    @GetMapping("/settings")
+    public String settingsPage(Model model, HttpSession session) {
+        return "settings";
+    }
+
+    @GetMapping("/signup")
+    public String signUpPage(Model model, HttpSession session) {
+        return "signup";
+    }
+
+    @PostMapping(path = "/signup", produces = "application/json")
     @Transactional // para no recibir resultados inconsistentes
     @ResponseBody // no devuelve nombre de vista, sino objeto JSON
-    public String registro(Model model, @RequestBody JsonNode o) {
-        log.info("----------- dentro de registro -------------");
+    public String signUpQuery(Model model, @RequestBody JsonNode o) {
+        log.info("----------- dentro de signup -------------");
 
         String username = o.get("username").asText();
         long idUser;
         String rol = "USER";
          
 
-        if (db.existeUsuario(em, username)) {
+        if (db.existsUser(em, username)) {
             log.info("usuario ya existe (rootController anadirUsuario)");
             return null;
         } else {
@@ -131,7 +146,7 @@ public class RootController {
             log.info(password1);
             log.info(password2);
 
-            idUser = db.crearUsuario(em, u);
+            idUser = db.createUser(em, u);
             /* idUsuario = db.crearUsuario(em, o.get("address").asText(), o.get("email").asText(),
                     o.get("firstName").asText(), o.get("lastName").asText(),
                     password, rol, o.get("phone").asText(), username); */

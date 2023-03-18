@@ -46,36 +46,21 @@ public class DBHandler {
         return u;
     }
 
-    public Boolean existeUsuario(EntityManager em, String username)
+    public Boolean existsUser(EntityManager em, String username)
     {
         List<User> lu = em.createNamedQuery("User.existsUsername", User.class).setParameter("username", username).getResultList();
         if(lu.size() == 0) return false;
         else return true;
     }
 
-    public long crearUsuario(EntityManager em, User user){
+    public long createUser(EntityManager em, User user){
         long idDevolver = -1;
 
-        if(!existeUsuario(em, user.getUsername())){
+        if(!existsUser(em, user.getUsername())){
             //User u = new User(username, password, firstName, lastName, email, direccion, telf, roles, enabled);
             em.persist(user);
             em.flush();
             idDevolver = user.getId();
-        }
-
-        return idDevolver;
-    }
-
-    public long crearUsuario(EntityManager em, String address, String email, String firstName, 
-    String lastName, String password, String roles, String phone, String username){
-        long idDevolver = -1;
-
-        if(!existeUsuario(em, username)){
-            User u = new User(username, password, firstName, lastName, email, address, phone, roles, ClientType.ONLINE);
-            //User u = new User(username, password, firstName, lastName, email, direccion, telf, roles, enabled);
-            em.persist(u);
-            em.flush();
-            idDevolver = u.getId();
         }
 
         return idDevolver;

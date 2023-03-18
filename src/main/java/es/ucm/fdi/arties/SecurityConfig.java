@@ -50,11 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers("/api/**")
 				.and()
 	        .authorizeRequests()
-			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/registro", "/courses").permitAll()
+			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access
 				.antMatchers("/admin/**", "/existeUsuario", "/anadirEmpleado").hasRole("ADMIN")	   // <-- administration
 			   .antMatchers("/user/**").hasAnyRole("USER", "EMPLEADO")		   
-				.antMatchers("/configuracion", "anadirUsuario").hasRole("ADMIN")
+				.antMatchers("/settings", "anadirUsuario").hasRole("ADMIN")
+				.antMatchers("/subscriptions", "/lessons").hasAnyRole("USER", "ADMIN", "EMPLEADO")
 	            .anyRequest().authenticated()
 	            .and()
 			.formLogin()

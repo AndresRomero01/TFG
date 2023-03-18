@@ -16,7 +16,7 @@
         </th:block>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
-            <div class="container-fluid">
+            <div class="container-fluid mx-5">
                 <!-- nombre del sitio; es un enlace que lleva a la página ppal -->
                 <a class="navbar-brand" th:href="@{/}" href="/">
                     <img th:src="@{/img/logo.png}" id="logoImgRest" src="/img/logo.png" alt="logo IW" width="32" height="32" class="d-inline-block align-text-top">
@@ -25,53 +25,53 @@
                 <!-- menu hamburguesa si no cabe todo -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <th:block th:if="${session.u}">
                             
                             <li class="nav-item mx-2">
-                                <a class="nav-link" th:href="@{/courses}">Cursos📖</a>
+                                <a class="nav-link" th:href="@{/courses}">Cursos</a>
                             </li>
 
                             <li th:if="${session.u.hasAnyRole('USER', 'EMPLEADO', 'ADMIN')}" class="nav-item mx-2">
-                                <a class="nav-link" th:href="@{/}">Clases🗓️</a>
+                                <a class="nav-link" th:href="@{/lessons}">Clases</a>
                             </li>
 
-                            <li th:if="${session.u.hasRole('USER')}" class="nav-item mx-2">
-                                <a class="nav-link"  th:href="@{/}">Perfil Malo🛍️</a>
+                            <li th:if="${session.u.hasAnyRole('USER', 'ADMIN')}" class="nav-item mx-2">
+                                <a class="nav-link"  th:href="@{/subscriptions}">Suscripciones</a>
                             </li>
 
                             <li th:if="${session.u.hasRole('ADMIN')}" class="nav-item mx-2">
-                                <a class="nav-link" th:href="@{/}">Configuracion⚙️</a>
+                                <a class="nav-link" th:href="@{/settings}">Configuracion</a>
                             </li>
 
                             <li class="nav-item mx-2">
-                                <a class="nav-link" th:href="@{/user/{id}(id=${session.u.id})}">Perfil👤
+                                <a class="nav-link" th:href="@{/user/{id}(id=${session.u.id})}">Perfil
                                     <!-- <img class="iwthumb rounded" th:src="@{/user/{id}/pic(id=${session.u.id})}">
                                     <span th:text="${session.u.username}">Pepe</span> -->
                                 </a>
                             </li>
                             
-                            <li class="nav-item align-self-center">
+                            <li class="nav-item align-self-center mx-2">
                                 <form th:action="@{/logout}" method="post">
-                                    <button type="submit" class="btn btn-outline-secondary btn-sm">Logout🚪</button>
+                                    <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
                                 </form>
                             </li>
                         </th:block>
                         <th:block th:unless="${session.u}">
 
-                            <li class="nav-item mx-2">
-                                <a class="nav-link"  th:href="@{/courses}">Cursos📖</a>
+                            <li class="nav-item mx-2 ">
+                                <a class="nav-link"  th:href="@{/courses}">Cursos</a>
                             </li>
 
                             <li class="nav-item mx-2">
-                                <a class="nav-link"  th:href="@{/registro}">Registro➕</a>
+                                <a class="nav-link"  th:href="@{/signup}">Registro</a>
                             </li>
 
                             <li class="nav-item mx-2">
-                                <a class="nav-link" th:href="@{/login}" href="/login">Login🔑</a>
+                                <a class="nav-link" th:href="@{/login}" href="/login">Login</a>
                             </li>
                             <!--/*
                                 Esto es un comentario "thymeleaf" - no se verá en el HTML
