@@ -35,6 +35,11 @@
                                 <a class="nav-link" th:href="@{/courses}">Cursos</a>
                             </li>
 
+                            
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" th:href="@{/items/listToLoan}">Items</a>
+                            </li>
+
                             <li th:if="${session.u.hasAnyRole('USER', 'EMPLEADO', 'ADMIN')}" class="nav-item mx-2">
                                 <a class="nav-link" th:href="@{/lessons}">Clases</a>
                             </li>
@@ -64,6 +69,10 @@
 
                             <li class="nav-item mx-2 ">
                                 <a class="nav-link"  th:href="@{/courses}">Cursos</a>
+                            </li>
+
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" th:href="@{/items/listAll}">Items</a>
                             </li>
 
                             <li class="nav-item mx-2">

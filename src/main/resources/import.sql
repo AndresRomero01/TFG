@@ -64,4 +64,34 @@ VALUES (11, 'curso de prueba5', TRUE, 'curso de prueba5', 2);
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (12, 'curso de prueba6', TRUE, 'curso de prueba6', 2);
 
+
+-- Datos sobre items
+
+INSERT INTO ITEM(id, name, description, quantity)
+VALUES (1,'pesa 5kg', 'Una pequeña pesa para principiantes', 10);
+
+INSERT INTO ITEM(id, name, description, quantity)
+VALUES (2,'pesa 10kg', 'Una pesa para niveles intermedios', 8);
+
+INSERT INTO ITEM(id, name, description, quantity)
+VALUES (3,'pesa 15kg', 'Una pesa para tonificar', 6);
+
+INSERT INTO ITEM(id, name, description, quantity)
+VALUES (4,'pesa 20kg', 'Una pesa para musculacion', 4);
+
+INSERT INTO ITEM(id, name, description, quantity)
+VALUES (5,'bicicleta basica', 'Una bicicleta basica ideal para principiantes y uso por ciudad', 6);
+
+INSERT INTO ITEM(id, name, description, quantity)
+VALUES (6,'bicicleta montaña', 'Una bicicleta perfecta para rutas por el campo', 4);
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (2, 1, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (1, 4, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (2, 4, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
+
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

@@ -94,6 +94,10 @@ public class User implements Transferable<User.Transfer> {
     private ClientType clientType; // NONE by default
 	
 
+    //por cada usuario, tenemos en esta var la lista de items que tiene alquilados
+    @OneToMany (mappedBy = "user")
+    private List<ItemLoans> itemLoans;
+
     /**
      * Checks whether this user has a given role.
      * @param role to check
