@@ -35,12 +35,16 @@
                                 <a class="nav-link" th:href="@{/courses}">Cursos</a>
                             </li>
 
+<<<<<<< Updated upstream
                             
                             <li class="nav-item mx-2">
                                 <a class="nav-link" th:href="@{/items/listToLoan}">Items</a>
                             </li>
 
                             <li th:if="${session.u.hasAnyRole('USER', 'EMPLEADO', 'ADMIN')}" class="nav-item mx-2">
+=======
+                            <li th:if="${session.u.hasAnyRole('USER', 'STAFF', 'ADMIN')}" class="nav-item mx-2">
+>>>>>>> Stashed changes
                                 <a class="nav-link" th:href="@{/lessons}">Clases</a>
                             </li>
 

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
+import es.ucm.fdi.arties.model.Category;
 import es.ucm.fdi.arties.model.Course;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
@@ -101,6 +102,10 @@ public class RootController {
 
     @GetMapping("/settings")
     public String settingsPage(Model model, HttpSession session) {
+        List<User> lu = db.getUsersByRol(em, "STAFF");
+        List<Category> lc = db.getCoursesCatogories(em);
+        model.addAttribute("employeesList", lu);
+        model.addAttribute("categories", lc);
         return "settings";
     }
 
@@ -160,8 +165,9 @@ public class RootController {
     @GetMapping("/courses")
     public String courses(Model model, HttpSession session) {
         List<Course> coursesList = new ArrayList<Course>();
+        List<Category> lc = db.getCoursesCatogories(em);
         coursesList = db.getCoursesList(em);
-
+        model.addAttribute("categories", lc);
         model.addAttribute("coursesList", coursesList);
         return "courses";
     }

@@ -22,11 +22,34 @@ INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, fir
 VALUES (2, 'USER', 'b',
     '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'user', 'user', 0);
 
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (3, 'STAFF', 'e',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'emp', 'emp_lastname', 0);
+
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (4, 'STAFF', 'emp',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'empleado2', 'e_lastname2', 0);
+
 INSERT INTO CATEGORY (id, name)
 VALUES (1, 'cat1');
 
 INSERT INTO CATEGORY (id, name)
 VALUES (2, 'cat2');
+
+INSERT INTO CATEGORY (id, name)
+VALUES (3, 'categoria3');
+
+INSERT INTO CATEGORY (id, name)
+VALUES (4, 'categoria4');
+
+INSERT INTO CATEGORY (id, name)
+VALUES (5, 'categoria5categoria5');
+
+INSERT INTO CATEGORY (id, name)
+VALUES (6, 'categoria6');
+
+INSERT INTO CATEGORY (id, name)
+VALUES (7, 'cat7');
 
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (1, 'curso de prueba1', FALSE, 'cprueba1', 1);
@@ -64,6 +87,7 @@ VALUES (11, 'curso de prueba5', TRUE, 'curso de prueba5', 2);
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (12, 'curso de prueba6', TRUE, 'curso de prueba6', 2);
 
+<<<<<<< Updated upstream
 
 -- Datos sobre items
 
@@ -93,5 +117,18 @@ VALUES (1, 4, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
 
 INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
 VALUES (2, 4, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
+=======
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (13, 'curso de prueba6', FALSE, 'curso de prueba6', 2);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (14, 'curso de prueba6', FALSE, 'curso de prueba6', 2);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (15, 'curso de prueba6', FALSE, 'curso de prueba6', 3);
+
+INSERT INTO COURSE (id, description, is_free, name, category_id)
+VALUES (16, 'curso de prueba6', FALSE, 'curso de prueba6', 1);
+>>>>>>> Stashed changes
 
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

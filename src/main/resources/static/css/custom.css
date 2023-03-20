@@ -1,6 +1,8 @@
 /* usa este fichero para personalizar tus vistas */
 :root{
   --red:#783848;
+  --dark: #343a40;
+  --secondary: #6c757d;
 }
 
 .bodyCol{

@@ -62,7 +62,7 @@ public class User implements Transferable<User.Transfer> {
     public enum Role {
         USER,			// normal users 
         ADMIN,          // admin users
-        EMPLEADO
+        STAFF
     }
 
     public enum ClientType {
@@ -87,12 +87,8 @@ public class User implements Transferable<User.Transfer> {
     private String address;
     private String phone;
 
-  
-
-   
     private String roles; // split by ',' to separate roles
     private ClientType clientType; // NONE by default
-	
 
     //por cada usuario, tenemos en esta var la lista de items que tiene alquilados
     @OneToMany (mappedBy = "user")

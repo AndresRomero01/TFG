@@ -15,6 +15,46 @@
     
 }
 
+#nav-tab{
+    margin-bottom: 3em;
+}
+
+.navTab{
+    color: var(--dark);
+    min-width: 8em;
+    /* border-right: 0.2em solid!important;
+    border-top: 0.2em solid!important;
+    border-bottom: 0.2em solid!important;
+    border-color: var(--bg-dark) !important;
+    border-radius: 0 !important; */
+    /* max-width: 10em; */
+}
+
+.navTab:hover{
+    background-color: var(--secondary) !important;
+    color: white !important;
+}
+
+.navTab:focus-within::before{
+    /* background-color:var(--dark) !important; */
+    color: var(--dark) !important;
+}
+
+.navTab.active:focus{
+    /* background-color:var(--dark) !important; */
+    color: white !important;
+}
+
+.navTab:focus{
+    /* background-color:var(--dark) !important; */
+    color: var(--dark) !important;
+}
+
+.navTab.active{
+    background-color: var(--dark) !important;
+    color: white;
+}
+
 .forFreeDiv{
     text-align: center;
     background-color: green;

@@ -10,7 +10,30 @@
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav"></header>
 
+    <div class="row bodyCol"  >
+        <div class="col" style="background-color: aqua;">
 
+            <nav class="navbar-light bg-light">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <th:block th:each="cat,iter: ${categories}"><!-- Se recorre la lista de categorias para crear los elementos de la navbar, el primero se pone como activo-->
+                        <button th:if="${iter.index} == 0" th:text="${cat.name}" class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" th:data-bs-target="'#'+${cat.getName()}" type="button" role="tab" aria-controls="nav-home" aria-selected="true">uno</button>
+                        <button th:unless="${iter.index} == 0" th:text="${cat.name}" class="nav-link" id="nav-home-tab" data-bs-toggle="tab" th:data-bs-target="'#'+${cat.getName()}" type="button" role="tab" aria-controls="nav-home" aria-selected="false">uno</button>
+                    </th:block>
+                </div>
+            </nav>
+
+            <th:block th:each="emp,iter: ${employeesList}">
+                <h1 th:text="${emp.username}">aaa</h1>
+            </th:block>
+        </div>
+        <div class="col" style="background-color:blue">
+            <h1>b</h1>
+        </div>
+
+    </div>
+
+    <h1>prueba</h1>
+    
 
 </body>
 

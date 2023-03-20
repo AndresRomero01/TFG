@@ -11,6 +11,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import es.ucm.fdi.arties.model.Category;
 import es.ucm.fdi.arties.model.Course;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.User.ClientType;
@@ -64,5 +65,17 @@ public class DBHandler {
         }
 
         return idDevolver;
+    }
+
+    public List<User> getUsersByRol(EntityManager em, String rol){
+        List<User> lu = null;
+        lu = em.createNamedQuery("User.byRol", User.class).setParameter("rol", "STAFF").getResultList();
+        return lu;
+    }
+
+    public List<Category> getCoursesCatogories(EntityManager em) {
+        List<Category> lc = null;
+        lc = em.createNamedQuery("getList", Category.class).getResultList();
+        return lc;
     }
 }

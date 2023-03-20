@@ -10,7 +10,6 @@
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav"></header>
 
-
     <!-- <div class="row" style="background-color: aqua;">
         <div class="col col-md-6" style="background-color: beige;"><h1>hola</h1></div>
         <div class="col col-md-2" style="background-color: rgb(28, 118, 40);"><h1>hola</h1></div>
@@ -26,7 +25,129 @@
     </div> -->
 
         <div class="col bodyCol">
-            <div class="row row-cols1 row-cols-md-4 g-5">
+
+            <th:block th:if="${session.u}">
+                <nav class="navbar">
+                    <div class="nav nav-tabs nav-pills" id="nav-tab" role="tablist">
+                        <div class="vr"></div>
+                        <button class="nav-link navTab active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#allCoursesPanel" type="button" role="tab" aria-controls="allCoursesPanel" aria-selected="true">Todos</button>
+                        <div class="vr"></div>
+                        <th:block th:each="cat,iter: ${categories}"><!-- Se recorre la lista de categorias para crear los elementos de la navbar, el primero se pone como activo-->
+                            <button th:if="${iter.index} == 0" th:text="${cat.name}" class="nav-link navTab" id="nav-home-tab" data-bs-toggle="tab" th:data-bs-target="'#'+${cat.getName()}" type="button" role="tab" aria-controls="nav-home" aria-selected="false">uno</button>
+                            <button th:unless="${iter.index} == 0" th:text="${cat.name}" class="nav-link navTab" id="nav-home-tab" data-bs-toggle="tab" th:data-bs-target="'#'+${cat.getName()}" type="button" role="tab" aria-controls="nav-home" aria-selected="false">uno</button>
+                            <div class="vr"></div>
+                        </th:block>
+                        <button class="nav-link navTab" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#freeCoursesPanel" type="button" role="tab" aria-controls="freeCoursesPanel" aria-selected="false">Gratis</button>
+                        <div class="vr"></div>
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="allCoursesPanel" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="col">
+                            <div class="row row-cols1 row-cols-md-4 g-5">
+                                <th:block th:each="course,iter: ${coursesList}">
+                                    <div class="col d-flex">
+                                        <div class="card text-white bg-dark " style="width: 18rem;">
+                                            <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
+                                                <p class="forFreeTag">For free!</p>
+                                            </div>
+                                            <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title" th:text="${course.name}">Card title</h5>
+                                                <p class="card-text" th:text="${course.description}">Card description</p>
+                                                
+                                            </div>
+                                            <div class="card-footer"> <!-- style="text-align: center;" -->
+                                                <a href="#" class="btn btn-light">Ver curso</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <th:block th:each="cat,iter: ${categories}">
+                        <div class="tab-pane fade" th:id="${cat.name}" role="tabpanel" aria-labelledby="nav-home-tab">
+                            
+                                <div class="row row-cols1 row-cols-md-4 g-5">
+                                    <th:block th:each="course,iter: ${cat.coursesList}" >
+                                        <div class="col d-flex">
+                                            <div class="card text-white bg-dark " style="width: 18rem;">
+                                                <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
+                                                    <p class="forFreeTag">For free!</p>
+                                                </div>
+                                                <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title" th:text="${course.name}">Card title</h5>
+                                                    <p class="card-text" th:text="${course.description}">Card description</p>
+                                                    
+                                                </div>
+                                                <div class="card-footer"> <!-- style="text-align: center;" -->
+                                                    <a href="#" class="btn btn-light">Ver curso</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            
+                        </div>
+                    </th:block>
+    
+                    <div class="tab-pane fade" id="freeCoursesPanel" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="col">
+                            <div class="row row-cols1 row-cols-md-4 g-5">
+                                <th:block th:each="course,iter: ${coursesList}"  th:if="${course.isFree}">
+                                    <div class="col d-flex">
+                                        <div class="card text-white bg-dark " style="width: 18rem;">
+                                            <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
+                                                <p class="forFreeTag">For free!</p>
+                                            </div>
+                                            <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title" th:text="${course.name}">Card title</h5>
+                                                <p class="card-text" th:text="${course.description}">Card description</p>
+                                                
+                                            </div>
+                                            <div class="card-footer"> <!-- style="text-align: center;" -->
+                                                <a href="#" class="btn btn-light">Ver curso</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+            <th:block th:unless="${session.u}">
+                <div class="row row-cols1 row-cols-md-4 g-5">
+                    <th:block th:each="course,iter: ${coursesList}" th:if="${course.isFree}">
+                        <div class="col d-flex">
+                            <div class="card text-white bg-dark " style="width: 18rem;">
+                                <div class="card-img-overlay forFreeDiv">
+                                    <p class="forFreeTag">For free!</p>
+                                </div>
+                                <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                                
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${course.name}">Card title</h5>
+                                    <p class="card-text" th:text="${course.description}">Card description</p>
+                                    
+                                </div>
+                                <div class="card-footer"> <!-- style="text-align: center;" -->
+                                    <a href="#" class="btn btn-light">Ver curso</a>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </th:block>
+
+            
+            <!-- <div class="row row-cols1 row-cols-md-4 g-5">
                 <th:block th:if="${session.u}">
                     <th:block th:each="course,iter: ${coursesList}">
                         <div class="col d-flex">
@@ -40,7 +161,7 @@
                                     <p class="card-text" th:text="${course.description}">Card description</p>
                                     
                                 </div>
-                                <div class="card-footer"> <!-- style="text-align: center;" -->
+                                <div class="card-footer"> 
                                     <a href="#" class="btn btn-light">Ver curso</a>
                                 </div>
                             </div>
@@ -62,14 +183,16 @@
                                     <p class="card-text" th:text="${course.description}">Card description</p>
                                     
                                 </div>
-                                <div class="card-footer"> <!-- style="text-align: center;" -->
+                                <div class="card-footer"> 
                                     <a href="#" class="btn btn-light">Ver curso</a>
                                 </div>
                             </div>
                         </div>
                     </th:block>
                 </th:block>
-            </div>   
+            </div> -->
+            
+            
         </div>
     
     
