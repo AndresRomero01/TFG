@@ -87,8 +87,6 @@ VALUES (11, 'curso de prueba5', TRUE, 'curso de prueba5', 2);
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (12, 'curso de prueba6', TRUE, 'curso de prueba6', 2);
 
-<<<<<<< Updated upstream
-
 -- Datos sobre items
 
 INSERT INTO ITEM(id, name, description, quantity)
@@ -117,7 +115,7 @@ VALUES (1, 4, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
 
 INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
 VALUES (2, 4, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
-=======
+
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (13, 'curso de prueba6', FALSE, 'curso de prueba6', 2);
 
@@ -129,6 +127,5 @@ VALUES (15, 'curso de prueba6', FALSE, 'curso de prueba6', 3);
 
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (16, 'curso de prueba6', FALSE, 'curso de prueba6', 1);
->>>>>>> Stashed changes
 
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;
