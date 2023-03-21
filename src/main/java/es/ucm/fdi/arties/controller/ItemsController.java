@@ -14,7 +14,7 @@ import es.ucm.fdi.arties.model.Item;
 
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.ItemLoans;
-
+import es.ucm.fdi.arties.model.DB.DBHandler;
 import es.ucm.fdi.arties.model.DB.DBItemsHandler;
 
 
@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -44,21 +44,33 @@ public class ItemsController {
    
     private DBItemsHandler db = new DBItemsHandler();
 
+    private DBHandler commonDB = new DBHandler();
+
 
     private static final Logger log = LogManager.getLogger(ItemsController.class);
 
   
     @GetMapping(path = "/myItems")
-    public String myItems(HttpSession session) {
+    public String myItems(Model model, HttpSession session) {
         User u = (User) session.getAttribute("u");
+        User u2;
+        u2 = commonDB.getUsuario(em, u.getId());
 
+        log.info("los roles son "+ u2.getRoles());
+
+        
+        model.addAttribute("loans", u2.getItemLoans());
+        
+        for (ItemLoans il : u2.getItemLoans()) {
+          log.info("loan: " + il.getItem().getName() + " end date: " + il.getLoanEnd());
+        } 
 
      //   List<Course> coursesList = new ArrayList<Course>();
     
         //  coursesList = db.getCoursesList(em);
       //  log.info("@@@@: " + coursesList.get(0).getName());
        // return coursesList;
-       return "index";
+       return "userItems";
     }
     
 
