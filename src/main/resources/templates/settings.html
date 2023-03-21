@@ -4,14 +4,20 @@
 <head>
     <th:block th:replace="fragments/head :: header" />
     <!-- <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css" type="text/css" /> -->
+    <link rel="stylesheet" href="css/calendar.css" />
+
     <title>Configuracion</title>
 </head>
 
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav"></header>
 
+    
+
     <div class="row bodyCol"  >
         <div class="col" style="background-color: aqua;">
+
+            
 
             <nav class="navbar-light bg-light">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -33,7 +39,70 @@
     </div>
 
     <h1>prueba</h1>
+
+    <div class="calendar">
+        <!-- Calendar Header -->
+        <div class="calendar-header">
+          <span class="month-picker" id="month-picker">
+            February
+          </span>
+          <div class="year-picker">
+            <span class="year-change mt-3" id="prev-year">
+              <pre> < </pre>
+            </span>
+            <span id="year">2023</span>
+            <span class="year-change mt-3" id="next-year">
+              <pre> > </pre>
+            </span>
+          </div>
+        </div>
+        <!-- Calendar Body -->
+        <div class="calendar-body">
+          <div class="calendar-week-day">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+          </div>
+          <div class="calendar-day">
+            <div>
+              1
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+          </div>
+        </div>
+        <!-- Calendar Footer -->
+        <div class="calendar-footer">
+            <div class="toggle">
+                <span>Dark Mode</span>
+                <div class="dark-mode-switch">
+                    <div class="dark-mode-switch-ident"></div>
+                </div>
+            </div>
+        </div>
+        <div class="month-list"></div>
+    </div>
     
+    <script th:src="@{/js/calendar.js}" src="js/calendar.js"></script>
 
 </body>
 

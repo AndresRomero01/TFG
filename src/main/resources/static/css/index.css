@@ -1,43 +1,43 @@
-.radioButtons:checked{
-    color: #ff70a6;
-}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100&display=swap');
 
 .firstDiv{
-  margin-top: 4em;
+  margin-top: 0em;
   position: relative;
 }
 
-.carouselLeftArrow{
+#bannerDiv{
+  position: relative;
+}
+
+#banner{
+  object-fit: cover;
+  object-position:50%;
+  height: 25vw;
+  width: 100%;
+  background-color: #90f1ef;
+  margin-top: -1px; /* para q no se vea una linea blanca entre la navbar y la img */
+  /* margin-bottom: 20em; */
+}
+
+#blackFilter{
   position: absolute;
-  top: 30%;
-  left: 9%;
-  grid-column: 1;
-  grid-row: 2 / 3;
+  height: 25vw;
+  width: 100%;
+  background-color: #00000090;
+  top: 0;
+  left: 0;
+  text-align: center;
 }
 
-.carouselRightArrow{
-  position: absolute;
-  top: 30%;
-  left: 90em;
+#bannerSentence{
+  padding-top: 10%;
+  color: white;
+  font-size: 3em;
+  font-family: 'Noto Sans', sans-serif;
 }
 
-.arrowButton{
-  /* text-align: center;
-  border-radius: 100%; */
-  height: 1.5em;
-  width: 1em;
-  font-size: 6em;
-}
 
-/* .arrowIcon{
-  margin-top: -0.45em;
-  padding-top: 0;
-} */
-
-.descField{
-  min-height: 4em;
-}
-
+/* ------  CAROUSEL  ------- */
 /* Codigo adaptado de https://freefrontend.com/css-carousels/ */
 .carouselDiv {
     display: grid;
@@ -135,5 +135,38 @@
   }
   input:nth-of-type(5):checked ~ main#carouselMain {
     --position: 5;
+  }
+
+
+  
+  .carouselLeftArrow{
+    position: absolute;
+    top: 30%;
+    left: 9%;
+    grid-column: 1;
+    grid-row: 2 / 3;
+  }
+  
+  .carouselRightArrow{
+    position: absolute;
+    top: 30%;
+    left: 90em;
+  }
+  
+  .arrowButton{
+    /* text-align: center;
+    border-radius: 100%; */
+    height: 1.5em;
+    width: 1em;
+    font-size: 6em;
+  }
+  
+  /* .arrowIcon{
+    margin-top: -0.45em;
+    padding-top: 0;
+  } */
+  
+  .descField{
+    min-height: 4em;
   }
   
