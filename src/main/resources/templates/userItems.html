@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <title >Items</title>
+     <link rel="stylesheet" href="../css/userItems.css" /> <!-- ../porque viene desde la ruta items/lo_que_sea. Se debe quitar ese items-->
+    
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+
+    <!-- <div class="row" style="background-color: aqua;">
+        <div class="col col-md-6" style="background-color: beige;"><h1>hola</h1></div>
+        <div class="col col-md-2" style="background-color: rgb(28, 118, 40);"><h1>hola</h1></div>
+    </div> -->
+
+    <!-- <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div> -->
+
+        <!-- <div class="col bodyCol"> -->
+           
+            <div class="myBody">
+
+                <th:block th:each="loan,iter: ${loans}">
+                
+                    <div class="row align-items-stretch loanRow">
+
+                        <div class="col text-center separator">
+                            <img class="imgItem" src="/img/drawing.jpg" alt="Card image cap">
+                           
+                        </div>
+
+                        
+                        <div class="col-sm-2 text-center separator">
+                            
+                            <h4 class="text-center" th:text="${loan.item.name}">Nombre item</h4>
+                        </div>
+                       
+
+                        <div class="col separator">
+                            <div>
+                                <h4 class="text-center" >Fecha inicio</h4>
+                                <p class="text-center"  th:text="${loan.loanStart}">04/04/2034</p>
+                            </div>
+                           
+                        </div>
+
+                        <div class="col separator">
+                            <div>
+                                <h4 class="text-center"  >Fecha fin</h4>
+                                <p class="text-center"  th:text="${loan.loanEnd}">17/04/2034</p>
+                            </div>  
+                        </div>
+
+                        <div class="col text-center separator">
+                            <div>
+                                <h4 class="text-center">cantidad</h4>
+                                <p class="text-center" th:text="${loan.quantity}">4</p>
+                            </div>
+                           
+                        </div>
+    
+                    </div>
+
+
+
+                </th:block>
+
+               
+              <!--   <th:block th:each="loan,iter: ${loans}">
+                    <div class="row">
+
+                    </div>
+
+                </th:block> -->
+            </div>
+                
+
+        
+        <!-- </div> -->
+    
+    
+
+    <!-- Pie de pagina -->
+    <th:block th:replace="fragments/footer.html :: footer" />
+    
+</body>
+</html>

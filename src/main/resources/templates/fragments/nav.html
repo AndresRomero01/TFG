@@ -37,9 +37,19 @@
 
 
                             
-                            <li class="nav-item mx-2">
+                            <!-- <li class="nav-item mx-2">
                                 <a class="nav-link" th:href="@{/items/listToLoan}">Items</a>
-                            </li>
+                            </li> -->
+                            <li class="nav-item mx-2 dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownItems" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Items
+                                </a>
+                                <ul class="dropdown-menu myDropdownMenu" aria-labelledby="navbarDropdownItems">
+                                  <li><a class="dropdown-item mydropdownItem" th:href="@{/items/listToLoan}">Alquilar</a></li>
+                                  <li><a class="dropdown-item mydropdownItem" th:href="@{/items/myItems}">Mis items</a></li>
+                                  
+                                </ul>
+                              </li>
 
                             <li th:if="${session.u.hasAnyRole('USER', 'STAFF', 'ADMIN')}" class="nav-item mx-2">
 
