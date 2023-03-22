@@ -109,8 +109,8 @@
 
 
 .customTab{
-  height: 10em;
-  width: 20em;
+/*   height: 10em;
+  width: 20em; */
   display: none;
   width: auto;
 }

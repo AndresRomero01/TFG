@@ -24,11 +24,31 @@ VALUES (2, 'USER', 'b',
 
 INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
 VALUES (3, 'STAFF', 'e',
-    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'emp', 'emp_lastname', 0);
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'Juan', 'Rodriguez', 0);
 
 INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
 VALUES (4, 'STAFF', 'emp',
-    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'empleado2', 'e_lastname2', 0);
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'Roberto', 'Pelaez', 0);
+
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (5, 'STAFF', 'emp2',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'Alejandra', 'Fernandez', 0);
+
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (6, 'STAFF', 'emp3',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'Jorge', 'Castaño', 0);
+
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (7, 'STAFF', 'emp4',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'Jorge', 'Castaño', 0);
+
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (8, 'STAFF', 'emp5',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'Jorge', 'Castaño', 0);
+
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (9, 'STAFF', 'emp6',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'Jorge', 'Castaño', 0);
 
 INSERT INTO CATEGORY (id, name)
 VALUES (1, 'cat1');

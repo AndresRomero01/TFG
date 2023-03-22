@@ -78,4 +78,11 @@ public class DBHandler {
         lc = em.createNamedQuery("getList", Category.class).getResultList();
         return lc;
     }
+
+    public void deleteUser(EntityManager em, long idUser){
+        /* User u = em.createNamedQuery("deleteUser", User.class).setParameter("idUser", idUser).getSingleResult(); */
+        User u = em.find(User.class, idUser);
+        em.remove(u);
+        em.flush();
+    }
 }

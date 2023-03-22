@@ -40,7 +40,8 @@ import java.util.List;
         @NamedQuery(name="User.byRol",
                 query="SELECT u "
                         + "FROM User u "
-                        + "WHERE u.roles = :rol")                                   
+                        + "WHERE u.roles = :rol")/* ,
+        @NamedQuery(name="deleteUser", query="DELETE u FROM User u WHERE u.id = :id") */                                   
 })
 
 @Table(name="ARTIESUser")

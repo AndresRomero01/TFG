@@ -5,6 +5,7 @@
     <th:block th:replace="fragments/head :: header" />
     <!-- <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css" type="text/css" /> -->
     <!-- <link rel="stylesheet" href="css/calendar.css" /> -->
+    <link rel="stylesheet" href="css/settings.css" />
 
     <title>Configuracion</title>
 </head>
@@ -32,10 +33,27 @@
       </div>
       
       <div id="staffPanel" class="customTab firstTab">
-        <div class="col" style="background-color: aqua;">
-            <th:block th:each="emp,iter: ${employeesList}">
-                <h1 th:text="${emp.firstName}">staff username</h1>
-            </th:block>
+        <div class="col staffListCol">
+            <div clas="row">
+              <div class="col d-flex justify-content-end">
+                <!-- <button class="btn btn-primary openStaffModalButton">Añadir empleado</button> -->
+                <button type="button" class="btn btn-primary openStaffModalButton" data-bs-toggle="modal" data-bs-target="#addStaffModal">
+                  Añadir empleado
+              </button> 
+              </div>
+            </div>
+            <th:div th:each="emp,iter: ${employeesList}" id="staffDivList">
+                <div class="row staffDiv"  th:data-id="${emp.id}">
+                  <div class="col d-flex justify-content-start">
+                    <p th:text="${emp.firstName} + ' ' + ${emp.lastName}" class="staffName">staff username</p>
+                  </div>
+                  
+                  <div class="col d-flex justify-content-end">
+                    <button class="btn btn-secondary modifyStaffButton button_slide slide_left">Modificar</button>
+                    <button class="btn btn-danger deleteStaffButton slide">Eliminar</button>
+                  </div>
+                </div>
+            </th:div>
         </div>
       </div>
 
@@ -58,8 +76,72 @@
     </div>
 
     
+
+
+    <!-- ------ MODALES -------- -->
+    <!-- Modal anadir empleado -->
+    <div class="modal fade" id="addStaffModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addStaffModalLabel">Añadir empleado</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="addStaffForm" th:action="@{/}" onsubmit="return false;">
+              <label for="username" style="display: block;">Username</label>
+              <input type="text" id="username" required>
+
+              <label for="email" style="display: block;" class="modalLabel">Email</label>
+              <input type="email" id="email" required>
+
+              <div class="row">
+                  <div class="col">
+                      <label for="firstName" style="display: block;" class="modalLabel">Nombre</label>
+                      <input type="text" id="firstName">
+                  </div>
+                  <div class="col">
+                      <label for="lastName" style="display: block;" class="modalLabel">Apellido</label>
+                      <input type="text" id="lastName">
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col">
+                      <label for="password1" style="display: block;" class="modalLabel">Contraseña</label>
+                      <input type="password" id="password1" onchange="validatePassword()" required>
+                  </div>
+                  <div class="col">
+                      <label for="password2" style="display: block;" class="modalLabel">Repite la contraseña</label>
+                      <input type="password" id="password2" onkeyup="validatePassword()" required>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col">
+                      <label for="address" style="display: block;" class="modalLabel">Direccion</label>
+                      <input type="input" id="address" required>
+                  </div>
+                  <div class="col">
+                      <label for="phone" style="display: block;" class="modalLabel">Telefono</label>
+                      <input type="tel" id="phone" required>
+                  </div>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="submit" id="addStaffButton" class="btn btn-primary">Añadir</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <!-- <script th:src="@{/js/calendar.js}" src="js/calendar.js"></script> -->
     <script th:src="@{/js/settings.js}" src="js/settings.js"></script>
+    
 </body>
 
 <th:block th:replace="fragments/footer.html :: footer" />

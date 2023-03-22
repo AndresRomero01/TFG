@@ -1,0 +1,90 @@
+.staffDiv{
+    background-color: var(--bs-dark);
+    color: white;
+    height: 2.5em;
+    margin: 0.5em 0;
+    border-radius: 0.5em;
+    font-size: 1.5em;
+}
+
+.staffDiv:hover{
+    transition: background-color 0.5s ease;
+    background-color: var(--bs-gray-800);
+}
+
+.staffListCol{
+    width: 80%;
+    margin: auto;
+}
+
+.deleteStaffButton{
+    height: 2em;
+    margin-top: 0.9em;
+    margin-right: 1em;
+    border: 0;
+}
+
+.modifyStaffButton{
+    height: 2em;
+    margin-top: 0.9em;
+    margin-right: 1em;
+    border: 0;
+}
+
+p.staffName{
+    margin-top: 0.5em;
+    margin-left: 1em;
+}
+
+.openStaffModalButton{
+    right: 0;
+    margin-bottom: 1em;
+}
+
+.modalLabel{
+    margin-top: 1.5em;
+}
+
+.modal-header{
+    background-color: var(--bs-dark);
+    color: white;
+}
+
+.crossButton{
+    color: white !important;
+}
+
+.modal-footer{
+    margin-top: 1em;
+}
+
+/* https://codepen.io/RazorXio/pen/gMaoOW */
+.button_slide {
+    color: #FFF;
+    /* border: 2px solid rgb(216, 2, 134); */
+    /* border-radius: 0px;
+    padding: 18px 36px;
+    display: inline-block; */
+    /* font-family: "Lucida Console", Monaco, monospace;
+    font-size: 14px;
+    letter-spacing: 1px; */
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 var(--bs-blue);
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+}
+
+.slide_right:hover {
+    box-shadow: inset 200px 0 0 0 var(--bs-blue);
+}
+
+.slide_left:hover {
+    box-shadow: inset 0 0 0 20px var(--bs-primary);
+}
+
+#outer {
+    width: 364px;
+    margin: 50px auto 0 auto;
+    text-align: center;
+}

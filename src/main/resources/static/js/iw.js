@@ -258,7 +258,7 @@ function toBlobGeneral(dataurl) {
 document.addEventListener("DOMContentLoaded", () => {
     if (config.socketUrl) {
 
-        let subs =[];
+        /* let subs =[];
         try{
             
         let idUs = document.getElementById("idUs").value
@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let p = document.querySelector("#nav-unread");
         if (p) {
             go(`${config.rootUrl}/user/unread`, "GET").then(d => p.textContent = d.unread);
-        }
+        } */
     } else {
         console.log("Not opening websocket: missing config", config)
     }

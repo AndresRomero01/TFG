@@ -35,7 +35,8 @@ import es.ucm.fdi.arties.LocalData;
 
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
-
+import es.ucm.fdi.arties.model.DB.DBHandler;
+import es.ucm.fdi.arties.model.User.ClientType;
 import es.ucm.fdi.arties.model.User.Role;
 
 import java.io.*;
@@ -58,7 +59,7 @@ public class UserController {
 	private static final Logger log = LogManager.getLogger(UserController.class);
 
 	@Autowired
-	private EntityManager entityManager;
+	private EntityManager em;
 
 	@Autowired
     private LocalData localData;
@@ -68,6 +69,8 @@ public class UserController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+    private DBHandler db = new DBHandler();
 
 
     /**
@@ -112,7 +115,7 @@ public class UserController {
 	@GetMapping("{id}")
     public String index(@PathVariable long id, Model model, HttpSession session) {
 		log.info("------en id --------@@");
-        User target = entityManager.find(User.class, id);
+        User target = em.find(User.class, id);
 
 		long idConf = 1;
 /* 		ConfiguracionRestaurante c = null;
@@ -145,13 +148,13 @@ public class UserController {
             target = new User();
             target.setPassword(encodePassword(generateRandomBase64Token(12)));
            
-            entityManager.persist(target);
-            entityManager.flush(); // forces DB to add user & assign valid id
+            em.persist(target);
+            em.flush(); // forces DB to add user & assign valid id
             id = target.getId();   // retrieve assigned id from DB
         }
         
         // retrieve requested user
-        target = entityManager.find(User.class, id);
+        target = em.find(User.class, id);
         model.addAttribute("user", target);
 		
 		if (requester.getId() != target.getId() &&
@@ -220,7 +223,7 @@ public class UserController {
     public String setPic(@RequestParam("photo") MultipartFile photo, @PathVariable long id, 
         HttpServletResponse response, HttpSession session, Model model) throws IOException {
 
-        User target = entityManager.find(User.class, id);
+        User target = em.find(User.class, id);
         model.addAttribute("user", target);
 		
 		// check permissions
@@ -274,5 +277,52 @@ public class UserController {
         return "{\"isok\": \"todobien\"}";// devuelve un json como un string
     }
 
+    @PostMapping(path = "/deleteUser", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String deleteUser(Model model, @RequestBody JsonNode o, HttpSession session) {
+        log.info("@@@@@ dentro de deleteUser @@@@@");
+        log.info("id a borrar: " + o.get("idUser").asText());
 
+
+        db.deleteUser(em, o.get("idUser").asLong());
+
+        return "{\"isok\": \"todobien\"}";// devuelve un json como un string
+    }
+
+    @PostMapping(path = "/addStaff", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String addStaff(Model model, @RequestBody JsonNode o, HttpSession session) {
+        log.info("@@@@@ dentro de addStaff @@@@@");
+
+
+        String username = o.get("username").asText();
+        long idUser;
+        String rol = "STAFF";
+
+        if (db.existsUser(em, username)) {
+            log.info("usuario ya existe (rootController anadirUsuario)");
+            return null;
+        } else {
+            String firstName = o.get("firstName").asText();
+            String lastName = o.get("lastName").asText();
+            String email = o.get("email").asText();
+            String phone = o.get("phone").asText();
+            String address = o.get("address").asText();
+            String password1 = o.get("password1").asText();
+            
+            User u = new User(username, password1, firstName, lastName, email, address, phone, rol, ClientType.ONLINE);
+            String encodedPassword = passwordEncoder.encode(o.get("password1").asText());
+            u.setPassword(encodedPassword);
+
+            idUser = db.createUser(em, u);
+            if (idUser == -1)
+                return null;
+
+            log.info("idUser es: " + idUser);
+        }
+
+        return "{\"isok\": \"true\", \"idUser\": " + idUser + "}";// devuelve un json como un string
+    }
 }
