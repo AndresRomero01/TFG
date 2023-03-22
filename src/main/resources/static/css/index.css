@@ -61,10 +61,12 @@
     --middle: 3;
     --position: 1;
     /* pointer-events: none; */
+    margin-top: 3em;
   }
   
   div.item {
     position: absolute;
+    
     /* width: 300px;
     height: 400px; */
     background-color: coral;
