@@ -178,6 +178,8 @@ function modifyStaff(e){
         document.getElementById("addressMod").value = d["address"];
         document.getElementById("phoneMod").value = d["phone"];
         document.getElementById("emailMod").value = d["email"];
+
+
     })
     .catch(() => {console.log("Error en catch modificar empleado");//si el username ya existia
 
@@ -227,6 +229,10 @@ function applyChanges(){
         .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
             document.getElementById("oldUsername").value = d["username"];
             username.setCustomValidity("");
+            // para encontrar el firstNameMod a cambiar
+            document.getElementById(id).innerHTML = firstName.value + " " + lastName.value;
+/*             document.getElementById("lastNameMod").innerHTML = lastName; */
+            document.getElementById('closeModalModifyStaff').click(); // cutre, pero lo de arriba no me ha funcionado
         })
         .catch(() => {console.log("Error en catch apply changes");//si el username ya existia
             username.setCustomValidity("El usuario ya existe, escoja otro, por favor");
