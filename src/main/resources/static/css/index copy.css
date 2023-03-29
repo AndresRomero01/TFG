@@ -1,39 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100&display=swap');
-
-
-#bannerDiv{
-  position: relative;
+.radioButtons:checked{
+    color: #ff70a6;
 }
-
-#banner{
-  object-fit: cover;
-  object-position:50%;
-  height: 25vw;
-  width: 100%;
-  background-color: #90f1ef;
-  margin-top: -1px; /* para q no se vea una linea blanca entre la navbar y la img */
-  /* margin-bottom: 20em; */
-}
-
-#blackFilter{
-  position: absolute;
-  height: 25vw;
-  width: 100%;
-  background-color: #00000090;
-  top: 0;
-  left: 0;
-  text-align: center;
-}
-
-#bannerSentence{
-  padding-top: 10%;
-  color: white;
-  font-size: 3em;
-  font-family: 'Noto Sans', sans-serif;
-}
-
-
-
 
 .firstDiv{
   margin-top: 4em;
@@ -169,8 +136,4 @@
   input:nth-of-type(5):checked ~ main#carouselMain {
     --position: 5;
   }
-  
-
-
-
   

@@ -7,6 +7,7 @@
 
 .myBody{
     margin: 5em;
+    margin-top: 1em;
 }
 .loanRow{
    
@@ -17,12 +18,17 @@
   
     border-width: 0.2em;
     border-style: solid;
-    border-radius: 0.5em;
+   
+
+
+    background-color: var(--secondary);
+    border-radius: 1em;
+    color: white;
 }
 
 .separator{
     border-style: solid;
-    border-color: rgba(54, 54, 54, 0.238);
+    border-color: rgba(255, 255, 255, 0.238);
     border-top-width: 0px;
     border-bottom-width: 0px;
     border-left-width: 0px;

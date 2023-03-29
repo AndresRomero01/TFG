@@ -30,14 +30,24 @@ public class Item {
     private long id;
 
 
+
     private String name;
     private String description;
     private Integer quantity;
+    private Integer maxLoan;
     // TO DO variables video/imagenes
 
     //por cada item, tenemos en esta var la lista de loans de ese item con el usuario que la tiene
     @OneToMany (mappedBy = "item")
     private List<ItemLoans> itemLoans;
+
+ public Item(String name, String desc, Integer quant, Integer maxL)
+ {
+    this.name = name;
+    description = desc;
+    quantity = quant;
+    maxLoan = maxL;
+ }
 
     
 }

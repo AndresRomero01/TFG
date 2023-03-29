@@ -50,11 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers("/api/**")
 				.and()
 	        .authorizeRequests()
-			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/items/listAll", "/seeCourse", "/items/listAll").permitAll()
+			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/items/listAll").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access
-				.antMatchers("/admin/**", "/existeUsuario", "/getUser", "/modifyUser").hasRole("ADMIN")	   // <-- administration
-				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem").hasRole("ADMIN")
-				.antMatchers("/user/**").hasAnyRole("USER", "STAFF")		   
+				.antMatchers("/admin/**", "/existeUsuario", "/addStaff", "/items/addNewItem").hasRole("ADMIN")	   // <-- administration
+			   .antMatchers("/user/**").hasAnyRole("USER", "STAFF")		   
+				.antMatchers("/settings", "anadirUsuario").hasRole("ADMIN")
 				.antMatchers("/subscriptions", "/lessons", "/items/myItems", "/listToLoan", "/items/loanItem").hasAnyRole("USER", "ADMIN", "STAFF")
 	            .anyRequest().authenticated()
 	            .and()

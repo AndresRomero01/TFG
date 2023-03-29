@@ -27,6 +27,16 @@
     </div> -->
 
         <!-- <div class="col bodyCol"> -->
+
+            <th:block th:if="${session.u}">
+                <th:block th:if="${session.u.hasRole('ADMIN')}">
+                  <div class="d-flex justify-content-end addItemBtt">
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalAddItem">
+                        Añadir item
+                      </button>
+                  </div>
+                </th:block>
+              </th:block>
            
             <div class="myBody row justify-content-center row-cols1 row-cols-md-4 g-5">
                
@@ -54,11 +64,47 @@
 
         
         <!-- </div> -->
+
+        <!-- Modal -->
+    <div class="modal fade" id="modalAddItem" tabindex="-1" aria-labelledby="modalAddItemLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="modalAddItemLabel">Añadir Item</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="addItemForm"> <!-- onsubmit="false;"   truco para validacion de requiered no necesario ya -->
+                    <label for="itemNameField" class="form-label">Nombre del item</label>
+                    <input type="text" class="form-control" name="itemName" id="itemNameField" value="" required> 
+
+                    <label class="form-label" for="itemQuantityField">Cantidad del item</label>
+                    <input type="number" id="itemQuantityField" name="itemQuantity"  class="form-control" required/>
+   
+                    <label for="itemDescField" class="form-label">Descripcion del item</label>
+                    <textarea class="form-control" id="itemDescField" name="itemDesc" rows="4" cols="60" required></textarea>
+
+                    <label class="form-label" for="itemMaxLoanField">Cantidad maxima que un usuario podrá alquilar a la vez</label>
+                    <input type="number" id="itemMaxLoanField" name="itemQuantity"  class="form-control" required/>
+                    
+                    <label for="fileFieldImgItem" class="form-label">Imagen del plato</label>
+                    <img id="newImgItem" alt="Imagen nuevo Plato" class="img-thumbnail mw-100 miClase">
+                    <input type="file" id="fileFieldImgItem" accept="image/jpeg,image/png" required>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" id ="buttonFormConfirm" class="btn btn-primary">Confirmar</button>
+                    </div>
+                  </form>
+        </div>
+        </div>
+    </div>
     
     
 
     <!-- Pie de pagina -->
     <th:block th:replace="fragments/footer.html :: footer" />
+
+    <script th:src="@{/js/modalAddItem.js}" src="js/modalAddItem.js"></script>
     
 </body>
 </html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <title >Items</title>
+     <link rel="stylesheet" href="../css/loanItem.css" /> <!-- ../porque viene desde la ruta items/lo_que_sea. Se debe quitar ese items-->
+     <link rel="stylesheet" href="../css/custom.css" />
+     <link rel="stylesheet" href="../css/calendar.css" />
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+    
+    <!-- <div class="row" style="background-color: aqua;">
+        <div class="col col-md-6" style="background-color: beige;"><h1>hola</h1></div>
+        <div class="col col-md-2" style="background-color: rgb(28, 118, 40);"><h1>hola</h1></div>
+    </div> -->
+
+    <!-- <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div> -->
+
+        <!-- <div class="col bodyCol"> -->
+
+            <div class="myBody">
+                <div class="row"><!--Row de la toda la info, que contiene las dos cols-->
+                    <div class="col-md-5"><!--Primera col con la card-->
+                        <div class="card text-white bg-dark myCard">
+                                <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                                
+                                <div class="card-body hVSeparator">
+                                    <div class="text-center">
+                                        <h5 class="card-title " th:text="${item.name}">Card title</h5>
+                                    </div>
+                                    <div class="row hSeparator">
+                                        <div th:text="${item.description}">Descripcion dle item</div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col cardText">
+                                            <div>Maximo de unidades que se pueden alquilar a la vez</div>
+                                        </div>
+                                        <div class="col-2 cardText">
+                                            <div th:text="${item.maxLoan}">2</div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="col"><!--Segunda col con el formulario si no tenias el item alquilado-->
+
+
+                        <th:block th:if="${hasItem}">
+                            <div class="text-center">
+                                Ya tienes este item alquilado.
+                                Podrás ampliar la reserva desde esta página en las 48h anteriores al fin del alquiler.
+                            </div>
+
+                        </th:block>
+
+                        <th:block th:unless="${hasItem}">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <div id="calendar"></div>
+                                    
+                                    <div class="myForm text-center justify-content-center" role="form" id="myForm"> 
+                                        <div class="row justify-content-center">
+                                            <div class="col">
+                                                <label class="form-label" for="typeNumber">Cantidad del item que quieres alquilar</label>
+                                                <input type="number" id="addQuantityItem" name="itemQuantity"  class="form-control" required/>
+                                            </div>
+                                            <div class="col">
+                                                <button type="button" id ="botonForm" class="btn btn-primary">Alquilar</button>
+                                            </div>
+                                        </div>
+                                        
+                                      
+                                    </div>
+                                   
+                                    
+                                   <!--  <form class="myForm" role="form" id="myForm"> 
+                                        <label for="addItemName" class="form-label">Fecha</label>
+                                        <input type="date" class="form-control" name="itemName" id="addItemName" value="" required> 
+                        
+                                        <label class="form-label" for="typeNumber">Cantidad del item</label>
+                                        <input type="number" id="addQuantityItem" name="itemQuantity"  class="form-control" required/>
+                                        <input type="hidden" id="itemId" th:value="${item.id}"/>
+                                    
+                                    
+                                        
+                                        <button type="button" id ="botonForm" class="btn btn-primary">Confirmar</button>
+                                    
+                                    </form> -->
+                                </div>
+                        
+        
+                              </div>
+
+                        </th:block>
+
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+<!--
+
+            <div class="myBody">
+                <div class="row">
+                    <div class="col">
+                        <div class="card myCard">
+                            <img class="card-img-top imgItem" src="/img/drawing.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <div class="text-center">
+                                  <h5 class="card-title">Believing is seeing</h5>
+                                </div>
+                            </div>
+                            <div class="row align-items-stretch justify-content-center hSeparator">
+                                <div>Descripcion dle item</div>
+                            </div>
+                            <div class="row align-items-stretch justify-content-start">
+                                <div class="col cardText">
+                                    <div>Maximo de unidades que se pueden alquilar a la vez</div>
+                                </div>
+                                <div class="col-2 text-center cardText">
+                                    <div>2</div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <section style="background-color: #eee;">
+                <div class="container py-5">
+                  <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4">
+                      <div class="card text-black">
+                        <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/3.webp"
+                          class="card-img-top" alt="Apple Computer" />
+                        <div class="card-body">
+                          <div class="text-center">
+                            <h5 class="card-title">Believing is seeing</h5>
+                            <p class="text-muted mb-4">Apple pro display XDR</p>
+                          </div>
+                          <div>
+                            <div class="d-flex justify-content-between">
+                              <span>Pro Display XDR</span><span>$5,999</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                              <span>Pro stand</span><span>$999</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                              <span>Vesa Mount Adapter</span><span>$199</span>
+                            </div>
+                          </div>
+                          <div class="d-flex justify-content-between total font-weight-bold mt-4">
+                            <span>Total</span><span>$7,197.00</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            -->
+<!--            <div class="myBody">
+                <div class="row align-items-stretch justify-content-center loanRow">
+
+                    <div class="col-sm-4 text-center separator">
+                        <img class="imgItem" src="/img/drawing.jpg" alt="Card image cap">
+                    </div>
+
+                    
+                    <div class="col-sm-2 text-center separator">
+                        
+                        <h4 class="text-center" th:text="${item.name}">Nombre item</h4>
+                    </div>
+
+                    <div class="col-sm-2 text-center separator">
+                        
+                        <h4 class="text-center" th:text="${item.description}">Desc item</h4>
+                    </div>
+
+                    <div class="col-sm-3 text-center separator">
+                        <div>
+                            <h4 class="text-center" >Maximo de unidades que se pueden alquilar a la vez</h4>
+                            <h4 class="text-center" th:text="${item.maxLoan}">Desc item</h4>
+
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+                <th:block th:if="${hasItem}">
+                    <div class="row justify-content-center">
+                        <div class="col-2 text-center">
+                            Ya tienes este item alquilado.
+                            Podras ampliar la reserva en las 48h anteriores al fin del alquiler
+                        </div>
+                    </div>
+
+                </th:block>
+               
+
+                <th:block th:unless="${hasItem}">
+                    <div class="row">
+                        <div class="col text-center">
+                            <form class="myForm" role="form" id="myForm">
+                                <label for="addItemName" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" name="itemName" id="addItemName" value="" required> 
+                
+                                <label class="form-label" for="typeNumber">Cantidad del item</label>
+                                <input type="number" id="addQuantityItem" name="itemQuantity"  class="form-control" required/>
+                
+                              
+                               
+                                
+                                  <button type="button" id ="botonForm" class="btn btn-primary">Confirmar</button>
+                               
+                              </form>
+                        </div>
+                        
+        
+                    </div>
+
+                </th:block>
+                
+
+
+
+
+
+            </div>
+-->
+            
+            
+           
+           
+           
+                
+
+        
+        <!-- </div> -->
+
+        <!-- Modal -->
+<!--   <div class="modal fade" id="modalAddItem" tabindex="-1" aria-labelledby="modalAddItemLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="modalAddItemLabel">Añadir Item</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="myForm">
+                    <label for="addItemName" class="form-label">Nombre del item</label>
+                    <input type="text" class="form-control" name="itemName" id="addItemName" value="" required> 
+
+                    <label class="form-label" for="typeNumber">Cantidad del item</label>
+                    <input type="number" id="addQuantityItem" name="itemQuantity"  class="form-control" required/>
+   
+                    <label for="addItemDesc" class="form-label">Descripcion del item</label>
+                    <textarea class="form-control" id="addItemDesc" name="itemDesc" rows="4" cols="60" required></textarea>
+                    
+                    <label for="fPlato" class="form-label">Imagen del plato</label>
+                    <img id="imgNuePlato" alt="Imagen nuevo Plato" class="img-thumbnail mw-100 miClase">
+                    <input type="file" id="fPlato" accept="image/jpeg,image/png" required>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" id ="botonForm" class="btn btn-primary">Confirmar</button>
+                    </div>
+                  </form>
+        </div>
+        </div>
+    </div>
+    </div>
+-->   
+    
+
+    <!-- Pie de pagina -->
+    <th:block th:replace="fragments/footer.html :: footer" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+    <script th:src="@{/js/calendar.js}" src="js/calendar.js"></script>
+
+    
+</body>
+</html>

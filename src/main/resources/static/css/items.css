@@ -28,4 +28,26 @@
 
 .myBody{
     margin: 5em;
+    margin-top: 1em;
+}
+
+.addItemBtt{
+margin-top: 1em;
+margin-right: 4.5em;
+
+}
+
+.addItemBtt button{
+    background-color: var(--secondary);
+    color: white;
+}
+
+.addItemBtt button:focus{
+    outline: 0px;
+    box-shadow:none;
+}
+
+.addItemBtt button:hover{
+    background-color: #343a40;
+    color: white;
 }

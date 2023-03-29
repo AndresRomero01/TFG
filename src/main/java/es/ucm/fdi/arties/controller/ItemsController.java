@@ -2,13 +2,15 @@ package es.ucm.fdi.arties.controller;
 
 
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
-
-
+import javax.transaction.Transactional;
 
 import es.ucm.fdi.arties.model.Item;
 
@@ -28,6 +30,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -79,10 +84,32 @@ public class ItemsController {
       //  User u = (User) session.getAttribute("u");
 
         List<Item> itemList = db.getItemList(em);
+        
 
         model.addAttribute("items", itemList);
 
          return "allItems";
+       //return "listToLoan";
+    }
+
+    @GetMapping(path = "/loanItem")
+    public String loanItem(Model model, HttpSession session, @RequestParam(required = true) long itemId) {
+      //  User u = (User) session.getAttribute("u");
+
+        log.info("Id del item pedido es: "+ itemId);
+
+        Item item = em.find(Item.class, itemId);
+
+        User u = (User) session.getAttribute("u");
+
+        boolean hasItem = u.hasItemLoan(item);
+
+        log.info("el valor del bool es: "+ hasItem);
+
+        model.addAttribute("hasItem", hasItem);
+        model.addAttribute("item", item);
+
+         return "loanItem";
        //return "listToLoan";
     }
 
@@ -126,7 +153,58 @@ public class ItemsController {
        //return "listToLoan";
     }
 
+    @PostMapping("addNewItem")
+    @Transactional
+    @ResponseBody 
+    public String addNewItem(@RequestParam("itemImg") MultipartFile photo,
+                            @RequestParam("itemName") String itemName,
+                            @RequestParam("itemQuantity") Integer itemQuantity,
+                            @RequestParam("itemDesc") String itemDesc,
+                            @RequestParam("itemMaxLoan") Integer itemMaxLoan)   {
+                          
 
+      log.info("adding new item");
+      Long newId = db.addNewItem(em, itemName, itemQuantity, itemDesc, itemMaxLoan);
+
+      if(newId <0)
+      {
+        return"";
+      }
+
+      File img = new File("src/main/resources/static/img/items", newId + ".jpg");
+
+      if (photo.isEmpty()) {
+        log.info("failed to upload photo: emtpy file?");
+        return null;
+      } else {
+          try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(img))) {
+              byte[] bytes = photo.getBytes();
+              stream.write(bytes);
+              log.info("la ruta es: " + img.getAbsolutePath());
+          } catch (Exception e) {
+              return null;
+          }
+      }
+
+      String dataToReturn = "{";
+        dataToReturn += "\"idItem\": \"" + newId + "\"";
+        dataToReturn += "}";
+
+        return dataToReturn;
+      
+    }
+
+    @PostMapping("makeLoan")
+    @Transactional
+    @ResponseBody 
+    public String makeLoan(HttpSession session, @RequestParam("date") String date,
+                          @RequestParam("quantity") Integer itemQuantity,
+                          @RequestParam("itemId") long itemId)
+    {
+
+
+      return "";
+    }
 
 
 

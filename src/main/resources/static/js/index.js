@@ -1,7 +1,19 @@
+
 document.getElementById("prevCourse").addEventListener("click", previousCourse);
 document.getElementById("nextCourse").addEventListener("click", nextCourse);
 
 /* let actualChecked; */
+
+
+
+
+var rad = document.querySelectorAll(".myRadio");
+var prev = null;
+for (var i = 0; i < rad.length; i++) {
+    rad[i].addEventListener('change', function() {
+        enableDisableDetails();
+    });
+}
 
 function previousCourse(){
     const actualCheckedIndex = getChecked();
@@ -13,6 +25,7 @@ function previousCourse(){
     document.getElementById(actualCheckedId).checked = false; */ 
 
     document.getElementById(previousId).checked = true;
+    enableDisableDetails()
 }
 
 function nextCourse(){
@@ -20,6 +33,7 @@ function nextCourse(){
     if(actualCheckedIndex == 5) previousId = "position" + 1;
     else previousId = "position" + (actualCheckedIndex+1);
     document.getElementById(previousId).checked = true;
+    enableDisableDetails();
 }
 
 function getChecked(){
@@ -34,7 +48,7 @@ function getChecked(){
 
 window.addEventListener("DOMContentLoaded", (event) => {
     console.log("DOM fully loaded and parsed");
-    setInterval(() => {nextCourse()}, 3000);
+   // setInterval(() => {nextCourse()}, 3000);
     /* while(1){
         setTimeout(() => {
             nextCourse();
@@ -42,3 +56,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
     } */
     
   });
+
+
+
+  function enableDisableDetails()
+  {
+    const actualCheckedIndex = getChecked() -1;
+    console.log("actual "+ actualCheckedIndex);//arry index
+
+    let details = document.querySelectorAll(".myDetails")
+
+    for(let i =0; i < details.length; i++)
+    {
+        details[i].classList.remove("detailsEnabled")
+    }
+
+    details[actualCheckedIndex].classList.add("detailsEnabled");
+  }

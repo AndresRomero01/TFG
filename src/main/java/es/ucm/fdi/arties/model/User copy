@@ -1,4 +1,4 @@
-package es.ucm.fdi.arties.model;
+//package es.ucm.fdi.arties.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,8 +40,7 @@ import java.util.List;
         @NamedQuery(name="User.byRol",
                 query="SELECT u "
                         + "FROM User u "
-                        + "WHERE u.roles = :rol")/* ,
-        @NamedQuery(name="deleteUser", query="DELETE u FROM User u WHERE u.id = :id") */                                   
+                        + "WHERE u.roles = :rol")                                   
 })
 
 @Table(name="ARTIESUser")
@@ -115,24 +114,6 @@ public class User implements Transferable<User.Transfer> {
         return false;
     }
 
-    @Getter
-    @AllArgsConstructor
-    public static class Transfer {
-		private long id;
-        private String username;
-    }
-
-	@Override
-    public Transfer toTransfer() {
-		return new Transfer(id,	username);
-	}
-	
-	@Override
-	public String toString() {
-		return toTransfer().toString();
-	}
-
-    
     public boolean hasItemLoan(Item item)
     {
         for (ItemLoans il : itemLoans) {
@@ -152,5 +133,22 @@ public class User implements Transferable<User.Transfer> {
 
         return false;
     }
+
+    @Getter
+    @AllArgsConstructor
+    public static class Transfer {
+		private long id;
+        private String username;
+    }
+
+	@Override
+    public Transfer toTransfer() {
+		return new Transfer(id,	username);
+	}
+	
+	@Override
+	public String toString() {
+		return toTransfer().toString();
+	}
 }
 

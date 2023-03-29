@@ -29,4 +29,21 @@ public class DBItemsHandler {
         items = em.createNamedQuery("item.list", Item.class).getResultList();
         return items;
     }
+
+
+    public Long addNewItem(EntityManager em, String name, Integer quantity, String desc, Integer maxLoan)
+    {
+        long newId = -1;
+
+        Item item = new Item(name, desc, quantity,maxLoan);
+
+        em.persist(item);
+        em.flush();
+        newId = item.getId();
+
+        return newId;
+
+
+    }
+
 }
