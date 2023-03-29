@@ -6,9 +6,15 @@
 
 /* window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js'); */
 const addStaffModal = document.querySelector('#addStaffModal');
-
 const addStaffButton = document.getElementById("addStaffButton");
 addStaffButton.addEventListener("click", newStaff);
+
+const modifyStaffModal = document.querySelector('#modifyStaffModal');
+document.querySelectorAll('.modifyStaffButton').forEach((btn) =>{
+    btn.addEventListener("click", modifyStaff);
+});
+const modifyStaffButton = document.getElementById("modifyStaffButton");
+modifyStaffButton.addEventListener("click", applyChanges);
 
 document.addEventListener("DOMContentLoaded", ()=>{
 
@@ -48,6 +54,20 @@ function manageTabs(e, msg){
 function validatePassword(){
     var password = document.getElementById("password1");
     var confirm_password = document.getElementById("password2");
+
+    console.log("--- en validate password ---");
+
+    if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords don't match");
+    } else {
+        confirm_password.setCustomValidity('');
+    }
+}
+
+//TO-DO: esto se puede parametrizar para no repetir codigo
+function validatePassword2(){
+    var password = document.getElementById("password1Mod");
+    var confirm_password = document.getElementById("password2Mod");
 
     console.log("--- en validate password ---");
 
@@ -136,4 +156,83 @@ function newStaff() {
                     username.reportValidity();
         })
     }
+}
+
+function modifyStaff(e){
+    const id = e.target.value;
+    console.log("dentro de modify staff");
+    console.log("el id es: " + id);
+
+    document.getElementById("idUser").value = id;
+
+
+    //hacer con post por si acaso, para que no se vea la contraseña de vuelta en la peticion?
+    go(config.rootUrl + "/getUser?id="+id, 'GET')
+    .then(d => {console.log("todo ok") // va ok si el username no existe
+        document.getElementById("usernameMod").value = d["username"];
+        document.getElementById("oldUsername").value = d["username"];
+        document.getElementById("firstNameMod").value = d["firstName"];
+        document.getElementById("lastNameMod").value = d["lastName"];
+        /* document.getElementById("password1Mod").value = d["password"];
+        document.getElementById("password2Mod").value = d["password"]; */
+        document.getElementById("addressMod").value = d["address"];
+        document.getElementById("phoneMod").value = d["phone"];
+        document.getElementById("emailMod").value = d["email"];
+    })
+    .catch(() => {console.log("Error en catch modificar empleado");//si el username ya existia
+
+    })
+    
+}
+
+function applyChanges(){
+    console.log("-- dentro de apply changes --");
+    const id = document.getElementById("idUser").value;
+    const oldUsername = document.getElementById("oldUsername").value;
+    const myForm = document.getElementById("modifyStaffForm");
+    let username = document.getElementById("usernameMod");
+
+    username.setCustomValidity("");
+    console.log("el id guardado es: " +  id);
+
+    if(!myForm.checkValidity())//comprueba si se cumplen las condiciones html (required, longitud maxima, formato, etc)
+    {
+        //si alguna condicion no se cumplia, llamamos a la funcion que muestra automaticamente un mensaje donde estuviera el primer error
+        myForm.reportValidity();
+    }
+    else{
+        let username = document.getElementById("usernameMod");
+        let oldUsername = document.getElementById("oldUsername");
+        let firstName = document.getElementById("firstNameMod");
+        let lastName = document.getElementById("lastNameMod");
+        let password1 = document.getElementById("password1Mod");
+        let password2 = document.getElementById("password2Mod");
+        let address = document.getElementById("addressMod");
+        let phone = document.getElementById("phoneMod");
+        let email = document.getElementById("emailMod");
+
+        let params = {"username" : username.value,
+                    "oldUsername" : oldUsername.value,
+                    "firstName" : firstName.value,
+                    "lastName" : lastName.value,
+                    "password1" : password1.value,
+                    "password2" : password2.value,
+                    "address" : address.value,
+                    "phone" : phone.value,
+                    "email" : email.value,
+                    "id" : id
+        }; 
+
+        go(config.rootUrl + "/modifyUser", 'POST', params)
+        .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+            document.getElementById("oldUsername").value = d["username"];
+            username.setCustomValidity("");
+        })
+        .catch(() => {console.log("Error en catch apply changes");//si el username ya existia
+            username.setCustomValidity("El usuario ya existe, escoja otro, por favor");
+            username.reportValidity();
+        })
+    }
+
+    
 }

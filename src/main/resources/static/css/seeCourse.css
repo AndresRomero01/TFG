@@ -1,0 +1,54 @@
+#thumbnailDiv{
+    position: relative;
+    height: 20em;
+    width: 20em;
+    background-color: rgb(248, 147, 23);
+    border-radius: 5em;
+    
+}
+
+#photo{
+    max-width: 100%;
+    /* width: 300px; */
+    min-height: 100%;
+    object-fit: cover;
+    /* object-position:50%; */
+    border-radius: 0.3em;
+
+}
+
+.forFreeTag {
+    margin-top: 0.6em;
+    height: 1em;
+    padding: 0 1em;
+}
+
+.forFreeDiv{
+    position: absolute; /* Sit on top of the page content */
+    top: 0;
+    right: 0;
+    background-color: green; /* Black background with opacity */
+    color: white;
+    z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+    border-radius: 0.3em;
+}
+
+.thumbnailCol{
+    margin: auto;
+    text-align: center;
+    
+}
+
+.infoCol{
+    margin: auto;
+}
+
+#nameTitle{
+    background-color: var(--bs-dark);
+    width: 100%;
+    text-align: center;
+    color: white;
+    border-radius: 0.1em;
+    padding: 0.15em;
+}

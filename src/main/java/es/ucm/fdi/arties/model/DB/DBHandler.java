@@ -54,6 +54,13 @@ public class DBHandler {
         else return true;
     }
 
+    public Boolean existsUserById(EntityManager em, Long id)
+    {
+        User u = em.find(User.class, id);
+        if(u == null) return false;
+        else return true;
+    }
+
     public long createUser(EntityManager em, User user){
         long idDevolver = -1;
 
@@ -84,5 +91,30 @@ public class DBHandler {
         User u = em.find(User.class, idUser);
         em.remove(u);
         em.flush();
+    }
+
+    public Course getCourse(EntityManager em, long idCourse){
+        Course c = em.find(Course.class, idCourse);
+        return c;
+    }
+
+    public User modifyUser(EntityManager em, Long idUser, User user){
+
+        /* log.info("id de db: " + user.getId()); */
+        User u = em.find(User.class, idUser);
+        /* log.info("user cogido: " + u.getFirstName()); */
+
+        u.setAddress(user.getAddress());
+        u.setEmail(user.getEmail());
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        if(!user.getPassword().equals("")) {
+            u.setPassword(user.getPassword());
+        }
+        u.setRoles(user.getRoles());
+        u.setPhone(user.getPhone());
+        u.setUsername(user.getUsername());
+
+        return u;
     }
 }

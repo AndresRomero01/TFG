@@ -76,6 +76,5 @@ function getChecked8(e){
     document.querySelector('.wrapper .navPropia #prueba3:checked ~ .tab').style.left= left;
 }
 
-
-
  */
+

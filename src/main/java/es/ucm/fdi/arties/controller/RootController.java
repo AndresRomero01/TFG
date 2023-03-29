@@ -162,6 +162,48 @@ public class RootController {
         return "{\"isok\": \"true\", \"idUsuario\": " + idUser + "}";// devuelve un json como un string
     }
 
+    @PostMapping(path = "/modifyUser", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String modifyUser(Model model, @RequestBody JsonNode o) {
+        log.info("----------- dentro de modifyUser -------------");
+
+        String username = o.get("username").asText();
+        String oldUsername = o.get("oldUsername").asText();
+        log.info("@@@@@ " + username);
+        long idUser = o.get("id").asLong();
+        String rol = "STAFF";
+         
+        if (db.existsUserById(em, idUser)) {
+            log.info("usuario ya existe (rootController modifyUser)");
+
+            // para comprobar que el nuevo username no existia ya
+            if(!oldUsername.equals(username)){
+                if(db.existsUser(em, username)) return null;
+            }
+
+            String firstName = o.get("firstName").asText();
+            String lastName = o.get("lastName").asText();
+            String email = o.get("email").asText();
+            String phone = o.get("phone").asText();
+            String address = o.get("address").asText();
+            String password1 = o.get("password1").asText();
+
+            User u = new User(username, password1, firstName, lastName, email, address, phone, rol, ClientType.NONE);
+            if(!password1.equals("")) {
+                String encodedPassword = passwordEncoder.encode(o.get("password1").asText());
+                u.setPassword(encodedPassword);
+            }
+
+            User modifiedUser = db.modifyUser(em, idUser, u);
+        } else {
+            return null;
+        }
+        
+
+        return "{\"isok\": \"true\", \"username\": \"" + username + "\"}";// devuelve un json como un string
+    }
+
     @GetMapping("/courses")
     public String courses(Model model, HttpSession session) {
         List<Course> coursesList = new ArrayList<Course>();
@@ -198,5 +240,36 @@ public class RootController {
 
     }
 
+    @GetMapping("/addCourse")
+    public String adCourse(Model model, HttpSession session) {
+        return "addCourse";
+    }
 
+    @GetMapping("/seeCourse")
+    public String verPlato(Model model, HttpSession session, @RequestParam(required = true) Long chosenCourseId) {
+        putComundDataInModel(model, session);
+
+        Course c = db.getCourse(em, chosenCourseId);
+
+
+        log.info("@@@@ chosen course " + c.getName());
+
+        model.addAttribute("course", c);
+
+        /* model.addAttribute("nombrePlato", platoElegidoId); */
+
+        return "seeCourse";
+    }
+
+    @GetMapping(path = "/getUser", produces = "application/json")
+    @ResponseBody
+    @Transactional
+    public User getUser(Model model, @RequestParam String id){
+        Long userId = Long.parseLong(id);
+        User u = db.getUsuario(em, userId);
+        log.info("@@@@@@  " + u.getFirstName());
+        return u;
+    }
+
+    
 }

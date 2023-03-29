@@ -23,11 +23,13 @@
             <input type="radio" name="tab" id="lessons" onclick="manageTabs(event, 'lessonsPanel')">
             <input type="radio" name="tab" id="items" onclick="manageTabs(event, 'itemsPanel')">
             <input type="radio" name="tab" id="subscriptions" onclick="manageTabs(event, 'subscriptionsPanel')">
+            <input type="radio" name="tab" id="rental" onclick="manageTabs(event, 'rentalPanel')">
             <label for="staff" class="staff"><a href="#">Empleados</a></label>
             <label for="courses" class="courses"><a href="#">Cursos</a></label>
             <label for="lessons" class="lessons"><a href="#">Clases</a></label>
             <label for="items" class="items"><a href="#">Material</a></label>
             <label for="subscriptions" class="subscriptions" ><a href="#">Suscripciones</a></label>
+            <label for="rental" class="rental" ><a href="#">Alquiler</a></label>
             <div class="tab"></div>
         </div>
       </div>
@@ -49,7 +51,7 @@
                   </div>
                   
                   <div class="col d-flex justify-content-end">
-                    <button class="btn btn-secondary modifyStaffButton button_slide slide_left">Modificar</button>
+                    <button class="btn btn-secondary modifyStaffButton button_slide slide_left" th:value="${emp.id}" data-bs-toggle="modal" data-bs-target="#modifyStaffModal">Modificar</button>
                     <button class="btn btn-danger deleteStaffButton slide">Eliminar</button>
                   </div>
                 </div>
@@ -71,6 +73,10 @@
 
       <div id="subscriptionsPanel" class="customTab">
         e
+      </div>
+
+      <div id="rentalPanel" class="customTab">
+        rental panel
       </div>
 
     </div>
@@ -129,8 +135,71 @@
               </div>
 
               <div class="modal-footer">
-                  <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="button" id="closeModalAddStaff" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                   <button type="submit" id="addStaffButton" class="btn btn-primary">Añadir</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal modificar empleado -->
+    <div class="modal fade" id="modifyStaffModal" tabindex="-1" aria-labelledby="modifyStaffModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modifyStaffModalLabel">Modificar empleado</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="modifyStaffForm" th:action="@{/}" onsubmit="return false;">
+              <input type="hidden" id="idUser">
+              <input type="hidden" id="oldUsername">
+
+              <label for="usernameMod" style="display: block;">Username</label>
+              <input type="text" id="usernameMod" required>
+
+              <label for="emailMod" style="display: block;" class="modalLabel">Email</label>
+              <input type="email" id="emailMod" required>
+
+              <div class="row">
+                  <div class="col">
+                      <label for="firstNameMod" style="display: block;" class="modalLabel">Nombre</label>
+                      <input type="text" id="firstNameMod">
+                  </div>
+                  <div class="col">
+                      <label for="lastNameMod" style="display: block;" class="modalLabel">Apellido</label>
+                      <input type="text" id="lastNameMod">
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col">
+                      <label for="password1Mod" style="display: block;" class="modalLabel">Contraseña</label>
+                      <input type="password" id="password1Mod" onchange="validatePassword2()">
+                  </div>
+                  <div class="col">
+                      <label for="password2Mod" style="display: block;" class="modalLabel">Repite la contraseña</label>
+                      <input type="password" id="password2Mod" onkeyup="validatePassword2()">
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col">
+                      <label for="addressMod" style="display: block;" class="modalLabel">Direccion</label>
+                      <input type="input" id="addressMod" required>
+                  </div>
+                  <div class="col">
+                      <label for="phoneMod" style="display: block;" class="modalLabel">Telefono</label>
+                      <input type="tel" id="phoneMod" required>
+                  </div>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" id="closeModalModifyStaff" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="submit" id="modifyStaffButton" class="btn btn-primary">Guardar</button>
               </div>
 
             </form>
