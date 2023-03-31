@@ -172,7 +172,7 @@ public class RootController {
         String oldUsername = o.get("oldUsername").asText();
         log.info("@@@@@ " + username);
         long idUser = o.get("id").asLong();
-        String rol = "STAFF";
+        String rol = "USER";
          
         if (db.existsUserById(em, idUser)) {
             log.info("usuario ya existe (rootController modifyUser)");

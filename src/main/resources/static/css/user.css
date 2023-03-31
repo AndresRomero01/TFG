@@ -4,7 +4,7 @@
     --background: #E9DCCD;
 }
 
-#infoPerfil{
+#profileInfo{
     margin-top: 2em;
     background-color:#783848b5;
     padding-top: 1em;
@@ -20,7 +20,7 @@
     display: inline;
 }
 
-button#abrirModalModificar{
+button#openModifyModal{
     border: 0;
     border-radius: 0.5em;
     background-color: #783848b3;
@@ -37,6 +37,6 @@ button#abrirModalModificar{
     margin: auto;
 }
 
-.cabecera{
+.welcomeMsg{
     text-align: center;
 }

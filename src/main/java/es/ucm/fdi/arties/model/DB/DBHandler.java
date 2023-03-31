@@ -111,7 +111,6 @@ public class DBHandler {
         if(!user.getPassword().equals("")) {
             u.setPassword(user.getPassword());
         }
-        u.setRoles(user.getRoles());
         u.setPhone(user.getPhone());
         u.setUsername(user.getUsername());
 

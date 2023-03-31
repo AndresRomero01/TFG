@@ -1,11 +1,11 @@
-let guardarPerfilButton = document.getElementById("guardarPerfilButton");
-guardarPerfilButton.addEventListener("click", guardarPerfil);
+let saveChangesButton = document.getElementById("saveChangesButton");
+saveChangesButton.addEventListener("click", applyChanges);
 
-const modalModificarPerfil = new bootstrap.Modal(document.querySelector('#modalModificarPerfil'));
+const modifyProfileModal = new bootstrap.Modal(document.querySelector('#modifyProfileModal'));
 
-function guardarPerfil() {
-    console.log("--- en guardarPerfil() ---");
-    const myForm = document.getElementById("modificarPerfilForm");
+/* function saveProfile() {
+    console.log("--- in saveProfile() ---");
+    const myForm = document.getElementById("modifyProfileForm");
 
     let username = document.getElementById("username");
     username.setCustomValidity("");
@@ -14,8 +14,8 @@ function guardarPerfil() {
     if (/^\s+$/.test( String(username.value)))
     {
         //string contains only whitespace
-        username.setCustomValidity("El nombre no puede ser solo espacios");
-        console.log("solo espacios")
+        username.setCustomValidity("Username cant be blank spaces");
+        console.log("username just blank spaces")
     }
 
     if(!myForm.checkValidity())//comprueba si se cumplen las condiciones html (required, longitud maxima, formato, etc)
@@ -25,49 +25,106 @@ function guardarPerfil() {
     }
     else{
 
-        let idUsuario = document.getElementById("idUsuario");
-        let rol = document.getElementById("rol");
-
-        let nombreEmpleado = document.getElementById("nombreEmpleado");
-        let apellidoEmpleado = document.getElementById("apellidoEmpleado");
-        let contrasena1Empleado = document.getElementById("contrasena1Empleado");
-        let contrasena2Empleado = document.getElementById("contrasena2Empleado");
-        let dir = document.getElementById("direccion");
-        let tel = document.getElementById("telefono");
+        let userId = document.getElementById("userId");
+        let oldUsername = document.getElementById("oldUsername");
+        let firstName = document.getElementById("firstName");
+        let lastName = document.getElementById("lastName");
+        let password1 = document.getElementById("password1");
+        let password2 = document.getElementById("password2");
+        let address = document.getElementById("address");
+        let phone = document.getElementById("phone");
         let email = document.getElementById("email");
 
         let params = {"username" : username.value,
-                    "nombreEmpleado" : nombreEmpleado.value,
-                    "apellidoEmpleado" : apellidoEmpleado.value,
-                    "contrasena1Empleado" : contrasena1Empleado.value,
-                    "contrasena2Empleado" : contrasena2Empleado.value,
-                    "direccion" : dir.value,
-                    "telefono" : tel.value,
+                    "oldUsername" : oldUsername.value,
+                    "firstName" : firstName.value,
+                    "lastName" : lastName.value,
+                    "password1" : password1.value,
+                    "password2" : password2.value,
+                    "address" : address.value,
+                    "phone" : phone.value,
                     "email" : email.value};
 
-        console.log("---" + idUsuario.value);      
-        console.log("---" + rol.value);       
+        console.log("---" + userId.value);  
+        console.log("new username: " + username.value);          
+        console.log("old username: " + oldUsername.value);          
 
-        go(config.rootUrl + "/modificarUsuario", 'POST', params)
-        .then(d => {console.log("todo ok") // va ok si el username no existe
+        go(config.rootUrl + "/modifyUser", 'POST', params)
+        .then(d => {console.log("all ok") // va ok si el username no existe
                     username.setCustomValidity("");
 
-                    modalModificarPerfil.hide();
+                    modifyProfileModal.hide();
 
-                    if(d["username"]) document.getElementById("mostrarUsername").innerHTML = d["username"];
-                    if(d["direccion"]) document.getElementById("mostrarDireccion").innerHTML = d["direccion"];
-                    if(d["telefono"]) document.getElementById("mostrarTelefono").innerHTML = d["telefono"];
-                    if(d["nombre"]) document.getElementById("mostrarNombre").innerHTML = d["nombre"];
-                    if(d["apellido"]) document.getElementById("mostrarApellido").innerHTML = d["apellido"];
+                    document.getElementById("showUsername").innerHTML = username.value;
+                    document.getElementById("showAddress").innerHTML = address.value;
+                    document.getElementById("showEmail").innerHTML = email.value;
+                    document.getElementById("showPhone").innerHTML = phone.value;
+                    document.getElementById("showFirstName").innerHTML = firstName.value;
+                    document.getElementById("showLastName").innerHTML = lastName.value;
         })
         .catch(() => {console.log("Error en catch anadir empleado");//si el username ya existia
                     username.setCustomValidity("El usuario ya existe, escoja otro, por favor");
                     username.reportValidity();
         })
     }
+} */
+
+function applyChanges(){
+    console.log("-- dentro de apply changes --");
+    const id = document.getElementById("userId").value;
+    const oldUsername = document.getElementById("oldUsername").value;
+    const myForm = document.getElementById("modifyProfileForm");
+    let username = document.getElementById("username");
+
+    username.setCustomValidity("");
+    console.log("el id guardado es: " +  id);
+
+    if(!myForm.checkValidity())//comprueba si se cumplen las condiciones html (required, longitud maxima, formato, etc)
+    {
+        //si alguna condicion no se cumplia, llamamos a la funcion que muestra automaticamente un mensaje donde estuviera el primer error
+        myForm.reportValidity();
+    }
+    else{
+        let username = document.getElementById("username");
+        let oldUsername = document.getElementById("oldUsername");
+        let firstName = document.getElementById("firstName");
+        let lastName = document.getElementById("lastName");
+        let password1 = document.getElementById("password1");
+        let password2 = document.getElementById("password2");
+        let address = document.getElementById("address");
+        let phone = document.getElementById("phone");
+        let email = document.getElementById("email");
+
+        let params = {"username" : username.value,
+                    "oldUsername" : oldUsername.value,
+                    "firstName" : firstName.value,
+                    "lastName" : lastName.value,
+                    "password1" : password1.value,
+                    "password2" : password2.value,
+                    "address" : address.value,
+                    "phone" : phone.value,
+                    "email" : email.value,
+                    "id" : id
+        }; 
+
+        go(config.rootUrl + "/modifyUser", 'POST', params)
+        .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+            document.getElementById("oldUsername").value = d["username"];
+            username.setCustomValidity("");
+            document.getElementById("password1").value="";
+            document.getElementById("password2").value="";
+            document.getElementById('closeProfileModal').click(); // cutre, pero lo de arriba no me ha funcionado
+        })
+        .catch(() => {console.log("Error en catch apply changes");//si el username ya existia
+            username.setCustomValidity("El usuario ya existe, escoja otro, por favor");
+            username.reportValidity();
+        })
+    }
+
+    
 }
 
-function validatePassword(){
+/* function validatePassword(){
     var password = document.getElementById("contrasena1Empleado");
     var confirm_password = document.getElementById("contrasena2Empleado");
 
@@ -78,4 +135,4 @@ function validatePassword(){
     } else {
         confirm_password.setCustomValidity('');
     }
-}
+} */

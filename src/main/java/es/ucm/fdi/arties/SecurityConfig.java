@@ -52,10 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .authorizeRequests()
 			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/items/listAll", "/seeCourse", "/items/listAll").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access
-				.antMatchers("/admin/**", "/existeUsuario", "/getUser", "/modifyUser").hasRole("ADMIN")	   // <-- administration
+				.antMatchers("/admin/**", "/existeUsuario", "/getUser").hasRole("ADMIN")	   // <-- administration
 				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem").hasRole("ADMIN")
 				.antMatchers("/user/**").hasAnyRole("USER", "STAFF")		   
-				.antMatchers("/subscriptions", "/lessons", "/items/myItems", "/listToLoan", "/items/loanItem").hasAnyRole("USER", "ADMIN", "STAFF")
+				.antMatchers("/subscriptions", "/lessons", "/items/myItems", "/listToLoan", "/items/loanItem", "/modifyUser").hasAnyRole("USER", "ADMIN", "STAFF")
 	            .anyRequest().authenticated()
 	            .and()
 			.formLogin()

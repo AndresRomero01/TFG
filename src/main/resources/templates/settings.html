@@ -18,12 +18,12 @@
       <!-- https://www.codingnepalweb.com/elastic-active-tab-animation-html-css/ -->
       <div class="wrapper">
         <div class="nav customNav" role="tablist" > <!-- nav-tabs -->
-            <input type="radio" name="tab" id="staff" onclick="manageTabs(event, 'staffPanel')" checked>
-            <input type="radio" name="tab" id="courses" onclick="manageTabs(event, 'coursesPanel')">
-            <input type="radio" name="tab" id="lessons" onclick="manageTabs(event, 'lessonsPanel')">
-            <input type="radio" name="tab" id="items" onclick="manageTabs(event, 'itemsPanel')">
-            <input type="radio" name="tab" id="subscriptions" onclick="manageTabs(event, 'subscriptionsPanel')">
-            <input type="radio" name="tab" id="rental" onclick="manageTabs(event, 'rentalPanel')">
+            <input type="radio" name="tab" id="staff" onclick="manageTabs(event)" checked>
+            <input type="radio" name="tab" id="courses" onclick="manageTabs(event)">
+            <input type="radio" name="tab" id="lessons" onclick="manageTabs(event)">
+            <input type="radio" name="tab" id="items" onclick="manageTabs(event)">
+            <input type="radio" name="tab" id="subscriptions" onclick="manageTabs(event)">
+            <input type="radio" name="tab" id="rental" onclick="manageTabs(event)">
             <label for="staff" class="staff"><a href="#">Empleados</a></label>
             <label for="courses" class="courses"><a href="#">Cursos</a></label>
             <label for="lessons" class="lessons"><a href="#">Clases</a></label>
@@ -210,6 +210,7 @@
     
     <!-- <script th:src="@{/js/calendar.js}" src="js/calendar.js"></script> -->
     <script th:src="@{/js/settings.js}" src="js/settings.js"></script>
+    <script th:src="@{/js/main.js}" src="js/main.js"></script>
     
 </body>
 

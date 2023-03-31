@@ -13,50 +13,81 @@
       
 
         <div class="col bodyCol">
+            
 
-            <div class="accordion" id="categoriesAccordion">
-
-                <th:block th:if="${session.u}">
-                    <div class="row">
-                        <div class="col d-flex justify-content-end">
-                            <a th:if="${session.u.hasRole('ADMIN')}" class="btn btn-dark my-5" th:href="@{/addCourse}">Añadir curso</a>
-                        </div>
-                    </div>
-                    <div th:each="cat,iter: ${categories}" class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne"> 
-                            <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" th:data-bs-target="'#'+${cat.name}" 
-                            aria-expanded="false" aria-controls="${cat.name}" th:text="${cat.name}">
-                                Accordion Item Title
+            <th:block th:if="${session.u}">
+                <div class="row m-5">
+                    <div class="col">
+                        <div class="col dropdown">
+                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false">
+                                Selecciona categoría
                             </button>
-                        </h2>
-                        <!-- con cat.id no me deja -->
-                        <div th:id="${cat.name}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#categoriesAccordion">
-                            <div class="accordion-body">
-                                <div class="row row-cols1 row-cols-md-4 g-5">
-                                    <th:block th:each="course,iter: ${cat.coursesList}" >
-                                        <div class="col d-flex">
-                                            <div class="card text-white bg-dark " style="width: 18rem;">
-                                                <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
-                                                    <p class="forFreeTag">For free!</p>
-                                                </div>
-                                                <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title" th:text="${course.name}">Card title</h5>
-                                                    <p class="card-text" th:text="${course.description}">Card description</p>
-                                                    
-                                                </div>
-                                                <div class="card-footer"> 
-                                                    <a th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}" class="btn btn-light">Ver curso</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th:block>
-                                </div>
-                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
+                                <button class="dropdown-item" type="button" 
+                                    th:each="cat,iter: ${categories}" onclick="manageTabs(event); updateCategoryTitle(event)" th:id="${cat.id}" th:text="${cat.name}">cat name
+                                </button>
+                            </ul>
                         </div>
                     </div>
-                </th:block>  
-            </div>
+
+                    <div class="col d-flex justify-content-end">
+                        <a th:if="${session.u.hasRole('ADMIN')}" class="btn btn-dark" th:href="@{/addCourse}">Añadir curso</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h1 class="text-center mb-5" id="categoryTitle">Todos los cursos</h1>
+                </div>
+
+                <!-- --- create dynamic tab panels --- -->
+                <th:block th:each="cat,iter: ${categories}">
+                    <div  th:if="${iter.index} == 0" th:id="${cat.id} + 'Panel'" class="firstTab customTab">
+                        <div class="row row-cols1 row-cols-md-4 g-5">
+                            <th:block th:each="course,iter: ${cat.coursesList}" >
+                                <div class="col d-flex">
+                                    <div class="card text-white bg-dark " style="width: 18rem;">
+                                        <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
+                                            <p class="forFreeTag">For free!</p>
+                                        </div>
+                                        <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title" th:text="${course.name}">Card title</h5>
+                                            <p class="card-text" th:text="${course.description}">Card description</p>
+                                            
+                                        </div>
+                                        <div class="card-footer"> 
+                                            <a th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}" class="btn btn-light">Ver curso</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+
+                    <div  th:unless="${iter.index} == 0" th:id="${cat.id} + 'Panel'" class="customTab">
+                        <div class="row row-cols1 row-cols-md-4 g-5">
+                            <th:block th:each="course,iter: ${cat.coursesList}" >
+                                <div class="col d-flex">
+                                    <div class="card text-white bg-dark " style="width: 18rem;">
+                                        <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
+                                            <p class="forFreeTag">For free!</p>
+                                        </div>
+                                        <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title" th:text="${course.name}">Card title</h5>
+                                            <p class="card-text" th:text="${course.description}">Card description</p>
+                                            
+                                        </div>
+                                        <div class="card-footer"> 
+                                            <a th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}" class="btn btn-light">Ver curso</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </th:block>
+            </th:block>
 
             <th:block th:unless="${session.u}">
                 <div class="row row-cols1 row-cols-md-4 g-5">
@@ -81,11 +112,15 @@
                     </th:block>
                 </div>
             </th:block>
-                   
+
+            
+           
+            
         </div>
     
     
     <script th:src="@{/js/courses.js}" src="js/courses.js"></script>
+    <script th:src="@{/js/main.js}" src="js/main.js"></script>
 
     
     
@@ -93,3 +128,13 @@
 <!-- Pie de pagina -->
 <th:block th:replace="fragments/footer.html :: footer" />
 </html>
+
+
+
+
+
+
+
+
+
+
