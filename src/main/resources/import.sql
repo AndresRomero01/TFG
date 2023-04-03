@@ -148,4 +148,13 @@ VALUES (15, 'curso de prueba6', FALSE, 'curso de prueba6', 3);
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (16, 'curso de prueba6', FALSE, 'curso de prueba6', 1);
 
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text)
+VALUES (1, 2, 1, 'hola, tengo una pregunta');
+
+INSERT INTO CHAT_MESSAGE (id, user_id, text)
+VALUES (2, 1, 'Hola! bienvenido. En que podemos ayudarte?');
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text)
+VALUES (3, 2, 1, 'Pues es que no se usar esta maquina');
+
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

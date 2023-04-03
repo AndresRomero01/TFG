@@ -1,5 +1,3 @@
-"use strict"
-
 /**
  * WebSocket API, which only works once initialized
  */

@@ -11,6 +11,16 @@
   --green3:  #2cff8e;
 }
 
+/* .col{
+  margin: 0;
+  padding: 0;
+}
+
+.row{
+  margin: 0;
+  padding: 0;
+} */
+
 .bodyCol{
   margin: auto;
   margin-top: 4em;
@@ -154,3 +164,7 @@
 .firstTab{
   display: block;
 }
+
+
+
+

@@ -1,4 +1,4 @@
-function manageTabs(e, msg){
+function manageTabs(e){
     const panelId = e.target.id + "Panel";
 
     // Get all elements with class="tabcontent" and hide them

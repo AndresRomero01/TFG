@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <!-- <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css" type="text/css" /> -->
+    <title>Chats</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+    <h1 id="prueba">Nada</h1>
+
+    <div class="bodyCol">
+        <div id="questionsList">
+            <div class="row questionDiv">
+                <div class="col">col1</div>
+                <div class="col">col2</div>
+                <div class="col">col3</div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <script th:src="@{/js/chats.js}" src="js/chats.js"></script>
+</body>
+
+<th:block th:replace="fragments/footer.html :: footer" />
+</html>

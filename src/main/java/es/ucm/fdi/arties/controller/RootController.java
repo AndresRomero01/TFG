@@ -72,7 +72,7 @@ public class RootController {
         //para alimentar el carousel con 5 cursos gratis (si hay)
         List<Course> coursesList = new ArrayList<Course>();
         List<Course> freeCourses = new ArrayList<Course>();
-        coursesList = db.getCoursesList(em);
+        coursesList = db.getFreeCoursesList(em);
         if(coursesList.size() >= 5){
             for(int i = 0; i < 5; i++){
                 freeCourses.add(coursesList.get(i));
@@ -98,6 +98,11 @@ public class RootController {
     @GetMapping("/lessons")
     public String lessonsPage(Model model, HttpSession session) {
         return "lessons";
+    }
+
+    @GetMapping("/chats")
+    public String chatsPage(Model model, HttpSession session) {
+        return "chats";
     }
 
     @GetMapping("/settings")
@@ -271,5 +276,23 @@ public class RootController {
         return u;
     }
 
+    @PostMapping(path = "/newQuestion", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String newQuestion(Model model, @RequestBody JsonNode o) {
+        log.info("----------- dentro de newQuestion -------------");
+
+        String subject = o.get("subject").asText();
+        String question = o.get("questionArea").asText();
+        Long userId = o.get("userId").asLong();
+        
+        log.info("@@@@@ subject: " + subject + " question: " + question + " userId: " + userId);
+
+        String jsonForWebSocket = "{\"subject\": \""+ subject +"\", \"question\": \""+question+"\", \"id\":"+userId+"}";
+
+        messagingTemplate.convertAndSend("/questionForStaff", jsonForWebSocket);
+
+        return "{\"isok\": \"true\"}";// devuelve un json como un string
+    }
     
 }

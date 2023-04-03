@@ -31,6 +31,13 @@ public class DBHandler {
         return courses;
     }
 
+    public List<Course> getFreeCoursesList(EntityManager em) {
+        List<Course> courses = null;
+
+        courses = em.createNamedQuery("course.freeCoursesList", Course.class).getResultList();
+        return courses;
+    }
+
     public User getUserByUsername(EntityManager em, String username){
         User u = null;
         log.info("&&&&&: " + username);

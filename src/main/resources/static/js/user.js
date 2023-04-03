@@ -123,16 +123,3 @@ function applyChanges(){
 
     
 }
-
-/* function validatePassword(){
-    var password = document.getElementById("contrasena1Empleado");
-    var confirm_password = document.getElementById("contrasena2Empleado");
-
-    console.log("--- en validate password ---");
-
-    if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords don't match");
-    } else {
-        confirm_password.setCustomValidity('');
-    }
-} */

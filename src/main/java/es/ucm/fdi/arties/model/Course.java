@@ -21,7 +21,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NamedQueries({
-    @NamedQuery(name = "course.list", query = "select c from Course c")
+    @NamedQuery(name = "course.list", query = "select c from Course c"),
+    @NamedQuery(name = "course.freeCoursesList", query = "select c from Course c where c.isFree = true")
 })
 @AllArgsConstructor
 @NoArgsConstructor

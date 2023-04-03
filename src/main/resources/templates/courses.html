@@ -23,6 +23,7 @@
                                 Selecciona categoría
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
+                                <button class="dropdown-item" type="button" onclick="manageTabs(event); updateCategoryTitle(event)" id="allCourses">Todos los cursos</button>
                                 <button class="dropdown-item" type="button" 
                                     th:each="cat,iter: ${categories}" onclick="manageTabs(event); updateCategoryTitle(event)" th:id="${cat.id}" th:text="${cat.name}">cat name
                                 </button>
@@ -39,32 +40,34 @@
                     <h1 class="text-center mb-5" id="categoryTitle">Todos los cursos</h1>
                 </div>
 
-                <!-- --- create dynamic tab panels --- -->
-                <th:block th:each="cat,iter: ${categories}">
-                    <div  th:if="${iter.index} == 0" th:id="${cat.id} + 'Panel'" class="firstTab customTab">
-                        <div class="row row-cols1 row-cols-md-4 g-5">
-                            <th:block th:each="course,iter: ${cat.coursesList}" >
-                                <div class="col d-flex">
-                                    <div class="card text-white bg-dark " style="width: 18rem;">
-                                        <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
-                                            <p class="forFreeTag">For free!</p>
-                                        </div>
-                                        <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title" th:text="${course.name}">Card title</h5>
-                                            <p class="card-text" th:text="${course.description}">Card description</p>
-                                            
-                                        </div>
-                                        <div class="card-footer"> 
-                                            <a th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}" class="btn btn-light">Ver curso</a>
-                                        </div>
+                <div th:id="allCoursesPanel" class="firstTab customTab">
+                    <div class="row row-cols1 row-cols-md-4 g-5">
+                        <th:block th:each="course,iter: ${coursesList}">
+                            <div class="col d-flex">
+                                <div class="card text-white bg-dark " style="width: 18rem;">
+                                    <div class="card-img-overlay forFreeDiv" th:if="${course.isFree}">
+                                        <p class="forFreeTag">For free!</p>
+                                    </div>
+                                    <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
+                                    
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${course.name}">Card title</h5>
+                                        <p class="card-text" th:text="${course.description}">Card description</p>
+                                        
+                                    </div>
+                                    <div class="card-footer"> 
+                                        <a href="#" class="btn btn-light">Ver curso</a>
                                     </div>
                                 </div>
-                            </th:block>
-                        </div>
+                            </div>
+                        </th:block>
                     </div>
+                </div>
+                
 
-                    <div  th:unless="${iter.index} == 0" th:id="${cat.id} + 'Panel'" class="customTab">
+                <!-- --- create dynamic tab panels --- -->
+                <th:block th:each="cat,iter: ${categories}">
+                    <div th:id="${cat.id} + 'Panel'" class="customTab">
                         <div class="row row-cols1 row-cols-md-4 g-5">
                             <th:block th:each="course,iter: ${cat.coursesList}" >
                                 <div class="col d-flex">
