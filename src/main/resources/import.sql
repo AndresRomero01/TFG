@@ -172,4 +172,34 @@ VALUES (7, 1, 1, 'soy admin. Para cuando tendreis la app', TRUE);
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (8, 2, 1, 'no te preocupes, nosotros te lo explicamos', FALSE);
 
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (9, 2, 3, 'prueba delete staff', FALSE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (10, 2, 4, 'foreign key error al delete staff', FALSE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (11, 1, 3, 'pregunta para ver si mi empleado 3 lo lee', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (12, 1, 3, 'soy 3 y estoy respondiendo a admin', FALSE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (13, 1, 3, 'asi que bienvenido admin!', FALSE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (14, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (15, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (16, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (17, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (18, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

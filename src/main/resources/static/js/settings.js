@@ -39,19 +39,6 @@ function ajaxDeleteUser(div, id){
     });
 }
 
-/* function manageTabs(e, msg){
-    console.log("msg: " + msg);
-
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("customTab");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    document.getElementById(msg).style.display = "block";
-} */
-
-
 
 function newStaff() {
     console.log("--- en validate user ---");
@@ -100,13 +87,13 @@ function newStaff() {
                     var staffDivList = document.getElementById("staffDivList");
                     var html0 = "asdasdasd123123";
                     var html = `
-                    <div class="row staffDiv"  th:data-id="`+d["idUsuario"]+`" id="`+d["idUser"]+`">
+                    <div class="row staffDiv"  data-id="`+d["idUser"]+`" id="`+d["idUser"]+`">
                         <div class="col d-flex justify-content-start">
-                            <p class="staffName">`+ firstName.value +` `+ lastName.value +`</p>
+                            <p class="staffName" id="`+d["idUser"]+`Names">`+ firstName.value +` `+ lastName.value +`</p>
                         </div>
                         
                         <div class="col d-flex justify-content-end">
-                            <button class="btn btn-secondary modifyStaffButton button_slide slide_left">Modificar</button>
+                        <button class="btn btn-secondary modifyStaffButton button_slide slide_left" value="`+d["idUser"]+`" data-bs-toggle="modal" data-bs-target="#modifyStaffModal">Modificar</button>
                             <button class="btn btn-danger deleteStaffButton slide">Eliminar</button>
                         </div>
                     </div>
@@ -117,7 +104,7 @@ function newStaff() {
                     myForm.reset();
                     /* addStaffModal.hide(); */
                     /* $('#addStaffModal').modal('hide') */
-                    document.getElementById('closeModal').click(); // cutre, pero lo de arriba no me ha funcionado
+                    document.getElementById('closeModalAddStaff').click(); // cutre, pero lo de arriba no me ha funcionado
 
 
                     let idDiv = "#"+d["idUser"];
@@ -125,6 +112,11 @@ function newStaff() {
 
                     let div = document.getElementById(d["idUser"]);
                     ajaxDeleteUser(div, d["idUser"]);
+
+                    div.querySelector(".modifyStaffButton").addEventListener("click", function(e){
+                        console.log("dentro de anadir modfy listener");
+                        modifyStaff(e);
+                    })
         })
         .catch(() => {console.log("Error en catch anadir empleado");//si el username ya existia
                     username.setCustomValidity("El usuario ya existe, escoja otro, por favor");
@@ -205,7 +197,7 @@ function applyChanges(){
             document.getElementById("oldUsername").value = d["username"];
             username.setCustomValidity("");
             // para encontrar el firstNameMod a cambiar
-            document.getElementById(id).innerHTML = firstName.value + " " + lastName.value;
+            document.getElementById(id+"Names").innerHTML = firstName.value + " " + lastName.value;
 /*             document.getElementById("lastNameMod").innerHTML = lastName; */
             document.getElementById('closeModalModifyStaff').click(); // cutre, pero lo de arriba no me ha funcionado
         })

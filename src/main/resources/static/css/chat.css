@@ -84,8 +84,43 @@
     width: 12em;
 }
 
+#makeGeneralQuestionForm{
+    text-align: center;
+}
+
+.formLabel{
+    margin-top: 3em;
+    margin-bottom: 1em;
+}
+
 button#makeQuestion{
     top: 10em;
+}
+
+#questionArea{
+    width: 80%;
+    min-height: 12em;
+    resize: none;
+    overflow: auto;
+}
+
+#questionArea::-webkit-scrollbar {
+    width: 0.4em;
+}
+
+/* Track */
+#questionArea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+#questionArea::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--bs-dark); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
 button#chooseTrainer{
@@ -129,6 +164,32 @@ button#seeChats{
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+#chooseTrainerPanel{
+    height: 90%;
+    margin-top: 0%;
+    overflow: auto;
+    padding-bottom: 2em;
+}
+
+#chooseTrainerPanel::-webkit-scrollbar {
+    width: 0.4em;
+}
+
+/* Track */
+#chooseTrainerPanel::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+#chooseTrainerPanel::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--bs-dark); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
 #chatStructure{
@@ -260,4 +321,19 @@ button#seeChats{
     max-width: 13em;
     padding: 0.5em;
     word-break: break-all;
+}
+
+.staffRow{
+    width: 80%;
+    margin: auto;
+    margin-top: 1em;
+    background-color: var(--bs-dark);
+    border-radius: 0.2rem;
+    color: white;
+    padding: 0.5em ;
+}
+
+.staffNameCol{
+    padding-left: 1em;
+    padding-top: 0.3em;
 }

@@ -59,7 +59,7 @@ public class ItemsController {
     public String myItems(Model model, HttpSession session) {
         User u = (User) session.getAttribute("u");
         User u2;
-        u2 = commonDB.getUsuario(em, u.getId());
+        u2 = commonDB.getUser(em, u.getId());
 
         log.info("los roles son "+ u2.getRoles());
 

@@ -255,21 +255,20 @@ function toBlobGeneral(dataurl) {
  */
 document.addEventListener("DOMContentLoaded", () => {
     if (config.socketUrl) {
-
-        /* let subs =[];
-        try{
-            
         let idUs = document.getElementById("idUs").value
-        console.log("idus: " + idUs)
-        subs = config.admin ? ["/topic/admin", "/user/queue/updates"] : ["/user/queue/updates", "/ver/misPedidos" + idUs]
-        console.log("try iw correcto")
+        let subs =["/getChatWithUser"+idUs];
+        try{
+            console.log("idus: " + idUs)
+            //subs = config.admin ? ["/topic/admin", "/user/queue/updates"] : ["/user/queue/updates", "/ver/misPedidos" + idUs]
+            console.log("try iw correcto")
         }
         catch{
-            subs = config.admin ? ["/topic/admin", "/user/queue/updates"] : ["/user/queue/updates"]
+            console.log("in try to suscribe catch in arties.js");
+            //subs = config.admin ? ["/topic/admin", "/user/queue/updates"] : ["/user/queue/updates"]
         }
         ws.initialize(config.socketUrl, subs);
 
-        let p = document.querySelector("#nav-unread");
+        /* let p = document.querySelector("#nav-unread");
         if (p) {
             go(`${config.rootUrl}/user/unread`, "GET").then(d => p.textContent = d.unread);
         } */

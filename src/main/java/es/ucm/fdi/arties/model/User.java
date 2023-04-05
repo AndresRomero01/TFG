@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
@@ -95,9 +98,11 @@ public class User implements Transferable<User.Transfer> {
 
     //por cada usuario, tenemos en esta var la lista de items que tiene alquilados
     @OneToMany (mappedBy = "user", fetch=FetchType.EAGER)//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
+    @JsonIgnore
     private List<ItemLoans> itemLoans;
 
     @OneToMany (mappedBy = "user")
+    /* @OnDelete(action = OnDeleteAction.CASCADE) */
     @JsonIgnore
     private List<ChatMessage> messagesList;
 

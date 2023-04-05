@@ -311,6 +311,33 @@ public class RootController {
         return "{\"isok\": \"true\"}";// devuelve un json como un string
     }
 
+    @PostMapping(path = "/newMessage", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String newMessage(Model model, @RequestBody JsonNode o) {
+        log.info("----------- dentro de newMessage -------------");
+
+        String msg = o.get("msg").asText();
+        Long userId = o.get("userId").asLong();
+        Long staffId = o.get("staffId").asLong();
+
+        User u = db.getUser(em, userId);
+        User staff = db.getUser(em, staffId);
+
+        ChatMessage cm = new ChatMessage(u, staff , msg,true);
+        Long msgId = db.addMessage(em, cm);
+        
+        log.info("@@@@ " + msgId);
+        log.info("@@@@@ msg: " + msg + " userId: " + userId);
+
+        String jsonForWebSocket = "{\"staffId\": "+ staffId +", \"msg\": \""+msg+"\", \"userId\":"+userId+", \"firstName\": \""
+                                    +u.getFirstName()+"\", \"lastName\": \""+u.getLastName()+"\", \"msgId\":"+msgId+"}";
+
+        //messagingTemplate.convertAndSend("/questionForStaff", jsonForWebSocket);
+
+        return "{\"isok\": \"true\"}";// devuelve un json como un string
+    }
+
     /* @GetMapping("/getGeneralQuestions")
     public List<ChatMessage> getGeneralQuestions(Model model, HttpSession session) {
 
@@ -345,4 +372,23 @@ public class RootController {
 
         return lcm;
     }
+
+    @GetMapping(path = "/getStaffList", produces = "application/json")
+    @ResponseBody
+    public List<User> getStaffList(Model model){
+        List<User> lu = db.getUsersByRol(em, "STAFF");
+        return lu;
+    }
+
+    @GetMapping(path = "/getUserChats", produces = "application/json")
+    @ResponseBody
+    public List<User> getUserChats(Model model, HttpSession session){
+        User u = (User) session.getAttribute("u");
+
+        List<User> lu = db.getUserChats(em, u.getId());
+
+        return lu;
+    }
+
+    
 }

@@ -33,7 +33,7 @@
         
                     <div class="innerChatWindow firstChatWindow" id="chatChoicesPanel">
                         <button class="btn btn-dark chatChoiceButton" id="makeQuestion" onclick="manageChatWindows(event)">Hacer pregunta</button>
-                        <button class="btn btn-dark chatChoiceButton" id="chooseTrainer" onclick="manageChatWindows(event)">Elegir entrenador</button>
+                        <button class="btn btn-dark chatChoiceButton" id="chooseTrainer" onclick="manageChatWindows(event); loadTrainers()">Elegir entrenador</button>
                         <button class="btn btn-dark chatChoiceButton" id="seeChats" onclick="manageChatWindows(event); scrollBottomFirstChat()">Ver mis chats</button>
                         <div class="chatFooterButtons">
                             <button class="btn btn-secondary closeButton" onclick="manageChat()">Salir</button>
@@ -41,13 +41,12 @@
                     </div>
         
                     <div class="innerChatWindow" id="makeQuestionPanel">
-                        <p>has escogido hacer pregunta</p>
                         <form id="makeGeneralQuestionForm">
                             <label for="subject" class="formLabel">Asunto</label>
-                            <input type="text" id="subject">
+                            <input type="text" id="subject" required>
         
                             <label for="questionArea" class="formLabel">Pregunta</label>
-                            <textarea type="text" id="questionArea">asd</textarea>
+                            <textarea type="text" id="questionArea" required></textarea>
                         </form>
         
                         <th:block th:if="${session.u}">
@@ -63,98 +62,16 @@
                     </div>
         
                     <div class="innerChatWindow" id="chooseTrainerPanel">
-                        <p>has escogido elegir entrenador</p>
+                        <div id="divToAppendStaff"></div> <!-- so insertAdjacentHTML can be used so there is no need to use createElement and appendChild -->
                     </div>
         
                     <div class="innerChatWindow" id="seeChatsPanel">
                         <div class="row" id="chatStructure">
                             <div class="col col-md-4" id="chatsList">
-                                <button class="selectChat" id="1" onclick="manageChats(event)">Juan</button>
-                                <button class="selectChat" id="2" onclick="manageChats(event)">Francisco diaz</button>
-                                <button class="selectChat" id="3" onclick="manageChats(event)">Roberto Manco</button>
+                                <div id="toAppendOpenChat"></div>
                             </div>
                             <div class="col col-md-8">
-                                <div class="showConversation firstChat" id="1Panel">
-                                    <div class="d-flex flex-row ">
-                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">hola 1231</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">adios prueba</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">hasta luego y buena suerte</p>
-                                    </div>
-                                    <div class="d-flex flex-row ">
-                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                                    </div>
-                                    <div class="d-flex flex-row ">
-                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">hola 1231</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">adios prueba</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">hasta luego y buena suerte</p>
-                                    </div>
-                                    <div class="d-flex flex-row ">
-                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                                    </div>
-                                </div>
-        
-                                <div class="showConversation" id="2Panel">
-                                    <div class="d-flex flex-row ">
-                                        <p class="staffMsg">Soy Francisco Diaz panel</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">hola 1231</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">adios prueba</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">hasta luego y buena suerte</p>
-                                    </div>
-                                    <div class="d-flex flex-row ">
-                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                                    </div>
-                                    <h1>b</h1>
-                                    <h1>b</h1>
-                                    <h1>b</h1>
-                                    <h1>b</h1>
-                                    <h1>b</h1>
-                                    <h1>b</h1>
-                                </div>
-        
-                                <div class="showConversation" id="3Panel">
-                                    <div class="d-flex flex-row ">
-                                        <p class="staffMsg">Soy Roberto Manco panel</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">hola 1231</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">adios prueba</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <p class="userMsg">hasta luego y buena suerte</p>
-                                    </div>
-                                    <div class="d-flex flex-row ">
-                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                                    </div>
-                                    <h1>c</h1>
-                                    <h1>c</h1>
-                                    <h1>c</h1>
-                                    <h1>c</h1>
-                                    <h1>c</h1>
-                                </div>
-        
-        
+                                <div id="toAppendChatPanel"></div>
                                 <textarea id="writeMessage" ></textarea>
                                 <button id="sendMessageButton" onclick="sendMessage()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-send-fill" viewBox="0 0 16 16">

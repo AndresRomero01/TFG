@@ -141,7 +141,7 @@ function getConversation(e){
         });
 
     })
-    .catch(() => {console.log("Error en catch modificar empleado");//si el username ya existia
+    .catch(() => {console.log("Error en catch get conversation");//si el username ya existia
 
     })
 }

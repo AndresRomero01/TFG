@@ -47,7 +47,7 @@
             <th:div th:each="emp,iter: ${employeesList}" id="staffDivList">
                 <div class="row staffDiv"  th:data-id="${emp.id}">
                   <div class="col d-flex justify-content-start">
-                    <p th:text="${emp.firstName} + ' ' + ${emp.lastName}" class="staffName" th:id="${emp.id}">staff username</p>
+                    <p th:text="${emp.firstName} + ' ' + ${emp.lastName}" class="staffName" th:id="${emp.id}+'Names'">staff username</p>
                   </div>
                   
                   <div class="col d-flex justify-content-end">

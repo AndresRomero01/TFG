@@ -153,6 +153,18 @@ public class DBHandler {
         return lu;
     }
 
+    public List<User> getUserChats(EntityManager em, Long userId){
+        List<ChatMessage> lcm = em.createNamedQuery("getUserChats", ChatMessage.class).setParameter("id", userId).getResultList();
+        // to remove duplicates (cant do group by because each msg has a unique id)
+        Set<User> set  = new HashSet<User>();
+        for(ChatMessage cm: lcm){
+            if(cm.getStaff() != null) set.add(cm.getStaff()); // so no general question are taken
+        }
+        //get unique users list
+        List<User> lu = new ArrayList<>(set);
+        return lu;
+    }
+
     public void linkQuestionStaff(EntityManager em, Long messageId, Long staffId){
         ChatMessage cm = em.find(ChatMessage.class, messageId);
         User staff = em.find(User.class, staffId);
