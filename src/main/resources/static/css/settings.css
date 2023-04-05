@@ -88,3 +88,111 @@ p.staffName{
     margin: 50px auto 0 auto;
     text-align: center;
 }
+
+/* --------  SUBNAVBAR  --------- */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* html,body{
+  display: grid;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+  background: #f2f2f2;
+} */
+
+.wrapper{
+  height: 4em;
+  width: 100%;
+  background-color: var(--bs-dark);
+  line-height: 4em;
+  border-radius: 50px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+  place-items: center;
+  text-align: center;
+  margin-bottom: 4em;
+}
+.wrapper .customNav{
+  position: relative;
+  display: flex;
+}
+.wrapper .customNav label{
+  flex: 1;
+  width: 100%;
+  z-index: 1;
+  cursor: pointer;
+}
+.wrapper .customNav label a{
+  position: relative;
+  z-index: -1;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.6s ease;
+}
+
+.wrapper .customNav label a i{
+  font-size: 25px;
+  margin: 0 7px;
+}
+.wrapper .customNav .tab{
+  position: absolute;
+  height: 4em;
+  width: 16.666%; /* 100/6 */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  border-radius: 50px;
+  background: linear-gradient(45deg, #05abe0 0%,#8200f4 100%);
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#courses:checked ~ .tab   {
+  left: 16.666%;
+}
+#lessons:checked ~ .tab{
+  left: 33.332%;
+}
+#items:checked ~ .tab{
+  left: 49.998%;
+}
+#subscriptions:checked ~ .tab{
+  left: 66.664%;
+}
+#rental:checked ~ .tab{
+  left: 83.333%;
+}
+.wrapper .customNav input{
+  display: none;
+}
+
+.customTab{
+/*   height: 10em;
+    width: 20em; */
+    display: none;
+    width: auto;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+/* #staffPanel{
+    background-color: #343a40;
+} */
+
+#coursesPanel{
+    background-color: #1889fa;
+    width: 30em;
+    height: 30em;
+}
+
+.firstTab{
+    display: block;
+}

@@ -4,20 +4,123 @@
 <head>
     <th:block th:replace="fragments/head :: header" />
     <!-- <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css" type="text/css" /> -->
+    <link rel="stylesheet" href="css/chats.css" />
     <title>Chats</title>
 </head>
 
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav"></header>
 
-    <h1 id="prueba">Nada</h1>
+    
 
     <div class="bodyCol">
-        <div id="questionsList">
-            <div class="row questionDiv">
-                <div class="col">col1</div>
-                <div class="col">col2</div>
-                <div class="col">col3</div>
+        <input type="hidden" th:value="${session.u.id}" id="staffId">
+
+        <div class="wrapper">
+            <div class="nav customNav" role="tablist" > <!-- nav-tabs -->
+                <input type="radio" name="tab" id="generalQuestions" onclick="manageTabs(event)" checked>
+                <input type="radio" name="tab" id="staffChats" onclick="manageTabs(event)">
+                <label for="generalQuestions" class="generalQuestions"><a href="#">Preguntas generales</a></label>
+                <label for="staffChats" class="staffChats"><a href="#">Mis chats</a></label>
+                <div class="tab"></div>
+            </div>
+        </div>
+
+        <div id="generalQuestionsPanel" class="customTab firstTab">
+
+            <div class="accordion" id="accordionGeneralQuestions">
+                <div id="toAppendAccordionEntry"></div>
+                <div class="accordion-item" th:each="q,iter: ${generalQuestions}">
+                  <div class="row accordion-header text-center" >
+                    <div class="col namesCol"><span class="firstName" th:text="${q.user.firstName} + ' '">Nombre </span><span class="lastName" th:text="${q.user.lastName}">Apellido</span></div>
+                    <div class="col subjectCol"><p class="subject" th:text="${q.subject}">Asunto Asunto1</p></div>
+                    <div class="col">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" th:data-bs-target="'#item'+${q.id}" 
+                            aria-expanded="false" aria-controls="2">
+                            Ver mensaje
+                        </button>
+                        <input type="hidden" id="messageId" th:value="${q.id}">
+                        <input type="hidden" class="userId" th:value="${q.user.id}">
+                        <button class="btn btn-primary" onclick="acceptChat(event)">Aceptar</button>
+                        <a class="btn btn-primary"  th:href="@{/user/{id} (id=${q.user.id})}">Ver perfil</a>
+                    </div>
+                </div>
+                  <div th:id="'item'+${q.id}" class="accordion-collapse collapse" data-bs-parent="#accordionGeneralQuestions">
+                    <div class="accordion-body">
+                      <p th:text="${q.text}">Text</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="staffChatsPanel" class="customTab">
+            <div id="divToAppend"></div>
+            <div class="row questionDiv text-center" th:each="user,iter: ${usersList}" th:id="${user.id}">
+                <div class="col" th:text="${user.firstName} + ' ' + ${user.lastName}">Nombre Apellido</div>
+                <div class="col">
+                    <input type="hidden" id="firstName" th:value="${user.firstName}">
+                    <input type="hidden" id="lastName" th:value="${user.lastName}">
+                    <button type="button" class="btn btn-primary" onclick="getConversation(event)" th:value="${user.id}" data-bs-toggle="modal" data-bs-target="#chatModal">
+                        Chat
+                    </button>
+                    <a class="btn btn-primary"  th:href="@{/user/{id} (id=${user.id})}">Ver perfil</a>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <!-- staff chat modal -->
+    <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="row mt-3">
+                    <div class="col col-md-11 headerCol">
+                        <span id="modalTitleSpan"> Chat con:  </span>
+                        <span id="firstNameUserModal"></span>
+                        <span id="lastNameUserModal"></span>
+                    </div>
+                    <div class="col col-md-1">
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div id="staffChatBody">
+                        <div class="d-flex flex-row ">
+                            <p class="employeeMsg">Soy Roberto Manco panel</p>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <p class="clientMsg">hola 1231</p>
+                        </div>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                        <h1>a</h1>
+                    </div>
+                </div>
+
+                <div class="row footerRow">
+                    <div class="col col-md-11"><textarea id="staffTextArea"></textarea></div>
+                    <div class="col col-md-1 sendButtonCol">
+                        <button id="staffSendMessageButton" onclick="sendMessage()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-send-fill" viewBox="0 0 16 16">
+                                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

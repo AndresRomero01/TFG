@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -94,6 +96,10 @@ public class User implements Transferable<User.Transfer> {
     //por cada usuario, tenemos en esta var la lista de items que tiene alquilados
     @OneToMany (mappedBy = "user", fetch=FetchType.EAGER)//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
     private List<ItemLoans> itemLoans;
+
+    @OneToMany (mappedBy = "user")
+    @JsonIgnore
+    private List<ChatMessage> messagesList;
 
     /**
      * Checks whether this user has a given role.

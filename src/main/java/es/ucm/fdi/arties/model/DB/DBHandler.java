@@ -2,9 +2,12 @@ package es.ucm.fdi.arties.model.DB;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -12,6 +15,7 @@ import javax.persistence.Query;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import es.ucm.fdi.arties.model.Category;
+import es.ucm.fdi.arties.model.ChatMessage;
 import es.ucm.fdi.arties.model.Course;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.User.ClientType;
@@ -46,11 +50,11 @@ public class DBHandler {
         return u;
     }
 
-    public User getUsuario(EntityManager em, long idUsuario)
+    public User getUser(EntityManager em, long userId)
     {
-        log.info("&&&&&: dentro de getUsuario by id: " +  idUsuario);
-        /* User u = em.find(User.class, idUsuario); */
-        User u = em.createNamedQuery("User.byId", User.class).setParameter("idUser", idUsuario).getSingleResult();
+        log.info("&&&&&: dentro de getUsuario by id: " +  userId);
+        /* User u = em.find(User.class, userId); */
+        User u = em.createNamedQuery("User.byId", User.class).setParameter("idUser", userId).getSingleResult();
         return u;
     }
 
@@ -122,5 +126,51 @@ public class DBHandler {
         u.setUsername(user.getUsername());
 
         return u;
+    }
+
+    public List<ChatMessage> getGeneralQuestions(EntityManager em){
+        List<ChatMessage> lcm = em.createNamedQuery("getGeneralQuestions", ChatMessage.class).getResultList();
+        return lcm;
+    }
+
+    /* public List<ChatMessage> getUserChats(EntityManager em, Long id){
+        List<ChatMessage> lcm = em.createNamedQuery("getUserChats", ChatMessage.class).setParameter("userId", id).getResultList();
+        // to remove duplicates (cant do group by because each msg has a unique id)
+        Set<ChatMessage> map  = new HashSet<ChatMessage>();
+        for(ChatMessage)
+        return lcm;
+    } */
+
+    public List<User> getStaffChats(EntityManager em, Long staffId){
+        List<ChatMessage> lcm = em.createNamedQuery("getStaffChats", ChatMessage.class).setParameter("id", staffId).getResultList();
+        // to remove duplicates (cant do group by because each msg has a unique id)
+        Set<User> set  = new HashSet<User>();
+        for(ChatMessage cm: lcm){
+            set.add(cm.getUser());
+        }
+        //get unique users list
+        List<User> lu = new ArrayList<>(set);
+        return lu;
+    }
+
+    public void linkQuestionStaff(EntityManager em, Long messageId, Long staffId){
+        ChatMessage cm = em.find(ChatMessage.class, messageId);
+        User staff = em.find(User.class, staffId);
+        cm.setStaff(staff);
+    }
+
+    public List<ChatMessage> getConversation(EntityManager em, Long userId, Long staffId){
+        List<ChatMessage> lcm = em.createNamedQuery("getConversation", ChatMessage.class).setParameter("userid", userId).setParameter("staffid", staffId).getResultList();
+        return lcm;
+    }
+
+    public Long addMessage(EntityManager em, ChatMessage cm){
+        long idDevolver = -1;
+
+        em.persist(cm);
+        em.flush();
+        idDevolver = cm.getId();
+
+        return idDevolver;
     }
 }

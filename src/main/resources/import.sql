@@ -148,13 +148,28 @@ VALUES (15, 'curso de prueba6', FALSE, 'curso de prueba6', 3);
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (16, 'curso de prueba6', FALSE, 'curso de prueba6', 1);
 
-INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text)
-VALUES (1, 2, 1, 'hola, tengo una pregunta');
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (1, 2, 1, 'hola, tengo una pregunta', TRUE);
 
-INSERT INTO CHAT_MESSAGE (id, user_id, text)
-VALUES (2, 1, 'Hola! bienvenido. En que podemos ayudarte?');
+INSERT INTO CHAT_MESSAGE (id, user_id, text, subject, user_sent_it)
+VALUES (2, 1, 'Hola! bienvenido. En que podemos ayudarte?', 'duda maquina abdominales', FALSE);
 
-INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text)
-VALUES (3, 2, 1, 'Pues es que no se usar esta maquina');
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (3, 2, 1, 'Pues es que no se usar esta maquina', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, text, subject, user_sent_it)
+VALUES (4, 3, 'Hola! como se usa esta app?', 'duda1', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, text, subject, user_sent_it)
+VALUES (5, 3, 'No he sido capaz de encontrar como usar esta maquina', 'duda2 duda2 duda2', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (6, 1, 1, 'hola, soy el admin y no se como funciona', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (7, 1, 1, 'soy admin. Para cuando tendreis la app', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (8, 2, 1, 'no te preocupes, nosotros te lo explicamos', FALSE);
 
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

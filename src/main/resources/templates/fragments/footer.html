@@ -11,160 +11,166 @@
     <!-- ver https://getbootstrap.com/docs/5.0/examples/sticky-footer-navbar/ -->
     <footer th:fragment="footer" class="footer mt-auto py-3 bg-dark py-4">
 
-        <button class="btn btn-green" id="chatButton" onclick="manageChat()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-chat-fill" viewBox="0 0 16 16">
-                <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
-            </svg>
-        </button>
+        <th:block th:if="${session.u}">
+            <th:block th:if="${session.u.hasAnyRole('USER', 'ADMIN')}">
+                <button class="btn btn-green" id="chatButton" onclick="manageChat()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-chat-fill" viewBox="0 0 16 16">
+                        <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+                    </svg>
+                </button>
+                
+                <div id="chatWindow">
+                    <div class="row chatHeader">
+                        <div class="col">
+                            <button class="btn btn-secondary" id="goBackArrow" onclick="openFirstWindow()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                </svg>
+                            </button>
+                            <h2 id="chatTitle">Chat</h2>
+                        </div>
+                    </div>
         
-        <div id="chatWindow">
-            <div class="row chatHeader">
-                <div class="col">
-                    <button class="btn btn-secondary" id="goBackArrow" onclick="openFirstWindow()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                        </svg>
-                    </button>
-                    <h2 id="chatTitle">Chat</h2>
-                </div>
-            </div>
-
-            <div class="innerChatWindow firstChatWindow" id="chatChoicesPanel">
-                <button class="btn btn-dark chatChoiceButton" id="makeQuestion" onclick="manageChatWindows(event)">Hacer pregunta</button>
-                <button class="btn btn-dark chatChoiceButton" id="chooseTrainer" onclick="manageChatWindows(event)">Elegir entrenador</button>
-                <button class="btn btn-dark chatChoiceButton" id="seeChats" onclick="manageChatWindows(event); scrollBottomFirstChat()">Ver mis chats</button>
-                <div class="chatFooterButtons">
-                    <button class="btn btn-secondary closeButton" onclick="manageChat()">Salir</button>
-                </div>
-            </div>
-
-            <div class="innerChatWindow" id="makeQuestionPanel">
-                <p>has escogido hacer pregunta</p>
-                <form id="makeGeneralQuestionForm">
-                    <label for="subject" class="formLabel">Asunto</label>
-                    <input type="text" id="subject">
-
-                    <label for="questionArea" class="formLabel">Pregunta</label>
-                    <textarea type="text" id="questionArea">asd</textarea>
-                </form>
-
-                <th:block th:if="${session.u}">
-                    <input type="hidden" id="userId" th:value="${session.u.id}">
-                </th:block>
-                
-
-                <div class="chatFooterButtons">
-                    <button class="btn btn-secondary closeButton" onclick="manageChat()">Salir</button>
-                    <button class="btn btn-dark " id="sendQuestionButton" onclick="sendQuestion()">Enviar</button>
-                </div>
-                
-            </div>
-
-            <div class="innerChatWindow" id="chooseTrainerPanel">
-                <p>has escogido elegir entrenador</p>
-            </div>
-
-            <div class="innerChatWindow" id="seeChatsPanel">
-                <div class="row" id="chatStructure">
-                    <div class="col col-md-4" id="chatsList">
-                        <button class="selectChat" id="1" onclick="manageChats(event)">Juan</button>
-                        <button class="selectChat" id="2" onclick="manageChats(event)">Francisco diaz</button>
-                        <button class="selectChat" id="3" onclick="manageChats(event)">Roberto Manco</button>
+                    <div class="innerChatWindow firstChatWindow" id="chatChoicesPanel">
+                        <button class="btn btn-dark chatChoiceButton" id="makeQuestion" onclick="manageChatWindows(event)">Hacer pregunta</button>
+                        <button class="btn btn-dark chatChoiceButton" id="chooseTrainer" onclick="manageChatWindows(event)">Elegir entrenador</button>
+                        <button class="btn btn-dark chatChoiceButton" id="seeChats" onclick="manageChatWindows(event); scrollBottomFirstChat()">Ver mis chats</button>
+                        <div class="chatFooterButtons">
+                            <button class="btn btn-secondary closeButton" onclick="manageChat()">Salir</button>
+                        </div>
                     </div>
-                    <div class="col col-md-8">
-                        <div class="showConversation firstChat" id="1Panel">
-                            <div class="d-flex flex-row ">
-                                <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
+        
+                    <div class="innerChatWindow" id="makeQuestionPanel">
+                        <p>has escogido hacer pregunta</p>
+                        <form id="makeGeneralQuestionForm">
+                            <label for="subject" class="formLabel">Asunto</label>
+                            <input type="text" id="subject">
+        
+                            <label for="questionArea" class="formLabel">Pregunta</label>
+                            <textarea type="text" id="questionArea">asd</textarea>
+                        </form>
+        
+                        <th:block th:if="${session.u}">
+                            <input type="hidden" id="userId" th:value="${session.u.id}">
+                        </th:block>
+                        
+        
+                        <div class="chatFooterButtons">
+                            <button class="btn btn-secondary closeButton" onclick="manageChat()">Salir</button>
+                            <button class="btn btn-dark " id="sendQuestionButton" onclick="sendQuestion()">Enviar</button>
+                        </div>
+                        
+                    </div>
+        
+                    <div class="innerChatWindow" id="chooseTrainerPanel">
+                        <p>has escogido elegir entrenador</p>
+                    </div>
+        
+                    <div class="innerChatWindow" id="seeChatsPanel">
+                        <div class="row" id="chatStructure">
+                            <div class="col col-md-4" id="chatsList">
+                                <button class="selectChat" id="1" onclick="manageChats(event)">Juan</button>
+                                <button class="selectChat" id="2" onclick="manageChats(event)">Francisco diaz</button>
+                                <button class="selectChat" id="3" onclick="manageChats(event)">Roberto Manco</button>
                             </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">hola 1231</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">adios prueba</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">hasta luego y buena suerte</p>
-                            </div>
-                            <div class="d-flex flex-row ">
-                                <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                            </div>
-                            <div class="d-flex flex-row ">
-                                <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">hola 1231</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">adios prueba</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">hasta luego y buena suerte</p>
-                            </div>
-                            <div class="d-flex flex-row ">
-                                <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
+                            <div class="col col-md-8">
+                                <div class="showConversation firstChat" id="1Panel">
+                                    <div class="d-flex flex-row ">
+                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">hola 1231</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">adios prueba</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">hasta luego y buena suerte</p>
+                                    </div>
+                                    <div class="d-flex flex-row ">
+                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
+                                    </div>
+                                    <div class="d-flex flex-row ">
+                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">hola 1231</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">adios prueba</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">hasta luego y buena suerte</p>
+                                    </div>
+                                    <div class="d-flex flex-row ">
+                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
+                                    </div>
+                                </div>
+        
+                                <div class="showConversation" id="2Panel">
+                                    <div class="d-flex flex-row ">
+                                        <p class="staffMsg">Soy Francisco Diaz panel</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">hola 1231</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">adios prueba</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">hasta luego y buena suerte</p>
+                                    </div>
+                                    <div class="d-flex flex-row ">
+                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
+                                    </div>
+                                    <h1>b</h1>
+                                    <h1>b</h1>
+                                    <h1>b</h1>
+                                    <h1>b</h1>
+                                    <h1>b</h1>
+                                    <h1>b</h1>
+                                </div>
+        
+                                <div class="showConversation" id="3Panel">
+                                    <div class="d-flex flex-row ">
+                                        <p class="staffMsg">Soy Roberto Manco panel</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">hola 1231</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">adios prueba</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <p class="userMsg">hasta luego y buena suerte</p>
+                                    </div>
+                                    <div class="d-flex flex-row ">
+                                        <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
+                                    </div>
+                                    <h1>c</h1>
+                                    <h1>c</h1>
+                                    <h1>c</h1>
+                                    <h1>c</h1>
+                                    <h1>c</h1>
+                                </div>
+        
+        
+                                <textarea id="writeMessage" ></textarea>
+                                <button id="sendMessageButton" onclick="sendMessage()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-send-fill" viewBox="0 0 16 16">
+                                        <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                                    </svg>
+                                </button>
+        
                             </div>
                         </div>
-
-                        <div class="showConversation" id="2Panel">
-                            <div class="d-flex flex-row ">
-                                <p class="staffMsg">Soy Francisco Diaz panel</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">hola 1231</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">adios prueba</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">hasta luego y buena suerte</p>
-                            </div>
-                            <div class="d-flex flex-row ">
-                                <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                            </div>
-                            <h1>b</h1>
-                            <h1>b</h1>
-                            <h1>b</h1>
-                            <h1>b</h1>
-                            <h1>b</h1>
-                            <h1>b</h1>
-                        </div>
-
-                        <div class="showConversation" id="3Panel">
-                            <div class="d-flex flex-row ">
-                                <p class="staffMsg">Soy Roberto Manco panel</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">hola 1231</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">adios prueba</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="userMsg">hasta luego y buena suerte</p>
-                            </div>
-                            <div class="d-flex flex-row ">
-                                <p class="staffMsg">12asdasdasdsadasdasdasdasdasdasd3132 asd3132 asd3132</p>
-                            </div>
-                            <h1>c</h1>
-                            <h1>c</h1>
-                            <h1>c</h1>
-                            <h1>c</h1>
-                            <h1>c</h1>
-                        </div>
-
-
-                        <textarea id="writeMessage" ></textarea>
-                        <button id="sendMessageButton" onclick="sendMessage()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" class="bi bi-send-fill" viewBox="0 0 16 16">
-                                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
-                            </svg>
-                        </button>
-
+                        
                     </div>
                 </div>
-                
-            </div>
-        </div> 
+            </th:block>
+        </th:block>
+
+         
 
         <div class="container">
             <span class="text-muted">Arties: una web para la gestión de gimnasios presenciales y online. TFG realizado
@@ -179,6 +185,7 @@
         <script th:src="@{/js/stomp.js}" src="js/stomp.js"></script>
         <script th:src="@{/js/arties.js}" src="js/arties.js"></script>
         <script th:src="@{/js/chat.js}" src="js/chat.js"></script>
+        <script th:src="@{/js/main.js}" src="js/main.js"></script>
 
         <!-- Otros scripts de interacción, aquí -->
     </footer>

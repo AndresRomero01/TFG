@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import es.ucm.fdi.arties.model.Category;
+import es.ucm.fdi.arties.model.ChatMessage;
 import es.ucm.fdi.arties.model.Course;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
@@ -102,6 +103,14 @@ public class RootController {
 
     @GetMapping("/chats")
     public String chatsPage(Model model, HttpSession session) {
+        User u = (User) session.getAttribute("u");
+
+        List<ChatMessage> lcm = db.getGeneralQuestions(em);
+        model.addAttribute("generalQuestions", lcm);
+
+        List<User> lu = db.getStaffChats(em, u.getId());
+        model.addAttribute("usersList", lu);
+
         return "chats";
     }
 
@@ -271,7 +280,7 @@ public class RootController {
     @Transactional
     public User getUser(Model model, @RequestParam String id){
         Long userId = Long.parseLong(id);
-        User u = db.getUsuario(em, userId);
+        User u = db.getUser(em, userId);
         log.info("@@@@@@  " + u.getFirstName());
         return u;
     }
@@ -285,14 +294,55 @@ public class RootController {
         String subject = o.get("subject").asText();
         String question = o.get("questionArea").asText();
         Long userId = o.get("userId").asLong();
+
+        User u = db.getUser(em, userId);
+
+        ChatMessage cm = new ChatMessage(u,subject,question,true);
+        Long questionId = db.addMessage(em, cm);
         
+        log.info("@@@@ " + questionId);
         log.info("@@@@@ subject: " + subject + " question: " + question + " userId: " + userId);
 
-        String jsonForWebSocket = "{\"subject\": \""+ subject +"\", \"question\": \""+question+"\", \"id\":"+userId+"}";
+        String jsonForWebSocket = "{\"subject\": \""+ subject +"\", \"question\": \""+question+"\", \"id\":"+userId+", \"firstName\": \""
+                                    +u.getFirstName()+"\", \"lastName\": \""+u.getLastName()+"\", \"questionId\":"+questionId+"}";
 
         messagingTemplate.convertAndSend("/questionForStaff", jsonForWebSocket);
 
         return "{\"isok\": \"true\"}";// devuelve un json como un string
     }
-    
+
+    /* @GetMapping("/getGeneralQuestions")
+    public List<ChatMessage> getGeneralQuestions(Model model, HttpSession session) {
+
+        List<ChatMessage> lcm = db.getGeneralQuestions(em);
+
+        return null;
+    } */
+
+    @PostMapping(path = "/linkQuestionStaff", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String linkQuestionStaff(Model model, HttpSession session, @RequestBody JsonNode o) {
+        log.info("---------- inside linkQuestionStaff -------------");
+
+        User u = (User) session.getAttribute("u");
+        Long messageId = o.get("messageId").asLong();
+        log.info("@@@@ " + messageId);
+        log.info("@@@@ " +  u.getId());
+
+        db.linkQuestionStaff(em, messageId, u.getId());
+
+        return "{\"isok\": \"true\"}";// devuelve un json como un string
+    }
+
+    @GetMapping("/getConversation")
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public List<ChatMessage> getConversation(Model model, HttpSession session, @RequestParam(required = true) Long userId, @RequestParam(required = true) Long staffId) {
+
+        log.info("@@@@@@@ " + userId);
+        log.info("@@@@@@@ " + staffId);
+        List<ChatMessage> lcm = db.getConversation(em, userId, staffId);
+
+        return lcm;
+    }
 }
