@@ -1,58 +1,63 @@
+var selectedUserId;
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (config.socketUrl) {
-        let subs = ["/questionForStaff"];
-        ws.initialize(config.socketUrl, subs);
-        console.log("suscribiendose a /questionForStaff");
+    //forceScrollbarBottom(document.getElementById("staffChatBody"));
+    if (ws.receive) {
+        const oldFn = ws.receive; // guarda referencia a manejador anterior
+        ws.receive = (m) => {//reescribe lo que hace la funcion receive
+            oldFn(m); // llama al manejador anterior En principio esto lo unico que hace es mostar por consola el objeto recibido
+            if(m["questionId"]){
+                console.log("qid: " + m["questionId"]);
+                var html = `
+                <div class="accordion" id="accordionGeneralQuestions">
+                    <div id="toAppendAccordionEntry"></div>
+                    <div class="accordion-item">
+                        <div class="row accordion-header text-center" >
+                        <div class="col namesCol"><span class="firstName">`+m["firstName"]+` </span><span class="lastName">`+m["lastName"]+`</span></div>
+                        <div class="col subjectCol"><p class="subject">`+m["subject"]+`</p></div>
+                        <div class="col">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#item`+m["questionId"]+`" 
+                                aria-expanded="false" aria-controls="2">
+                                Ver mensaje
+                            </button>
+                            <input type="hidden" id="messageId" value="`+m["questionId"]+`">
+                            <input type="hidden" class="userId" value="`+m["userId"]+`">
+                            <button class="btn btn-primary" onclick="acceptChat(event)">Aceptar</button>
+                            <a class="btn btn-primary" href="/user/`+m["id"]+`">Ver perfil</a>
+                        </div>
+                    </div>
+                        <div id="item`+m["questionId"]+`" class="accordion-collapse collapse" data-bs-parent="#accordionGeneralQuestions">
+                        <div class="accordion-body">
+                            <p>`+m["question"]+`</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+        
+                var divToAppend = document.getElementById("toAppendAccordionEntry");
+                divToAppend.insertAdjacentHTML("beforebegin", html);
 
-    } else {
-        console.log("Not opening websocket: missing config", config)
+            } else if(m["msgId"]){
+                console.log("receiving user msg");
+
+                var staffChatBody = document.getElementById("staffChatBody");
+                var div = document.createElement("div");
+                var p = document.createElement("p");
+                
+                div.className = "d-flex flex-row"
+                p.className = "clientMsg";
+                div.style = "margin-left: 1em;"
+                
+                p.innerText = m["msg"];
+                div.appendChild(p);
+
+                staffChatBody.appendChild(div);
+                forceScrollbarBottom(staffChatBody);
+            }
+            
+        }
     }
-
-
-
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-if (ws.receive) {
-    const oldFn = ws.receive; // guarda referencia a manejador anterior
-    ws.receive = (m) => {//reescribe lo que hace la funcion receive
-        oldFn(m); // llama al manejador anterior En principio esto lo unico que hace es mostar por consola el objeto recibido
-
-        console.log("qid: " + m["questionId"]);
-        var html = `
-        <div class="accordion" id="accordionGeneralQuestions">
-            <div id="toAppendAccordionEntry"></div>
-            <div class="accordion-item">
-                <div class="row accordion-header text-center" >
-                <div class="col namesCol"><span class="firstName">`+m["firstName"]+` </span><span class="lastName">`+m["lastName"]+`</span></div>
-                <div class="col subjectCol"><p class="subject">`+m["subject"]+`</p></div>
-                <div class="col">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#item`+m["questionId"]+`" 
-                        aria-expanded="false" aria-controls="2">
-                        Ver mensaje
-                    </button>
-                    <input type="hidden" id="messageId" value="`+m["questionId"]+`">
-                    <input type="hidden" class="userId" value="`+m["userId"]+`">
-                    <button class="btn btn-primary" onclick="acceptChat(event)">Aceptar</button>
-                    <a class="btn btn-primary" href="/user/`+m["id"]+`">Ver perfil</a>
-                </div>
-            </div>
-                <div id="item`+m["questionId"]+`" class="accordion-collapse collapse" data-bs-parent="#accordionGeneralQuestions">
-                <div class="accordion-body">
-                    <p>`+m["question"]+`</p>
-                </div>
-                </div>
-            </div>
-        </div>
-        `;
-
-        var divToAppend = document.getElementById("toAppendAccordionEntry");
-        divToAppend.insertAdjacentHTML("beforebegin", html);
-    }
-}
 
 });
 
@@ -83,7 +88,7 @@ function acceptChat(e){
 
         var html = `
         <div class="row questionDiv" id="`+userId+`">
-            <div class="col">`+firstName.innerText+` `+lastName.innerText+`</div>
+            <div class="col questionNames">`+firstName.innerText+` `+lastName.innerText+`</div>
             <div class="col">
                 <input type="hidden" id="firstName" tvalue="`+firstName.innerText+`">
                 <input type="hidden" id="lastName" value="`+lastName.innerText+`">
@@ -97,7 +102,6 @@ function acceptChat(e){
         divToAppend.insertAdjacentHTML("beforebegin", html);
     }
     
-
     accordionHeader.parentNode.remove(); // remove accordion-item
 }
 
@@ -112,6 +116,7 @@ function getConversation(e){
     document.getElementById("lastNameUserModal").innerText = lastName.value;
 
     var userId = e.target.value;
+    selectedUserId = userId;
     var staffId = document.getElementById("staffId").value;
     console.log("userid: " + userId);
     console.log("staffid: " + staffId);
@@ -138,10 +143,49 @@ function getConversation(e){
             div.appendChild(p);
 
             staffChatBody.appendChild(div);
+            forceScrollbarBottom(staffChatBody);
         });
 
     })
     .catch(() => {console.log("Error en catch get conversation");//si el username ya existia
 
     })
+}
+
+function sendStaffMessage(e){
+    var textArea = document.getElementById("staffTextArea");
+    var msg = textArea.value;
+    var staffId = document.getElementById("idUs").value;
+    console.log("userId: " + selectedUserId + "  msg: " + msg + "  staffId: " + staffId);
+    console.log(staffId);
+
+    let params = {"msg" : msg,
+                    "userId" : selectedUserId,
+                    "staffId" : staffId,
+                    "userSentIt": false
+    }; 
+
+    go(config.rootUrl + "/newMessage", 'POST', params)
+    .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+        var panelId = "staffChatBody";
+        /* console.log("panel id: " +  panelId); */
+
+        var div = document.createElement("div");
+        var p = document.createElement("p");
+        div.className = "d-flex justify-content-end";
+        p.className = "employeeMsg";
+        div.style = "margin-right: 0.5em;";
+        p.innerText = msg;
+        div.appendChild(p);
+
+        var currentChatBody = document.getElementById(panelId);
+        currentChatBody.appendChild(div);
+
+        textArea.value = "";
+        forceScrollbarBottom(currentChatBody);
+    })
+    .catch(() => {console.log("Error en catch newMessage");
+
+    })
+
 }

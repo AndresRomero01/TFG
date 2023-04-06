@@ -103,6 +103,8 @@ public class RootController {
 
     @GetMapping("/chats")
     public String chatsPage(Model model, HttpSession session) {
+        putComundDataInModel(model, session);
+
         User u = (User) session.getAttribute("u");
 
         List<ChatMessage> lcm = db.getGeneralQuestions(em);
@@ -320,11 +322,12 @@ public class RootController {
         String msg = o.get("msg").asText();
         Long userId = o.get("userId").asLong();
         Long staffId = o.get("staffId").asLong();
+        Boolean userSentIt = o.get("userSentIt").asBoolean();
 
         User u = db.getUser(em, userId);
         User staff = db.getUser(em, staffId);
 
-        ChatMessage cm = new ChatMessage(u, staff , msg,true);
+        ChatMessage cm = new ChatMessage(u, staff , msg, userSentIt);
         Long msgId = db.addMessage(em, cm);
         
         log.info("@@@@ " + msgId);
@@ -333,7 +336,9 @@ public class RootController {
         String jsonForWebSocket = "{\"staffId\": "+ staffId +", \"msg\": \""+msg+"\", \"userId\":"+userId+", \"firstName\": \""
                                     +u.getFirstName()+"\", \"lastName\": \""+u.getLastName()+"\", \"msgId\":"+msgId+"}";
 
-        //messagingTemplate.convertAndSend("/questionForStaff", jsonForWebSocket);
+        if(userSentIt) messagingTemplate.convertAndSend("/getChatWithUser"+staffId, jsonForWebSocket);
+        else messagingTemplate.convertAndSend("/getChatWithUser"+userId, jsonForWebSocket);
+        
 
         return "{\"isok\": \"true\"}";// devuelve un json como un string
     }

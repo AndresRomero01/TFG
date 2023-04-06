@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -144,7 +146,7 @@ public class DBHandler {
     public List<User> getStaffChats(EntityManager em, Long staffId){
         List<ChatMessage> lcm = em.createNamedQuery("getStaffChats", ChatMessage.class).setParameter("id", staffId).getResultList();
         // to remove duplicates (cant do group by because each msg has a unique id)
-        Set<User> set  = new HashSet<User>();
+        Set<User> set  = new LinkedHashSet<User>();
         for(ChatMessage cm: lcm){
             set.add(cm.getUser());
         }
@@ -156,7 +158,7 @@ public class DBHandler {
     public List<User> getUserChats(EntityManager em, Long userId){
         List<ChatMessage> lcm = em.createNamedQuery("getUserChats", ChatMessage.class).setParameter("id", userId).getResultList();
         // to remove duplicates (cant do group by because each msg has a unique id)
-        Set<User> set  = new HashSet<User>();
+        Set<User> set  = new LinkedHashSet<User>();
         for(ChatMessage cm: lcm){
             if(cm.getStaff() != null) set.add(cm.getStaff()); // so no general question are taken
         }

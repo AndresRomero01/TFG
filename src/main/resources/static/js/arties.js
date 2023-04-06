@@ -256,10 +256,20 @@ function toBlobGeneral(dataurl) {
 document.addEventListener("DOMContentLoaded", () => {
     if (config.socketUrl) {
         let idUs = document.getElementById("idUs").value
-        let subs =["/getChatWithUser"+idUs];
         try{
-            console.log("idus: " + idUs)
+            var subs = [];
+            console.log("en arties.js: idus: " + idUs)
             //subs = config.admin ? ["/topic/admin", "/user/queue/updates"] : ["/user/queue/updates", "/ver/misPedidos" + idUs]
+            if(config.staff){
+                console.log("staff suscribiendose");
+                subs = ["/questionForStaff", "/getChatWithUser" + idUs]
+            } else if (config.admin){
+                console.log("admin suscribiendose");
+                subs = ["/questionForStaff", "/getChatWithUser" + idUs]
+            } else { //user has rol USER
+                console.log("user suscribiendose");
+               subs = ["/getChatWithUser" + idUs]
+            }
             console.log("try iw correcto")
         }
         catch{
@@ -268,10 +278,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         ws.initialize(config.socketUrl, subs);
 
-        /* let p = document.querySelector("#nav-unread");
-        if (p) {
-            go(`${config.rootUrl}/user/unread`, "GET").then(d => p.textContent = d.unread);
-        } */
+        //let p = document.querySelector("#nav-unread");
+        //if (p) {
+        //   go(`${config.rootUrl}/user/unread`, "GET").then(d => p.textContent = d.unread);
+        //}
     } else {
         console.log("Not opening websocket: missing config", config)
     }

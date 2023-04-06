@@ -1,6 +1,7 @@
 
 var toggleChat = false;
 var selectedStaffId;
+var lastSelectedChat;
 let chatWindow = document.getElementById("chatWindow");
 const alreadyLoadedChats = new Set();
 const alreadyLoadedTrainers = new Set(); //sets used to ensure no duplicated chats or trainer because page hasnt been refreshed and they were added at the time
@@ -46,6 +47,11 @@ function manageChatWindows(e){
 
 function manageChats(e){
     const panelId = e.target.id + "ChatPanel";
+
+    if(lastSelectedChat != null) lastSelectedChat.className = "selectChat";
+    
+    lastSelectedChat = document.getElementById(e.target.id);
+    lastSelectedChat.className = "selectChat selectedChat";
 
     selectedStaffId = e.target.id;
     loadConversation(e.target.id, panelId);
@@ -127,7 +133,8 @@ function sendMessage(){
 
     let params = {"msg" : msg,
                     "userId" : userId,
-                    "staffId" : selectedStaffId
+                    "staffId" : selectedStaffId,
+                    "userSentIt": true
     }; 
 
     go(config.rootUrl + "/newMessage", 'POST', params)
@@ -144,7 +151,7 @@ function sendMessage(){
         div.appendChild(p);
 
         
-        var currentChatBody = document.getElementById(selectedStaffId+"ChatPanel");
+        var currentChatBody = document.getElementById(panelId);
         currentChatBody.appendChild(div);
 
         forceScrollbarBottom(currentChatBody);
@@ -311,7 +318,40 @@ function openConversation(e){
     })
     .catch(() => {console.log("Error en catch get staff list");
 
-    })
-
-    
+    }) 
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    if (ws.receive) {
+        const oldFn = ws.receive; // guarda referencia a manejador anterior
+        ws.receive = (m) => {//reescribe lo que hace la funcion receive
+            oldFn(m); // llama al manejador anterior En principio esto lo unico que hace es mostar por consola el objeto recibido
+            if(config.user) {//admin could also receive msgs but not working cause it would case some problems
+                var staffId = m["staffId"];
+                var panelId = staffId + "ChatPanel";
+                var msg = m["msg"];
+        
+                console.log("mid: " + m["msgId"]);
+                console.log("from: " + m["staffId"]);
+                console.log("msg: " + m["msg"]);
+
+                var chatBody = document.getElementById(panelId);
+                var div = document.createElement("div");
+                var p = document.createElement("p");
+                
+                div.className = "d-flex flex-row";
+                p.className = "staffMsg";
+                div.style = "margin-left: 0.5em;";
+
+                p.innerText = msg;
+                div.appendChild(p);
+
+                chatBody.appendChild(div);
+
+                forceScrollbarBottom(chatBody);
+            }
+        }
+    }
+    
+});

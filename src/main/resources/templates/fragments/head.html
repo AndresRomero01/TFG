@@ -22,9 +22,13 @@
                     value: "[[${_csrf.token}]]"
                 },
                 admin: "[[${session.u != null && session.u.hasRole('ADMIN')} ? true : false]]",
+                staff: "[[${session.u != null && session.u.hasRole('STAFF')} ? true : false]]",
+                user: "[[${session.u != null && session.u.hasRole('USER')} ? true : false]]",
                 userId: +"[[${session.u != null} ? ${session.u.id} : -1]]"
             };
             config.admin = config.admin == "true"; // ensure boolean
+            config.staff = config.staff == "true"; // ensure boolean
+            config.user = config.user == "true"; // ensure boolean
         </script>
     </th:block>
 </head>

@@ -26,6 +26,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     // poner aquí los websockets que vas a utilizar
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic", "/queue", "/questionForStaff");
+        config.enableSimpleBroker("/topic", "/queue", "/questionForStaff", "/getChatWithUser");
     }
 }

@@ -91,6 +91,7 @@
 .formLabel{
     margin-top: 3em;
     margin-bottom: 1em;
+    font-size: 1.2em;
 }
 
 button#makeQuestion{
@@ -214,6 +215,16 @@ button#seeChats{
     border: 0;
     border-bottom: var(--bs-secondary) solid;
     border-width: 1px;
+}
+
+.selectChat:hover{
+    background-color: #00000070;
+    border-radius: 0.3em;
+}
+
+.selectedChat{
+    background-color: #00000070;
+    border-radius: 0.3em;
 }
 
 #writeMessage{
