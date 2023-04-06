@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                 aria-expanded="false" aria-controls="2">
                                 Ver mensaje
                             </button>
-                            <input type="hidden" id="messageId" value="`+m["questionId"]+`">
+                            <input type="hidden" class="messageId" value="`+m["questionId"]+`">
                             <input type="hidden" class="userId" value="`+m["userId"]+`">
-                            <button class="btn btn-primary" onclick="acceptChat(event)">Aceptar</button>
-                            <a class="btn btn-primary" href="/user/`+m["id"]+`">Ver perfil</a>
+                            <button class="btn btn-success" onclick="acceptChat(event)">Aceptar</button>
+                            <a class="btn btn-secondary" href="/user/`+m["userId"]+`">Ver perfil</a>
                         </div>
                     </div>
                         <div id="item`+m["questionId"]+`" class="accordion-collapse collapse" data-bs-parent="#accordionGeneralQuestions">
@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function acceptChat(e){
     var accordionHeader = e.target.closest(".accordion-header");
+    console.log(accordionHeader);
 
     var userAlreadyExists = false;
     var userId = accordionHeader.getElementsByClassName("userId")[0].value;
@@ -71,14 +72,17 @@ function acceptChat(e){
         if(userRows[i].id == userId) userAlreadyExists = true;
     }
 
-    var messageId = document.getElementById("messageId")
+    var messageId = accordionHeader.getElementsByClassName("messageId")[0];
     var params = {"messageId" : messageId.value }; 
+    //console.log(messageId);
+    var staffId = document.getElementById("idUs").value;
+    //console.log("staffId: " + staffId);
 
     go(config.rootUrl + "/linkQuestionStaff", 'POST', params)
     .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
 
     })
-    .catch(() => {console.log("Error en catch newQuestion");//si el username ya existia
+    .catch(() => {console.log("Error en catch accept chat");//si el username ya existia
 
     })
 
@@ -92,14 +96,17 @@ function acceptChat(e){
             <div class="col">
                 <input type="hidden" id="firstName" tvalue="`+firstName.innerText+`">
                 <input type="hidden" id="lastName" value="`+lastName.innerText+`">
-                <button class="btn btn-primary" onclick="getConversation(event)" value="`+userId+`" data-bs-toggle="modal" data-bs-target="#chatModal">Chat</button>
-                <button class="btn btn-primary">Ver perfil</button>
+                <button class="btn btn-primary openChatButton" onclick="getConversation(event)" value="`+userId+`" data-bs-toggle="modal" data-bs-target="#chatModal">Chat</button>
+                <a class="btn btn-secondary"  href="/user/`+userId+`">Ver perfil</a>
             </div>
         </div>
         `;
 
         var divToAppend = document.getElementById("divToAppend");
         divToAppend.insertAdjacentHTML("beforebegin", html);
+
+        var addedDiv = document.getElementById(userId);
+        var addedOpenChatButton = addedDiv.getElementsByClassName("openChatButton")[0].addEventListener("click", getConversation)
     }
     
     accordionHeader.parentNode.remove(); // remove accordion-item
@@ -110,6 +117,7 @@ function showStaffChat(e){
 }
 
 function getConversation(e){
+    console.log("en get conversation");
     var lastName = e.target.previousElementSibling;
     var firstName = lastName.previousElementSibling;
     document.getElementById("firstNameUserModal").innerText = firstName.value;
@@ -189,3 +197,10 @@ function sendStaffMessage(e){
     })
 
 }
+
+//case when using browser back arrow and "Mis Chats" is selected, the panel is wrong (the one displayed is "Preguntas Generales")
+function updateSubnavbar(){
+    var generalQuestionsOption = document.getElementById("generalQuestions");
+    generalQuestionsOption.click();
+}
+

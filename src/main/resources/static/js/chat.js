@@ -109,6 +109,8 @@ function sendQuestion(){
         }; 
     
         console.log("userId: " + userId.value);
+        questionArea.value = "";
+        subject.value = "";
     
         go(config.rootUrl + "/newQuestion", 'POST', params)
         .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente

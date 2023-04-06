@@ -8,7 +8,7 @@
     <title>Chats</title>
 </head>
 
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100" onbeforeunload="updateSubnavbar()"> 
     <header th:replace="fragments/nav.html :: nav"></header>
 
     
@@ -39,10 +39,10 @@
                             aria-expanded="false" aria-controls="2">
                             Ver mensaje
                         </button>
-                        <input type="hidden" id="messageId" th:value="${q.id}">
+                        <input type="hidden" class="messageId" th:value="${q.id}">
                         <input type="hidden" class="userId" th:value="${q.user.id}">
-                        <button class="btn btn-primary" onclick="acceptChat(event)">Aceptar</button>
-                        <a class="btn btn-primary"  th:href="@{/user/{id} (id=${q.user.id})}">Ver perfil</a>
+                        <button class="btn btn-success" onclick="acceptChat(event)">Aceptar</button>
+                        <a class="btn btn-secondary"  th:href="@{/user/{id} (id=${q.user.id})}">Ver perfil</a>
                     </div>
                 </div>
                   <div th:id="'item'+${q.id}" class="accordion-collapse collapse" data-bs-parent="#accordionGeneralQuestions">
@@ -65,7 +65,7 @@
                     <button type="button" class="btn btn-primary" onclick="getConversation(event)" th:value="${user.id}" data-bs-toggle="modal" data-bs-target="#chatModal">
                         Chat
                     </button>
-                    <a class="btn btn-primary"  th:href="@{/user/{id} (id=${user.id})}">Ver perfil</a>
+                    <a class="btn btn-secondary"  th:href="@{/user/{id} (id=${user.id})}">Ver perfil</a>
                 </div>
             </div>
         </div>

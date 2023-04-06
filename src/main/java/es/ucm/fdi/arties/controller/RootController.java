@@ -299,13 +299,13 @@ public class RootController {
 
         User u = db.getUser(em, userId);
 
-        ChatMessage cm = new ChatMessage(u,subject,question,true);
+        ChatMessage cm = new ChatMessage(u,question,subject,true);
         Long questionId = db.addMessage(em, cm);
         
         log.info("@@@@ " + questionId);
         log.info("@@@@@ subject: " + subject + " question: " + question + " userId: " + userId);
 
-        String jsonForWebSocket = "{\"subject\": \""+ subject +"\", \"question\": \""+question+"\", \"id\":"+userId+", \"firstName\": \""
+        String jsonForWebSocket = "{\"subject\": \""+ subject +"\", \"question\": \""+question+"\", \"userId\":"+userId+", \"firstName\": \""
                                     +u.getFirstName()+"\", \"lastName\": \""+u.getLastName()+"\", \"questionId\":"+questionId+"}";
 
         messagingTemplate.convertAndSend("/questionForStaff", jsonForWebSocket);
