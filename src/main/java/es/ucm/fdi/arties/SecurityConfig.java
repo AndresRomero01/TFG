@@ -50,14 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers("/api/**")
 				.and()
 	        .authorizeRequests()
-			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/items/listAll", "/seeCourse", "/items/listAll").permitAll()
+			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/seeCourse", "/items/listToLoan").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access
 				.antMatchers("/admin/**", "/existeUsuario", "/getUser").hasRole("ADMIN")	   // <-- administration
 				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem").hasRole("ADMIN")
 				.antMatchers("/user/**").hasAnyRole("USER", "STAFF", "ADMIN")	
 				.antMatchers("/chats").hasAnyRole("STAFF", "ADMIN")	   
 				.antMatchers("/newQuestion").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/subscriptions", "/lessons", "/items/myItems", "/listToLoan", "/items/loanItem", "/modifyUser", "/getConversation", "/getStaffList").hasAnyRole("USER", "ADMIN", "STAFF")
+				.antMatchers("/subscriptions", "/lessons", "/items/myItems","/items/loanItem", "/items/makeLoan", "items/availableItemDay", "/modifyUser", "/getConversation", "/getStaffList").hasAnyRole("USER", "ADMIN", "STAFF")
 	            .anyRequest().authenticated()
 	            .and()
 			.formLogin()

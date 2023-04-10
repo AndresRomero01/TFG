@@ -1,15 +1,5 @@
-package es.ucm.fdi.arties;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 /**
  * Security configuration.
@@ -50,12 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers("/api/**")
 				.and()
 	        .authorizeRequests()
-			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/items/listAll").permitAll()
+			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/items/listAll", "/seeCourse", "/items/listAll", "items/availableItemDay", "/items/makeLoan", "/items/listToLoan").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access
-				.antMatchers("/admin/**", "/existeUsuario", "/addStaff", "/items/addNewItem").hasRole("ADMIN")	   // <-- administration
-			   .antMatchers("/user/**").hasAnyRole("USER", "STAFF")		   
-				.antMatchers("/settings", "anadirUsuario").hasRole("ADMIN")
-				.antMatchers("/subscriptions", "/lessons", "/items/myItems", "/listToLoan", "/items/loanItem").hasAnyRole("USER", "ADMIN", "STAFF")
+				.antMatchers("/admin/**", "/existeUsuario", "/getUser").hasRole("ADMIN")	   // <-- administration
+				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem").hasRole("ADMIN")
+				.antMatchers("/user/**").hasAnyRole("USER", "STAFF")		   
+				.antMatchers("/subscriptions", "/lessons", "/items/myItems", "/items/loanItem", "/modifyUser").hasAnyRole("USER", "ADMIN", "STAFF")
 	            .anyRequest().authenticated()
 	            .and()
 			.formLogin()

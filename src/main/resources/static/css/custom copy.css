@@ -6,23 +6,31 @@
 
   --color1: #ef7845;
   --green1:#b0ffa3;
+  --green1Second:#9adf8f;
   
   --green2: #c3f96f;
   --green3:  #2cff8e;
 }
 
 .bodyCol{
+  margin: auto;
   margin-top: 4em;
   margin-bottom: 4em;
+  width: 1100px;
+  
+  /* min-height: auto; */
+  max-width: 90%;
+
+  /* margin-top: 4em;
+  margin-bottom: 4em;
   width: 70%;
-  margin-left: 15%;
+  margin-left: 15%; */
 }
 
 
 .myDropdownMenu{
   /* background-color: #6c757dd9; */
   background-color: #343a40b5;
- /*  background-color: var(--secondary); */
   color: white;
 }
 
@@ -30,104 +38,132 @@
   color: white;
 }
 
-.secondaryBack{
-  background-color: var(--secondary);
+
+/* --------  SUBNAVBAR  --------- */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* html,body{
+  display: grid;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+  background: #f2f2f2;
+} */
+
+.wrapper{
+  height: 4em;
+  width: 100%;
+  background-color: var(--bs-dark);
+  line-height: 3.9em;
+  border-radius: 50px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+  place-items: center;
+  text-align: center;
+  margin-bottom: 4em;
+}
+.wrapper .customNav{
+  position: relative;
+  display: flex;
+}
+.wrapper .customNav label{
+  flex: 1;
+  width: 100%;
+  z-index: 1;
+  cursor: pointer;
+}
+.wrapper .customNav label a{
+  position: relative;
+  z-index: -1;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.6s ease;
+}
+
+.wrapper .customNav label a i{
+  font-size: 25px;
+  margin: 0 7px;
+}
+.wrapper .customNav .tab{
+  position: absolute;
+  height: 100%;
+  width: 16.666%; /* 100/6 */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  border-radius: 50px;
+  background: linear-gradient(45deg, #05abe0 0%,#8200f4 100%);
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#courses:checked ~ .tab   {
+  left: 16.666%;
+}
+#lessons:checked ~ .tab{
+  left: 33.332%;
+}
+#items:checked ~ .tab{
+  left: 49.998%;
+}
+#subscriptions:checked ~ .tab{
+  left: 66.664%;
+}
+#rental:checked ~ .tab{
+  left: 83.333%;
+}
+.wrapper .customNav input{
+  display: none;
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.customTab{
+/*   height: 10em;
+  width: 20em; */
+  display: none;
+  width: auto;
+  -webkit-animation: fadeIn 0.5s;
+  animation: fadeIn 0.5s;
+}
+
+/* #staffPanel{
+  background-color: #343a40;
+} */
+
+#coursesPanel{
+  background-color: #1889fa;
+  width: 30em;
+  height: 30em;
+}
+
+.firstTab{
+  display: block;
 }
 
 
-
-
-/* .iwthumb {
-    height: 32px;
-    width: 32px;
+.greenButton{
+  border: 0;
+  background-color: var(--green1);
+  border-radius: 1em;
+  padding: 0.5em 2em;
 }
 
-.errTable tr>td:first-child {
-    min-width: 200px;
-    max-width: 200px;
-    word-break: break-all;
-    font-weight: bold;
-    color: gray;
+.greenButton:hover{
+  background-color: var(--green1Second);
 }
-
-.errTable td {
-    vertical-align: top;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
-}
-body{
-  background-color: #E9DCCD;
-}
-*::selection{
-  background:var(--red);
-  color: #E9DCCD
-}
-
-#logoImgRest{
-  object-fit: cover
-}
-
-
-
-
-.parent{
-  width:10px;
-  height:10px;
-  background:#2033db;
-  border-radius:100%;
- position: absolute;
-  cursor:pointer;
-}
-@keyframes breathe{
-  0%{transform:scale(1)}
-  50%{transform:scale(0.5)}
-  100%{transform:scale(1)}
-}
-@keyframes breathe2{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.2)}
-  100%{transform:scale(1)}
-}
-
-.parent:after{
-  content:"";
-  position:absolute;
-  top:-7.5px;
-  left:-7.5px;
-  z-index:3;
-  width:25px;
-  height:25px;
-  background:#2033db;
-  opacity:0.2;
-  border-radius:100%;
-  animation:breathe 2s infinite;
-}
-.parent > span{
-  color:#fff;
-  font-weight:bold;
-  font-size:25px;
-  position:absolute;
-  z-index:4;
-  top:6px;
-  left:8px;
-}
-
-
-  .contExt{
-    width: 1em;
-    height: 1em;
-   position: absolute;
-   top: 0.5em;
-   right: -0.5em;
-  }
-
-  .cont{
-    position: relative;
-  }
-
-  .oculto{
-    display: none;
-  }
-
-
- */

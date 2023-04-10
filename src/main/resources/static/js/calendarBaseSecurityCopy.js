@@ -8,13 +8,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 var selectedDay = new Date();
 var selectedDayStr = "";
-
 //TODO hacer un patron listener, guardando lista de quienes estan interesados en conocer los cambios
 //y que se suscriban mendiante una funcion definida aqui que les añada al array.
 //Cuando se cambie de mes se avisara a los otros scripts 
 var auxCurrentDate = new Date();
 //otra opcion, incluir en los scripts algun evento tipo onchange sobre el calendario para que ahi ya ellos se actualicen
-
 
 !function() {
 
@@ -46,6 +44,8 @@ var auxCurrentDate = new Date();
 //Custom code after Drawing
       translateMonth();
 
+      disableEnableDays();
+    //  translateDays();
 
   }
 
@@ -61,8 +61,8 @@ var auxCurrentDate = new Date();
       var right = createElement('div', 'right');
       right.addEventListener('click', function() { self.nextMonth();/* translateMonth()*/});
 
-       var left = createElement('div', 'left');
-      left.addEventListener('click', function() { self.prevMonth();}); 
+      var left = createElement('div', 'left');
+      left.addEventListener('click', function() { self.prevMonth(); /*translateMonth()*/});
 
       //Append the Elements
       this.header.appendChild(this.title); 
@@ -157,11 +157,15 @@ var auxCurrentDate = new Date();
 
     //Outer Day
     var outer = createElement('div', this.getDayClass(day));
+
+   /*   var dayNumber = +outer.querySelectorAll('.day-number')[0].innerText || +outer.querySelectorAll('.day-number')[0].textContent;
+    if(!outer.classList.contains("other"))
+    {
+
+    }  */
+
+    //console.log("class list: "+ outer.classList);
      
-    //Ya no es necesario controlar desde aqui el evento clickable de cada dia, ahora se hace desde
-    //calendarExtra.js tras haber pintado el calendario
-
-
     /*  if(!outer.classList.contains('other'))
     {
           
@@ -200,6 +204,23 @@ var auxCurrentDate = new Date();
     this.week.appendChild(outer);
   }
 
+  
+
+ /*  Calendar.prototype.drawEvents = function(day, element) {
+    if(day.month() === this.current.month()) {
+      var todaysEvents = this.events.reduce(function(memo, ev) {
+        if(ev.date.isSame(day, 'day')) {
+          memo.push(ev);
+        }
+        return memo;
+      }, []);
+
+      todaysEvents.forEach(function(ev) {
+        var evSpan = createElement('span', ev.color);
+        element.appendChild(evSpan);
+      });
+    }
+  } */
 
   Calendar.prototype.getDayClass = function(day) {
     classes = ['day'];
@@ -208,15 +229,135 @@ var auxCurrentDate = new Date();
     } else if (today.isSame(day, 'day')) {
       classes.push('today');
     }
+    else{
+   /*    var dayNumber = +day.querySelectorAll('.day-number')[0].innerText || +day.querySelectorAll('.day-number')[0].textContent;
+      if(dayNumber < auxCurrentDate.getDay())
+        classes.push('prev'); */
+    }
     
     
     classes.push('col');
     return classes.join(' ');
   }
 
-  
+  /* Calendar.prototype.openDay = function(el) {
+    var details, arrow;
+    var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
+    var day = this.current.clone().date(dayNumber);
 
-/* Calendar.prototype.dayPressed = function (day)
+    var currentOpened = document.querySelector('.details');
+
+    //Check to see if there is an open detais box on the current row
+    if(currentOpened && currentOpened.parentNode === el.parentNode) {
+      details = currentOpened;
+      arrow = document.querySelector('.arrow');
+    } else {
+      //Close the open events on differnt week row
+      //currentOpened && currentOpened.parentNode.removeChild(currentOpened);
+      if(currentOpened) {
+        currentOpened.addEventListener('webkitAnimationEnd', function() {
+          currentOpened.parentNode.removeChild(currentOpened);
+        });
+        currentOpened.addEventListener('oanimationend', function() {
+          currentOpened.parentNode.removeChild(currentOpened);
+        });
+        currentOpened.addEventListener('msAnimationEnd', function() {
+          currentOpened.parentNode.removeChild(currentOpened);
+        });
+        currentOpened.addEventListener('animationend', function() {
+          currentOpened.parentNode.removeChild(currentOpened);
+        });
+        currentOpened.className = 'details out';
+      }
+
+      //Create the Details Container
+      details = createElement('div', 'details in');
+
+      //Create the arrow
+      var arrow = createElement('div', 'arrow');
+
+      //Create the event wrapper
+
+      details.appendChild(arrow);
+      el.parentNode.appendChild(details);
+    }
+
+    var todaysEvents = this.events.reduce(function(memo, ev) {
+      if(ev.date.isSame(day, 'day')) {
+        memo.push(ev);
+      }
+      return memo;
+    }, []);
+
+    this.renderEvents(todaysEvents, details);
+
+    arrow.style.left = el.offsetLeft - el.parentNode.offsetLeft + 27 + 'px';
+  } */
+
+ /*  Calendar.prototype.renderEvents = function(events, ele) {
+    //Remove any events in the current details element
+    var currentWrapper = ele.querySelector('.events');
+    var wrapper = createElement('div', 'events in' + (currentWrapper ? ' new' : ''));
+
+    events.forEach(function(ev) {
+      var div = createElement('div', 'event');
+      var square = createElement('div', 'event-category ' + ev.color);
+      var span = createElement('span', '', ev.eventName);
+
+      div.appendChild(square);
+      div.appendChild(span);
+      wrapper.appendChild(div);
+    });
+
+    if(!events.length) {
+      var div = createElement('div', 'event empty');
+      var span = createElement('span', '', 'No Events');
+
+      div.appendChild(span);
+      wrapper.appendChild(div);
+    }
+
+    if(currentWrapper) {
+      currentWrapper.className = 'events out';
+      currentWrapper.addEventListener('webkitAnimationEnd', function() {
+        currentWrapper.parentNode.removeChild(currentWrapper);
+        ele.appendChild(wrapper);
+      });
+      currentWrapper.addEventListener('oanimationend', function() {
+        currentWrapper.parentNode.removeChild(currentWrapper);
+        ele.appendChild(wrapper);
+      });
+      currentWrapper.addEventListener('msAnimationEnd', function() {
+        currentWrapper.parentNode.removeChild(currentWrapper);
+        ele.appendChild(wrapper);
+      });
+      currentWrapper.addEventListener('animationend', function() {
+        currentWrapper.parentNode.removeChild(currentWrapper);
+        ele.appendChild(wrapper);
+      });
+    } else {
+      ele.appendChild(wrapper);
+    }
+  } */
+
+  /* Calendar.prototype.drawLegend = function() {
+    var legend = createElement('div', 'legend');
+    var calendars = this.events.map(function(e) {
+      return e.calendar + '|' + e.color;
+    }).reduce(function(memo, e) {
+      if(memo.indexOf(e) === -1) {
+        memo.push(e);
+      }
+      return memo;
+    }, []).forEach(function(e) {
+      var parts = e.split('|');
+      var entry = createElement('span', 'entry ' +  parts[1], parts[0]);
+      legend.appendChild(entry);
+    });
+    this.el.appendChild(legend);
+  } */
+
+Calendar.prototype.dayPressed = function (day)
 {
   var dayNumber = +day.querySelectorAll('.day-number')[0].innerText || +day.querySelectorAll('.day-number')[0].textContent;
  // console.log(dayNumber);
@@ -232,7 +373,7 @@ var auxCurrentDate = new Date();
 
   //selectedDay = dateConstructor(dayNumber, document.querySelector("#calendar .header h1").innerHTML);
   selectedDayStr = dateStringFormat(dayNumber, document.querySelector("#calendar .header h1").innerHTML);
-} */
+}
 
   Calendar.prototype.nextMonth = function() {
     this.current.add('months', 1);
@@ -294,11 +435,15 @@ var auxCurrentDate = new Date();
 }();
 
 
-//translateMonth();
+/* function translate(){ */
+ /*  var elem = document.querySelector("#calendar .header h1");
+  console.log(elem);
+  console.log(elem.innerHTML);
+  translateMonth(elem); */
+  //elem.innerHTML ="Marzo";
+/*   } */
 
-//esta llamada es solo util para el primer dibujado. en el resto, el cambio de informacion sobre dias no funciona
-      //para ello se llama a dicha funcion desde el calendarExtra, para cuando se cambia de mes
-      disableEnableDays();
+//translateMonth();
 
 function translateMonth()
 {
@@ -332,7 +477,7 @@ function translateDays()
   if(w <=600)
   {
       for (let i = 0; i < nodeList.length; i++) {
-          //console.log(nodeList[i]);
+          console.log(nodeList[i]);
           let dayStr = nodeList[i].innerHTML;
           
           dayStr = dayStr.replace("Mon", "L");
@@ -347,7 +492,7 @@ function translateDays()
   }
   else{
       for (let i = 0; i < nodeList.length; i++) {
-         // console.log(nodeList[i]);
+          console.log(nodeList[i]);
           let dayStr = nodeList[i].innerHTML;
           
           dayStr = dayStr.replace("Mon", "Lunes");
@@ -415,22 +560,27 @@ function dateStringFormat(dayNumber, MonthYear)
 
   dayNumber = ""+dayNumber;
 
+
+  console.log(dayNumber.length);
   if(dayNumber.length == 1)
   {
     dayNumber = '0'+dayNumber; 
+    console.log("long es 1");
   }
     
-  var aux = MonthYear.split(" ");
 
-  if(aux.length < 2)
-  {
+ var aux = MonthYear.split(" ");
+
+ if(aux.length < 2)
+ {
       console.log("Mal input para el dateConstructor");
       return null;
-  }
-
+ }
   year = aux[1];
-  
-  month = ESMonthToNumberStr(aux[0]);//Como solo los dias del mes actual son clickables, basta con coger el mes mostrado en el header
+  //TODO coger asi el mes no vale, ya que hay dias de meses pasados y siguientes
+  //Sol1: poner solo listener a days que no tengan la clase other
+  //Sol2: ver si en el objeto day hay alguna forma de saber su mes y anio
+  month = ESMonthToNumberStr(aux[0]);
   dateStr = year +"-"+month+"-"+dayNumber;
   return dateStr;
 }
@@ -439,7 +589,7 @@ function dateConstructor(dayNumber, MonthYear)
 {
   dateStr = dateStringFormat(dayNumber, MonthYear);
   var d = new Date(dateStr);
-  //console.log(d);
+  console.log(d);
   return d;
 }
 
@@ -490,77 +640,53 @@ function ESMonthToNumberStr(ESmonth)
 }
 
 /**
- * Prepara los dias con funcionamiento basico de seleccion en el calendario
- * Pone como clickables los dias posteriores al actual, asociando al click la funcion
- * que actauliza el dia actual seleccionado y el aspecto visual de seleccion
+ * Prepara los dias asociando 
  */
 function disableEnableDays()
-{
-  
+  {
+
     let days = document.querySelectorAll(".day");
+    console.log("days" + days);
+    console.log("current" + auxCurrentDate.getDate());
 
     for(let i = 0; i < days.length; i++)
     {
-     // console.log("day: " + days[i] + "day number: " + days[i].querySelector(".day-number").innerHTML);
+      console.log("day: " + days[i] + "day number: " + days[i].querySelector(".day-number").innerHTML);
     
  
       if(!days[i].classList.contains('other'))
       {
-          let monthYear = document.querySelector(".header h1").innerHTML.split(" ");
-          let monthNumber =  ESMonthToNumberStr(monthYear[0]);
-          let yearNumber = parseInt(monthYear[1])
-
-          //console.log("year "+ yearNumber + " month: "+ monthNumber);
-          //console.log("current year "+ auxCurrentDate.getFullYear() + " current month: "+ (auxCurrentDate.getMonth()+1));
-
-          //si msotrando un anio anterior, todo disabled
-          if(yearNumber < auxCurrentDate.getFullYear())
-          {
+          var dayNumber = +days[i].querySelectorAll('.day-number')[0].innerText || +days[i].querySelectorAll('.day-number')[0].textContent;
+      
+          if(dayNumber < auxCurrentDate.getDate())
             days[i].classList.add("prev")
-            //console.log("anterior year")
+          else 
+          {
+            days[i].addEventListener('click', function() {
+              //TODO listener de un day
+              //console.log("dia pulsado");
+            // var dayNumber = +day.querySelectorAll('.day-number')[0].innerText || +day.querySelectorAll('.day-number')[0].textContent;
+              
+      //        if(dayNumber > auxCurrentDate.getDay())
+                self.dayPressed2(days[i], dayNumber);
+              //ejemplo de obtener datos en la funcion openDay
+              //self.openDay(this);
+            }); 
           }
             
-            //si mostrando un mes anterior del mismo anio, todo disabled
-          else if(yearNumber == auxCurrentDate.getFullYear() && monthNumber < auxCurrentDate.getMonth()+1)
-          {
-            days[i].classList.add("prev")
-            //console.log("anterior mes")
-          }
-            
-            //Si mismo mes y anio, solo quitar los dias anteriores al actual
-          else if (yearNumber == auxCurrentDate.getFullYear() && monthNumber == auxCurrentDate.getMonth()+1){
-              var dayNumber = +days[i].querySelectorAll('.day-number')[0].innerText || +days[i].querySelectorAll('.day-number')[0].textContent;
-        
-              if(dayNumber < auxCurrentDate.getDate())
-                days[i].classList.add("prev")
-              else 
-              {
-                days[i].addEventListener('click', function() {
-                    self.dayPressed2(days[i]);
-                }); 
-          }
-        }
-        else{//anio y mes superior, todo enabled
-          //console.log("futuro")
-            days[i].addEventListener('click', function() {         
-                self.dayPressed2(days[i]);
-          }); 
+     //   console.log("day poniendo listener " + day)
 
-          }
+          
+          
   
       } 
     }
 
-}
+  }
 
-
-  /**
-   * Gestiona los eventos basicos del calendario cuando se ha pulsado un dia clickable
-   * siendo estos cambiar la variable con el dia actual y mostrar cual es el dia seleccionado
-   */
-function dayPressed2(parentDiv)
+function dayPressed2(parentDiv, dayNumber)
 {
-  var dayNumber2 = +parentDiv.querySelectorAll('.day-number')[0].innerText || +parentDiv.querySelectorAll('.day-number')[0].textContent;
+  //var dayNumber = +day.querySelectorAll('.day-number')[0].innerText || +day.querySelectorAll('.day-number')[0].textContent;
  // console.log(dayNumber);
 
   var olderSelected = document.querySelector(".selectedDay")
@@ -570,8 +696,10 @@ function dayPressed2(parentDiv)
   var dayNumberDiv = parentDiv.querySelector(".day-number");
   dayNumberDiv.classList.add("selectedDay");
   
+
+
   //selectedDay = dateConstructor(dayNumber, document.querySelector("#calendar .header h1").innerHTML);
-  selectedDayStr = dateStringFormat(dayNumber2, document.querySelector("#calendar .header h1").innerHTML);
+  selectedDayStr = dateStringFormat(dayNumber, document.querySelector("#calendar .header h1").innerHTML);
 }
 
 

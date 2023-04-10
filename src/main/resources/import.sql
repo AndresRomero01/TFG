@@ -50,6 +50,8 @@ INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, fir
 VALUES (9, 'STAFF', 'emp6',
     '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calle machado', 'user@normalito.com', '456543675', 'Jorge', 'Castaño', 0);
 
+--Datos sobre cursos
+
 INSERT INTO CATEGORY (id, name)
 VALUES (1, 'cat1');
 
@@ -107,34 +109,6 @@ VALUES (11, 'curso de prueba5', TRUE, 'curso de prueba5', 2);
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (12, 'curso de prueba6', TRUE, 'curso de prueba6', 2);
 
--- Datos sobre items
-
-INSERT INTO ITEM(id, name, description, quantity)
-VALUES (1,'pesa 5kg', 'Una pequeña pesa para principiantes', 10);
-
-INSERT INTO ITEM(id, name, description, quantity)
-VALUES (2,'pesa 10kg', 'Una pesa para niveles intermedios', 8);
-
-INSERT INTO ITEM(id, name, description, quantity)
-VALUES (3,'pesa 15kg', 'Una pesa para tonificar', 6);
-
-INSERT INTO ITEM(id, name, description, quantity)
-VALUES (4,'pesa 20kg', 'Una pesa para musculacion', 4);
-
-INSERT INTO ITEM(id, name, description, quantity)
-VALUES (5,'bicicleta basica', 'Una bicicleta basica ideal para principiantes y uso por ciudad', 6);
-
-INSERT INTO ITEM(id, name, description, quantity)
-VALUES (6,'bicicleta montaña', 'Una bicicleta perfecta para rutas por el campo', 4);
-
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (2, 1, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
-
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (1, 4, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
-
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (2, 4, 2, '2023-03-20T10:00:00', '2023-04-20T10:00:00');
 
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (13, 'curso de prueba6', FALSE, 'curso de prueba6', 2);
@@ -147,6 +121,54 @@ VALUES (15, 'curso de prueba6', FALSE, 'curso de prueba6', 3);
 
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (16, 'curso de prueba6', FALSE, 'curso de prueba6', 1);
+
+--Datos sobre items y alquiler de items
+
+ALTER TABLE item ALTER COLUMN description TYPE text;--Para poder guardar textos largos en la descripcion
+
+INSERT INTO ITEM(id, name, quantity, max_loan, description)
+VALUES (1,'pesa 5kg', 10, 2, 'Gna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+
+INSERT INTO ITEM(id, name, quantity, max_loan, description)
+VALUES (2,'pesa 10kg',8, 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut en.');
+
+INSERT INTO ITEM(id, name, quantity, max_loan, description)
+VALUES (3,'pesa 15kg',6, 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+
+INSERT INTO ITEM(id, name, quantity, max_loan, description)
+VALUES (4,'pesa 20kg', 4, 1, 'Una pesa para musculacion');
+
+INSERT INTO ITEM(id, name, quantity, max_loan, description)
+VALUES (5,'bicicleta basica', 6, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+
+INSERT INTO ITEM(id, name, quantity, max_loan, description)
+VALUES (6,'bicicleta montaña', 4, 1, 'Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet. Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet');
+
+/* Para probar fecha de devolucion ya pasada o no unidades disponibles modificando fecha endLoand 
+y poniendo dia del start del siguiente al dia siguiente*/
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (1, 4, 2, '2023-03-20T10:00:00', '2023-04-9T23:59:00');
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (3, 4, 1, '2023-04-10T00:00:00', '2023-04-20T23:59:00');
+
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (3, 6, 4, '2023-03-20T10:00:00', '2023-04-6T10:00:00');
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (3, 1, 1, '2023-03-20T10:00:00', '2023-03-27T10:00:00');
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (2, 1, 2, '2023-04-04T00:00:00', '2023-04-13T00:00:00');
+/* Para probar fecha cercana a fin loan (modificandolo) */
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (1, 3, 1, '2023-04-04T00:00:00', '2023-04-11T23:59:00');
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (1, 2, 1, '2023-04-04T00:00:00', '2023-04-06T00:00:00');
+
+--Datos sobre chats
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (1, 2, 1, 'hola, tengo una pregunta', TRUE);

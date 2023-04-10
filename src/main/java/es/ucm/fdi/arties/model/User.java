@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * An authorized user of the system.
  */
@@ -51,6 +54,8 @@ import java.util.List;
 
 @Table(name="ARTIESUser")
 public class User implements Transferable<User.Transfer> {
+
+    private static final Logger log = LogManager.getLogger(User.class);
 
     public User (String username, String password, String firstName, 
     String lastName, String email, String address, String phone, String roles, ClientType clientType){
@@ -146,7 +151,9 @@ public class User implements Transferable<User.Transfer> {
     
     public boolean hasItemLoan(Item item)
     {
+        log.info("comprobando items loans del user " + id);
         for (ItemLoans il : itemLoans) {
+            log.info("id item: "+ il.getItem().getId());
             if(il.getItem().getId() == item.getId())
             return true;
         }
@@ -154,14 +161,32 @@ public class User implements Transferable<User.Transfer> {
         return false;
     }
 
+    
     public boolean hasItemLoan(long itemId)
     {
+        log.info("comprobando items loans del user " + id);
         for (ItemLoans il : itemLoans) {
+            log.info("id item: "+ il.getItem().getId());
             if(il.getItem().getId() == itemId)
             return true;
         }
 
         return false;
+    }
+
+    public void addItemLoan(ItemLoans itemLoan, Item item)
+    {
+        this.itemLoans.add(itemLoan);
+        item.getItemLoans().add(itemLoan);
+    }
+
+    public ItemLoans getOneItemLoan(long itemId)
+    {
+        for (ItemLoans il : itemLoans) {
+            if(il.getItem().getId() == itemId)
+            return il;
+        }
+        return null;
     }
 }
 

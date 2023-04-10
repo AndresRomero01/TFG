@@ -6,6 +6,7 @@
 
   --color1: #ef7845;
   --green1:#b0ffa3;
+  --green1Second:#9adf8f;
   
   --green2: #c3f96f;
   --green3:  #2cff8e;
@@ -57,6 +58,20 @@
   from { opacity: 0; }
     to { opacity: 1; }
 }
+
+.greenButton{
+  border: 0;
+  background-color: var(--green1);
+  border-radius: 1em;
+  padding: 0.5em 2em;
+}
+
+.greenButton:hover{
+  background-color: var(--green1Second);
+}
+
+
+
 
 
 

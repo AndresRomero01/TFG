@@ -13,7 +13,7 @@
 
 
 
-@media (max-width: 600px) {
+@media (max-width: 740px) {
     .myBody {
         margin-left: 0.5em;
         margin-right: 0.5em;
@@ -112,3 +112,28 @@
     display: flex;
     align-items: center;
 }
+
+.infoMsg{
+    height: 100%;;
+    display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoMsg div{
+    background-color: var(--dark);
+    color: white;
+    padding: 1em;
+    border-radius: 0.5em;
+}
+
+.infoMsg p{
+    margin: 0;
+}
+
+#addQuantityItem{
+    margin-left: 1em;
+}
+
+

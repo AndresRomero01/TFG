@@ -7,16 +7,39 @@
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/carrouselCard.css" />
 </head>
+</head>
 
-<body class="d-flex flex-column h-100">
+
+
+<body>
     <header th:replace="fragments/nav.html :: nav"></header>
 
+    <div id="bannerDiv">
+        <img id="banner" src="/img/path1.jpg" alt="banner Arties" class="d-inline-block align-text-top">
+        <div id="blackFilter">
+            <p id="bannerSentence">Te ayudamos en tu camino</p>
+        </div>
+    </div>
 
+   <!--  <div class="demoDiv">
+        <div class="myContainer">
+            <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
+                <div class="myDetails detailsEnabled">
+                    <h2>Lakes</h2>
+                    <p class="myDescText">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet. Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet</p>
+                </div>
+            </div>
+        </div>
 
+    </div> -->
+
+    
+    
 
     <div class="demoDiv">
         <div class="carouselDiv">
 
+           
             <input type="radio" name="position" id="position1" class="myRadio form-check-input bg-dark"/>
             <input  type="radio" name="position" id="position2" class="myRadio form-check-input bg-dark"/>
             <input  type="radio" name="position" id="position3" class="myRadio form-check-input bg-dark" checked/>
@@ -30,7 +53,7 @@
                         <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
                             <div class="myDetails">
                                 <h2>Lakes</h2>
-                                <p>Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit</p>
+                                <p class="myDescText">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet</p>
                             </div>
                         </div>
                     </div>
@@ -41,7 +64,7 @@
                         <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
                             <div class="myDetails">
                                 <h2>Lakes</h2>
-                                <p>Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit</p>
+                                <p class="myDescText">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet. Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet</p>
                             </div>
                         </div>
                     </div>
@@ -52,7 +75,7 @@
                         <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
                             <div class="myDetails detailsEnabled">
                                 <h2>Lakes</h2>
-                                <p>Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit</p>
+                                <p class="myDescText">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet</p>
                             </div>
                         </div>
                     </div>
@@ -63,7 +86,7 @@
                         <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
                             <div class="myDetails">
                                 <h2>Lakes</h2>
-                                <p>Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit</p>
+                                <p class="myDescText">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit</p>
                             </div>
                         </div>
                     </div>
@@ -74,7 +97,7 @@
                         <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
                             <div class="myDetails">
                                 <h2>Lakes</h2>
-                                <p>Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit</p>
+                                <p class="myDescText">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit</p>
                             </div>
                         </div>
                     </div>
@@ -107,59 +130,6 @@
 
     </div>
 
-<!-- 
-    <div class="demoDiv">
-        <div class="myContainer">
-            <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
-                <div class="myDetails">
-                    <h2>Lakes</h2>
-                    <p>Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit</p>
-                </div>
-            </div>
-        </div>
-
-    </div> -->
-
-<!--     <div class="firstDiv"> -->
-        <!-- <div class="carouselLeftArrow">
-            <a type="button" class="btn text-dark prevButton arrowButton">&#8249;</a>
-        </div>
-
-        <div class="carouselRightArrow">
-            <a type="button" class="btn text-dark nextButton arrowButton">&#8250;</a>
-        </div> -->
-        
-        <!-- Codigo adaptado de https://freefrontend.com/css-carousels/ -->
-<!--         <div class="carouselDiv" th:if="${#arrays.length(freeCourses) == 5}"> -->
-            <!-- <a type="button" class="btn text-dark prevButton arrowButton">&#8249;</a> -->
-<!--             <input type="radio" name="position" id="position1" class="form-check-input bg-dark"/>
-            <input type="radio" name="position" id="position2" class="form-check-input bg-dark"/>
-            <input type="radio" name="position" id="position3" class="form-check-input bg-dark" checked/>
-            <input type="radio" name="position" id="position4" class="form-check-input bg-dark"/>
-            <input type="radio" name="position" id="position5" class="form-check-input bg-dark"/>
-
-            <main id="carouselMain">
-                <div class="item" th:each="course,iter: ${freeCourses}"> -->
-                    <!-- <h1 th:text="${course.name}"></h1> -->
-<!--                     <div class="col d-flex">
-                        <div class="card text-white bg-dark " style="width: 18rem;">
-                            <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${course.name}">Card title</h5>
-                                <p class="card-text descField" th:text="${course.description}">Card description</p>
-                                
-                            </div>
-                            <div class="card-footer">
-                                <a href="${course.name}" class="btn btn-light">Ver curso</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <main>  
-        </div>
-          
-    </div>
- -->
     <div class="bodyCol">
 
         <a class="btn btn-dark" id="prevCourse">Anterior</a>

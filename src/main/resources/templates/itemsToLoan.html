@@ -27,262 +27,54 @@
         </div>
     </div> -->
 
-     <div class="myBody">
+    <div class="myBody">
         
-       <div class="row justify-content-center">
+        <div class="row justify-content-center">
+            <th:block th:each="item,iter: ${itemsToLoan}">
+                <div class="col-5 myColW">
+                    <div class="myContainer">
+                        <div class="card2">
+                            <img src="/img/drawing.jpg" />
+                            <div class="myh100 "> <!-- align-items-center justify-content-center -->
+                                <div class="titulo justify-content-center">
+                                    <h2 class="text-center" th:text="${item.name}">Pesas 5kg</h2>
+                                </div>
+                              <div class="texto">
+                                <div>
+                                  
+                                  <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
+                                   <p th:text="${item.description}">
+                                     gna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                   </p>
+                                </div>
+                               
+                                </div>
+                                <th:block th:if="${session.u}">
+                                    <div class="boton justify-content-center">
+                                        <a  th:href="@{/items/loanItem?itemId=}+${item.id}">
+                                            <button>Alquilar</button>
+                                        </a>
+                                        
+                                    </div>
 
-        <!-- Version inicial nuevas cards -->
-         <!--    <div class="col-5 myColW">
-                <div class="myContainer">
-                    <div class="card2">
-                        <img src="/img/drawing.jpg" />
-                        <div>
-                          <h2 class="text-center">Pesas 5kg</h2>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          </p>
-                          <div class="text-center">
-                            <button >Alquilar</button>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-5 myColW">
-                <div class="myContainer">
-                    <div class="card2">
-                        <img src="/img/drawing.jpg" />
-                        <div>
-                          <h2 class="text-center">Pesas 5kg</h2>
-
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aat.
-                          </p>
-                          <div class="text-center">
-                            <button >Alquilar</button>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div> -->
-
-             <!-- Version actual nuevas cards -->
-            <div class="col-5 myColW">
-                <div class="myContainer">
-                    <div class="card2">
-                        <img src="/img/drawing.jpg" />
-                        <div class="myh100 "> <!-- align-items-center justify-content-center -->
-                            <div class="titulo justify-content-center">
-                                <h2 class="text-center">Pesas 5kg</h2>
-                            </div>
-                          <div class="texto">
-                            <div>
-                              
-                              <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
-                               <p>
-                                 gna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                               </p>
-                            </div>
-                           
-                            </div>
-
-                            <div class="boton justify-content-center">
-                                <button >Alquilar</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-5 myColW">
-                <div class="myContainer">
-                    <div class="card2">
-                        <img src="/img/drawing.jpg" />
-                        <div class="myh100 "> <!-- align-items-center justify-content-center -->
-                            <div class="titulo justify-content-center">
-                                <h2 class="text-center">Pesas 5kg</h2>
-                            </div>
-                          <div class="texto">
-                            <div>
-                              
-                              <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
-                               <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                               </p>
-                            </div>
-                           
-                            </div>
-
-                            <div class="boton justify-content-center">
-                                <button >Alquilar</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-5 myColW">
-                <div class="myContainer">
-                    <div class="card2">
-                        <img src="/img/drawing.jpg" />
-                        <div class="myh100 "> <!-- align-items-center justify-content-center -->
-                            <div class="titulo justify-content-center">
-                                <h2 class="text-center">Pesas 5kg</h2>
-                            </div>
-                          <div class="texto">
-                            <div>
-                              
-                              <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
-                               <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut en.
-                               </p>
-                            </div>
-                           
-                            </div>
-
-                            <div class="boton justify-content-center">
-                                <button >Alquilar</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-5 myColW">
-                <div class="myContainer">
-                    <div class="card2">
-                        <img src="/img/drawing.jpg" />
-                        <div class="myh100 "> <!-- align-items-center justify-content-center -->
-                            <div class="titulo justify-content-center">
-                                <h2 class="text-center">Pesas 5kg</h2>
-                            </div>
-                          <div class="texto">
-                            <div>
-                              
-                              <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
-                               <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                               </p>
-                            </div>
-                           
-                            </div>
-
-                            <div class="boton justify-content-center">
-                                <button >Alquilar</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-             <!-- Version intermedia nuevas cards -->
-
-           <!--  <div class="col-5 myColW">
-              <div class="myContainer">
-                  <div class="card2">
-                      <img src="/img/drawing.jpg" />
-                      <div class="myh100 ">
-                        <div class="texto">
-                          <div>
-                            <h2 class="text-center">Pesas 5kg</h2>
-      
-                             <p>
-                               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                              </p>
-                          </div>
-                         
-                          </div>
-
-                          <div class="boton justify-content-center">
-                              <button >Alquilar</button>
-                          </div>
-
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <div class="col-5 myColW">
-            <div class="myContainer">
-                <div class="card2">
-                    <img src="/img/drawing.jpg" />
-                    <div class="myh100 ">
-                      <div class="texto">
-                        <div>
-                          <h2 class="text-center">Pesas 5kg</h2>
-               
-                           <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aat.                           </p>
-                        </div>
-                       
-                        </div>
-
-                        <div class="boton justify-content-center">
-                            <button >Alquilar</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div> -->
-            
-            
-        </div>
-    </div>
-
-
-<div class="myContainer">
-    <div class="card2">
-        <img src="/img/drawing.jpg" />
-        <div>
-          <h2>Invest in Valby's sparkling new construction</h2>
-          <h3>Type: Residential rental</h3>
-          <p>
-            Soon you can invest in Sid Harman's new attractive property, set in
-            the heart of Athens.
-          </p>
-          <button>Show the property project</button>
-        </div>
-    </div>
-
-</div>
-   
-
-        <div class="col bodyCol">
-            <div class="row row-cols1 row-cols-md-4 g-5">
-               
-                <th:block th:each="item,iter: ${itemsToLoan}">
-                    <div class="col d-flex">
-                        <div class="card text-white bg-dark " style="width: 18rem;">
-                        <!--  <div class="card-img-overlay forFreeDiv">
-                                <p class="forFreeTag">For free!</p>
-                            </div> -->
-                            <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                            
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${item.name}">Card title</h5>
-                                <p class="card-text" th:text="${item.description}">Card description</p>
+                                </th:block>
                                 
-                            </div>
-                            <div class="card-footer"> <!-- style="text-align: center;" -->
-                                <a  th:href="@{/items/loanItem?itemId=}+${item.id}" class="btn btn-light">Alquilar</a>
+    
                             </div>
                         </div>
                     </div>
-                </th:block>
-            </div>
-                
-              
+                </div>
+
+            </th:block>
+
+            
+
         </div>
+    </div>
+
+
+
+
     
     
 

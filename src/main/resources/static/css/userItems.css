@@ -1,3 +1,5 @@
+
+
 .imgItem{
     width: 80%;
     margin-bottom: 0.5em;
@@ -8,6 +10,14 @@
 .myBody{
     margin: 5em;
     margin-top: 1em;
+}
+
+@media (max-width: 600px) {
+  .myBody {
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+  }
+
 }
 .loanRow{
    
@@ -55,3 +65,4 @@
 .separator:last-of-type{
     border-right-width: 0px;
 }
+

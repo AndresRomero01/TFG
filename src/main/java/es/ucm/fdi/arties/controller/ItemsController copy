@@ -63,7 +63,7 @@ public class ItemsController {
     public String myItems(Model model, HttpSession session) {
         User u = (User) session.getAttribute("u");
         User u2;
-        u2 = commonDB.getUser(em, u.getId());
+        u2 = commonDB.getUsuario(em, u.getId());
 
         log.info("los roles son "+ u2.getRoles());
 
@@ -108,7 +108,7 @@ public class ItemsController {
         User u = (User) session.getAttribute("u");
   
         User u2;
-        u2 = commonDB.getUser(em, u.getId());
+        u2 = commonDB.getUsuario(em, u.getId());
 
 
         boolean hasItem = u2.hasItemLoan(item);
@@ -323,7 +323,7 @@ public class ItemsController {
     {
       User u = (User) session.getAttribute("u");
       User u2;
-      u2 = commonDB.getUser(em, u.getId());
+      u2 = commonDB.getUsuario(em, u.getId());
       ItemLoans itemLoan = u2.getOneItemLoan(itemId);
 
 

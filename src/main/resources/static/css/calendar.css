@@ -146,6 +146,10 @@
     .day.other {
      color: rgba(255, 255, 255, .3);
     }
+
+    .day.prev {
+      color: rgba(255, 255, 255, .3);
+     }
     
     .day.today {
       color: rgba(156, 202, 235, 1);

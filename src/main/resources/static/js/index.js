@@ -59,8 +59,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
 
-  function enableDisableDetails()
-  {
+function enableDisableDetails()
+{
     const actualCheckedIndex = getChecked() -1;
     console.log("actual "+ actualCheckedIndex);//arry index
 
@@ -72,4 +72,33 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
 
     details[actualCheckedIndex].classList.add("detailsEnabled");
-  }
+}
+
+
+let items = document.querySelectorAll(".item");
+for(let i = 0; i < items.length; i++)
+{
+    //items[i].addEventListener("click", selectCarrouselItem(i));
+    items[i].addEventListener("click", function(){
+        console.log("item pulsado con index: " +i)
+
+        let radios = document.querySelectorAll(".myRadio");
+
+        const actualCheckedIndex = getChecked() -1;
+
+        radios[i].checked = true;
+        radios[actualCheckedIndex] = false;
+
+        enableDisableDetails();
+        
+        
+
+    });
+}
+
+
+
+
+
+
+

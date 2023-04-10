@@ -8,18 +8,7 @@ html {
 }
 */
 
-.myBody{
-    margin: 5em;
-    margin-top: 1em;
-}
 
-@media (max-width: 600px) {
-  .myBody {
-      margin-left: 0.5em;
-      margin-right: 0.5em;
-  }
-
-}
 .texto{
   height: 65%;
     display: flex;
@@ -160,11 +149,54 @@ html {
   background: linear-gradient(90deg, #5448de, #5448de);
   background: var(--green1);
   /* color: #f8f8f8; */
-  color: --var(dark);
+ 
   font-family: inherit;
   padding: 0.5em 2em;
   font-size: 16px;
   border-radius: 1em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+}
+
+.card2 button:disabled{
+  
+  background:#9fe794; 
+}
+
+.infoIcon
+{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+    height: 30px;
+    width: 30px;
+   
+    margin-left: 20px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 100%;
+    border-style: solid;
+    border-color: white;
+    margin: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+}
+.infoIcon p{
+     font-size: large;
+}
+
+.card2 .warningMsg{
+ /*  color: #c22b11; */
+ background-color: #c22b11;
+        padding: 5px;
+
+        display: -webkit-box;
+        /* max-width: 200px; */
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        color: white;
+        margin-top: -20px;
+        border-radius: 1em;
 }
 
 
@@ -190,7 +222,8 @@ html {
 
   .boton{
     margin:0px;
-    margin-top: 2em;
+    /* margin-top: 2em; */
+    height: fit-content;
   }
 
   .texto{
@@ -209,6 +242,21 @@ html {
     margin: 0px;
   }
 
+  .card2 .warningMsg{
+    background-color: #c22b11;
+        padding: 5px;
+
+        display: -webkit-box;
+        /* max-width: 200px; */
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        color: white;
+        margin-top: -20px;
+        border-radius: 1em;
+  }
+
   .card2 img {
    
      width: 28vw;
@@ -222,7 +270,12 @@ html {
     margin-top:-0.1em;
     
   }
+  .infoIcon{
+    background-color: var(--dark);
+  }
 }
+
+
 
 /* @media (width <= 740px) {
   .card2 {
