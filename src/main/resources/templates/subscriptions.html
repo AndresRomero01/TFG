@@ -4,13 +4,77 @@
 <head>
     <th:block th:replace="fragments/head :: header" />
     <!-- <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css" type="text/css" /> -->
+    <link rel="stylesheet" th:href="@{/css/subsCards.css}" />
     <title>Suscripciones</title>
 </head>
 
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav"></header>
+    <!-- <h1 th:text="${session.u.clientType}"></h1> -->
+    <input type="hidden" th:value="${session.u.clientType}" id="sub">
 
+    <!-- card style: https://codepen.io/devjamal/pen/WMEVBL -->
+    <!-- ribbon style: https://multiwebpress.com/pricing-card-using-html-css/ -->
+    <section>
+        <div class="container-fluid">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4 offset-md-2">
+                <div class="card text-center">
+                    <!-- <div th:if="${session.u.clientType.toString().equals('ONLINE')}" class="ribbon" id="onlineRibbon"><span>A c t u a l</span></div> -->
+                    <div class="ribbon" id="onlineRibbon"><span>A c t u a l</span></div>
+                  <div class="title">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    <h2>Online</h2>
+                  </div>
+                  <div class="price">
+                    <h4>25<sup>€</sup></h4>
+                  </div>
+                  <div class="option">
+                    <ul>
+                    <li> <i class="fa fa-check" aria-hidden="true"></i> Acceso a todos los cursos</li>
+                    <li> <i class="fa fa-check" aria-hidden="true"></i> Alquiler de material </li>
+                    <li> <i class="fa fa-check" aria-hidden="true"></i> Ayuda por chat </li>
+                    <li class="transparentText"> <i class="fa fa-times" aria-hidden="true"></i> to match other card size </li>
+                    <li class="transparentText"> <i class="fa fa-times" aria-hidden="true"></i> to match other card size </li>
+                    </ul>
+                  </div>
+                  <a onclick="suscribe(event)" data-sub="online">Suscribirse</a>
+                </div>
+              </div>
+              <!-- END Col one -->
 
+              <div class="col-md-4">
+                <div class="card text-center">
+                    <!-- <div th:if="${session.u.clientType.toString().equals('ONSITE')}" class="ribbon" id="onsiteRibbon"><span>A c t u a l</span></div> -->
+                    <div class="ribbon" id="onsiteRibbon"><span>A c t u a l</span></div>
+                  <div class="title">
+                    <i class="fa fa-plane" aria-hidden="true"></i>
+                    <h2>Presencial</h2>
+                  </div>
+                  <div class="price">
+                    <h4>50<sup>€</sup></h4>
+                  </div>
+                  <div class="option">
+                    <ul>
+                        <li> <i class="fa fa-check" aria-hidden="true"></i> Acceso al gimnasio</li>
+                        <li> <i class="fa fa-check" aria-hidden="true"></i> Acceso a todos los cursos</li>
+                        <li> <i class="fa fa-check" aria-hidden="true"></i> Alquiler de material </li>
+                        <li> <i class="fa fa-check" aria-hidden="true"></i> Acceso gratis a las clases </li>
+                        <li> <i class="fa fa-check" aria-hidden="true"></i> Ayuda por chat </li>
+                    </ul>
+                  </div>
+                  <a onclick="suscribe(event)" data-sub="onsite">Suscribirse</a>
+                </div>
+              </div>
+              <!-- END Col two -->
+              
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <script th:src="@{/js/subscriptions.js}" src="js/subscriptions.js"></script>
 
 </body>
 

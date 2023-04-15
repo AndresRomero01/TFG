@@ -187,4 +187,11 @@ public class DBHandler {
 
         return idDevolver;
     }
+
+    public User suscribe(EntityManager em, User user, ClientType sub) {
+        User u = em.find(User.class, user.getId());
+        u.setClientType(sub);
+
+        return u;
+    }
 }

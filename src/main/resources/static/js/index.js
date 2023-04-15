@@ -48,14 +48,14 @@ function getChecked(){
 
 window.addEventListener("DOMContentLoaded", (event) => {
     console.log("DOM fully loaded and parsed");
-   // setInterval(() => {nextCourse()}, 3000);
+    setInterval(() => {nextCourse()}, 3000);
     /* while(1){
         setTimeout(() => {
             nextCourse();
         }, 1000);
     } */
     
-  });
+});
 
 
 

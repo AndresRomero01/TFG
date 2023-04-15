@@ -5,7 +5,7 @@
     <th:block th:replace="fragments/head :: header" />
     <title>Sign up</title>
 
-    <link rel="stylesheet" th:href="@{/css/registro.css}" />
+    <link rel="stylesheet" th:href="@{/css/signup.css}" />
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -15,7 +15,7 @@
         <div class="container">
             <div class="centeredDiv">
                 <h1>¡Crea tu cuenta!</h1>
-                <form role="form" id="modificarPerfilForm" onsubmit="return false;"> <!-- onsubmit="false;"   truco para validacion de requiered no necesario ya -->
+                <form role="form" id="signUpForm" onsubmit="return false;"> <!-- onsubmit="false;"   truco para validacion de requiered no necesario ya -->
                 
                     <label for="username" class="firstLabel">Username</label>
                     <input type="text" id="username" class="inputForm" required>

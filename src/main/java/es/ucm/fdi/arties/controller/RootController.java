@@ -395,5 +395,24 @@ public class RootController {
         return lu;
     }
 
+    @PostMapping(path = "/suscribe", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String suscribe(Model model, HttpSession session, @RequestBody JsonNode o) {
+        log.info("---------- inside suscribe -------------");
+
+        User u = (User) session.getAttribute("u");
+        Boolean onlineSub = o.get("onlineSub").asBoolean();
+        log.info("@@@@ sub1: " + u.getClientType());
+
+        if(onlineSub) u = db.suscribe(em, u, ClientType.ONLINE);
+        else u = db.suscribe(em, u, ClientType.ONSITE);
+
+        session.setAttribute("u", u);
+        log.info("@@@@ sub2: " + u.getClientType());
+
+        return "{\"isok\": \"true\"}";// devuelve un json como un string
+    }
+
     
 }

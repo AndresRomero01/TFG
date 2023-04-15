@@ -2,8 +2,8 @@ let createAccountButton = document.getElementById("createButton");
 createAccountButton.addEventListener("click", signUp);
 
 function signUp() {
-    console.log("--- en signUp() ---");
-    const myForm = document.getElementById("modificarPerfilForm");
+    console.log("--- inside signUp() ---");
+    const myForm = document.getElementById("signUpForm");
 
     let username = document.getElementById("username");
     username.setCustomValidity("");
@@ -13,7 +13,7 @@ function signUp() {
     {
         //string contains only whitespace
         username.setCustomValidity("El nombre no puede ser solo espacios");
-        console.log("solo espacios")
+        console.log("just blank spaces")
     }
 
     if(!myForm.checkValidity())//comprueba si se cumplen las condiciones html (required, longitud maxima, formato, etc)
@@ -63,7 +63,7 @@ function validatePassword(){
     var password = document.getElementById("password1");
     var confirm_password = document.getElementById("password2");
 
-    console.log("--- en validate password ---");
+    console.log("--- inside validate password ---");
 
     if(password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Passwords don't match");
