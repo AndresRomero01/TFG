@@ -7,14 +7,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.collection.internal.PersistentList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,19 +63,6 @@ public class User implements Transferable<User.Transfer> {
 
     private static final Logger log = LogManager.getLogger(User.class);
 
-    public User (String username, String password, String firstName, 
-    String lastName, String email, String address, String phone, String roles, ClientType clientType){
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName= lastName;
-        this.email=email;
-        this.address=address;
-       this.phone = phone;
-        this.roles =roles;
-        this.clientType = clientType;
-    }
-
     public enum Role {
         USER,			// normal users 
         ADMIN,          // admin users
@@ -98,13 +91,52 @@ public class User implements Transferable<User.Transfer> {
     private String address;
     private String phone;
 
+    private String description;
     private String roles; // split by ',' to separate roles
     private ClientType clientType; // NONE by default
 
+    public User (String username, String password, String firstName, 
+    String lastName, String email, String address, String phone, String roles, ClientType clientType, String description){
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName= lastName;
+        this.email=email;
+        this.address=address;
+        this.phone = phone;
+        this.roles =roles;
+        this.clientType = clientType;
+        this.description = description;
+    }
+
+    public User (String username, String password, String firstName, 
+    String lastName, String email, String address, String phone, String roles, ClientType clientType){
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName= lastName;
+        this.email=email;
+        this.address=address;
+        this.phone = phone;
+        this.roles =roles;
+        this.clientType = clientType;
+    }
+
     //por cada usuario, tenemos en esta var la lista de items que tiene alquilados
-    @OneToMany (mappedBy = "user", fetch=FetchType.EAGER)//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
+    
+    @OneToMany (mappedBy = "user")//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
     @JsonIgnore
     private List<ItemLoans> itemLoans;
+
+    // EAGER: cuando se construye el USER, mete la lista de items del tiron
+    // LAZY: solo se asocian los datos a la lista de items bajo demanda (getItems)
+    // Es muy pesado "precargar" los datos de la lista, si no se va a usar ese atributo
+    // Ademas, hibernate solo deja tener 1 EAGER simultaneamente
+    
+    @OneToMany (mappedBy = "user")
+    @JsonIgnore
+    //@LazyCollection(LazyCollectionOption.FALSE)
+    private List<RelationUserCourse> coursesList;
 
     @OneToMany (mappedBy = "user")
     /* @OnDelete(action = OnDeleteAction.CASCADE) */

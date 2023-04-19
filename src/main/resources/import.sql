@@ -14,9 +14,9 @@ VALUES (1, TRUE, 'ADMIN', 'a',
 INSERT INTO ARTIESUser (id, enabled, roles, username, password,address, email, phone, first_name, last_name)
 VALUES (2, TRUE, 'USER', 'user',
     'u', 'calla jefazo', 'user@gmail.es', '1234123555', 'user', 'user'); */
-INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type, description)
 VALUES (1, 'ADMIN', 'a',
-    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calla jefazo', 'admin@faq.es', '123456321', 'admin', 'admin', 2);
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calla jefazo', 'admin@faq.es', '123456321', 'admin', 'admin', 2, 'Dentro de la descripcion del admin: me lesione de la rodilla');
 
 INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
 VALUES (2, 'USER', 'b',
@@ -122,7 +122,19 @@ VALUES (15, 'curso de prueba6', FALSE, 'curso de prueba6', 3);
 INSERT INTO COURSE (id, description, is_free, name, category_id)
 VALUES (16, 'curso de prueba6', FALSE, 'curso de prueba6', 1);
 
---Datos sobre items y alquiler de items
+INSERT INTO RELATION_USER_COURSE(course_id, user_id, times_done)
+VALUES (1, 1, 4);
+
+INSERT INTO RELATION_USER_COURSE(course_id, user_id, times_done)
+VALUES (2, 1, 1);
+
+INSERT INTO RELATION_USER_COURSE(course_id, user_id, times_done)
+VALUES (3, 1, 1000);
+
+INSERT INTO RELATION_USER_COURSE(course_id, user_id, times_done)
+VALUES (1, 2, 3);
+
+--- Datos sobre items y alquiler de items ---
 
 ALTER TABLE item ALTER COLUMN description TYPE text;--Para poder guardar textos largos en la descripcion
 
@@ -168,7 +180,7 @@ VALUES (1, 3, 1, '2023-04-04T00:00:00', '2023-04-11T23:59:00');
 INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
 VALUES (1, 2, 1, '2023-04-04T00:00:00', '2023-04-06T00:00:00');
 
---Datos sobre chats
+--- Data for chats ---
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (1, 2, 1, 'hola, tengo una pregunta', TRUE);

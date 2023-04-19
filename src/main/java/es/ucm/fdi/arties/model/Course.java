@@ -38,6 +38,7 @@ public class Course {
     //TO DO: Variables para videos e imagenes (aprender a hacerlo)
 
     @ManyToOne
+    @JsonIgnore
     private Category category;
 
     @OneToMany (mappedBy = "course")

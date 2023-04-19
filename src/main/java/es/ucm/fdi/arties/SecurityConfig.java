@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem").hasRole("ADMIN")
 				.antMatchers("/user/**").hasAnyRole("USER", "STAFF", "ADMIN")	
 				.antMatchers("/chats").hasAnyRole("STAFF", "ADMIN")	   
-				.antMatchers("/newQuestion", "/suscribe").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/newQuestion", "/suscribe", "/updateUserDescription").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/subscriptions", "/lessons", "/items/myItems","/items/loanItem", "/items/makeLoan", "items/availableItemDay", "/modifyUser", "/getConversation", "/getStaffList").hasAnyRole("USER", "ADMIN", "STAFF")
 	            .anyRequest().authenticated()
 	            .and()

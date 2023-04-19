@@ -39,7 +39,7 @@ public class Item {
     // TO DO variables video/imagenes
 
     //por cada item, tenemos en esta var la lista de loans de ese item con el usuario que la tiene
-    @OneToMany (mappedBy = "item", fetch=FetchType.EAGER)
+    @OneToMany (mappedBy = "item")/* , fetch=FetchType.EAGER) */
     private List<ItemLoans> itemLoans;
 
  public Item(String name, String desc, Integer quant, Integer maxL)

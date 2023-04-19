@@ -2,6 +2,7 @@ package es.ucm.fdi.arties.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -32,7 +33,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import es.ucm.fdi.arties.LocalData;
-
+import es.ucm.fdi.arties.model.Course;
+import es.ucm.fdi.arties.model.RelationUserCourse;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.DB.DBHandler;
@@ -43,8 +45,10 @@ import java.io.*;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -121,6 +125,13 @@ public class UserController {
 /* 		ConfiguracionRestaurante c = null;
         c = entityManager.find(ConfiguracionRestaurante.class, idConf);
         model.addAttribute("nombreSitio", c.getNombreSitio()); */
+
+        List<RelationUserCourse> coursesList = target.getCoursesList();
+        model.addAttribute("coursesList", coursesList);
+
+        log.info("@@@@ course0: " + coursesList.get(0).getCourse().getName());
+
+        log.info("@@@@ despues de setAttribute");
 
         model.addAttribute("user", target);
 		model.addAttribute("idUs", target.getId());

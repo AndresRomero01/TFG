@@ -194,4 +194,11 @@ public class DBHandler {
 
         return u;
     }
+
+    public User updateUserDescription(EntityManager em, long id, String desc) {
+        User u = em.find(User.class, id);
+        u.setDescription(desc);
+
+        return u;
+    }
 }

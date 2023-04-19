@@ -414,5 +414,18 @@ public class RootController {
         return "{\"isok\": \"true\"}";// devuelve un json como un string
     }
 
-    
+    @PostMapping(path = "/updateUserDescription", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String updateUserDescription(Model model, HttpSession session, @RequestBody JsonNode o) {
+        log.info("---------- inside updateUserDescription -------------");
+
+        User u = (User) session.getAttribute("u");
+        String desc = o.get("userDescription").asText();
+
+        User updatedUser = db.updateUserDescription(em, u.getId(), desc);
+        session.setAttribute("u", updatedUser);
+
+        return "{\"isok\": \"true\"}";// devuelve un json como un string
+    }
 }

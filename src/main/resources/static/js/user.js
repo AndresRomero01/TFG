@@ -123,3 +123,16 @@ function applyChanges(){
 
     
 }
+
+function updateDescription(){
+    let params = {"userDescription" : document.getElementById("userDescription").value}; 
+    console.log(document.getElementById("userDescription").value);
+
+    go(config.rootUrl + "/updateUserDescription", 'POST', params)
+    .then(d => {console.log("all ok") 
+
+    })
+    .catch(() => {console.log("Error in catch update description");
+
+    })
+}

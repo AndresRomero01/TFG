@@ -12,7 +12,7 @@
     
     <main class="flex-shrink-0">
         
-        <div class="container">
+        <div class="container"> <!-- bodyCol -->
             <div id="centeredDiv">
                 <div class="welcomeMsg">
                     <h1 class="inlineElement">¡Bienvenido <span id="showUsername" th:text="${user.username} ">Paco</span>!</h1>
@@ -32,8 +32,18 @@
                         <p class="mt-5 info">👤 Apellido: <span id="showLastName" th:text="${user.lastName}"></span></p>
                     </th:block>
                 </div>
-            </div>
-            
+
+                <div id="userDescriptionDiv">
+                    <textarea id="userDescription" th:text="${session.u.description}" onchange="updateDescription()"></textarea>
+                </div>
+
+                <div id="coursesStatsDiv">
+                    <th:block th:each="courseLine,iter: ${coursesList}">
+                        <p th:text="'Has completado el curso ' + ${courseLine.course.name} + ' ' + ${courseLine.timesDone} + ' veces'">asd</p>
+                    </th:block>
+                    
+                </div>
+            </div>  
         </div>
     </main>
 
