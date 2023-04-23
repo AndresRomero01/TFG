@@ -5,16 +5,136 @@
     <th:block th:replace="fragments/head :: header" />
     <title>Restaurant.es: Perfil</title>
     <link rel="stylesheet" th:href="@{/css/user.css}" />
+    <link rel="stylesheet" th:href="@{/css/elements/textInputs.css}" />
 </head>
 
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav"></header>
     
     <main class="flex-shrink-0">
+
+        <div id="bannerDiv">
+
+        </div>
         
-        <div class="container"> <!-- bodyCol -->
+        <div id="backgroundDiv">
             <div id="centeredDiv">
-                <div class="welcomeMsg">
+                <div class="row profilePanel" id="userInfoRow">
+                    <div class="col text-center">
+                        <h2>Tus datos</h2>
+                        <div class="row d-flex justify-content-center infoRow">
+                            <div class="form__group field">
+                                <input type="input" class="form__field" placeholder="Name" name="name" id='username' th:value="${user.username}" required />
+                                <label for="username" class="form__label">Nombre de usuario</label>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center infoRow">
+                            <div class="form__group field">
+                                <input type="input" class="form__field" placeholder="Name" name="name" id='email' th:value="${user.email}" required />
+                                <label for="email" class="form__label">Email</label>
+                            </div>
+                        </div>
+                        <div class="row infoRow">
+                            <div class="col col-md-5 offset-1">
+                                
+                                <div class="form__group field">
+                                    <input type="input" class="form__field" placeholder="Name" name="name" id='firstName' th:value="${user.firstName}" required />
+                                    <label for="firstName" class="form__label">Nombre</label>
+                                </div>
+                            </div>
+        
+                            <div class="col  col-md-5">
+                                <div class="form__group field">
+                                    <input type="input" class="form__field" placeholder="Last name" name="lastName" id='prueba2' th:value="${user.lastName}" required />
+                                    <label for="lastName" class="form__label">Apellido</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row infoRow">
+                            <div class="col  col-md-5  offset-1">
+                                <div class="form__group field">
+                                    <input type="input" class="form__field" placeholder="Last name" name="phone" id='prueba2' th:value="${user.phone}" required />
+                                    <label for="phone" class="form__label">Móvil</label>
+                                </div>
+                            </div>
+
+                            <div class="col col-md-5">
+                                
+                                <div class="form__group field">
+                                    <input type="input" class="form__field" placeholder="Name" name="name" id='address' th:value="${user.address}" required />
+                                    <label for="address" class="form__label">Dirección</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row infoRow">
+                            <div class="col  col-md-5  offset-1">
+                                <div class="form__group field">
+                                    <input type="input" class="form__field" placeholder="Last name" name="phone" id='password' />
+                                    <label for="password" class="form__label">Contraseña</label>
+                                </div>
+                            </div>
+
+                            <div class="col col-md-5">
+                                
+                                <div class="form__group field">
+                                    <input type="input" class="form__field" placeholder="Name" name="name" id='password2' />
+                                    <label for="password2" class="form__label">Repite la contraseña</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row infoRow">
+                            <div class="col col-md-2 offset-8">
+                                <button class="btn btn-primary" id="saveUserInfoButton">Confirmar</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row profilePanel" id="personalDescriptionRow">
+                    <div class="col text-center">
+                        <h2>Cuéntanos sobre ti!</h2>
+                        <span class="secondaryText">Dinos qué deportes, rutinas, o hábitos realizas, así como lesiones o cosas que creas que debamos saber. Así nuestros instructores serán capaces 
+                            de responderte mejor!</span>
+                        <div id="userDescriptionDiv">
+                            <textarea id="userDescription" th:text="${session.u.description}" ></textarea> <!-- onchange="updateDescription()" -->
+                        </div>
+                    </div>
+                    <div class="row infoRow">
+                        <div class="col col-md-2 offset-8">
+                            <button class="btn btn-primary" id="saveUserDescriptionButton">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row profilePanel" id="personalDescriptionRow">
+                    <div class="col text-center">
+                        <h2 id="statsTitle">Algunas estadísticas de tus cursos</h2>
+                        <th:block th:if="${#lists.isEmpty(coursesList)}">
+                            <h5 id="noCoursesMsg">Aun no has completado ningún curso. Te animamos a empezar!</h5>
+                        </th:block>
+                        <th:block th:unless="${#lists.isEmpty(coursesList)}">
+                            <div class="d-flex justify-content-center">
+                                <div class="text-start">
+                                    <th:block th:each="courseLine,iter: ${coursesList}">
+                                        <div class="courseStatLine">
+                                            <span class="courseName" th:text="${courseLine.course.name} + ' - '"> Name - </span>
+                                            <span th:text="'lo has completado ' + ${courseLine.timesDone} + ' veces'"></span>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </th:block>
+                        
+                    </div>
+                </div>
+
+
+                <!-- <div class="welcomeMsg">
                     <h1 class="inlineElement">¡Bienvenido <span id="showUsername" th:text="${user.username} ">Paco</span>!</h1>
                     <button type="button" id="openModifyModal"  data-bs-toggle="modal" data-bs-target="#modifyProfileModal">
                         ✏️
@@ -31,18 +151,8 @@
                     <th:block th:if="${user.lastName} != null">
                         <p class="mt-5 info">👤 Apellido: <span id="showLastName" th:text="${user.lastName}"></span></p>
                     </th:block>
-                </div>
+                </div> -->
 
-                <div id="userDescriptionDiv">
-                    <textarea id="userDescription" th:text="${session.u.description}" onchange="updateDescription()"></textarea>
-                </div>
-
-                <div id="coursesStatsDiv">
-                    <th:block th:each="courseLine,iter: ${coursesList}">
-                        <p th:text="'Has completado el curso ' + ${courseLine.course.name} + ' ' + ${courseLine.timesDone} + ' veces'">asd</p>
-                    </th:block>
-                    
-                </div>
             </div>  
         </div>
     </main>

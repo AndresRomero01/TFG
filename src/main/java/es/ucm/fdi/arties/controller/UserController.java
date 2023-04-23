@@ -129,7 +129,7 @@ public class UserController {
         List<RelationUserCourse> coursesList = target.getCoursesList();
         model.addAttribute("coursesList", coursesList);
 
-        log.info("@@@@ course0: " + coursesList.get(0).getCourse().getName());
+        //log.info("@@@@ course0: " + coursesList.get(0).getCourse().getName());
 
         log.info("@@@@ despues de setAttribute");
 
