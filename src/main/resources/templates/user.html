@@ -6,6 +6,7 @@
     <title>Restaurant.es: Perfil</title>
     <link rel="stylesheet" th:href="@{/css/user.css}" />
     <link rel="stylesheet" th:href="@{/css/elements/textInputs.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -13,8 +14,23 @@
     
     <main class="flex-shrink-0">
 
-        <div id="bannerDiv">
+        <input type="hidden" id="userId" th:value="${user.id}">
+        <input type="hidden" id="oldUsername" th:value="${user.username}">
 
+        <div id="bannerDiv">
+            <!-- Icons made by https://www.flaticon.com/authors/freepik Freepik from www.flaticon.com -->
+            <div id="profileTitleDiv">
+                <span id="profileTitle">Perfil</span>
+            </div>
+            
+            <div id="userPictureDiv">
+                <img id="userPicture" src="/img/userIcon256.png" alt="foto perfil">
+                <button class="btn btn-primary material-symbols-rounded" id="changeUserPicture">
+                    edit
+                </button>
+            </div>
+            
+            
         </div>
         
         <div id="backgroundDiv">
@@ -22,74 +38,77 @@
                 <div class="row profilePanel" id="userInfoRow">
                     <div class="col text-center">
                         <h2>Tus datos</h2>
-                        <div class="row d-flex justify-content-center infoRow">
-                            <div class="form__group field">
-                                <input type="input" class="form__field" placeholder="Name" name="name" id='username' th:value="${user.username}" required />
-                                <label for="username" class="form__label">Nombre de usuario</label>
-                            </div>
-                        </div>
-                        <div class="row d-flex justify-content-center infoRow">
-                            <div class="form__group field">
-                                <input type="input" class="form__field" placeholder="Name" name="name" id='email' th:value="${user.email}" required />
-                                <label for="email" class="form__label">Email</label>
-                            </div>
-                        </div>
-                        <div class="row infoRow">
-                            <div class="col col-md-5 offset-1">
-                                
+                        <form role="form" id="modifyProfileForm" onsubmit="return false;">
+                            <div class="row d-flex justify-content-center infoRow">
                                 <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Name" name="name" id='firstName' th:value="${user.firstName}" required />
-                                    <label for="firstName" class="form__label">Nombre</label>
+                                    <input type="input" class="form__field" placeholder="Name"id='username' th:value="${user.username}" required />
+                                    <label for="username" class="form__label">Nombre de usuario</label>
                                 </div>
                             </div>
-        
-                            <div class="col  col-md-5">
+                            <div class="row d-flex justify-content-center infoRow">
                                 <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Last name" name="lastName" id='prueba2' th:value="${user.lastName}" required />
-                                    <label for="lastName" class="form__label">Apellido</label>
+                                    <input type="email" class="form__field" placeholder="Name" id='email' th:value="${user.email}" required />
+                                    <label for="email" class="form__label">Email</label>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row infoRow">
-                            <div class="col  col-md-5  offset-1">
-                                <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Last name" name="phone" id='prueba2' th:value="${user.phone}" required />
-                                    <label for="phone" class="form__label">Móvil</label>
+                            <div class="row infoRow">
+                                <div class="col col-md-5 offset-1">
+                                    
+                                    <div class="form__group field">
+                                        <input type="input" class="form__field" placeholder="Name" id='firstName' th:value="${user.firstName}" required />
+                                        <label for="firstName" class="form__label">Nombre</label>
+                                    </div>
+                                </div>
+            
+                                <div class="col  col-md-5">
+                                    <div class="form__group field">
+                                        <input type="input" class="form__field" placeholder="Last name" id='lastName' th:value="${user.lastName}" required />
+                                        <label for="lastName" class="form__label">Apellido</label>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col col-md-5">
-                                
-                                <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Name" name="name" id='address' th:value="${user.address}" required />
-                                    <label for="address" class="form__label">Dirección</label>
+    
+                            <div class="row infoRow">
+                                <div class="col  col-md-5  offset-1">
+                                    <div class="form__group field">
+                                        <input type="input" class="form__field" placeholder="Last name" id='phone' th:value="${user.phone}" required />
+                                        <label for="phone" class="form__label">Móvil</label>
+                                    </div>
+                                </div>
+    
+                                <div class="col col-md-5">
+                                    
+                                    <div class="form__group field">
+                                        <input type="input" class="form__field" placeholder="Name"id='address' th:value="${user.address}" required />
+                                        <label for="address" class="form__label">Dirección</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row infoRow">
-                            <div class="col  col-md-5  offset-1">
-                                <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Last name" name="phone" id='password' />
-                                    <label for="password" class="form__label">Contraseña</label>
+    
+                            <div class="row infoRow">
+                                <div class="col  col-md-5  offset-1">
+                                    <div class="form__group field">
+                                        <input type="password" class="form__field" placeholder="Contraseña" id='password1' onkeyup="validatePassword()"/>
+                                        <label for="password1" class="form__label">Contraseña</label>
+                                    </div>
+                                </div>
+    
+                                <div class="col col-md-5">
+                                    
+                                    <div class="form__group field">
+                                        <input type="password" class="form__field" placeholder="Contraseña" id='password2' onkeyup="validatePassword()"/>
+                                        <label for="password2" class="form__label">Repite la contraseña</label>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col col-md-5">
-                                
-                                <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Name" name="name" id='password2' />
-                                    <label for="password2" class="form__label">Repite la contraseña</label>
+    
+                            <div class="row infoRow">
+                                <div class="col col-md-2 offset-8">
+                                    <button class="btn btn-primary" id="saveUserInfoButton" onclick="applyChanges()">Confirmar</button>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row infoRow">
-                            <div class="col col-md-2 offset-8">
-                                <button class="btn btn-primary" id="saveUserInfoButton">Confirmar</button>
-                            </div>
-                        </div>
+                        </form>
+                        
 
                     </div>
 
@@ -106,7 +125,7 @@
                     </div>
                     <div class="row infoRow">
                         <div class="col col-md-2 offset-8">
-                            <button class="btn btn-primary" id="saveUserDescriptionButton">Confirmar</button>
+                            <button class="btn btn-primary" id="saveUserDescriptionButton" onclick="updateDescription()">Confirmar</button>
                         </div>
                     </div>
                 </div>
@@ -161,14 +180,14 @@
 
 
 
-    <div class="modal fade" id="modifyProfileModal" tabindex="-1" aria-hidden="true">
+    <!-- <div class="modal fade" id="modifyProfileModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Modificar perfil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form role="form" id="modifyProfileForm" onsubmit="return false;"> <!-- onsubmit="false;"   truco para validacion de requiered no necesario ya -->
+                <form role="form" id="modifyProfileForm" onsubmit="return false;"> onsubmit="false;"   truco para validacion de requiered no necesario ya
                     <div class="modal-body">
                         <label for="username" style="display: block;">Username</label>
                         <input type="text" id="username" th:value="${user.username}" required>
@@ -214,14 +233,14 @@
 
                     </div>
                     <div class="modal-footer">
-                        <!-- Los botones deben estar dentro del form para que el mensaje por el required de html funcione (ya no necesario, gestionado via js) -->
+                        Los botones deben estar dentro del form para que el mensaje por el required de html funcione (ya no necesario, gestionado via js)
                         <button type="button" class="btn btn-secondary" id="closeProfileModal" data-bs-dismiss="modal">Cancelar</button>
                         <button type="button" id ="saveChangesButton" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
