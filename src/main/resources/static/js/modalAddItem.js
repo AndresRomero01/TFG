@@ -15,6 +15,15 @@ document.querySelector("#fileFieldImgItem").onchange = e => {
     readImageFileData(fileInput.files[0], img);
 };
 
+//cambia la previsualizacion de la imagen a subir de un nuevo item
+document.querySelector("#fileFieldImgItemM").onchange = e => {
+    console.log("imagen suida");
+    let img = document.querySelector("#newImgItemM");
+    let fileInput = document.querySelector("#fileFieldImgItemM");
+    console.log(img, fileInput);
+    readImageFileData(fileInput.files[0], img);
+};
+
 
 function newItem(){
 
@@ -51,11 +60,6 @@ function newItem(){
         console.log(d);
 
 
-
     }).catch(() => console.log("fallo"));
-
-
-
-
 
 }

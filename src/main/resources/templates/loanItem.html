@@ -49,8 +49,8 @@
                 <div class="row"><!--Row de la toda la info, que contiene las dos cols-->
                     <div class="col-md-5"><!--Primera col con la card-->
                         <div class="card text-white bg-dark myCard">
-                                <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                                
+                                <img class="card-img-top imgCustom" th:src="@{/img/items/{id}.jpg(id=${item.id})}" src="/img/drawing.jpg" alt="Card image cap">
+                                <div class="newSeparator"></div>
                                 <div class="card-body hVSeparator">
                                     <div class="text-center">
                                         <h5 class="card-title " th:text="${item.name}">Card title</h5>

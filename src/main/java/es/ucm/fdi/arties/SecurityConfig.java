@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/seeCourse", "/items/listToLoan").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access
 				.antMatchers("/admin/**", "/existeUsuario", "/getUser").hasRole("ADMIN")	   // <-- administration
-				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem").hasRole("ADMIN")
+				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem").hasRole("ADMIN")
 				.antMatchers("/user/**").hasAnyRole("USER", "STAFF", "ADMIN")	
 				.antMatchers("/chats").hasAnyRole("STAFF", "ADMIN")	   
 				.antMatchers("/newQuestion", "/suscribe", "/updateUserDescription").hasAnyRole("USER", "ADMIN")

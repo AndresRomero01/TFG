@@ -34,7 +34,7 @@
                 <div class="col-5 myColW">
                     <div class="myContainer">
                         <div class="card2">
-                            <img src="/img/drawing.jpg" />
+                            <img  th:src="@{/img/items/{id}.jpg(id=${item.id})}"src="/img/drawing.jpg" />
                             <div class="myh100 "> <!-- align-items-center justify-content-center -->
                                 <div class="titulo justify-content-center">
                                     <h2 class="text-center" th:text="${item.name}">Pesas 5kg</h2>

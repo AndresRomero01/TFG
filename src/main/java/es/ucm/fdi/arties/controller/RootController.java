@@ -22,9 +22,11 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import es.ucm.fdi.arties.model.Category;
 import es.ucm.fdi.arties.model.ChatMessage;
 import es.ucm.fdi.arties.model.Course;
+import es.ucm.fdi.arties.model.Item;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.DB.DBHandler;
+import es.ucm.fdi.arties.model.DB.DBItemsHandler;
 import es.ucm.fdi.arties.model.User.ClientType;
 import es.ucm.fdi.arties.model.User.Role;
 
@@ -62,6 +64,7 @@ public class RootController {
 
     
     private DBHandler db = new DBHandler();
+    private DBItemsHandler dbItems = new DBItemsHandler();
 
 
     private static final Logger log = LogManager.getLogger(RootController.class);
@@ -122,6 +125,10 @@ public class RootController {
         List<Category> lc = db.getCoursesCatogories(em);
         model.addAttribute("employeesList", lu);
         model.addAttribute("categories", lc);
+
+        List<Item> itemList = dbItems.getItemList(em);
+        model.addAttribute("items", itemList);
+        
         return "settings";
     }
 

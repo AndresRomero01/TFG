@@ -22,7 +22,7 @@
                         <div class="col-5 myColW">
                             <div class="myContainer">
                                 <div class="card2">
-                                    <img src="/img/drawing.jpg" />
+                                    <img  th:src="@{/img/items/{id}.jpg(id=${loan.item.id})}" src="/img/drawing.jpg" />
                                     <div class="myh100 "> <!-- align-items-center justify-content-center -->
                                         <div class="titulo justify-content-center">
                                             <h2 class="text-center" th:text="${loan.item.name}">Pesas 5kg</h2>
@@ -47,12 +47,16 @@
 
                                             <th:block th:unless="${loan.isRenovable}">
                                                 <div class="boton justify-content-center">
-                                                    <a  th:href="@{/items/loanItem?itemId=}+${loan.item.id}">
-                                                        <button disabled>Ampliar Alquiler</button>
-                                                    </a>
-                                                    <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="48 Horas antes del fin de la reserva podras ampliarla desde aqui">
-                                                        <p>i</p>
-                                                    </span>
+                                                    <div class="ampliarContainer">
+                                                        <a  th:href="@{/items/loanItem?itemId=}+${loan.item.id}">
+                                                            <button disabled>Ampliar Alquiler</button>
+                                                        </a>
+                                                        <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="48 Horas antes del fin de la reserva podras ampliarla desde aqui">
+                                                            <p>i</p>
+                                                        </span>
+
+                                                    </div>
+                                                    
                                                     <!-- <p>48 Horas antes del fin de la reserva podras ampliarla desde aqui</p> -->
                                                     
                                                 </div>

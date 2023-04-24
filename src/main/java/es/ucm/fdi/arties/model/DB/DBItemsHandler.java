@@ -52,6 +52,43 @@ public class DBItemsHandler {
 
     }
 
+    public int modifyItem(EntityManager em, String name, Integer quantity, String desc, Integer maxLoan, long id)
+    {
+        Item i = em.find(Item.class, id);
+
+        int loanedQuantity = 0;
+        for (ItemLoans il : i.getItemLoans()) {
+            loanedQuantity += il.getQuantity();
+        }
+
+        //cantidad nueva es menor que la actual disponible (cantidad actual total - reservados)
+        log.info("cantidad disp: "+ (i.getQuantity() - loanedQuantity) + " quantity to put "+ quantity);
+        if( quantity < loanedQuantity)
+            return loanedQuantity;
+
+        i.setQuantity(quantity);
+        i.setName(name);
+        i.setDescription(desc);
+        i.setMaxLoan(maxLoan);
+        em.flush();
+
+
+        return 0;
+    }
+
+    public boolean deleteItem(EntityManager em, long id)
+    {
+        Item i = em.find(Item.class, id);
+
+        //si el item estaba alquilado no se puede eliminar
+        if(i.getItemLoans().size() > 0)
+            return false;
+
+        em.remove(i);
+        em.flush();
+        return true;
+    }
+
     //public List<Reserva> listarReservasFecha(EntityManager em, String fecha)
     public int getItemAvailability(EntityManager em, String date)
     {

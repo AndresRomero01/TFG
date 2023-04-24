@@ -6,6 +6,7 @@
     <!-- <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css" type="text/css" /> -->
     <!-- <link rel="stylesheet" href="css/calendar.css" /> -->
     <link rel="stylesheet" href="css/settings.css" />
+    <link rel="stylesheet" href="css/settingsItems.css" />
 
     <title>Configuracion</title>
 </head>
@@ -44,7 +45,7 @@
                 </button> 
               </div>
             </div>
-            <th:div th:each="emp,iter: ${employeesList}" id="staffDivList">
+            <div th:each="emp,iter: ${employeesList}" id="staffDivList">
                 <div class="row staffDiv"  th:data-id="${emp.id}">
                   <div class="col d-flex justify-content-start">
                     <p th:text="${emp.firstName} + ' ' + ${emp.lastName}" class="staffName" th:id="${emp.id}+'Names'">staff username</p>
@@ -55,7 +56,7 @@
                     <button class="btn btn-danger deleteStaffButton slide">Eliminar</button>
                   </div>
                 </div>
-            </th:div>
+            </div>
         </div>
       </div>
 
@@ -68,7 +69,66 @@
       </div>
 
       <div id="itemsPanel" class="customTab">
-        d
+
+        <div class="row">
+          <div class="col d-flex justify-content-end">
+           
+             <button type="button" class="btn btn-primary openStaffModalButton" data-bs-toggle="modal" data-bs-target="#modalAddItem">
+              Añadir Material
+            </button> 
+          </div>
+
+        </div>
+
+        <div id="itemsContainer">
+          <th:block th:each="item,iter: ${items}">
+  
+          <div class="row itemRow">
+
+            <div class="col-3">
+              <div class="itemImgContainer">
+                 
+                <span>
+                  <img th:src="@{/img/items/{id}.jpg(id=${item.id})}"th:id="'itemImg'+${item.id}" class="itemImg" src="/img/drawing.jpg" />
+                  <button th:value="${item.id}" data-bs-toggle="modal" data-bs-target="#modalModifyItemImg" class="editImgButton">✏️</button>
+                </span>
+                
+              </div>
+              
+            </div>
+
+            <div class="col">
+          
+             <div class="row itemHeader">
+              <div class="col-4">
+                <p th:id="'itemName'+${item.id}" class="" th:text="${item.name}">Nombre del objeto</p>
+              </div>
+              <div class="col-4 offset-4">
+                <p th:id="'itemQuantityText'+${item.id}" class="" th:text="'Unidades: ' + ${item.quantity}">Unidades</p>
+                <input type="hidden" th:id="'itemQuantity'+${item.id}" th:value="${item.quantity}">
+              </div>
+             </div>
+             
+             <div class="itemDescContainer">
+                <p th:id="'itemDesc'+${item.id}" class="itemDescText" th:text="${item.description}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              </div>
+              <p th:id="'itemMaxLoanText'+${item.id}" th:text="${'Cantidad maxima que un usuario puede alquilar a la vez: '+item.maxLoan}" class="itemMaxLoan">Cantidad maxima que un usuario puede alquilar a la vez: 5</p>
+              <input type="hidden" th:id="'itemMaxLoan'+${item.id}" th:value="${item.maxLoan}">
+            </div>
+
+            <div class="col-1">
+              <div class="itemButtonsContainer">
+                <button class="btn itemButtonModify" th:value="${item.id}" data-bs-toggle="modal" data-bs-target="#modalModifyItem">Modificar</button>
+                <button th:value="${item.id}" class="btn itemButtonDelete deleteItem">Eliminar</button>
+              </div>        
+            </div>
+
+          </div>
+  
+        </th:block>
+          
+        </div>
+
       </div>
 
       <div id="subscriptionsPanel" class="customTab">
@@ -81,7 +141,7 @@
 
     </div>
 
-    
+  
 
 
     <!-- ------ MODALES -------- -->
@@ -207,11 +267,110 @@
         </div>
       </div>
     </div>
+
+
+     <!-- Modal add item -->
+     <div class="modal fade" id="modalAddItem" tabindex="-1" aria-labelledby="modalAddItemLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalAddItemLabel">Añadir Material</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form role="form" id="addItemForm"> 
+                  <label for="itemNameField" class="form-label">Nombre del item</label>
+                  <input type="text" class="form-control" name="itemName" id="itemNameField" value="" required> 
+
+                  <label class="form-label" for="itemQuantityField">Cantidad del item</label>
+                  <input type="number" id="itemQuantityField" name="itemQuantity"  class="form-control" required/>
+
+                  <label for="itemDescField" class="form-label">Descripcion del item</label>
+                  <textarea class="form-control" id="itemDescField" name="itemDesc" rows="4" cols="60" required></textarea>
+
+                  <label class="form-label" for="itemMaxLoanField">Cantidad maxima que un usuario podrá alquilar a la vez</label>
+                  <input type="number" id="itemMaxLoanField" name="itemQuantity"  class="form-control" required/>
+                  
+                  <label for="fileFieldImgItem" class="form-label">Imagen del plato</label>
+                  <img id="newImgItem" alt="Imagen nuevo Plato" class="img-thumbnail mw-100 miClase">
+                  <input type="file" id="fileFieldImgItem" accept="image/jpeg,image/png" required>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id ="buttonFormConfirmItem" class="btn btn-primary">Confirmar</button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+     </div>
+
+
+     <!-- Modal modify item -->
+     <div class="modal fade" id="modalModifyItem" tabindex="-1" aria-labelledby="modalAddItemLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalModifyItemLabel">Modificar material</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form role="form" id="modifyItemForm">
+                  <label for="itemNameFieldM" class="form-label">Nombre del item</label>
+                  <input type="text" class="form-control" name="itemName" id="itemNameFieldM" value="" required> 
+
+
+                  <label class="form-label" for="itemQuantityFieldM">Cantidad del item</label>
+                  <input type="number" id="itemQuantityFieldM" name="itemQuantity"  class="form-control" required/>
+
+                  <label for="itemDescFieldM" class="form-label">Descripcion del item</label>
+                  <textarea class="form-control" id="itemDescFieldM" name="itemDesc" rows="4" cols="60" required></textarea>
+
+                  <label class="form-label" for="itemMaxLoanFieldM">Cantidad maxima que un usuario podrá alquilar a la vez</label>
+                  <input type="number" id="itemMaxLoanFieldM" name="itemQuantity"  class="form-control" required/>
+                  
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id ="buttonFormConfirmItemM" class="btn btn-primary">Confirmar</button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+     </div>
+
+
+      <!-- Modal modify item Img -->
+      <div class="modal fade" id="modalModifyItemImg" tabindex="-1" aria-labelledby="modalAddItemLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalModifyItemLabel">Modificar material</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form role="form" id="modifyItemFormImg"> 
+                   
+                    <label for="fileFieldImgItem" class="form-label">Imagen del plato</label>
+                    <img id="newImgItemM" alt="Imagen nuevo Plato" class="img-thumbnail mw-100 miClase">
+                    <input type="file" id="fileFieldImgItemM" accept="image/jpeg,image/png" required>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" id ="buttonFormConfirmItemImgM" class="btn btn-primary">Confirmar</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+       </div>
     
     <!-- <script th:src="@{/js/calendar.js}" src="js/calendar.js"></script> -->
     <script th:src="@{/js/settings.js}" src="js/settings.js"></script>
+
+    
     
 </body>
 
 <th:block th:replace="fragments/footer.html :: footer" />
+<script th:src="@{/js/settingsItems.js}" src="js/settingsItems.js" ></script>
+
 </html>

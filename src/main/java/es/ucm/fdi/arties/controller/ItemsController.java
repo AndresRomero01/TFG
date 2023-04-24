@@ -261,6 +261,27 @@ public class ItemsController {
       
     }
 
+    @PostMapping("modifyItem")
+    @Transactional
+    @ResponseBody 
+    public String modifyItem(
+                            @RequestParam("itemName") String itemName,
+                            @RequestParam("itemQuantity") Integer itemQuantity,
+                            @RequestParam("itemDesc") String itemDesc,
+                            @RequestParam("itemMaxLoan") Integer itemMaxLoan,
+                            @RequestParam("itemId") long idItem)   {
+
+      int quant = db.modifyItem(em, itemName, itemQuantity, itemDesc, itemMaxLoan, idItem);
+      
+        //return "{\"quant\": \"todomal\"}";
+      
+      //0 ha ido bien. mayor que 0 es que se deb tener al menos esa cantidad minima del item a modificar
+      return "{\"quant\": \""+quant+"\"}";
+
+    }
+
+
+
     @PostMapping("availableItemDay")
     @Transactional
     @ResponseBody 
@@ -272,6 +293,45 @@ public class ItemsController {
       //TODO: Comprobar con la sesion que la peticion es de un usuario con suscripcion presencial u online
 
       return "{\"availableItems\": \""+ (availableItemsPerDay(date, itemId)) +"\"}";
+    }
+
+    @PostMapping("modifyItemImg")
+    @Transactional
+    @ResponseBody 
+    public String modifyItemImg(@RequestParam("itemImg") MultipartFile photo, @RequestParam("itemId") long idItem)
+    {
+
+      File img = new File("src/main/resources/static/img/items", idItem + ".jpg");
+
+      if (photo.isEmpty()) {
+        log.info("failed to upload photo: emtpy file?");
+        return null;
+      } else {
+          try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(img))) {
+              byte[] bytes = photo.getBytes();
+              stream.write(bytes);
+              log.info("la ruta es: " + img.getAbsolutePath());
+          } catch (Exception e) {
+              return null;
+          }
+      }
+
+      return "{\"isok\": \"todobien\"}";
+
+    }
+
+    @PostMapping("deleteItem")
+    @Transactional
+    @ResponseBody 
+    public String deleteItem(@RequestParam("itemId") long idItem)
+    {
+       if(!db.deleteItem(em, idItem))
+        return "{\"isok\": \"todomal\"}";
+
+        //TODO borrar img
+      
+      return "{\"isok\": \"todobien\"}";
+
     }
 
 
