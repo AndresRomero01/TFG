@@ -21,6 +21,7 @@ html {
   display: flex;
   align-items: flex-end
 }
+
 .boton div{
   display: flex;
     align-items: center;
@@ -150,7 +151,7 @@ html {
   border: 0;
   background: linear-gradient(90deg, #5448de, #5448de);
   background: var(--green1);
-  /* color: #f8f8f8; */
+  color: white;
  
   font-family: inherit;
   padding: 0.5em 2em;

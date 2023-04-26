@@ -177,7 +177,7 @@ function loadTrainers(){
                         `+e["firstName"]+` `+e["lastName"]+`
                     </div>
                     <div class="col col-md-4">
-                    <button class="btn btn-secondary btn-sm" onclick="openConversation(event)" value="`+e["id"]+`">Abrir chat</button>
+                    <button class="btn btn-sm customButton" onclick="openConversation(event)" value="`+e["id"]+`">Abrir chat</button>
                     </div>
                 </div>
                 `;

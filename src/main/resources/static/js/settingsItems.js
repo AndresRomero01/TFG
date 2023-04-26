@@ -43,7 +43,7 @@ function setIdItemImgToModify(e)
 setModifyButtonListeners();
 //cambia la previsualizacion de la imagen a subir de un nuevo item
 document.querySelector("#fileFieldImgItemM").onchange = e => {
-    console.log("imagen suida");
+    console.log("imagen subida");
     let img = document.querySelector("#newImgItemM");
     let fileInput = document.querySelector("#fileFieldImgItemM");
     console.log(img, fileInput);
@@ -52,7 +52,7 @@ document.querySelector("#fileFieldImgItemM").onchange = e => {
 
 //cambia la previsualizacion de la imagen a subir de un nuevo item
 document.querySelector("#fileFieldImgItem").onchange = e => {
-    console.log("imagen suida");
+    console.log("imagen subida");
     let img = document.querySelector("#newImgItem");
     let fileInput = document.querySelector("#fileFieldImgItem");
     console.log(img, fileInput);

@@ -4,8 +4,16 @@
 
 .form-signin-heading{
     margin-bottom: 1em;
+    color: var(--bs-dark);
 }
 
 .loginButton{
-    margin-top: 1em;
+    margin-top: 3em;
+    background-color: var(--main-blue);
+    border: 0;
+    color: white;
+}
+
+.loginButton:hover{
+    color: white;
 }

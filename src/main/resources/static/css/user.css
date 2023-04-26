@@ -104,7 +104,7 @@ textarea:focus{
 #saveUserInfoButton{
   margin-top: 3em;
   width: 10em;
-  background-color: #3F51B5;
+  background-color: #365bea;
   border: none;
 }
 
@@ -114,7 +114,7 @@ textarea:focus{
 
 #saveUserDescriptionButton{
   width: 10em;
-  background-color: #3F51B5;
+  background-color: #365bea; /* 0d34fe    365bea               3F51B5 */
   border: none;
   margin-top: 3em;
 }
@@ -130,7 +130,7 @@ textarea:focus{
 
 .courseName{
   font-weight: bold;
-  color: #3F51B5;
+  color: #365bea;
 }
 
 #statsTitle{
@@ -139,7 +139,7 @@ textarea:focus{
 
 #bannerDiv{
   height: 8em;
-  background-image: linear-gradient(to right, #3F51B5, #8192f3);
+  background-image: linear-gradient(to right, #365bea, #8192f3);
   position: relative;
 }
 
@@ -161,8 +161,8 @@ textarea:focus{
   /* top: 3em;
   left: 20%; */
   border-radius: 100%;
-  object-fit: fill;
-  /* object-position:50%; */
+  object-fit: cover;
+  object-position:50%;
   width: 9em;
   height: 9em;
   border: 6px solid;

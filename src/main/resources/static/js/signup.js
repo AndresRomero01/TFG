@@ -58,16 +58,3 @@ function signUp() {
         })
     }
 }
-
-function validatePassword(){
-    var password = document.getElementById("password1");
-    var confirm_password = document.getElementById("password2");
-
-    console.log("--- inside validate password ---");
-
-    if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords don't match");
-    } else {
-        confirm_password.setCustomValidity('');
-    }
-}

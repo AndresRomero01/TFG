@@ -17,7 +17,7 @@ function validatePassword(){
     console.log("--- en validate password ---");
 
     if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords don't match");
+        confirm_password.setCustomValidity("Las contraseñas no coinciden");
     } else {
         confirm_password.setCustomValidity('');
     }
@@ -31,7 +31,7 @@ function validatePassword2(){
     console.log("--- en validate password ---");
 
     if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords don't match");
+        confirm_password.setCustomValidity("Las contraseñas no coinciden");
     } else {
         confirm_password.setCustomValidity('');
     }

@@ -19,11 +19,13 @@
 #chatWindow{
     height: 40em;
     width: 35em;
-    z-index: 1;
+    z-index: 10;
     position: fixed;
     right: 10em;
     bottom: 3em;
-    background-color: var(--bs-gray-400);
+    /* background-color: var(--bs-gray-400); */
+    background-color: var(--bs-light);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.26), 0 4px 8px rgba(0,0,0,0.33);
     border-radius: 0.3em;
     display: none;
     -webkit-animation: fadeIn 0.2s;
@@ -82,7 +84,14 @@
     right: 0;
     margin: auto;
     width: 12em;
+    /* background-color: var(--main-blue);
+    color: white; */
 }
+
+/* .chatChoiceButton:hover{
+    color: white;
+    background-color: #284FC2;
+} */
 
 #makeGeneralQuestionForm{
     text-align: center;
@@ -151,7 +160,14 @@ button#seeChats{
     position: relative;
     display: inline-block;
     width: 10em;
+    /* background-color: var(--main-blue);
+    color: white; */
 }
+
+/* #sendQuestionButton:hover{
+    color: white;
+    background-color: #284FC2;
+} */
 
 .formLabel{
     display: block;
@@ -313,7 +329,8 @@ button#seeChats{
 }
 
 .staffMsg{
-    background-color: #2cff8e;
+    background-color: #2E7D32; /* 228B22  43A047*/
+    color: white;
     border-radius: 0.3em;
     margin-left: 0.5em;
     margin-top: 0.5em;
@@ -324,14 +341,15 @@ button#seeChats{
 }
 
 .userMsg{
-    background-color:#6c757d;
+    background-color:var(--main-blue);
+    color: white;
     border-radius: 0.3em;
     margin-right: 0.5em;
     margin-top: 0.5em;
     margin-bottom: 0.3em;
     max-width: 13em;
     padding: 0.5em;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .staffRow{

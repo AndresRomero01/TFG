@@ -233,6 +233,7 @@ public class UserController {
 	@ResponseBody
     public String setPic(@RequestParam("photo") MultipartFile photo, @PathVariable long id, 
         HttpServletResponse response, HttpSession session, Model model) throws IOException {
+        log.info("@@@@ inside setPic in userController");
 
         User target = em.find(User.class, id);
         model.addAttribute("user", target);
@@ -260,6 +261,32 @@ public class UserController {
 			}
 		}
 		return "{\"status\":\"photo uploaded correctly\"}";
+    }
+
+    @PostMapping("modifyUserImg")
+    @Transactional
+    @ResponseBody 
+    public String modifyUserImg(@RequestParam("userImg") MultipartFile photo, @RequestParam("userId") long userId)
+    {
+        log.info("---- inside modifyUserImg ----");
+
+      File img = new File("src/main/resources/static/img/userImgs", userId + ".jpg");
+
+      if (photo.isEmpty()) {
+        log.info("failed to upload photo: emtpy file?");
+        return null;
+      } else {
+          try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(img))) {
+              byte[] bytes = photo.getBytes();
+              stream.write(bytes);
+              log.info("la ruta es: " + img.getAbsolutePath());
+          } catch (Exception e) {
+              return null;
+          }
+      }
+
+      return "{\"isok\": \"todobien\"}";
+
     }
 
 	@PostMapping(path = "/actualizarPedido", produces = "application/json")

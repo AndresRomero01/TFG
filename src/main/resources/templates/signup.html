@@ -13,46 +13,67 @@
 
     <main class="flex-shrink-0">
         <div class="container">
-            <div class="centeredDiv">
-                <h1>¡Crea tu cuenta!</h1>
+            <div class="centeredDiv text-center">
+                <h1 id="createAccountTitle">¡Crea tu cuenta!</h1>
                 <form role="form" id="signUpForm" onsubmit="return false;"> <!-- onsubmit="false;"   truco para validacion de requiered no necesario ya -->
                 
-                    <label for="username" class="firstLabel">Username</label>
-                    <input type="text" id="username" class="inputForm" required>
-    
-                    <label for="email" class="inputLabel">Email</label>
-                    <input type="email" id="email" class="inputForm" required>
-    
-                    <div class="row">
-                        <div class="col">
-                            <label for="firstName" class="inputLabel">Nombre</label>
-                            <input type="text" id="firstName" class="inputForm">
+                    <div class="row text-start">
+                        <div class="col col col-md-4 offset-2">
+                            <div class="form__group field">
+                                <input type="input" class="form-control form__field" placeholder="Nombre de usuario" id='username' required />
+                                <label for="username" class="form__label">Nombre de usuario</label>
+                            </div>
+            
+                            <div class="form__group field">
+                                <input type="input" class="form-control form__field" placeholder="Email" id='email' required />
+                                <label for="email" class="form__label">Email</label>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label for="lastName"  class="inputLabel">Apellido</label>
-                            <input type="text" id="lastName" class="inputForm">
+                    </div>
+                    
+    
+                    <div class="row text-start">
+                        <div class="col col-md-4 offset-2">
+                            <div class="form__group field">
+                                <input type="input" class="form-control form__field" placeholder="Nombre" id='firstName' required />
+                                <label for="firstName" class="form__label">Nombre</label>
+                            </div>
+                        </div>
+                        <div class="col col-md-4 offset-1">
+                            <div class="form__group field">
+                                <input type="input" class="form-control form__field" placeholder="Apellido" id='lastName' required />
+                                <label for="lastName" class="form__label">Apellido</label>
+                            </div>
                         </div>
                     </div>
     
-                    <div class="row">
-                        <div class="col">
-                            <label for="password1"  class="inputLabel">Contraseña</label>
-                            <input type="password" id="password1" class="inputForm" onchange="validatePassword()" required>
+                    <div class="row text-start">
+                        <div class="col col col-md-4 offset-2">
+                            <div class="form__group field">
+                                <input type="password" class="form-control form__field" placeholder="Contraseña" id='password1'  onchange="validatePassword()" required />
+                                <label for="password1" class="form__label">Contraseña</label>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label for="password2"  class="inputLabel">Repite la contraseña</label>
-                            <input type="password" id="password2" class="inputForm" onkeyup="validatePassword()" required>
+                        <div class="col col col-md-4 offset-1">
+                            <div class="form__group field">
+                                <input type="password" class="form-control form__field" placeholder="Repite la contraseña" id='password2'  onchange="validatePassword()" required />
+                                <label for="password2" class="form__label">Repite la contraseña</label>
+                            </div>
                         </div>
                     </div>
     
-                    <div class="row">
-                        <div class="col">
-                            <label for="address"  class="inputLabel">Direccion</label>
-                            <input type="input" id="address" class="inputForm" required>
+                    <div class="row text-start">
+                        <div class="col col col-md-4 offset-2">
+                            <div class="form__group field">
+                                <input type="input" class="form-control form__field" placeholder="Dirección" id='address' required />
+                                <label for="address" class="form__label">Dirección</label>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label for="phone"  class="inputLabel">Telefono</label>
-                            <input type="tel" id="phone" class="inputForm" required>
+                        <div class="col col col-md-4 offset-1">
+                            <div class="form__group field">
+                                <input type="input" class="form-control form__field" placeholder="Teléfono" id='phone' required />
+                                <label for="phone" class="form__label">Teléfono</label>
+                            </div>
                         </div>
                     </div>
                     

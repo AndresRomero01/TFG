@@ -7,11 +7,14 @@
   --redWarning:#dc3545;
 
   --color1: #ef7845;
-  --green1:#b0ffa3;
+  --green1:#b0ffa3;   /* b0ffa3 */
   --green1Second:#9adf8f;
   
   --green2: #c3f96f;
   --green3:  #2cff8e;
+
+  --main-blue: #365bea;
+  --main-blue-hover: #284FC2;
 }
 
 /* .col{
@@ -70,6 +73,17 @@
 
 .greenButton:hover{
   background-color: var(--green1Second);
+}
+
+
+.customButton{
+  background-color: var(--main-blue);
+  color: white;
+}
+
+.customButton:hover{
+  background-color: var(--main-blue-hover);
+  color: white;
 }
 
 

@@ -236,4 +236,16 @@ VALUES (17, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TR
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (18, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
 
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (19, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (20, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (21, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
+INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
+VALUES (22, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;
