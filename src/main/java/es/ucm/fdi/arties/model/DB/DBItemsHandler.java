@@ -20,6 +20,7 @@ import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.User.ClientType;
 
 import org.apache.logging.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 import org.apache.logging.log4j.LogManager;
 import lombok.Data;
 import net.bytebuddy.asm.Advice.Local;
@@ -106,12 +107,13 @@ public class DBItemsHandler {
         return 0;
     }
 
+    @Transactional
     public Item getItem(EntityManager em, long id) {
         Item i = em.find(Item.class, id);
         return i;
     }
 
-
+    @Transactional
     public User makeLoan(EntityManager em, long idItem, long idUser, int quantity, LocalDateTime date)
     {
         Item item = em.find(Item.class, idItem);
@@ -172,6 +174,20 @@ public class DBItemsHandler {
 
 
         return true;
+    }
+
+    public ItemLoans endLoan(EntityManager em, long idItem, long idUser)
+    {
+        Item item = em.find(Item.class, idItem);
+        User user = em.find(User.class, idUser);
+
+        ItemLoans il = user.removeItemLoan(idItem);
+        item.removeItemLoan(idUser);
+
+        em.remove(il);
+
+        em.flush();  
+        return il;
     }
 
     

@@ -12,9 +12,13 @@ import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import es.ucm.fdi.arties.controller.ItemsController;
+import es.ucm.fdi.arties.model.User.Transfer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 
 @Entity
@@ -23,10 +27,11 @@ import lombok.Data;
 /* @NamedQueries({
 @NamedQuery(name = "es.ucm.fdi.iw.model.itemLoans.availabilityItem", query = "select loan from item_loans loan where  :date1 >= loan.loan_start AND :date2 <= loan.loan_end AND loan.item_id = idItem"),
 }) */
-public class ItemLoans {
+public class ItemLoans implements Transferable<ItemLoans.Transfer> {
     
     @EmbeddedId private ItemLoansId id;
     @ManyToOne
+   
     @MapsId("item") private Item item;
 
     @ManyToOne
@@ -62,10 +67,39 @@ public class ItemLoans {
         return ItemsController.getDateStrESFormat(loanEnd);
     }
 
+    public String getLoanStartStrES()
+    {
+        return ItemsController.getDateStrESFormat(loanStart);
+    }
+
     public String getLoanEndStrESHourMin()
     {
         return ItemsController.getDateStrESFormatHourMin(loanEnd);
     }
+
+    @Getter
+    @AllArgsConstructor
+    public static class Transfer {
+		private long idUser;
+        private long idItem;
+        private int quantity;
+        private LocalDateTime loanStart;
+        private LocalDateTime loanEnd;
+
+    }
+
+
+    @Override
+    public Transfer toTransfer() {
+        // TODO Auto-generated method stub
+        return new Transfer(user.getId(),item.getId(), quantity, loanStart, loanEnd);
+    }
+
+    @Override
+	public String toString() {
+		return toTransfer().toString();
+	}
+
 
 
 }

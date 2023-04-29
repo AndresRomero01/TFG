@@ -16,6 +16,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Entity
 @Data
 @NamedQueries({
@@ -24,6 +28,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Item {
+
+    private static final Logger log = LogManager.getLogger(Item.class);
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen")
@@ -49,6 +55,25 @@ public class Item {
     quantity = quant;
     maxLoan = maxL;
  }
+
+
+ public void removeItemLoan(long idUsr)
+    {
+        ItemLoans toRemove = null;
+        for(ItemLoans il:itemLoans)
+        {
+            if(il.getUser().getId() == idUsr)
+            {
+                toRemove = il;
+                log.info("id encontrado en user");
+            }
+                
+        }
+        if(toRemove != null)
+        {
+            itemLoans.remove(toRemove);
+        }
+    }
 
     
 }

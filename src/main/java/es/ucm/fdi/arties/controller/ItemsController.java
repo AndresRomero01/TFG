@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
+
 
 import es.ucm.fdi.arties.model.Item;
 
@@ -28,6 +28,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -355,11 +356,15 @@ public class ItemsController {
         return"";
 
         User u = (User) session.getAttribute("u");
-      if(u.hasItemLoan(itemId))
+
+        User u2;
+        u2 = commonDB.getUser(em, u.getId());
+
+      if(u2.hasItemLoan(itemId))
         return "";
 
 
-        User updatedUser = db.makeLoan(em, itemId, u.getId(), itemQuantity, time);
+        User updatedUser = db.makeLoan(em, itemId, u2.getId(), itemQuantity, time);
       if(updatedUser != null)
       {
         session.setAttribute("u", updatedUser);
@@ -403,7 +408,29 @@ public class ItemsController {
       return "{\"isok\": \"todomal\"}";
     }
 
+    @PostMapping("endLoan")
+    @Transactional
+    @ResponseBody 
+    public String endLoan(HttpSession session, @RequestParam("itemId") long itemId,  @RequestParam("userId") long userId)
+    {
+     
+      ItemLoans il = db.endLoan(em, itemId, userId);
 
+      return "{\"itemLoan\": \""+il.toString()+"\"}";
+    }
+
+   /*  @PostMapping("undoEndLoan")
+    @Transactional
+    @ResponseBody 
+    public String undoEndLoan(HttpSession session, @RequestParam("itemLoan") ItemLoans il)
+    {
+     
+      log.info("il recibido: "+ il.toString());
+
+      return "{\"itemLoan\": \""+"il.toString()"+"\"}";
+    } */
+
+    //@Transactional
     private int availableItemsPerDay(String date, long itemId)
     {
       LocalDateTime time;
@@ -412,7 +439,7 @@ public class ItemsController {
       return availableItemsPerDay(time, itemId);
     }
 
-
+    //@Transactional
     private int availableItemsPerDay(LocalDateTime time, long itemId)
     {
 

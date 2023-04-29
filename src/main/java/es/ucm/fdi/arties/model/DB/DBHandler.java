@@ -23,6 +23,7 @@ import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.User.ClientType;
 
 import org.apache.logging.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 import org.apache.logging.log4j.LogManager;
 import lombok.Data;
 
@@ -52,6 +53,7 @@ public class DBHandler {
         return u;
     }
 
+    @Transactional
     public User getUser(EntityManager em, long userId)
     {
         log.info("&&&&&: dentro de getUsuario by id: " +  userId);

@@ -12,6 +12,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.collection.internal.PersistentList;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -193,7 +194,7 @@ public class User implements Transferable<User.Transfer> {
         return false;
     }
 
-    
+    //@Transactional
     public boolean hasItemLoan(long itemId)
     {
         log.info("comprobando items loans del user " + id);
@@ -219,6 +220,27 @@ public class User implements Transferable<User.Transfer> {
             return il;
         }
         return null;
+    }
+
+    public ItemLoans removeItemLoan(long idItem)
+    {
+        ItemLoans toRemove = null;
+        for(ItemLoans il:itemLoans)
+        {
+            if(il.getItem().getId() == idItem)
+            {
+                toRemove = il;
+                log.info("id encontrado en user");
+            }
+                
+        }
+
+        if(toRemove != null)
+        {
+            itemLoans.remove(toRemove);
+        }
+
+        return toRemove;
     }
 }
 
