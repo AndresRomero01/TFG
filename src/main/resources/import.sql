@@ -248,4 +248,8 @@ VALUES (21, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TR
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (22, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
 
+------ DATA FOR GYM SUBSCRIPTION ----- 
+INSERT INTO GYM_SUB (id, online_price, onsite_price)
+VALUES (1, 25, 50);
+
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

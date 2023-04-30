@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import es.ucm.fdi.arties.model.Category;
 import es.ucm.fdi.arties.model.ChatMessage;
 import es.ucm.fdi.arties.model.Course;
+import es.ucm.fdi.arties.model.GymSub;
 import es.ucm.fdi.arties.model.Item;
 import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
@@ -95,8 +96,54 @@ public class RootController {
     }
 
     @GetMapping("/subscriptions")
+    @Transactional // para no recibir resultados inconsistentes
     public String subscriptionsPage(Model model, HttpSession session) {
+        //loadSubscriptionPhrases(model);
+
+        Long id = Long.valueOf(1);
+        GymSub gymSub = em.find(GymSub.class, id);
+        if(gymSub.getOnlineInfo() == null && gymSub.getOnsiteInfo() == null){
+            loadSubscriptionPhrases(model);
+        } else {
+            model.addAttribute("onlinePhrases", gymSub.getOnlineInfo());
+            model.addAttribute("onsitePhrases", gymSub.getOnsiteInfo());
+            model.addAttribute("sizesDif", Math.abs(gymSub.getOnlineInfo().size() - gymSub.getOnsiteInfo().size()));
+            model.addAttribute("onlineArraySize", gymSub.getOnlineInfo().size());
+            model.addAttribute("onsiteArraySize", gymSub.getOnsiteInfo().size());
+            model.addAttribute("onlinePrice", gymSub.getOnlinePrice());
+            model.addAttribute("onsitePrice", gymSub.getOnsitePrice());
+        }
+        
+
         return "subscriptions";
+    }
+
+    @Transactional // para no recibir resultados inconsistentes
+    public void loadSubscriptionPhrases(Model model){
+        Long id = Long.valueOf(1);
+        GymSub gymSub = em.find(GymSub.class, id);
+
+        ArrayList<String> onlineInfo = new ArrayList<>();
+        onlineInfo.add("Acceso a todos los cursos");
+        onlineInfo.add("Alquiler de material");
+        onlineInfo.add("Ayuda por chat");
+        gymSub.setOnlineInfo(onlineInfo);
+
+        ArrayList<String> onsiteInfo = new ArrayList<>();
+        onsiteInfo.add("Acceso al gimnasio");
+        onsiteInfo.add("Acceso a todos los cursos");
+        onsiteInfo.add("Alquiler de material");
+        onsiteInfo.add("Acceso gratis a las clases");
+        onsiteInfo.add("Ayuda por chat");
+        gymSub.setOnsiteInfo(onsiteInfo);
+
+        model.addAttribute("onlinePhrases", gymSub.getOnlineInfo());
+        model.addAttribute("onsitePhrases", gymSub.getOnsiteInfo());
+        model.addAttribute("sizesDif", Math.abs(gymSub.getOnlineInfo().size() - gymSub.getOnsiteInfo().size()));
+        model.addAttribute("onlineArraySize", gymSub.getOnlineInfo().size());
+        model.addAttribute("onsiteArraySize", gymSub.getOnsiteInfo().size());
+        model.addAttribute("onlinePrice", gymSub.getOnlinePrice());
+        model.addAttribute("onsitePrice", gymSub.getOnsitePrice());
     }
 
     @GetMapping("/lessons")
@@ -120,6 +167,7 @@ public class RootController {
     }
 
     @GetMapping("/settings")
+    @Transactional // para no recibir resultados inconsistentes
     public String settingsPage(Model model, HttpSession session) {
         List<User> lu = db.getUsersByRol(em, "STAFF");
         List<Category> lc = db.getCoursesCatogories(em);
@@ -128,7 +176,22 @@ public class RootController {
 
         List<Item> itemList = dbItems.getItemList(em);
         model.addAttribute("items", itemList);
-        
+
+
+        Long id = Long.valueOf(1);
+        GymSub gymSub = em.find(GymSub.class, id);
+        if(gymSub.getOnlineInfo() == null && gymSub.getOnsiteInfo() == null){
+            loadSubscriptionPhrases(model);
+        } else {
+            model.addAttribute("onlinePhrases", gymSub.getOnlineInfo());
+            model.addAttribute("onsitePhrases", gymSub.getOnsiteInfo());
+            model.addAttribute("sizesDif", Math.abs(gymSub.getOnlineInfo().size() - gymSub.getOnsiteInfo().size()));
+            model.addAttribute("onlineArraySize", gymSub.getOnlineInfo().size());
+            model.addAttribute("onsiteArraySize", gymSub.getOnsiteInfo().size());
+            model.addAttribute("onlinePrice", gymSub.getOnlinePrice());
+            model.addAttribute("onsitePrice", gymSub.getOnsitePrice());
+        }
+
         return "settings";
     }
 
@@ -432,6 +495,101 @@ public class RootController {
 
         User updatedUser = db.updateUserDescription(em, u.getId(), desc);
         session.setAttribute("u", updatedUser);
+
+        return "{\"isok\": \"true\"}";// devuelve un json como un string
+    }
+
+    @GetMapping("/paymentPage")
+    @Transactional
+    public String paymentPage(Model model, HttpSession session, @RequestParam(required = true) String subType) {
+        log.info("---------- inside paymentPage -------------");
+        log.info("@@@@ type: " + subType);
+
+        Double quantity;
+        Long id = Long.valueOf(1);
+        GymSub gymSub = em.find(GymSub.class, id);
+        if(subType.equals("onsite")) quantity = gymSub.getOnsitePrice();
+        else quantity = gymSub.getOnlinePrice();
+
+        model.addAttribute("price", quantity);
+
+        return "paymentPage";
+    }
+
+    @PostMapping(path = "/deletePhrase", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String deletePhrase(Model model, HttpSession session, @RequestBody JsonNode o) {
+        log.info("---------- inside deletePhrase -------------");
+
+        Long id = Long.valueOf(1);
+        GymSub gymSub = em.find(GymSub.class, id);
+
+        int index = o.get("index").asInt();
+        String type = o.get("type").asText();
+        log.info("@@@@ index to delete: " + index);
+        log.info("@@@@ type to delete: " + type);
+
+        if(type.equals("online")) {
+            gymSub.getOnlineInfo().remove(index);
+
+        } else if (type.equals("onsite")){
+            gymSub.getOnsiteInfo().remove(index);
+        }
+
+        return "{\"isok\": \"true\"}";// devuelve un json como un string
+    }
+
+    @PostMapping(path = "/addPhrase", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String addPhrase(Model model, HttpSession session, @RequestBody JsonNode o) {
+        log.info("---------- inside addPhrase -------------");
+
+        Long id = Long.valueOf(1);
+        GymSub gymSub = em.find(GymSub.class, id);
+
+        String phrase = o.get("phrase").asText();
+        String type = o.get("type").asText();
+        log.info("@@@@ phrase to add " + phrase);
+        log.info("@@@@ type to add: " + type);
+
+        int arraySize = 0;
+
+        if(type.equals("online")) {
+            gymSub.getOnlineInfo().add(phrase);
+            arraySize = gymSub.getOnlineInfo().size();
+
+        } else if (type.equals("onsite")){
+            gymSub.getOnsiteInfo().add(phrase);
+            arraySize = gymSub.getOnsiteInfo().size();
+        }
+
+
+
+        return "{\"arraySize\": "+arraySize+"}";// devuelve un json como un string
+    }
+
+    @PostMapping(path = "/changeGymSubPrice", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String changeGymSubPrice(Model model, HttpSession session, @RequestBody JsonNode o) {
+        log.info("---------- inside changeGymSubPrice -------------");
+
+        Long id = Long.valueOf(1);
+        GymSub gymSub = em.find(GymSub.class, id);
+
+        double price = o.get("price").asDouble();
+        String type = o.get("type").asText();
+        log.info("@@@@ changed price " + price);
+        log.info("@@@@ type to add: " + type);
+
+        if(type.equals("online")) {
+            gymSub.setOnlinePrice(price);;
+
+        } else if (type.equals("onsite")){
+            gymSub.setOnsitePrice(price);;
+        }
 
         return "{\"isok\": \"true\"}";// devuelve un json como un string
     }

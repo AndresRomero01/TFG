@@ -12,7 +12,7 @@
     <header th:replace="fragments/nav.html :: nav"></header>
     <!-- <h1 th:text="${session.u.clientType}"></h1> -->
     <input type="hidden" th:value="${session.u.clientType}" id="sub">
-
+    
     <!-- card style: https://codepen.io/devjamal/pen/WMEVBL -->
     <!-- ribbon style: https://multiwebpress.com/pricing-card-using-html-css/ -->
     <section>
@@ -28,18 +28,21 @@
                     <h2>Online</h2>
                   </div>
                   <div class="price">
-                    <h4>25<sup>€</sup></h4>
+                    <h4 th:text="${onlinePrice}">25<sup>€</sup></h4>
                   </div>
                   <div class="option">
                     <ul>
-                    <li> <i class="fa fa-check" aria-hidden="true"></i> Acceso a todos los cursos</li>
-                    <li> <i class="fa fa-check" aria-hidden="true"></i> Alquiler de material </li>
-                    <li> <i class="fa fa-check" aria-hidden="true"></i> Ayuda por chat </li>
-                    <li class="transparentText"> <i class="fa fa-times" aria-hidden="true"></i> to match other card size </li>
-                    <li class="transparentText"> <i class="fa fa-times" aria-hidden="true"></i> to match other card size </li>
+                      <th:block th:each="phrase,iter: ${onlinePhrases}">
+                        <li  th:text=${phrase}> <i class="fa fa-check" aria-hidden="true"></i > Acceso a todos los cursos</li>
+                      </th:block>
+                      <th:block th:if="${onlineArraySize &lt onsiteArraySize}">
+                        <th:block th:each="i: ${#numbers.sequence(0,sizesDif-1)}">
+                          <li class="transparentText"> <i class="fa fa-times" aria-hidden="true"></i>  - </li>
+                        </th:block>
+                      </th:block>
                     </ul>
                   </div>
-                  <a onclick="suscribe(event)" data-sub="online">Suscribirse</a>
+                  <a th:href="@{/paymentPage?subType=online}" onclick="suscribe(event)" data-sub="online">Suscribirse</a>
                 </div>
               </div>
               <!-- END Col one -->
@@ -53,18 +56,23 @@
                     <h2>Presencial</h2>
                   </div>
                   <div class="price">
-                    <h4>50<sup>€</sup></h4>
+                    <h4 th:text="${onsitePrice}">50<sup>€</sup></h4>
                   </div>
                   <div class="option">
                     <ul>
-                        <li> <i class="fa fa-check" aria-hidden="true"></i> Acceso al gimnasio</li>
-                        <li> <i class="fa fa-check" aria-hidden="true"></i> Acceso a todos los cursos</li>
-                        <li> <i class="fa fa-check" aria-hidden="true"></i> Alquiler de material </li>
-                        <li> <i class="fa fa-check" aria-hidden="true"></i> Acceso gratis a las clases </li>
-                        <li> <i class="fa fa-check" aria-hidden="true"></i> Ayuda por chat </li>
+                      <th:block th:each="phrase,iter: ${onsitePhrases}">
+                        <li  th:text=${phrase}> <i class="fa fa-check" aria-hidden="true"></i > Acceso a todos los cursos</li>
+                      </th:block>
+                      <th:block th:unless="${onlineArraySize &lt; onsiteArraySize} ">
+                        <th:block th:if="${sizesDiv &gt; 0}"> <!-- necessary cause when both arrays have size 0, the code below will execute -->
+                          <th:block th:each="i: ${#numbers.sequence(0,sizesDif-1)}">
+                            <li class="transparentText" th:text="${i}"> <i class="fa fa-times" aria-hidden="true"></i>  - </li>
+                          </th:block>
+                        </th:block>
+                      </th:block>
                     </ul>
                   </div>
-                  <a onclick="suscribe(event)" data-sub="onsite">Suscribirse</a>
+                  <a th:href="@{/paymentPage?subType=onsite}" onclick="suscribe(event)" data-sub="onsite">Suscribirse</a>
                 </div>
               </div>
               <!-- END Col two -->

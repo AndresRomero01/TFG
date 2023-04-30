@@ -96,6 +96,7 @@ public class User implements Transferable<User.Transfer> {
     private String roles; // split by ',' to separate roles
     private ClientType clientType; // NONE by default
 
+
     public User (String username, String password, String firstName, 
     String lastName, String email, String address, String phone, String roles, ClientType clientType, String description){
         this.username = username;

@@ -209,3 +209,176 @@ function applyChanges(){
 
     
 }
+
+
+/* ---- SUBSCRIPTIONS ----- */
+
+function deletePhraseOnline(e){
+    let index = e.target.value
+    console.log("--- phrase index: " + index);
+
+    let params = {"type": "online",
+                    "index" : index
+    }; 
+
+    go(config.rootUrl + "/deletePhrase", 'POST', params)
+    .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+        e.target.closest(".phraseDiv").remove();
+        let i = 0;
+        document.querySelectorAll(".delOnline").forEach(e => {
+            e.value = i;
+            i++;
+            console.log("value: " + e.value);
+        })
+    })
+    .catch(() => {console.log("Error en catch deletePhrasesOnline");//si el username ya existia
+
+    })
+}
+
+function deletePhraseOnsite(e){
+    let index = e.target.value
+    console.log("--- phrase index: " + index);
+
+    let params = {"type": "onsite",
+                    "index" : index
+    }; 
+
+    go(config.rootUrl + "/deletePhrase", 'POST', params)
+    .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+        e.target.closest(".phraseDiv").remove();
+        let i = 0;
+        document.querySelectorAll(".delOnsite").forEach(e => {
+            e.value = i;
+            i++;
+            console.log("value: " + e.value);
+        })
+    })
+    .catch(() => {console.log("Error en catch deletePhrasesOnsite");//si el username ya existia
+
+    })
+}
+
+function addOnlinePhrase(){
+    let phrase = document.getElementById("newOnlinePhrase").value;
+    console.log("phrase: " + phrase);
+
+    if(phrase != ""){
+        let params = {"phrase": phrase,
+        "type": "online"}; 
+
+        go(config.rootUrl + "/addPhrase", 'POST', params)
+        .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+        let index = d["arraySize"]-1;
+        console.log("new index: " + index);
+        let html = `
+            <div class="row phraseDiv">
+                <div class="col col-md-9 phraseCol">
+                    <p class="phrase">`+ phrase +`</p>
+                </div>
+                <div class="col col-md-2 deleteCol">
+                    <button class="btn btn-danger material-symbols-rounded delPhraseButton delOnline" value="`+index+`" onclick="deletePhraseOnline(event)">delete</button>
+                </div>
+            </div>
+        `;
+        document.getElementById("divToAppendOnlinePhrases").insertAdjacentHTML("beforebegin",html)
+        })
+        .catch(() => {console.log("Error en catch en addOnlinePhrase");//si el username ya existia
+
+        })
+    }
+
+}
+
+function addOnsitePhrase(){
+    let phrase = document.getElementById("newOnsitePhrase").value;
+    console.log("phrase: " + phrase);
+
+    if(phrase != ""){
+        let params = {"phrase": phrase,
+        "type": "onsite"}; 
+
+        go(config.rootUrl + "/addPhrase", 'POST', params)
+        .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+        let index = d["arraySize"]-1;
+        console.log("new index: " + index);
+        let html = `
+            <div class="row phraseDiv">
+                <div class="col col-md-9 phraseCol">
+                    <p class="phrase">`+ phrase +`</p>
+                </div>
+                <div class="col col-md-2 deleteCol">
+                    <button class="btn btn-danger material-symbols-rounded delPhraseButton delOnsite" value="`+index+`" onclick="deletePhraseOnsite(event)">delete</button>
+                </div>
+            </div>
+        `;
+        document.getElementById("divToAppendOnsitePhrases").insertAdjacentHTML("beforebegin",html)
+        })
+        .catch(() => {console.log("Error en catch addOnsitePhrase");//si el username ya existia
+
+        })
+    }
+
+}
+
+function checkPriceValidity(){
+    console.log("--- Checking price validity ---");
+}
+
+function changeOnlinePrice(){
+    let form = document.getElementById("onlinePriceForm");
+    let input = document.getElementById("onlinePrice");
+
+    if(input.value < 0) {
+        input.setCustomValidity("El precio no puede ser negativo")
+        input.reportValidity()
+    } else {
+        input.setCustomValidity("")
+    }
+
+    if(!form.checkValidity()) { //comprueba si se cumplen las condiciones html (required, longitud maxima, formato, etc)
+        //si alguna condicion no se cumplia, llamamos a la funcion que muestra automaticamente un mensaje donde estuviera el primer error
+        form.reportValidity();
+    }
+    else{
+        let params = {"price": input.value,
+        "type": "online"}; 
+
+        go(config.rootUrl + "/changeGymSubPrice", 'POST', params)
+        .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+            document.getElementById("onlinePriceLabel").innerHTML = "Precio online: " + input.value + "€"
+        })
+        .catch(() => {console.log("Error en catch changeGymSubPrice");//si el username ya existia
+
+        })
+    }
+}
+
+function changeOnsitePrice(){
+    let form = document.getElementById("onsitePriceForm");
+    let input = document.getElementById("onsitePrice");
+
+    if(input.value < 0) {
+        input.setCustomValidity("El precio no puede ser negativo")
+        input.reportValidity()
+    } else {
+        input.setCustomValidity("")
+    }
+
+    if(!form.checkValidity()) { //comprueba si se cumplen las condiciones html (required, longitud maxima, formato, etc)
+        //si alguna condicion no se cumplia, llamamos a la funcion que muestra automaticamente un mensaje donde estuviera el primer error
+        form.reportValidity();
+    }
+    else{
+        let params = {"price": input.value,
+        "type": "onsite"}; 
+
+        go(config.rootUrl + "/changeGymSubPrice", 'POST', params)
+        .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+            document.getElementById("onsitePriceLabel").innerHTML = "Precio presencial: " + input.value + "€"
+        })
+        .catch(() => {console.log("Error en catch changeGymSubPrice");//si el username ya existia
+
+        })
+    }
+}
