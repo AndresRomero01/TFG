@@ -1,8 +1,15 @@
+.totalBody{
+    background: linear-gradient(90deg, #3F69E3 0%,#150872 100%);
+}
+
 .centeredDiv{
     width: 70%;
     margin: auto;
     font-size: 1.2em;
     margin-top: 2em;
+    background-color: white;
+    border-radius: 0.3em;
+    box-shadow: 0 10px 12px rgba(0,0,0,0.12);
 }
 
 #createButton{
@@ -29,6 +36,7 @@
 
 #createAccountTitle{
     color: var(--bs-dark);
+    padding-top: 1em;
     margin-top: 1.5em;
     margin-bottom: 1em;
 }

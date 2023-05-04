@@ -329,7 +329,7 @@ button#seeChats{
 }
 
 .staffMsg{
-    background-color: #2E7D32; /* 228B22  43A047*/
+    background-color: var(--msg-green); /* 228B22  43A047*/
     color: white;
     border-radius: 0.3em;
     margin-left: 0.5em;

@@ -35,7 +35,7 @@
                     <div class="col namesCol"><span class="firstName" th:text="${q.user.firstName} + ' '">Nombre </span><span class="lastName" th:text="${q.user.lastName}">Apellido</span></div>
                     <div class="col subjectCol"><p class="subject" th:text="${q.subject}">Asunto Asunto1</p></div>
                     <div class="col">
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" th:data-bs-target="'#item'+${q.id}" 
+                        <button class="btn customButton" type="button" data-bs-toggle="collapse" th:data-bs-target="'#item'+${q.id}" 
                             aria-expanded="false" aria-controls="2">
                             Ver mensaje
                         </button>
@@ -62,7 +62,7 @@
                 <div class="col">
                     <input type="hidden" id="firstName" th:value="${user.firstName}">
                     <input type="hidden" id="lastName" th:value="${user.lastName}">
-                    <button type="button" class="btn btn-primary" onclick="getConversation(event)" th:value="${user.id}" data-bs-toggle="modal" data-bs-target="#chatModal">
+                    <button type="button" class="btn customButton" onclick="getConversation(event)" th:value="${user.id}" data-bs-toggle="modal" data-bs-target="#chatModal">
                         Chat
                     </button>
                     <a class="btn btn-secondary"  th:href="@{/user/{id} (id=${user.id})}">Ver perfil</a>

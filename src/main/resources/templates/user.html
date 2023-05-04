@@ -39,16 +39,20 @@
                     <div class="col text-center">
                         <h2>Tus datos</h2>
                         <form role="form" id="modifyProfileForm" onsubmit="return false;">
-                            <div class="row d-flex justify-content-center infoRow">
-                                <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Name"id='username' th:value="${user.username}" required />
-                                    <label for="username" class="form__label">Nombre de usuario</label>
+                            <div class="row d-flex infoRow">
+                                <div class="col col-md-5 offset-1">
+                                    <div class="form__group field">
+                                        <input type="input" class="form__field" placeholder="Name"id='username' th:value="${user.username}" required />
+                                        <label for="username" class="form__label">Nombre de usuario</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row d-flex justify-content-center infoRow">
-                                <div class="form__group field">
-                                    <input type="email" class="form__field" placeholder="Name" id='email' th:value="${user.email}" required />
-                                    <label for="email" class="form__label">Email</label>
+                            <div class="row d-flex infoRow">
+                                <div class="col col-md-5 offset-1">
+                                    <div class="form__group field">
+                                        <input type="email" class="form__field" placeholder="Name" id='email' th:value="${user.email}" required />
+                                        <label for="email" class="form__label">Email</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row infoRow">

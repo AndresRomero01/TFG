@@ -192,10 +192,10 @@ INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (3, 2, 1, 'Pues es que no se usar esta maquina', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, text, subject, user_sent_it)
-VALUES (4, 3, 'Hola! como se usa esta app?', 'duda1', TRUE);
+VALUES (4, 3, 'Hola! Hoy he ido al gimnasio y me ha quedado la duda de cómo se utiliza la máquina que teneis nada más entrar a la izquierda', 'No se usar esta máquina', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, text, subject, user_sent_it)
-VALUES (5, 3, 'No he sido capaz de encontrar como usar esta maquina', 'duda2 duda2 duda2', TRUE);
+VALUES (5, 3, 'No he sido capaz de encontrar como usar esta maquina', 'Pregunta instrucciones máquina', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (6, 1, 1, 'hola, soy el admin y no se como funciona', TRUE);
@@ -216,37 +216,37 @@ INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (11, 1, 3, 'pregunta para ver si mi empleado 3 lo lee', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (12, 1, 3, 'soy 3 y estoy respondiendo a admin', FALSE);
+VALUES (12, 1, 3, 'soy empleado 3 y estoy respondiendo a admin', FALSE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
 VALUES (13, 1, 3, 'asi que bienvenido admin!', FALSE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (14, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (14, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (15, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (15, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (16, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (16, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (17, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (17, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (18, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (18, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (19, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (19, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (20, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (20, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (21, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (21, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 INSERT INTO CHAT_MESSAGE (id, user_id, staff_id, text, user_sent_it)
-VALUES (22, 1, 3, 'genial! pues voy a repartir trabajo y os vais a cagar :)', TRUE);
+VALUES (22, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconvenientes', TRUE);
 
 ------ DATA FOR GYM SUBSCRIPTION ----- 
 INSERT INTO GYM_SUB (id, online_price, onsite_price)

@@ -7,11 +7,11 @@
     <title>Login</title>
 </head>
 
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100 totalBody">
     <header th:replace="fragments/nav.html :: nav"></header>
 
-    <div class="col col-md-4 offset-md-4 loginBody">
-        <form class="form-signin" method="post" th:action="@{/login}">
+    <div class="col col-md-4 offset-md-4 loginBody text-center">
+        <form class="form-signin" id="loginForm" method="post" th:action="@{/login}">
             <h2 class="form-signin-heading">Inicie sesión</h2>
             <div class="form__group field">
                 <input type="input" class="form-control form__field" placeholder="Nombre de usuario" name="username" id='username' required />
