@@ -61,6 +61,15 @@ public class LessonsController {
 
     private static final Logger log = LogManager.getLogger(LessonsController.class);
 
+
+    @GetMapping(path = "/lessonsToBook")
+    public String lessonsToBook(Model model, HttpSession session)
+    {
+      
+      model.addAttribute("lessonsToBook", dbLessons.getAllLessons(em));
+
+      return"lessonsToBook";
+    }
   
     @GetMapping(path = "/myBookingLessons")
     @Transactional
@@ -91,11 +100,12 @@ public class LessonsController {
     public String addNewLesson(
                             @RequestParam("lessonName") String lessonName,
                             @RequestParam("lessonCapacity") Integer lessonCapacity,
-                            @RequestParam("period") String period
+                            @RequestParam("period") String period,
+                            @RequestParam("description") String description
                             )   {
 
       
-      long id = dbLessons.addNewLesson(em, lessonName, lessonCapacity, period);
+      long id = dbLessons.addNewLesson(em, lessonName, lessonCapacity, period, description);
       
         //return "{\"quant\": \"todomal\"}";
       

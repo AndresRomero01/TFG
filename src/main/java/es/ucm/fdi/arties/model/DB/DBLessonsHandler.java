@@ -34,10 +34,10 @@ public class DBLessonsHandler {
 
 
     @Transactional
-    public long addNewLesson(EntityManager em, String lessonName, int capacity, String period) {
+    public long addNewLesson(EntityManager em, String lessonName, int capacity, String period,String description) {
 
         long newId = -1;
-        Lesson l = new Lesson(lessonName, capacity, period);
+        Lesson l = new Lesson(lessonName, capacity, period, description);
         em.persist(l);
         em.flush();
         newId = l.getId();
@@ -99,6 +99,14 @@ public class DBLessonsHandler {
                 addSessionOfLesson(em, l, dateAndHour);
              }
         }
+    }
+
+
+    public List<Lesson> getAllLessons(EntityManager em)
+    {
+        List<Lesson> lessons = null;
+        lessons = em.createNamedQuery("lesson.list", Lesson.class).getResultList();
+        return lessons;
     }
 
 

@@ -33,18 +33,11 @@ import org.apache.logging.log4j.Logger;
 @EnableScheduling
 public class AppConfig {
 
-	
-    private static final Logger log = LogManager.getLogger(AppConfig.class);
-
-	@Autowired
-    private EntityManager em;
-	private DBLessonsHandler dbLessons = new DBLessonsHandler();
 
 	@Autowired
 	private Environment env;
 
-	@Autowired
-	private TaskScheduler taskScheduler;
+	
 	
 	/**
 	 * Declares a LocalData bean.

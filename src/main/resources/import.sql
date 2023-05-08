@@ -249,11 +249,11 @@ INSERT INTO GYM_SUB (id, online_price, onsite_price)
 VALUES (1, 25, 50);
 
 --- DATA FOR LESSONS ---
-INSERT INTO LESSON (id, name, period, capacity)
-VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 30);
+INSERT INTO LESSON (id, name, period, capacity, description)
+VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 30, 'Clase de baile muy animada, perfecta para para aquellos que les guste moverse con estilo.');
 
-INSERT INTO LESSON (id, name, period, capacity)
-VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30);
+INSERT INTO LESSON (id, name, period, capacity, description)
+VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
 
 ------
 INSERT INTO SESSION (id, date, lesson_id)

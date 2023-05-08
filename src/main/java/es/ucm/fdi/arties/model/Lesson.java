@@ -35,16 +35,18 @@ public class Lesson {
     private long id;
     private String name;
     private String period;
+    private String description;
     private int capacity;//TODO llevarselo a la clase (lesson)
     
     @OneToMany (mappedBy = "lesson")
     private List<Session> sessionsList;
 
-    public Lesson(String name, int capacity, String period)
+    public Lesson(String name, int capacity, String period, String description)
     {
         this.name = name;
         this.capacity  =capacity;
         this.period = period;
+        this.description = description;
 
     }
 

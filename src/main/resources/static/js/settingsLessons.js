@@ -130,11 +130,13 @@ function newLesson()
 
     let lessonName = document.getElementById("lessonNameField").value;
     let lessonCapacity = document.getElementById("lessonCapacity").value;
+    let lessonDesc = document.getElementById("lessonDescField").value;
     console.log("capa: "+ lessonCapacity);
 
     formData.append("lessonName", lessonName);
     formData.append("lessonCapacity", lessonCapacity);
     formData.append("period", sessionsToAddStr);
+    formData.append("description", lessonDesc);
 
     go("/lessons/addNewLesson", "POST", formData, {}).then(d => {
         console.log(d);
