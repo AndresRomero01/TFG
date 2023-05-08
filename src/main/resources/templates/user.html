@@ -172,18 +172,18 @@
               <div class="modal-body">
                 <form role="form" id="userFormImg"> 
                    
-                    <label for="fileFieldImgItem" class="form-label">Nueva foto</label>
+                    <label for="newUserImg" class="form-label">Nueva foto</label>
                     <img id="newUserImg" alt="Nueva imagen de perfil" class="img-thumbnail mw-100 miClase">
-                    <input type="file" id="fileFieldUserImg" accept="image/jpeg,image/png" onchange="changeImgPreview()" required>
+                    <input type="file" class="form-control" id="fileFieldUserImg" accept="image/jpeg,image/png" onchange="changeImgPreview()" required>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                       <button type="button" id ="buttonFormNewUserImg" class="btn btn-primary" onclick="modifyUserImg()">Confirmar</button>
                     </div>
                   </form>
-              </div>
+               </div>
             </div>
-          </div>
-       </div>
+        </div>
+    </div>
 
 
     <th:block th:replace="fragments/footer.html :: footer" />

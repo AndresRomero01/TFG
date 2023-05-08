@@ -159,14 +159,14 @@ html {
 
 .card2 button {
   border: 0;
-  background: linear-gradient(90deg, #5448de, #5448de);
-  background: var(--green1);
+  /* background: linear-gradient(90deg, #5448de, #5448de); */
+  /* background: var(--main-blue); */
   /* color: #f8f8f8; */
   color: white;
   font-family: inherit;
   padding: 0.5em 2em;
   font-size: 16px;
-  border-radius: 1em;
+  border-radius: 0.3em;
 }
 
 

@@ -1,5 +1,78 @@
+
 #thumbnail{
     height: 20em;
     width: 20em;
-    background-color: bisque;
+    /* background-color: bisque; */
+    position: relative;
+    /* background-color: aqua; */
+    
+}
+
+#coursePicture{
+    position: absolute;
+    /* top: 3em;
+    left: 20%; */
+    /* border-radius: 100%; */
+    object-fit: cover;
+    object-position:50%;
+    width: 100%;
+    height: 100%;
+    /* border: 6px solid;
+    border-color: var(--bs-gray-400); */
+    background: transparent;
+    border-radius: 0.3em;
+}
+
+#changeCoursePicture{
+    position: absolute;
+    bottom: -1em;
+    right: -1em;
+    border-radius: 100%;
+    width: 2.5em;
+    height: 2.5em;
+}
+
+#createCourseButton{
+    font-size: large;
+    width: 7em;
+    height: 2.5em;
+    margin-top: 3em;
+}
+
+#courseDescription{
+    margin-top: 1em;
+    height: 10em;
+    width: 70%;
+}
+
+.form-switch{
+    margin-top: 1.5em;
+}
+
+#isFreeSwitch{
+    width: 4em;
+    height: 2em;
+}
+
+#hasVideoSwitch{
+    width: 4em;
+    height: 2em;
+}
+
+#isFreeSwitchLabel{
+    margin-left: 1em;
+    font-size: 1.5em;
+}
+
+#hasVideoSwitchLabel{
+    margin-left: 1em;
+    font-size: 1.5em;
+}
+
+#catSelect{
+    margin-top: 2em;
+}
+
+.descRow{
+    margin-top: 3em;
 }

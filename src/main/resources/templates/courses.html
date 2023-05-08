@@ -5,6 +5,7 @@
     <th:block th:replace="fragments/head :: header" />
     <title >Courses</title>
     <link rel="stylesheet" href="css/courses.css" />
+    <link rel="stylesheet" href="../css/generalCards.css" />
     <!-- <link rel="stylesheet" href="css/calendar.css" /> -->
 </head>
 
@@ -12,14 +13,14 @@
     <header th:replace="fragments/nav.html :: nav"></header>
       
 
-        <div class="col bodyCol">
+        <div class="col bodyCol bodyColCourses">
             
 
             <th:block th:if="${session.u}">
                 <div class="row m-5">
                     <div class="col">
                         <div class="col dropdown">
-                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn customButton dropdown-toggle" type="button" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false">
                                 Selecciona categoría
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
@@ -32,7 +33,7 @@
                     </div>
 
                     <div class="col d-flex justify-content-end">
-                        <a th:if="${session.u.hasRole('ADMIN')}" class="btn btn-dark" th:href="@{/addCourse}">Añadir curso</a>
+                        <a th:if="${session.u.hasRole('ADMIN')}" class="btn customButton" id="addCourseButton" th:href="@{/addCourse}">Añadir curso</a>
                     </div>
                 </div>
 
@@ -40,26 +41,31 @@
                     <h1 class="text-center mb-5" id="categoryTitle">Todos los cursos</h1>
                 </div>
 
+                
                 <div th:id="allCoursesPanel" class="firstTab customTab">
-                    <div class="row row-cols1 row-cols-md-4 g-5">
+                    <div class="row justify-content-center">
                         <th:block th:each="course,iter: ${coursesList}">
-                            <div class="col d-flex">
-                                <div class="card text-white bg-dark " style="width: 18rem;">
-                                    <div class="card-img-overlay forFreeDiv" th:if="${course.isFree}">
-                                        <p class="forFreeTag">For free!</p>
-                                    </div>
-                                    <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title" th:text="${course.name}">Card title</h5>
-                                        <p class="card-text" th:text="${course.description}">Card description</p>
-                                        
-                                    </div>
-                                    <div class="card-footer"> 
-                                        <a href="#" class="btn btn-light">Ver curso</a>
+                            <div class="col col-md-2 myColW">
+                                <div class="myContainer"> <!-- no hace nada, no tiene ni css -->
+                                    <div class="card2">
+                                        <img  src="/img/drawing.jpg" />
+                                        <div class="myh100">
+                                            <div class="titulo justify-content-center">
+                                                <h2 class="text-center" th:text="${course.name}">Titulo</h2>
+                                            </div>
+                                            <div class="texto">
+                                                <div>
+                                                    <p th:text="${course.description}">Descripcion</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-center">
+                                                <button class="customButton seeCourseButton">Ver curso</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            
                         </th:block>
                     </div>
                 </div>
@@ -68,24 +74,42 @@
                 <!-- --- create dynamic tab panels --- -->
                 <th:block th:each="cat,iter: ${categories}">
                     <div th:id="${cat.id} + 'Panel'" class="customTab">
-                        <div class="row row-cols1 row-cols-md-4 g-5">
+                        <!-- <div class="row row-cols1 row-cols-md-4 g-5"> -->
+                        <!-- <div class="row"></div> -->
+                        <div class="row justify-content-center">
                             <th:block th:each="course,iter: ${cat.coursesList}" >
-                                <div class="col d-flex">
-                                    <div class="card text-white bg-dark " style="width: 18rem;">
-                                        <div th:if="${course.isFree}" class="card-img-overlay forFreeDiv">
-                                            <p class="forFreeTag">For free!</p>
-                                        </div>
-                                        <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title" th:text="${course.name}">Card title</h5>
-                                            <p class="card-text" th:text="${course.description}">Card description</p>
+
+                                <div class="col col-md-2 myColW">
+                                    <div class="myContainer"> <!-- no hace nada, no tiene ni css -->
+                                        <div class="card2">
+                                            <!-- <img th:src="@{/img/courses/{id}.jpg(id=${course.id})}" onerror="this.onerror=null; this.src='/img/drawing.jpg'; return true;"> -->
+                                            <th:block th:if="${course.hasImage}">
+                                                <div class="courseImgDiv">
+                                                    <img class="courseImg" th:src="@{/img/courses/{id}.jpg(id=${course.id})}">
+                                                </div>
+                                                
+                                            </th:block>
+                                            <th:block th:unless="${course.hasImage}">
+                                                <img src="/img/drawing.jpg">
+                                            </th:block>
                                             
-                                        </div>
-                                        <div class="card-footer"> 
-                                            <a th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}" class="btn btn-light">Ver curso</a>
+                                            <div class="myh100">
+                                                <div class="titulo justify-content-center">
+                                                    <h2 class="text-center" th:text="${course.name}">Titulo</h2>
+                                                </div>
+                                                <div class="texto">
+                                                    <div>
+                                                        <p th:text="${course.description}">asd</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <button class="customButton seeCourseButton">Ver curso</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+ 
                             </th:block>
                         </div>
                     </div>
@@ -93,32 +117,37 @@
             </th:block>
 
             <th:block th:unless="${session.u}">
-                <div class="row row-cols1 row-cols-md-4 g-5">
+                <div class="row justify-content-center">
                     <th:block th:each="course,iter: ${coursesList}" th:if="${course.isFree}">
-                        <div class="col d-flex">
-                            <div class="card text-white bg-dark " style="width: 18rem;">
-                                <div class="card-img-overlay forFreeDiv">
-                                    <p class="forFreeTag">For free!</p>
-                                </div>
-                                <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title" th:text="${course.name}">Card title</h5>
-                                    <p class="card-text" th:text="${course.description}">Card description</p>
+                        <div class="col col-md-2 myColW">
+                            <div class="myContainer"> <!-- no hace nada, no tiene ni css -->
+                                <div class="card2">
+                                    <div class="imgDiv">
+                                        <div class="freeDiv">Gratis</div>
+                                        <img th:src="@{/img/courses/{id}.jpg(id=${course.id})}" onerror="this.onerror=null; this.src='/img/drawing.jpg';">
+                                    </div>
                                     
-                                </div>
-                                <div class="card-footer"> 
-                                    <a href="#" class="btn btn-light">Ver curso</a>
+                                    <div class="myh100">
+                                        <div class="titulo justify-content-center">
+                                            <h2 class="text-center" th:text="${course.name}">Titulo</h2>
+                                        </div>
+                                        <div class="texto">
+                                            <div>
+                                                <p class="courseDesc" th:text="${course.description}">asd</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <button class="customButton seeCourseButton">Ver curso</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
                     </th:block>
                 </div>
             </th:block>
 
-            
-           
-            
         </div>
     
     

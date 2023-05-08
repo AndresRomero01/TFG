@@ -186,10 +186,11 @@ textarea:focus{
 }
 
 #profileTitle{
+  position: relative;
   text-align: center;
   color: white;
   font-size: 3em;
-  padding-top: 10em;
+  margin-top: 10em;
 }
 
 #changeUserPicture{

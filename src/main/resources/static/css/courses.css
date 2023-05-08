@@ -2,6 +2,10 @@
     --margi: 80%;
 }
 
+.bodyColCourses{
+    width: 70% !important;
+}
+
 .forFreeTag{
     /* text-align: center; */
     margin-top: -0.8em;
@@ -95,3 +99,57 @@
 
 
 /* ----- DROPDOWN SELECT ----- */
+
+#dropdownCategories{
+    margin-left: 5em;
+}
+
+#addCourseButton{
+    margin-right: 5em;
+}
+
+.customTab{
+    display: none;
+}
+
+.firstTab{
+    display: block;
+}
+
+.seeCourseButton{
+    margin: auto;
+}
+
+.imgDiv{
+    position: relative;
+    text-align: center;
+}
+
+.freeDiv{
+    position: absolute;
+    background-color: var(--msg-green);
+    color: white;
+    font-size: 1.3em;
+    width: 3.5em;
+    left: 0em;
+    border-radius: 0.1em;
+    margin-left: -60px; /* the same margin as the img in general cards .card2 img */
+}
+
+/* Foto de <a href="https://unsplash.com/es/@demoya?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Michael DeMoya</a> en <a href="https://unsplash.com/es/fotos/i2GS_MtW9hM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> */
+  
+
+.courseImgDiv{
+    /* height: 14vw;
+    width: 20vw; */
+    /* object-fit: cover ;
+    object-position:50% ; */
+}
+
+.courseImg{
+    /* width: 100% !important;
+    height: 100% !important; */
+    object-fit: contain !important;
+    object-position:50% !important;
+    background-color: var(--bs-gray-200);
+}

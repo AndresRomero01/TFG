@@ -203,4 +203,18 @@ public class DBHandler {
 
         return u;
     }
+
+    public long createCourse(EntityManager em, String name, Long catId, String desc, Boolean isFree, Boolean hasImage){
+        long idDevolver = -1;
+
+        Category cat = em.find(Category.class, catId);
+        Course c = new Course(name, cat, desc, isFree, hasImage);
+            
+        em.persist(c);
+        em.flush();
+        idDevolver = c.getId();
+        
+
+        return idDevolver;
+    }
 }

@@ -27,14 +27,12 @@
                                         <div class="titulo justify-content-center">
                                             <h2 class="text-center" th:text="${loan.item.name}">Pesas 5kg</h2>
                                         </div>
-                                      <div class="texto">
-                                        <div>
-                                          
-                                          <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
-                                           <p th:text="'Fin del alquiler: '+${loan.getLoanEndStrESHourMin}"></p>
-                                           <p th:text="'Cantidad alquilada: '+${loan.quantity}"></p>
-                                        </div>
-                                       
+                                        <div class="texto">
+                                            <div>
+                                                <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
+                                                <p th:text="'Fin del alquiler: '+${loan.getLoanEndStrESHourMin}"></p>
+                                                <p th:text="'Cantidad alquilada: '+${loan.quantity}"></p>
+                                            </div>
                                         </div>
 
                                         <th:block th:if="${loan.isLate}">
@@ -49,7 +47,7 @@
                                                 <div class="boton justify-content-center">
                                                     <div class="ampliarContainer">
                                                         <a  th:href="@{/items/loanItem?itemId=}+${loan.item.id}">
-                                                            <button disabled>Ampliar Alquiler</button>
+                                                            <button disabled class="customButton">Ampliar Alquiler</button>
                                                         </a>
                                                         <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="48 Horas antes del fin de la reserva podras ampliarla desde aqui">
                                                             <p>i</p>
@@ -66,13 +64,14 @@
                                             <th:block th:if="${loan.isRenovable}">
 
                                                 <div class="boton justify-content-center">
-                                                    <a  th:href="@{/items/loanItem?itemId=}+${loan.item.id}">
-                                                        <button>Ampliar Alquiler</button>
-                                                    </a>
-                                                    <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="Si hay disponibilidad podrás ampliar el alquiler una semana más">
-                                                        <p>i</p>
-                                                    </span>
-                                                    
+                                                    <div class="ampliarContainer">
+                                                        <a  th:href="@{/items/loanItem?itemId=}+${loan.item.id}">
+                                                            <button class="customButton">Ampliar Alquiler</button>
+                                                        </a>
+                                                        <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="Si hay disponibilidad podrás ampliar el alquiler una semana más">
+                                                            <p>i</p>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                                 
                                             </th:block>

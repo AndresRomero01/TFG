@@ -18,7 +18,6 @@
 
 .loginButton{
     margin-top: 4em;
-    background-color: var(--main-blue);
     border: 0;
     color: white;
 }

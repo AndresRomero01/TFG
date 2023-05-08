@@ -53,74 +53,70 @@ VALUES (9, 'STAFF', 'emp6',
 --Datos sobre cursos
 
 INSERT INTO CATEGORY (id, name)
-VALUES (1, 'cat1');
+VALUES (1, 'Cardio');
 
 INSERT INTO CATEGORY (id, name)
-VALUES (2, 'cat2');
+VALUES (2, 'Musculación');
 
 INSERT INTO CATEGORY (id, name)
-VALUES (3, 'categoria3');
+VALUES (3, 'Yoga');
 
 INSERT INTO CATEGORY (id, name)
-VALUES (4, 'categoria4');
+VALUES (4, 'Pilates');
 
 INSERT INTO CATEGORY (id, name)
-VALUES (5, 'categoria5categoria5');
+VALUES (5, 'HIIT');
 
 INSERT INTO CATEGORY (id, name)
-VALUES (6, 'categoria6');
+VALUES (6, 'Tren superior');
 
 INSERT INTO CATEGORY (id, name)
-VALUES (7, 'cat7');
+VALUES (7, 'Tren inferior');
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (1, 'curso de prueba1', FALSE, 'cprueba1', 1);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (1, 'Carrera 10km', FALSE, 'Prepárate para iniciarte en las maratones. Este curso te ayudará a conseguir superar la primera de ellas, la de 10km', 1, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (2, 'curso de prueba2', FALSE, 'cprueba2', 1);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (2, 'Maratón 42km', FALSE, 'Una maratón no es fácil, y lo sabemos. Prepárate junto con nuestro entrenador especializado para lograr tu objetivo', 1, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (3, 'curso de prueba3', TRUE, 'cprueba3', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (3, 'Triceps', TRUE, 'Aprenderás de diferentes maneras a entrenar adecuadamente tus triceps, haciendo incapié en la técinca para evitar lesiones', 2, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (4, 'curso de prueba4 y desc mas larga para ver como se ve', TRUE, 'abdominales laterales', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (4, 'Biceps', TRUE, 'Aprenderás de diferentes maneras a entrenar adecuadamente tus biceps, haciendo incapié en la técinca para evitar lesiones', 2, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (5, 'curso de prueba5', TRUE, 'curso de prueba5', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (5, 'Hombro', TRUE, 'Hay muchas maneras de entrenar hombros. En este curso te mostramos las mejores', 2, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (6, 'curso de prueba6', TRUE, 'curso de prueba6', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (6, 'Abdominales', TRUE, 'Entrena tus abdominales y consigue resultados en tiempo record', 2, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (7, 'curso de prueba1', FALSE, 'cprueba1', 1);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (7, 'Cinta', FALSE, 'La cinta de correr es lo más típico. Sin embargo, te enseñaremos algunos trucos que no sabías', 1, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (8, 'curso de prueba2', FALSE, 'cprueba2', 1);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (8, 'Elíptica', FALSE, 'Otro de las máquinas más comunes de cardio gracias a ser menos agresiva para tus rodillas. Te enseñaremos algunos ajustes para sacar el máximo provecho', 1, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (9, 'curso de prueba3', TRUE, 'cprueba3', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (9, 'Pecho', TRUE, 'En este curso aprenderás cuales son los mejores ejercicios tanto en eficiencia como en menor riesgo de lesión', 2, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (10, 'curso de prueba4 y desc mas larga para ver como se ve', TRUE, 'abdominales laterales', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (10, 'Cuádriceps', TRUE, 'Aprende cómo funcionan los cuádriceps, además de la mejor manera de entrenarlos', 2, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (11, 'curso de prueba5', TRUE, 'curso de prueba5', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (11, 'Isquiotibiales', TRUE, 'Sigue estos pasos para conseguir tu objetivo', 2, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (12, 'curso de prueba6', TRUE, 'curso de prueba6', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (12, 'Gemelos', FALSE, '¿Se te cansan los gemelos solo por andar? No te preocupes, nosotros te explicamos cómo solucionarlo', 2, FALSE, FALSE);
 
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (13, 'Glúteos', FALSE, 'Convierte la grasa en músculo con este curso', 2, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (13, 'curso de prueba6', FALSE, 'curso de prueba6', 2);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (14, 'Iniciación al yoga', FALSE, 'En este curso aprenderás en qué se basa el yoga, además de los primeros movimientos', 3, FALSE, FALSE);
 
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (14, 'curso de prueba6', FALSE, 'curso de prueba6', 2);
-
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (15, 'curso de prueba6', FALSE, 'curso de prueba6', 3);
-
-INSERT INTO COURSE (id, description, is_free, name, category_id)
-VALUES (16, 'curso de prueba6', FALSE, 'curso de prueba6', 1);
+INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
+VALUES (15, 'Bicicleta', FALSE, 'Uno de los mejores ejercicios para entrenar cardio, y además es divertido', 1, FALSE, FALSE);
 
 INSERT INTO RELATION_USER_COURSE(course_id, user_id, times_done)
 VALUES (1, 1, 4);
@@ -178,7 +174,7 @@ INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
 VALUES (1, 3, 1, '2023-04-04T00:00:00', '2023-04-11T23:59:00');
 
 INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (1, 2, 1, '2023-04-04T00:00:00', '2023-04-06T00:00:00');
+VALUES (1, 2, 1, '2023-04-04T00:00:00', '2023-05-07T00:00:00');
 
 --- Data for chats ---
 

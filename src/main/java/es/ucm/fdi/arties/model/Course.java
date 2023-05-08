@@ -35,6 +35,8 @@ public class Course {
     private Boolean isFree;
     private String name;
     private String description;
+    private Boolean hasImage;
+    private Boolean hasVideo;
     //TO DO: Variables para videos e imagenes (aprender a hacerlo)
 
     @ManyToOne
@@ -44,4 +46,12 @@ public class Course {
     @OneToMany (mappedBy = "course")
     @JsonIgnore
     private List<RelationUserCourse> coursesList;
+
+    public Course(String name, Category cat, String desc, Boolean isFree, Boolean hasImage){
+        this.name = name;
+        this.category = cat;
+        this.description = desc;
+        this.isFree = isFree;
+        this.hasImage = hasImage;
+    }
 }

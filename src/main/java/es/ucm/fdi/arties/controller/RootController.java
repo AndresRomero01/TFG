@@ -328,7 +328,50 @@ public class RootController {
 
     @GetMapping("/addCourse")
     public String adCourse(Model model, HttpSession session) {
+        List<Category> lc = db.getCoursesCatogories(em);
+        model.addAttribute("categories", lc);
         return "addCourse";
+    }
+
+    @PostMapping(path = "/createCourse", produces = "application/json")
+    @ResponseBody
+    @Transactional
+    public String createCourse(@RequestBody JsonNode o){
+        String courseName = o.get("name").asText();
+        String desc = o.get("desc").asText();
+        Boolean isFree = o.get("isFree").asBoolean();
+        Long catId = o.get("cat").asLong();
+        Boolean hasImage = o.get("hasImage").asBoolean();
+
+        long id = db.createCourse(em, courseName, catId, desc, isFree, hasImage);
+        
+        return "{\"courseId\":" + id + "}";
+    }
+
+    @PostMapping("/modifyCourseImg")
+    @Transactional
+    @ResponseBody 
+    public String modifyCourseImg(@RequestParam("courseImg") MultipartFile photo, @RequestParam("courseId") long courseId)
+    {
+        log.info("---- inside modifyCourseImg ----");
+
+      File img = new File("src/main/resources/static/img/courses", courseId + ".jpg");
+
+      if (photo.isEmpty()) {
+        log.info("failed to upload photo: emtpy file?");
+        return null;
+      } else {
+          try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(img))) {
+              byte[] bytes = photo.getBytes();
+              stream.write(bytes);
+              log.info("la ruta es: " + img.getAbsolutePath());
+          } catch (Exception e) {
+              return null;
+          }
+      }
+
+      return "{\"isok\": \"todobien\"}";
+
     }
 
     @GetMapping("/seeCourse")
