@@ -245,12 +245,12 @@ function toBlobGeneral(dataurl) {
  function appendImageToFomData(form, img, name)
  {
     console.log("--- inside appendImageToFomData ---");
-     let imageBlob = toBlobGeneral(img.src);
-     form.append(name, imageBlob);
+    let imageBlob = toBlobGeneral(img.src);
+    form.append(name, imageBlob);
     console.log(form);
 
-     return form;
-     //return go(endpoint, "POST", fd, {})
+    return form;
+    //return go(endpoint, "POST", fd, {})
  }
 
 /**

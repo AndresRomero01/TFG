@@ -1,0 +1,24 @@
+/* --- cutre: parte del css esta reutilizado de addCourse --- */
+
+#modifyCourseButton{
+    font-size: large;
+    width: 10em;
+    height: 2.5em;
+    margin-top: 3em;
+}
+
+.toast-header{
+    background-color: var(--bs-dark);
+    color: white;
+}
+
+#successToast{
+    position: absolute;
+    top: 10%;
+    left: 45%;
+}
+
+#toastHeaderText{
+    font-size: large;
+    margin: auto;
+}

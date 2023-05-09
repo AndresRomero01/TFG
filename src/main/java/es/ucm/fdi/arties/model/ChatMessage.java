@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
     @NamedQuery(name = "getGeneralQuestions", query = "select m from ChatMessage m where staff_id = null"),
     @NamedQuery(name = "getStaffChats", query = "select m from ChatMessage m where staff_id = :id"),
     @NamedQuery(name = "getConversation", query = "select m from ChatMessage m where staff.id = :staffid AND user.id = :userid"),
+    @NamedQuery(name = "deleteUserChats", query = "delete from ChatMessage m where staff.id = :id or user.id = :id"),
     @NamedQuery(name = "getUserChats", query = "select m from ChatMessage m where user_id = :id")
 })
 @AllArgsConstructor

@@ -17,7 +17,16 @@
                     <div th:if="${course.isFree}" class="forFreeDiv">
                         <p class="forFreeTag">For free!</p>
                     </div>
-                    <img  src="/img/drawing.jpg" id="photo" alt="course thumbnail">
+                    <th:block th:if="${course.hasImage}">
+                        <div class="courseImgDiv">
+                            <img class="courseImg" id="photo" th:src="@{/img/courses/{id}.jpg(id=${course.id})}">
+                        </div>
+                    </th:block>
+                    
+                    <th:block th:unless="${course.hasImage}">
+                        <img src="/img/drawing.jpg" id="photo">
+                    </th:block>
+                    <!-- <img  src="/img/drawing.jpg" id="photo" alt="course thumbnail"> -->
                 </div>
             </div>
             <div class="col d-flex flex-column align-items-center justify-content-between">

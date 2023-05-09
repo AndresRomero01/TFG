@@ -74,13 +74,13 @@ INSERT INTO CATEGORY (id, name)
 VALUES (7, 'Tren inferior');
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (1, 'Carrera 10km', FALSE, 'Prepárate para iniciarte en las maratones. Este curso te ayudará a conseguir superar la primera de ellas, la de 10km', 1, FALSE, FALSE);
+VALUES (1, 'Carrera 10km', FALSE, 'Prepárate para iniciarte en las maratones. Este curso te ayudará a conseguir superar la primera de ellas, la de 10km', 1, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (2, 'Maratón 42km', FALSE, 'Una maratón no es fácil, y lo sabemos. Prepárate junto con nuestro entrenador especializado para lograr tu objetivo', 1, FALSE, FALSE);
+VALUES (2, 'Maratón 42km', FALSE, 'Una maratón no es fácil, y lo sabemos. Prepárate junto con nuestro entrenador especializado para lograr tu objetivo', 1, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (3, 'Triceps', TRUE, 'Aprenderás de diferentes maneras a entrenar adecuadamente tus triceps, haciendo incapié en la técinca para evitar lesiones', 2, FALSE, FALSE);
+VALUES (3, 'Triceps', TRUE, 'Aprenderás de diferentes maneras a entrenar adecuadamente tus triceps, haciendo incapié en la técinca para evitar lesiones', 2, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
 VALUES (4, 'Biceps', TRUE, 'Aprenderás de diferentes maneras a entrenar adecuadamente tus biceps, haciendo incapié en la técinca para evitar lesiones', 2, FALSE, FALSE);
@@ -160,7 +160,6 @@ VALUES (1, 4, 2, '2023-03-20T10:00:00', '2023-04-9T23:59:00');
 INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
 VALUES (3, 4, 1, '2023-04-10T00:00:00', '2023-04-20T23:59:00');
 
-
 INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
 VALUES (3, 6, 4, '2023-03-20T10:00:00', '2023-04-6T10:00:00');
 
@@ -175,6 +174,12 @@ VALUES (1, 3, 1, '2023-04-04T00:00:00', '2023-04-11T23:59:00');
 
 INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
 VALUES (1, 2, 1, '2023-04-04T00:00:00', '2023-05-07T00:00:00');
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (3, 3, 1, '2023-04-04T00:00:00', '2023-05-07T00:00:00');
+
+INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
+VALUES (3, 2, 1, '2023-04-04T00:00:00', '2023-05-07T00:00:00');
 
 --- Data for chats ---
 

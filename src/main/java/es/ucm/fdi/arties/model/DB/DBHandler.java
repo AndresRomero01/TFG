@@ -104,6 +104,10 @@ public class DBHandler {
     public void deleteUser(EntityManager em, long idUser){
         /* User u = em.createNamedQuery("deleteUser", User.class).setParameter("idUser", idUser).getSingleResult(); */
         User u = em.find(User.class, idUser);
+
+        // first we have to delete all related chats so there are no problems removing foreign keys
+        deleteUserChats(em, idUser);
+
         em.remove(u);
         em.flush();
     }
@@ -217,4 +221,31 @@ public class DBHandler {
 
         return idDevolver;
     }
+
+    public long modifyCourse(EntityManager em, long courseId, String courseName, Long catId, String desc, Boolean isFree) {
+        Course c = em.find(Course.class, courseId);
+
+        Category cat = em.find(Category.class, catId);
+
+        c.setCategory(cat);
+        c.setIsFree(isFree);
+        c.setDescription(desc);
+        c.setName(courseName);
+
+        return 0;
+    }
+
+    public void deleteCourse(EntityManager em, Long courseId){
+        Course c = em.find(Course.class, courseId);
+        em.remove(c);
+        em.flush();
+    }
+
+    public void deleteUserChats(EntityManager em, Long userId){
+        /* Query q = em.createNamedQuery("deleteUserChats", ChatMessage.class).setParameter("id", userId); */
+        Query query = em.createQuery("delete from ChatMessage m where user.id = :id or staff.id = :id");
+        query.setParameter("id", userId);
+        query.executeUpdate();
+    }
+
 }

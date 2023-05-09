@@ -10,6 +10,19 @@ function manageTabs(e){
     document.getElementById(panelId).style.display = "block";
 }
 
+function manageCoursesTabs(e){
+    const panelId = e.target.id + "Panel";
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("coursesTab");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    document.getElementById("dropdownCategoriesText").innerText = e.target.innerText;
+    document.getElementById(panelId).style.display = "block";
+}
+
 function validatePassword(){
     var password = document.getElementById("password1");
     var confirm_password = document.getElementById("password2");

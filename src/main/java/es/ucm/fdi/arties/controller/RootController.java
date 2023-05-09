@@ -177,6 +177,10 @@ public class RootController {
         List<Item> itemList = dbItems.getItemList(em);
         model.addAttribute("items", itemList);
 
+        List<Course> coursesList = new ArrayList<Course>();
+        coursesList = db.getCoursesList(em);
+        model.addAttribute("coursesList", coursesList);
+
 
         Long id = Long.valueOf(1);
         GymSub gymSub = em.find(GymSub.class, id);
@@ -333,6 +337,32 @@ public class RootController {
         return "addCourse";
     }
 
+    @GetMapping("/modifyCourse")
+    public String modifyCourse(Model model, HttpSession session, @RequestParam(required = true) Long courseId) {
+        List<Category> lc = db.getCoursesCatogories(em);
+        model.addAttribute("categories", lc);
+        Course c = em.find(Course.class, courseId);
+        model.addAttribute("course", c);
+        
+        return "modifyCourse"; //reuse the addCourse page, but with the info of the course preloaded
+    }
+
+    @PostMapping(path = "/modifyCourse", produces = "application/json")
+    @ResponseBody
+    @Transactional
+    public String modifyCourse(@RequestBody JsonNode o){
+        String courseName = o.get("name").asText();
+        String desc = o.get("desc").asText();
+        Boolean isFree = o.get("isFree").asBoolean();
+        Long catId = o.get("cat").asLong();
+        Long courseId = o.get("courseId").asLong();
+        /* Boolean hasImage = o.get("hasImage").asBoolean(); */
+
+        db.modifyCourse(em, courseId, courseName, catId, desc, isFree);
+        
+        return "{\"isok\": \"ok\"}";
+    }
+
     @PostMapping(path = "/createCourse", produces = "application/json")
     @ResponseBody
     @Transactional
@@ -371,7 +401,18 @@ public class RootController {
       }
 
       return "{\"isok\": \"todobien\"}";
+    }
 
+    @PostMapping(path = "/deleteCourse", produces = "application/json")
+    @ResponseBody
+    @Transactional
+    public String deleteCourse(@RequestBody JsonNode o){
+        Long courseId = o.get("courseId").asLong();
+        /* Boolean hasImage = o.get("hasImage").asBoolean(); */
+
+        db.deleteCourse(em, courseId);
+        
+        return "{\"isok\": \"ok\"}";
     }
 
     @GetMapping("/seeCourse")
@@ -380,12 +421,9 @@ public class RootController {
 
         Course c = db.getCourse(em, chosenCourseId);
 
-
         log.info("@@@@ chosen course " + c.getName());
 
         model.addAttribute("course", c);
-
-        /* model.addAttribute("nombrePlato", platoElegidoId); */
 
         return "seeCourse";
     }

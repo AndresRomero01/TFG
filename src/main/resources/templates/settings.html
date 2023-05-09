@@ -9,10 +9,7 @@
     <link rel="stylesheet" href="css/settingsItems.css" />
     <link rel="stylesheet" href="css/settingsLoans.css" />
     <link rel="stylesheet" href="css/settingsLessons.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
-
 
     <title>Configuracion</title>
 </head>
@@ -67,7 +64,79 @@
       </div>
 
       <div id="coursesPanel" class="customTab">
-        b
+
+        <div class="row">
+          <div class="col col-md-4 offset-2 text-center">
+            <div class="col dropdown">
+              <button class="btn customButton dropdown-toggle" type="button" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span id="dropdownCategoriesText"> Todos los cursos </span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
+                  <button class="dropdown-item" type="button" onclick="manageCoursesTabs(event)" id="allCourses">Todos los cursos</button>
+                  <button class="dropdown-item" type="button" 
+                      th:each="cat,iter: ${categories}" onclick="manageCoursesTabs(event)" th:id="${cat.id}" th:text="${cat.name}">cat name
+                  </button>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col col-md-4 text-center">
+            <a class="btn customButton" id="addCourseButton" th:href="@{/addCourse}">Añadir curso</a>
+          </div>
+        </div>
+        
+
+        <div th:id="allCoursesPanel" class="firstTab coursesTab">
+          <div class="row justify-content-center">
+            <th:block th:each="course,iter: ${coursesList}">
+              <div  th:class="${course.id}+ ' row courseRow'">
+                <div class="col col-md-7">
+                  <p th:text="${course.name}" class="courseName"></p>
+                </div>
+
+                <div class="col">
+                  <a class="btn customButton" th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}">Ver curso</a>
+                </div>
+                <div class="col">
+                  <a class="btn btn-secondary" th:href="@{/modifyCourse?courseId={id} (id=${course.id})}">Modificar</a>
+                </div>
+                <div class="col">
+                  <button class="btn btn-danger"  onclick="deleteCourse(event)" th:value="${course.id}">Eliminar</button>
+                </div>
+              </div>
+            </th:block>
+          </div>
+        </div>
+
+        <!-- --- create dynamic tab panels --- -->
+        
+        <th:block th:each="cat,iter: ${categories}">
+          <div th:id="${cat.id} + 'Panel'" class="coursesTab">
+            <div class="row justify-content-center">
+              <th:block th:each="course,iter: ${cat.coursesList}">
+                <div th:class="${course.id}+ ' row courseRow'">
+                    <div class="col col-md-7">
+                      <p th:text="${course.name}" class="courseName"></p>
+                    </div>
+  
+                    <div class="col">
+                      <a class="btn customButton" th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}">Ver curso</a>
+                    </div>
+                    <div class="col">
+                      <a class="btn btn-secondary" th:href="@{/modifyCourse?courseId={id} (id=${course.id})}">Modificar</a>
+                    </div>
+                    <div class="col">
+                      <button class="btn btn-danger" onclick="deleteCourse(event)" th:value="${course.id}">Eliminar</button>
+                    </div>
+                      
+                  </div>
+              </th:block>
+            </div>
+          </div>
+        </th:block>
+        
+        
+
       </div>
 
       <div id="lessonsPanel" class="customTab">

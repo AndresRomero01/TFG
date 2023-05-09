@@ -76,3 +76,23 @@
 .descRow{
     margin-top: 3em;
 }
+
+
+
+
+
+.toast-header{
+    background-color: var(--bs-dark);
+    color: white;
+}
+
+#successToast{
+    position: absolute;
+    top: 10%;
+    left: 45%;
+}
+
+#toastHeaderText{
+    font-size: large;
+    margin: auto;
+}

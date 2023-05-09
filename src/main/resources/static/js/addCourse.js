@@ -1,3 +1,4 @@
+const courseAddedToast = new bootstrap.Toast(document.querySelector('#successToast'));
 
 function createCourse(){
     console.log("----- in createCourse -----");
@@ -98,7 +99,8 @@ function modifyCourseImg(courseId){
         //TODO cambiar imagen en la vista
         //document.querySelector("#coursePicture").src = img2.src;
         /* modalModifyCourseImg.hide(); */
-        document.getElementById("navCourses").click()
+        /* document.getElementById("navCourses").click() */
+        courseAddedToast.show()
 
     }).catch(
         (e) =>{ //console.log("fallo: "+ Object.values(e))
@@ -106,3 +108,4 @@ function modifyCourseImg(courseId){
     });
 
 }
+

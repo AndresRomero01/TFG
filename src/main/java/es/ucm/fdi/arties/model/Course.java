@@ -2,6 +2,7 @@ package es.ucm.fdi.arties.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,7 +44,7 @@ public class Course {
     @JsonIgnore
     private Category category;
 
-    @OneToMany (mappedBy = "course")
+    @OneToMany (mappedBy = "course", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<RelationUserCourse> coursesList;
 

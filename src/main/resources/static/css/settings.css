@@ -183,15 +183,21 @@ p.staffName{
     animation: fadeIn 0.5s;
 }
 
+.coursesTab{
+  display: none;
+}
+
+
+
 /* #staffPanel{
     background-color: #343a40;
 } */
 
-#coursesPanel{
+/* #coursesPanel{
     background-color: #1889fa;
     width: 30em;
     height: 30em;
-}
+} */
 
 .firstTab{
     display: block;
@@ -259,4 +265,55 @@ p.staffName{
   height: 1.5em;
   width: 1.5em;
   font-size: 2em !important;
+}
+
+
+
+
+
+/* --- css for courses panel --- */
+
+.courseRow{
+  background-color: var(--bs-dark);
+  color: white;
+  margin-top: 1em;
+  border-radius: 0.3em;
+  width: 80%;
+  height: 2.5em;
+  font-size: 1.5em;
+}
+
+.courseName{
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+
+.courseRow button,a{
+  margin-top: 0.7em;
+  width: 6em;
+}
+
+/* .addIcon{
+  font-size: 2em !important;
+  font-weight: 500 !important;
+  margin-top: -0.1em;
+}
+ */
+
+
+#dropdownCategories{
+  height: 2.5em;
+  width: 12em;
+}
+
+#addCourseButton{
+  height: 2.5em;
+  width: 12em;
+  padding: 0;
+  margin: 0;
+  padding-top: 0.5em;
+}
+
+#dropdownCategoriesText{
+  margin-right: 0.5em;
 }

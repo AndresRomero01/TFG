@@ -126,12 +126,12 @@ public class User implements Transferable<User.Transfer> {
 
     //por cada usuario, tenemos en esta var la lista de items que tiene alquilados
     
-    @OneToMany (mappedBy = "user")//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
+    @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
     @JsonIgnore
     private List<ItemLoans> itemLoans;
 
 
-    @OneToMany (mappedBy = "user")//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
+    @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
     @JsonIgnore
     private List<SessionBookings> sessionBookings;
 
@@ -140,12 +140,12 @@ public class User implements Transferable<User.Transfer> {
     // Es muy pesado "precargar" los datos de la lista, si no se va a usar ese atributo
     // Ademas, hibernate solo deja tener 1 EAGER simultaneamente
     
-    @OneToMany (mappedBy = "user")
+    @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonIgnore
     //@LazyCollection(LazyCollectionOption.FALSE)
     private List<RelationUserCourse> coursesList;
 
-    @OneToMany (mappedBy = "user")
+    @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)
     /* @OnDelete(action = OnDeleteAction.CASCADE) */
     @JsonIgnore
     private List<ChatMessage> messagesList;
