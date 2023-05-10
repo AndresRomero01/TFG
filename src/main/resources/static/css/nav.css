@@ -5,3 +5,8 @@
 #nombreSitioNavbar{
     font-size: 2em;
 }
+
+.selectedPage{
+    font-weight: bold;
+    text-decoration: underline;
+}

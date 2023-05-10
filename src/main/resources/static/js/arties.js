@@ -293,3 +293,57 @@ document.addEventListener("DOMContentLoaded", () => {
     // 	 document.addEventListener("DOMContentLoaded", () => { /* your-code-here */ });
     //   (assuming you do not care about order-of-execution, all such handlers will be called correctly)
 });
+
+
+// to detect and highlight the navbar entry of the actual page
+document.addEventListener("DOMContentLoaded", () => {
+    let url = window.location.href.toString();
+
+    let urlParts = url.split("/")
+    let page = urlParts[urlParts.length-1]
+    let otherPages = urlParts[urlParts.length-2]
+
+    switch (page){
+        case "courses":
+            selectNavbarPage("navCourses")
+            break;
+        case "subscriptions":
+            selectNavbarPage("navSubscriptions")
+            break;
+        case "settings":
+            selectNavbarPage("navSettings")
+            break;
+        case "chats":
+            selectNavbarPage("navChats")
+            break;
+        case "signup":
+            selectNavbarPage("navSignup")
+            break;
+        case "login":
+            selectNavbarPage("navLogin")
+            break;
+    }
+
+    switch (otherPages){
+        case "items":
+            if(document.getElementById("navbarDropdownItems") != null) selectNavbarPage("navbarDropdownItems")
+            else selectNavbarPage("navItems")
+            break;
+        case "lessons":
+            if(document.getElementById("navbarDropdownLessons") != null) selectNavbarPage("navbarDropdownLessons")
+            else selectNavbarPage("navLessons")
+            break;
+        case "user":
+            selectNavbarPage("navProfile")
+            break;
+    }
+});
+
+function selectNavbarPage(navLinkId){
+    Array.from(document.getElementsByClassName("nav-link")).forEach(e => {
+        e.classList.remove("selectedPage")
+    })
+
+    let actualNavLink = document.getElementById(navLinkId)
+    actualNavLink.classList.add("selectedPage")
+}
