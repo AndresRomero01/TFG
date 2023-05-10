@@ -7,6 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.ucm.fdi.arties.model.Lesson;
 import es.ucm.fdi.arties.model.Session;
+import es.ucm.fdi.arties.model.SessionBookings;
+import es.ucm.fdi.arties.model.SessionBookingsId;
+import es.ucm.fdi.arties.model.User;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -34,10 +37,10 @@ public class DBLessonsHandler {
 
 
     @Transactional
-    public long addNewLesson(EntityManager em, String lessonName, int capacity, String period,String description) {
+    public long addNewLesson(EntityManager em, String lessonName, int capacity, String period,String description, float lessonPrice) {
 
         long newId = -1;
-        Lesson l = new Lesson(lessonName, capacity, period, description);
+        Lesson l = new Lesson(lessonName, capacity, period, description, lessonPrice);
         em.persist(l);
         em.flush();
         newId = l.getId();
@@ -107,6 +110,55 @@ public class DBLessonsHandler {
         List<Lesson> lessons = null;
         lessons = em.createNamedQuery("lesson.list", Lesson.class).getResultList();
         return lessons;
+    }
+
+    @Transactional
+    public int makeBookLessonSession(EntityManager em, User u, long idSession)
+    {
+        Session s = em.find(Session.class, idSession);
+        Lesson l = s.getLesson();
+
+        //si capacidad de la clase menor que actuales mas la nueva es que no habia hueco para la reserva
+        if(l.getCapacity() < (s.getSessionBookings().size()+1))
+            return -2;
+
+        //si el usuario ya tenia una reserva para esa sesion
+        for(SessionBookings sb : u.getSessionBookings())
+        {
+            if(sb.getSession().getId() == idSession)
+                return -1;
+        }
+
+
+
+        SessionBookingsId sbi = new SessionBookingsId(u.getId(), idSession);
+       
+
+        SessionBookings sb = new SessionBookings(sbi, u, s);
+
+        em.persist(sb);
+        em.flush();
+        u.getSessionBookings().add(sb);
+        s.getSessionBookings().add(sb);
+       // SessionBookingsId  si = new SessionBookingsId(u.getId(), idSession);
+        //SessionBookings sb = new Ses
+        return 0;
+    }
+
+
+    @Transactional
+    public void cancelBookSession(EntityManager em, User u, long idSession)
+    {
+
+        u.removeBookSession(idSession);
+
+        Session s = em.find(Session.class, idSession);
+
+        SessionBookings sb = s.removeBookSession(u.getId());
+
+        em.remove(sb);
+
+        em.flush(); 
     }
 
 

@@ -97,13 +97,18 @@
 }
 
 .editImgButton{
-  background-color: rgba(124, 124, 124, 0.7);
-  font-size: large;
+/*   background-color: rgba(124, 124, 124, 0.7); */
+/*   font-size: large; */
   position: absolute;
-  top: 2px;
+  bottom: 2px;
+
+  font-size: large !important;
+  width: 40px;
+  height: 40px;
   
   right: 2px;
-  border-radius: 20px;
+  border-radius: 100%;
   border-color: transparent;
+  aspect-ratio : 1;
 }
 

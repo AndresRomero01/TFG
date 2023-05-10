@@ -35,4 +35,37 @@ public class Utils {
 
       return dateStr;
     }
+
+
+    public static String weekDayEnToEs(String weekDay)
+    {
+      String spanishWeekday;
+      switch (weekDay.toLowerCase()) {
+          case "monday":
+              spanishWeekday = "Lunes";
+              break;
+          case "tuesday":
+              spanishWeekday = "Martes";
+              break;
+          case "wednesday":
+              spanishWeekday = "Miércoles";
+              break;
+          case "thursday":
+              spanishWeekday = "Jueves";
+              break;
+          case "friday":
+              spanishWeekday = "Viernes";
+              break;
+          case "saturday":
+              spanishWeekday = "Sábado";
+              break;
+          case "sunday":
+              spanishWeekday = "Domingo";
+              break;
+          default:
+              spanishWeekday = "invalid weekday";
+              break;
+      }
+      return spanishWeekday;
+    }
 }

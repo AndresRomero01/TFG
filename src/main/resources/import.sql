@@ -254,15 +254,18 @@ INSERT INTO GYM_SUB (id, online_price, onsite_price)
 VALUES (1, 25, 50);
 
 --- DATA FOR LESSONS ---
-INSERT INTO LESSON (id, name, period, capacity, description)
-VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 30, 'Clase de baile muy animada, perfecta para para aquellos que les guste moverse con estilo.');
+ALTER TABLE lesson ALTER COLUMN period TYPE text;--Para poder guardar textos largos
+ALTER TABLE lesson ALTER COLUMN description TYPE text;--Para poder guardar textos largos en la descripcion
 
-INSERT INTO LESSON (id, name, period, capacity, description)
-VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
+INSERT INTO LESSON (id, name, period, capacity, price, description)
+VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 30, 12, 'Clase de baile muy animada, perfecta para para aquellos que les guste moverse con estilo.');
+
+INSERT INTO LESSON (id, name, period, capacity, price, description)
+VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 10, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
 
 ------
-INSERT INTO SESSION (id, date, lesson_id)
-VALUES (1,'2023-05-20T00:00:00', 1);
+/* INSERT INTO SESSION (id, date, lesson_id)
+VALUES (1,'2023-04-20T00:00:00', 1);
 
 INSERT INTO SESSION (id, date, lesson_id)
 VALUES (2,'2023-05-22T00:00:00', 1);
@@ -273,10 +276,10 @@ VALUES (3,'2023-05-23T00:00:00', 1);
 INSERT INTO SESSION (id, date, lesson_id)
 VALUES (4, '2023-05-20T00:10:00', 2);
 INSERT INTO SESSION (id, date, lesson_id)
-VALUES (5, '2023-05-20T00:12:24', 2);
+VALUES (5, '2023-05-20T00:12:24', 2); */
 ------
 
-INSERT INTO SESSION_BOOKINGS (user_id, session_id)
+/* INSERT INTO SESSION_BOOKINGS (user_id, session_id)
 VALUES (1,1);
 
 INSERT INTO SESSION_BOOKINGS (user_id, session_id)
@@ -289,6 +292,6 @@ INSERT INTO SESSION_BOOKINGS (user_id, session_id)
 VALUES (1,5);
 
 INSERT INTO SESSION_BOOKINGS (user_id, session_id)
-VALUES (1,2);
+VALUES (1,2); */
 
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

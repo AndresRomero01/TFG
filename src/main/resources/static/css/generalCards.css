@@ -150,6 +150,7 @@ html {
 }
 
 .card2 button {
+  background-color: var(--main-blue);
   border: 0;
   color: white;
   font-family: inherit;

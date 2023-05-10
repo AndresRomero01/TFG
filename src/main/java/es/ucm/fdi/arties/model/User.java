@@ -170,6 +170,11 @@ public class User implements Transferable<User.Transfer> {
         return false;
     }
 
+    public boolean isType(ClientType type)
+    {
+        return clientType == type;
+    }
+
     @Getter
     @AllArgsConstructor
     public static class Transfer {
@@ -247,6 +252,24 @@ public class User implements Transferable<User.Transfer> {
         }
 
         return toRemove;
+    }
+
+    
+    public void removeBookSession(long idSession)
+    {
+        SessionBookings toRemove = null;
+        for(SessionBookings sb:sessionBookings)
+        {
+            if(sb.getSession().getId() == idSession)
+            {
+                toRemove = sb;
+            }
+                
+        }
+        if(toRemove != null)
+        {
+            sessionBookings.remove(toRemove);
+        }
     }
 }
 

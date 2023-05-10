@@ -28,6 +28,7 @@ import es.ucm.fdi.arties.model.Transferable;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.DB.DBHandler;
 import es.ucm.fdi.arties.model.DB.DBItemsHandler;
+import es.ucm.fdi.arties.model.DB.DBLessonsHandler;
 import es.ucm.fdi.arties.model.User.ClientType;
 import es.ucm.fdi.arties.model.User.Role;
 
@@ -66,6 +67,7 @@ public class RootController {
     
     private DBHandler db = new DBHandler();
     private DBItemsHandler dbItems = new DBItemsHandler();
+    private DBLessonsHandler dbLessons = new DBLessonsHandler();
 
 
     private static final Logger log = LogManager.getLogger(RootController.class);
@@ -195,6 +197,11 @@ public class RootController {
             model.addAttribute("onlinePrice", gymSub.getOnlinePrice());
             model.addAttribute("onsitePrice", gymSub.getOnsitePrice());
         }
+
+
+
+        //lessons
+        model.addAttribute("lessons", dbLessons.getAllLessons(em));
 
         return "settings";
     }

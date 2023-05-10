@@ -1,0 +1,152 @@
+.imgItem{
+    width: 80%;
+    margin:0.5em
+   
+}
+
+
+
+.myBody{
+    margin: 5em;
+    margin-top: 1em;
+}
+
+
+
+@media (max-width: 740px) {
+    .myBody {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+  }
+
+.loanRow{
+    background-color: var(--secondary);
+    border-radius: 1em;
+    color: white;
+
+}
+
+.separator{
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.238);
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 1px;
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.hSeparator{
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.238);
+    border-top-width: 0px;
+    border-bottom-width: 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+}
+
+
+
+.hVSeparator{
+    /* border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-top-width: 0.1em;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px; */
+}
+
+.cardText{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.cardText:first-of-type{
+    align-items: center;
+    justify-content: start;
+    display: flex;
+}
+
+
+
+.myCard{
+    
+    color:white;
+    border-width: 0px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+   
+}
+
+
+/* .row :first-child{
+    border-right-width: 0px;
+} */
+
+/* Selecciona al primero que este en una lista de iguales de ese tipo */
+.separator:first-of-type{
+    border-right-width: 0px;
+    margin: 0px;
+  
+}
+
+.separator:last-of-type{
+    border-right-width: 0px;
+}
+
+
+
+.myForm{
+   /*  width: 50%; */
+    margin-top: 1em;
+   /*  height: 20em; */
+    
+}
+
+.myForm .col{
+    display: flex;
+    align-items: center;
+}
+
+.infoMsg{
+    height: 100%;;
+    display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoMsg div{
+    background-color: var(--dark);
+    color: white;
+    padding: 1em;
+    border-radius: 0.5em;
+}
+
+.infoMsg p{
+    margin: 0;
+}
+
+#addQuantityItem{
+    margin-left: 1em;
+}
+
+.imgCustom{
+    width: 100%;
+    /* width: 20vw; */
+    /* height: 14vw; */
+    aspect-ratio : 1.3;
+    object-fit: cover;
+    
+}
+
+

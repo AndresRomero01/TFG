@@ -34,6 +34,8 @@ let sessionListContainer = document.querySelector("#sessionListContainer")
 
 let sessionsToAdd = []
 
+let sessionsToAddEs = []
+
 function showAddSession()
 {
     console.log("pulsado")
@@ -75,6 +77,7 @@ function addNewSession()
 
    
     sessionsToAdd.push(weekDay.value+"-"+hour.value)
+    sessionsToAddEs.push(weekDayEs+"-"+hour.value);
 
 
     let newSessionhtml = '<div class="col-sm-4 addSessionContainer">'+
@@ -97,6 +100,7 @@ function removeAddSession(e)
  console.log("aqui")
     let index = sessionsToAdd.indexOf(e.target.value+"");
     sessionsToAdd.splice(index,1)
+    sessionsToAddEs.splice(index,1)
     
     e.target.closest(".addSessionContainer").remove();
     console.log(sessionsToAdd); 
@@ -131,10 +135,12 @@ function newLesson()
     let lessonName = document.getElementById("lessonNameField").value;
     let lessonCapacity = document.getElementById("lessonCapacity").value;
     let lessonDesc = document.getElementById("lessonDescField").value;
+    let lessonPrice = document.getElementById("lessonPrice").value;
     console.log("capa: "+ lessonCapacity);
 
     formData.append("lessonName", lessonName);
     formData.append("lessonCapacity", lessonCapacity);
+    formData.append("lessonPrice", lessonPrice);
     formData.append("period", sessionsToAddStr);
     formData.append("description", lessonDesc);
 
@@ -144,9 +150,82 @@ function newLesson()
         myForm.reset();
         sessionListContainer.innerHTML = "";
         sessionsToAdd = []
+       
 
+        updateUiNewLesson(d["newId"], lessonName, lessonCapacity, lessonDesc, lessonPrice)
+        sessionsToAddEs = []
 
     }).catch(() => console.log("fallo"));
 
-       
+    
+}
+
+
+
+
+
+function updateUiNewLesson(lessonId, lessonName, lessonCapacity, lessonDesc, lessonPrice)
+{
+    let rootContainer = document.getElementById("lessonsContainer");
+
+
+    let htmlNewLesson = '<div class="row lessonRow">'+
+
+                            '<div class="col-3">'+
+                            '<div class="lessonImgContainer">'+
+                                
+                                '<span>'+
+                                '<img  src="/img/backgroundLessons.png" th:id="lessonImg'+lessonId+'" class="lessonImg" />'+
+                                '<!-- <button th:value="${item.id}" data-bs-toggle="modal" data-bs-target="#modalModifyItemImg" class="editImgButton">✏️</button> -->'+
+                                '</span>'+
+                                
+                            '</div>'+
+                            
+                            '</div>'+
+
+                            '<div class="col">'+
+    
+    
+                            '<div class="row lessonHeader">'+
+                            '<div class="col-4">'+
+                            '<p id="lessonName'+lessonId+'" class="" >'+lessonName+'</p>'+
+                            '</div>'+
+                            '<div class="col offset-3">'+
+                            '<p id="lessonCapacityText'+lessonId+'" class="">Aforo: '+lessonCapacity+'</p>'+
+                            '<input type="hidden" id="lessonCapacity'+lessonId+'" value="'+lessonCapacity+'">'+
+                            '</div>'+
+                            '<div class="col">'+
+                            '<p id="lessonPriceText'+lessonId+'" class="lessonPrice">Precio: '+lessonPrice+'</p>'+
+                            '<input type="hidden" id="lessonPrice'+lessonId+'" value="'+lessonPrice+'">'+
+                            '</div>'+
+                        '</div>'+
+                        
+                        '<div class="lessonDescContainer row">'+
+                            '<p id="lessonDesc'+lessonId+'" class="lessonDescText">'+lessonDesc+'</p>'+
+                            '</div>'+
+
+                            '<div class="row sessionLessonContainer">';
+
+
+    for(let i = 0; i < sessionsToAddEs.length; i++)
+    {
+        htmlNewLesson += '<span class="sessionLessonStr">'+sessionsToAddEs[i]+'</span>'
+    }
+
+                           /*  '<th:block th:each="sessionStr,iter: ${lesson.getListPeriodStrEs}">'+
+                                '<span class="sessionLessonStr" th:text="${sessionStr}"></span>'+
+                                '</th:block>'+ */
+    htmlNewLesson +=     '</div>'+
+                        '</div>'+
+
+                        '<div class="col-1">'+
+                            '<div class="lessonButtonsContainer">'+
+                            '<button class="btn lessonButtonModify" value="'+lessonId+'" data-bs-toggle="modal" data-bs-target="#modalModifylesson">Modificar</button>'+
+                            '<button value="'+lessonId+'" class="btn lessonButtonDelete deleteLesson">Eliminar</button>'+
+                            '</div>'+
+                        '</div>'+
+
+                        '</div>'
+
+    rootContainer.innerHTML += htmlNewLesson;
 }

@@ -16,6 +16,7 @@ var auxCurrentDate = new Date();
 //otra opcion, incluir en los scripts algun evento tipo onchange sobre el calendario para que ahi ya ellos se actualicen
 
 
+
 !function() {
 
   var today = moment();
@@ -32,6 +33,8 @@ var auxCurrentDate = new Date();
         //self.openDay(current);
       }, 500);
     }
+
+    
   }
 
   Calendar.prototype.draw = function() {
@@ -573,6 +576,7 @@ function dayPressed2(parentDiv)
   //selectedDay = dateConstructor(dayNumber, document.querySelector("#calendar .header h1").innerHTML);
   selectedDayStr = dateStringFormat(dayNumber2, document.querySelector("#calendar .header h1").innerHTML);
 }
+
 
 
 

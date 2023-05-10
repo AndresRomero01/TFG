@@ -149,6 +149,63 @@
           </div>
         </div>
 
+        <div id="lessonsContainer">
+          <th:block th:each="lesson,iter: ${lessons}">
+  
+          <div class="row lessonRow">
+
+            <div class="col-3">
+              <div class="lessonImgContainer">
+                 
+                <span>
+                  <img th:src="@{/img/backgroundLessons.png}" src="/img/backgroundLessons.png" th:id="'lessonImg'+${lesson.id}" class="lessonImg" />
+                  <!-- <button th:value="${item.id}" data-bs-toggle="modal" data-bs-target="#modalModifyItemImg" class="editImgButton">✏️</button> -->
+                </span>
+                
+              </div>
+              
+            </div>
+
+            <div class="col">
+          
+             <div class="row lessonHeader">
+              <div class="col-4">
+                <p th:id="'lessonName'+${lesson.id}" class="" th:text="${lesson.name}">Nombre de la clase</p>
+              </div>
+              <div class="col offset-3">
+                <p th:id="'lessonCapacityText'+${lesson.id}" class="" th:text="'Aforo: ' + ${lesson.capacity}">Aforo</p>
+                <input type="hidden" th:id="'lessonCapacity'+${lesson.id}" th:value="${lesson.capacity}">
+              </div>
+              <div class="col">
+                <p th:id="'lessonPriceText'+${lesson.id}" th:text="${'Precio: '+lesson.price}" class="lessonPrice">Precio</p>
+                <input type="hidden" th:id="'lessonPrice'+${lesson.id}" th:value="${lesson.price}">
+              </div>
+             </div>
+             
+             <div class="lessonDescContainer row">
+                <p th:id="'lessonDesc'+${lesson.id}" class="lessonDescText" th:text="${lesson.description}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              </div>
+
+              <div class="row sessionLessonContainer">
+                <th:block th:each="sessionStr,iter: ${lesson.getListPeriodStrEs}">
+                    <span class="sessionLessonStr" th:text="${sessionStr}"></span>
+                  </th:block>
+              </div>
+            </div>
+
+            <div class="col-1">
+              <div class="lessonButtonsContainer">
+                <button class="btn lessonButtonModify" th:value="${lesson.id}" data-bs-toggle="modal" data-bs-target="#modalModifylesson">Modificar</button>
+                <button th:value="${lesson.id}" class="btn lessonButtonDelete deleteLesson">Eliminar</button>
+              </div>        
+            </div>
+
+          </div>
+  
+        </th:block>
+          
+        </div>
+
 
 
       </div>
@@ -175,7 +232,10 @@
                  
                 <span>
                   <img th:src="@{/img/items/{id}.jpg(id=${item.id})}"th:id="'itemImg'+${item.id}" class="itemImg" src="/img/drawing.jpg" />
-                  <button th:value="${item.id}" data-bs-toggle="modal" data-bs-target="#modalModifyItemImg" class="editImgButton">✏️</button>
+                  <!-- <button th:value="${item.id}" data-bs-toggle="modal" data-bs-target="#modalModifyItemImg" class="editImgButton">✏️</button> -->
+                  <button class="btn customButton material-symbols-rounded editImgButton" th:value="${item.id}"  data-bs-toggle="modal" data-bs-target="#modalUserImg">
+                    edit
+                </button>
                 </span>
                 
               </div>
@@ -669,6 +729,10 @@
 
                   <label class="form-label" for="lessonCapacity">Aforo de la clase</label>
                   <input type="number" id="lessonCapacity" name="lessonCapacity"  class="form-control" required/>
+
+                  <label class="form-label" for="lessonCapacity">Precio de la suscripción mensual</label>
+                  <input type="number" id="lessonPrice" step="0.01" name="lessonPrice"  class="form-control" required/>
+                  
                   <label class="form-label">Sesiones</label>
                   <div class="row justify-content-center" id="sessionListContainer">
                     <!-- <div class="col-sm-4 addSessionContainer">

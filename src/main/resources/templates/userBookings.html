@@ -43,9 +43,9 @@
     
                                 <div class="boton justify-content-center">
                                     <div class="ampliarContainer">
-                                        <a  th:href="@{/items/loanItem}">
-                                            <button disabled>Cancelar reserva</button>
-                                        </a>
+                                        
+                                            <button th:value="${booking.session.id}"class="btnCancelBooking">Cancelar reserva</button>
+                                        
                                     <!--     <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="48 Horas antes del fin de la reserva podras ampliarla desde aqui">
                                             <p>i</p>
                                         </span>
@@ -100,6 +100,8 @@
 
     <!-- Pie de pagina -->
     <th:block th:replace="fragments/footer.html :: footer" />
+
+    <script th:src="@{/js/userBookings.js}" src="js/userBokkings.js"></script>
     
 </body>
 </html>

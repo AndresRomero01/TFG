@@ -20,6 +20,8 @@ import es.ucm.fdi.arties.model.Item;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.ItemLoans;
 import es.ucm.fdi.arties.model.Lesson;
+import es.ucm.fdi.arties.model.Session;
+import es.ucm.fdi.arties.model.SessionBookings;
 import es.ucm.fdi.arties.model.DB.DBHandler;
 import es.ucm.fdi.arties.model.DB.DBItemsHandler;
 import es.ucm.fdi.arties.model.DB.DBLessonsHandler;
@@ -78,8 +80,17 @@ public class LessonsController {
         User u2;
         u2 = commonDB.getUser(em, u.getId());
 
-        model.addAttribute("sessionBookings", u2.getSessionBookings());
-        demo();
+        List<SessionBookings> sbList = new ArrayList<>();
+       for(SessionBookings sb : u2.getSessionBookings())
+       {
+          if(sb.getSession().getDate().compareTo(LocalDateTime.now()) >0 )
+          {
+            sbList.add(sb);
+          }
+       }
+
+        model.addAttribute("sessionBookings", sbList);
+       // demo();
         //model.addAttribute("loans", u2.getItemLoans());
         
   /*       for (ItemLoans il : u2.getItemLoans()) {
@@ -94,24 +105,102 @@ public class LessonsController {
        return "userBookings";
     }
 
+
+    @PostMapping(path = "/getDaysOfLesson")
+    @Transactional
+    @ResponseBody 
+    public String getDaysOfLesson(Model model, HttpSession session, @RequestParam(required = true) long lessonId)
+    {
+      Lesson l = dbLessons.getLesson(em, lessonId);
+
+      String jsonDays = "[";
+      for(Session s: l.getSessionsList())
+      {
+        log.info("dentro del bucle session");
+        //si la fecha y hora de la sesion es despues de la actual
+        if(s.getDate().compareTo(LocalDateTime.now()) >0)
+        {
+          log.info("dentro del if");
+          jsonDays += ("{\"idSession\":"+"\""+s.getId()+"\","+
+                        "\"capa\":"+"\""+(l.getCapacity() - s.getSessionBookings().size())+"\","+
+                        "\"date\":"+"\""+(s.getDate())+"\""+
+                        "},");
+        }
+      }
+      if(jsonDays.endsWith(","))
+      {
+        jsonDays = jsonDays.substring(0,jsonDays.length() - 1);
+      }
+      jsonDays += "]";
+      log.info("MyJson: "+ jsonDays);
+
+      return jsonDays;
+    }
+
+
+    @GetMapping(path = "/bookLesson")
+    @Transactional
+    public String bookLesson(Model model, HttpSession session, @RequestParam(required = true) long lessonId) {
+
+
+      model.addAttribute("lesson", dbLessons.getLesson(em, lessonId));
+
+      return "bookLesson";
+    }
+
     @PostMapping("addNewLesson")
     @Transactional
     @ResponseBody 
     public String addNewLesson(
                             @RequestParam("lessonName") String lessonName,
                             @RequestParam("lessonCapacity") Integer lessonCapacity,
+                            @RequestParam("lessonPrice") float lessonPrice,
                             @RequestParam("period") String period,
                             @RequestParam("description") String description
                             )   {
 
       
-      long id = dbLessons.addNewLesson(em, lessonName, lessonCapacity, period, description);
+      long id = dbLessons.addNewLesson(em, lessonName, lessonCapacity, period, description, lessonPrice);
       
         //return "{\"quant\": \"todomal\"}";
       
       //0 ha ido bien. mayor que 0 es que se deb tener al menos esa cantidad minima del item a modificar
       return "{\"newId\": \""+id+"\"}";
 
+    }
+
+
+    @PostMapping("bookLessonSession")
+    @Transactional
+    @ResponseBody 
+    public String bookLessonSession(Model model, HttpSession session, @RequestParam("sessionId") long sessionid)
+    {
+      User u = (User) session.getAttribute("u");
+      User u2;
+      u2 = commonDB.getUser(em, u.getId());
+
+      
+
+      int res = dbLessons.makeBookLessonSession(em, u2, sessionid);
+
+
+      return "{\"res\": \""+res+"\"}";
+    }
+
+    @PostMapping("cancelBookSession")
+    @Transactional
+    @ResponseBody 
+    public String cancelBookSession(Model model, HttpSession session, @RequestParam("sessionId") long sessionid)
+    {
+      User u = (User) session.getAttribute("u");
+      User u2;
+      u2 = commonDB.getUser(em, u.getId());
+      
+
+     dbLessons.cancelBookSession(em, u2, sessionid);
+
+
+      return "{\"res\": \"ok\"}";
     }
 
 
@@ -155,6 +244,36 @@ public class LessonsController {
         LocalDate date = actualDate.plusDays(30-1);  
         dbLessons.createNewSessionsInDay(em,date);
         log.info("nueva date " +date);
+    }
+
+
+    private boolean alreadyInit = false;
+    //crea las sesiones de las clases definidas en el import. Se ejecuta despues del incio
+    //y no vuelve a ejecutarse hasta Long.MaxValue segundos despues, no haciendo ya nada
+    @Scheduled(fixedDelay =  Long.MAX_VALUE)
+    @Transactional
+    public void createInitialSessions() {
+
+        if(alreadyInit)
+          return;
+
+        log.info("evento automatico iniciado");
+
+        
+
+        LocalDate actualDate = LocalDate.now();
+		    LocalDate date = actualDate;
+        
+        for (int i = 1; i <= 30; i++) {
+			
+          log.info("date: "+ date.toString());
+          dbLessons.createNewSessionsInDay(em,date);
+          date = actualDate.plusDays(i);		   
+        }
+
+        //dbLessons.addSessionOfLesson(em, null, null);
+        alreadyInit = true;
+        log.info("evento automatico ejecutado");
     }
 
 

@@ -8,6 +8,7 @@
 
 // Select the target node.
 var target = document.querySelector('#calendar')
+console.log("target" + target)
 
 // Create an observer instance.
 var observer = new MutationObserver(function(mutations) {

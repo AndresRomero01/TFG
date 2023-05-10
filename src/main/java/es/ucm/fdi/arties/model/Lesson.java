@@ -36,17 +36,19 @@ public class Lesson {
     private String name;
     private String period;
     private String description;
-    private int capacity;//TODO llevarselo a la clase (lesson)
+    private int capacity;
+    private float price = 0;
     
     @OneToMany (mappedBy = "lesson")
     private List<Session> sessionsList;
 
-    public Lesson(String name, int capacity, String period, String description)
+    public Lesson(String name, int capacity, String period, String description, float price)
     {
         this.name = name;
         this.capacity  =capacity;
         this.period = period;
         this.description = description;
+        this.price = price;
 
     }
 
@@ -92,7 +94,24 @@ public class Lesson {
     public List<LocalTime> getHoursOfDay(LocalDate date) {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         return getHoursOfDay(dayOfWeek);
-
     }
+
+    public List<String> getListPeriodStrEs()
+    {
+
+         String[] sessions = period.split(",");
+         List<String> res = new ArrayList<>();
+         
+        for (String session : sessions) {
+            String[] partes = session.split("-");
+            String s = Utils.weekDayEnToEs(partes[0])+"-"+partes[1];
+            res.add(s);
+        }
+
+        return res;
+    }
+
+
+    
 }
 

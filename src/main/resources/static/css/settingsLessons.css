@@ -36,3 +36,132 @@
   margin-right: 5px;
 }
 
+/* ---- */
+
+
+.lessonRow{
+  margin-top: 2em;
+  background-color: var(--dark);
+  padding: 1em;
+  border-radius: 0.5em;
+  color: white;
+  height: 80%;
+}
+
+.lessonImgContainer{
+  position: relative;
+}
+
+.lessonImg{
+  width: 100%;
+  /* width: 20vw; */
+  /* height: 14vw; */
+  aspect-ratio : 1.3;
+  object-fit: cover;
+ 
+ }
+
+ 
+.lessonHeader{
+  height: 10%;
+  margin: 0;
+ margin-bottom: 0.5em;
+ font-size: large;
+}
+
+
+.lessonDescContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  width: 95%;
+}
+
+.lessonDescText{
+  /*  width: 95%; */
+  margin: 0;
+ 
+  
+   display: -webkit-box;
+   /* max-width: 200px; */
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+ }
+
+
+ .lessonButtonsContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.lessonButtonModify{
+  height: 2em;
+  width: 6em;
+  border: 0;
+  background-color: var(--secondary);
+  color: white;
+  margin-top: 1em;
+  margin-right: 1em;
+}
+
+.lessonButtonDelete{
+  height: 2em;
+  width: 6em;
+  border: 0;
+  background-color: var(--redWarning);
+  color: white;
+  margin-top: 1em;
+  margin-right: 1em;
+}
+
+.sessionLessonStr{
+ /* dark #343a40 */
+  background-color: #191c1f72;
+  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 0.2em;
+  margin-right: 0.2em;
+
+  height: fit-content;
+  width: fit-content;
+
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+
+  margin-bottom: 0.2em;
+
+}
+
+
+.sessionLessonContainer
+{
+  height: 30%;
+  overflow-y: auto;
+}
+
+
+.sessionLessonContainer::-webkit-scrollbar {
+  width: 0.4em;
+}
+
+/* Track */
+.sessionLessonContainer::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+.sessionLessonContainer::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: var(--bs-dark); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+

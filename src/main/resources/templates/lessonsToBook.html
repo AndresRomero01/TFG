@@ -57,7 +57,7 @@
     
                                 <div th:if="${session.u}" class="boton justify-content-center">
                                     <div class="ampliarContainer">
-                                        <a  th:href="@{/items/loanItem}">
+                                        <a  th:href="@{/lessons/bookLesson?lessonId=}+${lesson.id}">
                                             <button class="btn customButton">Reservar</button>
                                         </a>
                                     <!--     <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="48 Horas antes del fin de la reserva podras ampliarla desde aqui">
