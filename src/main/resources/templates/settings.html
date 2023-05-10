@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/settings.css" />
     <link rel="stylesheet" href="css/settingsItems.css" />
     <link rel="stylesheet" href="css/settingsLoans.css" />
+    <link rel="stylesheet" href="css/settingsLessons.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -70,7 +71,17 @@
       </div>
 
       <div id="lessonsPanel" class="customTab">
-        c
+        <div class="row">
+          <div class="col d-flex justify-content-end">
+           
+             <button type="button" class="btn customButton" data-bs-toggle="modal" data-bs-target="#modalAddLesson">
+              Añadir Clase
+            </button> 
+          </div>
+        </div>
+
+
+
       </div>
 
       <div id="itemsPanel" class="customTab">
@@ -78,7 +89,7 @@
         <div class="row">
           <div class="col d-flex justify-content-end">
            
-             <button type="button" class="btn btn-primary openStaffModalButton" data-bs-toggle="modal" data-bs-target="#modalAddItem">
+             <button type="button" class="btn customButton openStaffModalButton" data-bs-toggle="modal" data-bs-target="#modalAddItem">
               Añadir Material
             </button> 
           </div>
@@ -298,7 +309,7 @@
 
                     <div class="col-2 btnEndLoanContainer">
                       <!-- id se loan= idItem:idUsuario -->
-                      <button th:value="${loan.item.id}+':'+${loan.user.id}" class="btn makeEndLoanBtn">Finalizar Alquiler</button>
+                      <button th:value="${loan.item.id}+':'+${loan.user.id}" class="btn makeEndLoanBtn customButton">Finalizar Alquiler</button>
                     </div>
                   </div>
                   <!-- <div class="loanContainer row">
@@ -401,7 +412,7 @@
 
               <div class="modal-footer">
                   <button type="button" id="closeModalAddStaff" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                  <button type="submit" id="addStaffButton" class="btn btn-primary">Añadir</button>
+                  <button type="submit" id="addStaffButton" class="btn customButton">Añadir</button>
               </div>
 
             </form>
@@ -464,7 +475,7 @@
 
               <div class="modal-footer">
                   <button type="button" id="closeModalModifyStaff" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                  <button type="submit" id="modifyStaffButton" class="btn btn-primary">Guardar</button>
+                  <button type="submit" id="modifyStaffButton" class="btn customButton">Guardar</button>
               </div>
 
             </form>
@@ -501,7 +512,7 @@
                   <input type="file" id="fileFieldImgItem" accept="image/jpeg,image/png" required>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" id ="buttonFormConfirmItem" class="btn btn-primary">Confirmar</button>
+                    <button type="button" id ="buttonFormConfirmItem" class="btn customButton">Confirmar</button>
                   </div>
                 </form>
             </div>
@@ -535,7 +546,7 @@
                   
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" id ="buttonFormConfirmItemM" class="btn btn-primary">Confirmar</button>
+                    <button type="button" id ="buttonFormConfirmItemM" class="btn customButton">Confirmar</button>
                   </div>
                 </form>
             </div>
@@ -560,13 +571,100 @@
                     <input type="file" id="fileFieldImgItemM" accept="image/jpeg,image/png" required>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <button type="button" id ="buttonFormConfirmItemImgM" class="btn btn-primary">Confirmar</button>
+                      <button type="button" id ="buttonFormConfirmItemImgM" class="btn customButton">Confirmar</button>
                     </div>
                   </form>
               </div>
             </div>
           </div>
        </div>
+
+
+
+
+     <!-- Modal add Lesson -->
+     <div class="modal fade" id="modalAddLesson" tabindex="-1" aria-labelledby="modalAddLessonLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalAddLessonLabel">Añadir Clase</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form role="form" id="addLessonForm"> 
+                  <label for="lessonNameField" class="form-label">Nombre de la clase</label>
+                  <input type="text" class="form-control" name="LessonName" id="lessonNameField" value="" required> 
+
+                  <label class="form-label" for="lessonCapacity">Aforo de la clase</label>
+                  <input type="number" id="lessonCapacity" name="lessonCapacity"  class="form-control" required/>
+                  <label class="form-label">Sesiones</label>
+                  <div class="row justify-content-center" id="sessionListContainer">
+                    <!-- <div class="col-sm-4 addSessionContainer">
+                      <span class="sesionDate">Lunes-10:30</span>
+                      <span class="btn btnRemoveAddSession">❌</span>
+                    </div>
+                    <div class="col-sm-4 addSessionContainer">
+                      <span class="sesionDate">Lunes-10:30</span>
+                      <span class="btn btnRemoveAddSession">❌</span>
+                    </div>
+                    <div class="col-sm-4 addSessionContainer">
+                      <span class="sesionDate">Lunes-10:30</span>
+                      <span class="btn btnRemoveAddSession">❌</span>
+                    </div>
+                    <div class="col-sm-4 addSessionContainer">
+                      <span class="sesionDate">Lunes-10:30</span>
+                      <span class="btn btnRemoveAddSession">❌</span>
+                    </div> -->
+                  
+                  </div>
+
+                  <div class="row newSessionRow">
+                    <div class="row">
+                      <div class="col">Dia de la semana y hora</div>
+                     
+                    </div>
+                    <div class="row rowInputsSession">
+                   
+                        <select  id="sessionDay" name="sessionDay" class="form-select col" aria-label="Default select example">
+                          <option value="MONDAY" selected>Lunes</option>
+                          <option value="TUESDAY">Martes</option>
+                          <option value="WEDNESDAY">Miercoles</option>
+                          <option value="THURSDAY">Jueves</option>
+                          <option value="FRIDAY">Viernes</option>
+                        </select>
+                      
+                     
+               
+                        <input class="form-control col" type="time" id="addSessionTime" name="addSessionTime">
+                      
+                     
+                      <button type="button" class="btn btn-secondary col cancelAddSession">Cancelar</button>
+                      <div class="btn customButton col addNewSession">Añadir</div>
+                    </div>
+                    
+
+                    
+
+                  </div>
+
+                  <div class="w-100 text-center">
+                    <button class="btn btnAddSession customButton">➕ Añadir sesion</button>
+                  <!--   <div class="btn btn-primary openStaffModalButton btnAddSession" data-bs-toggle="modal" data-bs-target="#modalAddSession">
+                      ➕ Añadir sesion
+                    </div> -->
+                  </div>
+                
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id ="buttonFormConfirmLesson" class="btn customButton">Confirmar</button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+     </div>
+
 
 
        <!-- Toast -->
@@ -592,5 +690,6 @@
 <th:block th:replace="fragments/footer.html :: footer" />
 <script th:src="@{/js/settingsItems.js}" src="js/settingsItems.js" ></script>
 <script th:src="@{/js/settingsLoans.js}" src="js/settingsLoans.js" ></script>
+<script th:src="@{/js/settingsLessons.js}" src="js/settingsLessons.js" ></script>
 
 </html>

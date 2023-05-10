@@ -248,4 +248,42 @@ VALUES (22, 1, 3, 'genial! pues voy a repartir trabajo, dime si tienes inconveni
 INSERT INTO GYM_SUB (id, online_price, onsite_price)
 VALUES (1, 25, 50);
 
+--- DATA FOR LESSONS ---
+INSERT INTO LESSON (id, name, period, capacity)
+VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 30);
+
+INSERT INTO LESSON (id, name, period, capacity)
+VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30);
+
+------
+INSERT INTO SESSION (id, date, lesson_id)
+VALUES (1,'2023-05-20T00:00:00', 1);
+
+INSERT INTO SESSION (id, date, lesson_id)
+VALUES (2,'2023-05-22T00:00:00', 1);
+
+INSERT INTO SESSION (id, date, lesson_id)
+VALUES (3,'2023-05-23T00:00:00', 1);
+
+INSERT INTO SESSION (id, date, lesson_id)
+VALUES (4, '2023-05-20T00:10:00', 2);
+INSERT INTO SESSION (id, date, lesson_id)
+VALUES (5, '2023-05-20T00:12:24', 2);
+------
+
+INSERT INTO SESSION_BOOKINGS (user_id, session_id)
+VALUES (1,1);
+
+INSERT INTO SESSION_BOOKINGS (user_id, session_id)
+VALUES (1,4);
+
+INSERT INTO SESSION_BOOKINGS (user_id, session_id)
+VALUES (1,3);
+
+INSERT INTO SESSION_BOOKINGS (user_id, session_id)
+VALUES (1,5);
+
+INSERT INTO SESSION_BOOKINGS (user_id, session_id)
+VALUES (1,2);
+
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

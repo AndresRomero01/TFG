@@ -130,6 +130,11 @@ public class User implements Transferable<User.Transfer> {
     @JsonIgnore
     private List<ItemLoans> itemLoans;
 
+
+    @OneToMany (mappedBy = "user")//TODO resvisar. Sin eso no se puede acceder a esta lista desde el controlador de items
+    @JsonIgnore
+    private List<SessionBookings> sessionBookings;
+
     // EAGER: cuando se construye el USER, mete la lista de items del tiron
     // LAZY: solo se asocian los datos a la lista de items bajo demanda (getItems)
     // Es muy pesado "precargar" los datos de la lista, si no se va a usar ese atributo

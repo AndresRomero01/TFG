@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <title>Items</title>
+  <!--   <link rel="stylesheet" href="css/courses.css" /> -->
+  <link rel="stylesheet" href="../css/custom.css" />
+  <link rel="stylesheet" href="../css/userBookings.css" />
+  <link rel="stylesheet" href="../css/generalCards.css" />
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+
+    <div class="mainContainer">
+        
+        <div class="row justify-content-center">
+
+            <th:block th:each="booking,iter: ${sessionBookings}">
+                <div class="col-5 myColW">
+                    <div class="myContainer">
+                        <div class="card2">
+                            <div class="lessonCustomImgContainer">
+                                <img  th:src="@{/img/backgroundLessons.png}" src="/img/backgroundLessons.png" />
+                    
+                                <div class="lessonTextOverImg" th:text="${booking.session.lesson.name}">clase super especial</div>
+                            </div>
+                            
+                            <div class="myh100 "> <!-- align-items-center justify-content-center -->
+                                <div class="titulo justify-content-center">
+                                    <h2 class="text-center" th:text="${booking.session.lesson.name}">Zumba</h2>
+                                </div>
+                                <div class="texto">
+                                    <div>
+                                    
+                                    <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
+                                    <p>Fecha:</p>
+                                    <p th:text="${booking.session.getDateStrESHourMin}">09/04/2023 23:59</p>
+                                    </div>
+                                </div>
+    
+                                <div class="boton justify-content-center">
+                                    <div class="ampliarContainer">
+                                        <a  th:href="@{/items/loanItem}">
+                                            <button disabled>Cancelar reserva</button>
+                                        </a>
+                                    <!--     <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="48 Horas antes del fin de la reserva podras ampliarla desde aqui">
+                                            <p>i</p>
+                                        </span>
+     -->
+                                    </div>
+                                    
+                                    <!-- <p>48 Horas antes del fin de la reserva podras ampliarla desde aqui</p> -->
+                                    
+                                </div>
+                                   
+                                
+    
+                                    
+    
+    
+                                
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            
+            <!-- <div class="col bookingContainer">
+                <p class="lessonName">Zumba</p>
+                <p>Fecha:</p>
+                <p>09/04/2023 23:59</p>
+            </div>
+            <div class="col bookingContainer">
+                <p class="lessonName">Zumba</p>
+                <p>Fecha:</p>
+                <p>09/04/2023 23:59</p>
+            </div>
+            <div class="col bookingContainer">
+                <p class="lessonName">Zumba</p>
+                <p>Fecha:</p>
+                <p>09/04/2023 23:59</p>
+            </div>
+            <div class="col bookingContainer">
+                <p class="lessonName">Zumba</p>
+                <p>Fecha:</p>
+                <p>09/04/2023 23:59</p>
+            </div> -->
+        </div>
+    </div>
+
+
+
+
+    
+    
+
+    <!-- Pie de pagina -->
+    <th:block th:replace="fragments/footer.html :: footer" />
+    
+</body>
+</html>

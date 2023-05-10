@@ -401,7 +401,9 @@ public class ItemsController {
 
       LocalDateTime nextDayForLoan = itemLoan.getLoanEnd().plusMinutes(1);
         if(availableItemsPerDay(nextDayForLoan, itemId) < itemLoan.getQuantity())  return "{\"isok\": \"todomal\"}";
-
+//TODO esto revisa solo si el dia siguiente al fin del alquiler habia unidades. 
+//habria que revisar tambien los 6 dias siguientes, pues si al dia siguiente habia una unidad, pero en sig sig habia 0
+//no se deberia de poder ampliar 
 
         db.renovateLoan(em, itemId, u2.getId());
 

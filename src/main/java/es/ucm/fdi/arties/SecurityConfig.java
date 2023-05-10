@@ -58,10 +58,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers( "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem","/items/endLoan").hasRole("ADMIN")
 				.antMatchers("/admin/**", "/existeUsuario", "/getUser", "/deletePhrase", "/addPhrase", "/changeGymSubPrice").hasRole("ADMIN")	   // <-- administration
 				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem").hasRole("ADMIN")
+				.antMatchers("/lessons/addNewLesson").hasRole("ADMIN")
 				.antMatchers("/user/**").hasAnyRole("USER", "STAFF", "ADMIN")	
 				.antMatchers("/chats").hasAnyRole("STAFF", "ADMIN")	   
 				.antMatchers("/newQuestion", "/suscribe", "/updateUserDescription", "/paymentPage").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/subscriptions", "/lessons", "/items/myItems","/items/loanItem", "/items/makeLoan", "items/availableItemDay", "/modifyUser", "/getConversation", "/getStaffList").hasAnyRole("USER", "ADMIN", "STAFF")
+				.antMatchers("/subscriptions", "/lessons", "/items/myItems","/items/loanItem", "/items/makeLoan", "items/availableItemDay", "/modifyUser", "/getConversation", "/getStaffList", "/lessons/myBookingLessons").hasAnyRole("USER", "ADMIN", "STAFF")
 	            .anyRequest().authenticated()
 	            .and()
 			.formLogin()

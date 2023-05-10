@@ -160,8 +160,13 @@ html {
 }
 
 .card2 button:disabled{
-  
-  background:#9fe794; 
+  background-color: var(--main-blue-disabled);
+ /*  background:#9fe794;  */
+}
+
+.card2 button:disabled:hover{
+  background-color: var(--main-blue-disabled);
+ /*  background:#9fe794;  */
 }
 
 .ampliarContainer a{

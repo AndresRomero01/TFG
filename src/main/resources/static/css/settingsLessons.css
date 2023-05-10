@@ -1,0 +1,38 @@
+.addSessionContainer{
+  background-color: var(--dark);
+  color: white;
+  margin: 0.5em;
+  border-radius: 0.2em;
+}
+
+.addSessionContainer p{
+  margin: 0;
+}
+
+.btnRemoveAddSession{
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  float:right;
+}
+
+.btnAddSession{
+  background-color: var(--main-blue);
+  color: white;
+}
+
+.newSessionRow{
+  display: none;
+}
+
+.rowInputsSession {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+
+}
+
+.rowInputsSession .col{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+

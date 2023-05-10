@@ -42,7 +42,7 @@
                 </symbol>
               </svg>
             
-            <div class="myBody">
+            <div class="mainContainer">
 
                 
 
@@ -56,7 +56,7 @@
                                         <h5 class="card-title " th:text="${item.name}">Card title</h5>
                                     </div>
                                     <div class="row hSeparator">
-                                        <div th:text="${item.description}">Descripcion dle item</div>
+                                        <div th:text="${item.description}">Descripcion del item</div>
                                     </div>
                                     <div class="row ">
                                         <div class="col cardText">
@@ -118,7 +118,7 @@
                                        <br>
                                        <p th:text="'Debes devolverlo antes de dicha fecha o puedes ampliar tu alquiler hasta el dia ' + ${nextEnd}"></p>
                                         <div class="col"> <!--justify-content-end -->
-                                            <button class="greenButton" style="margin-top: 1em;" type="button" id ="buttonRenovateLoan">Ampliar alquiler</button>
+                                            <button class="btn customButton" style="margin-top: 1em;" type="button" id ="buttonRenovateLoan">Ampliar alquiler</button>
                                         </div>
                                     </div>
 
