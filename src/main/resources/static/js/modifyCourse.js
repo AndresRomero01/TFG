@@ -19,9 +19,8 @@ function modifyCourse(){
 
     let img = document.getElementById("coursePicture")
     let hasImage = img.src != "http://localhost:8080/img/drawing.jpg"
-    let oldSrc = document.getElementById("oldImg").src
+    let oldSrc = document.getElementById("oldImg").value
 
-    console.log("desc: " + desc);
 
     if(courseName === "" || /^\s+$/.test( String(courseName))) { // so name cannot be just blank spaces
         nameInput.setCustomValidity("El nombre no puede ser vacío")
@@ -42,10 +41,15 @@ function modifyCourse(){
 
         go(config.rootUrl + "/modifyCourse", 'POST', params)
         .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
-        if(hasImage && oldSrc != img.src){
-            modifyCourseImg(courseId)
-        }
-        //console.log("navCourse: " + document.getElementById("navCourses").href);
+            let imageHasChanged = oldSrc != img.src
+            console.log("oldSrc: " + oldSrc);
+            console.log("new src: " + img.src);
+            console.log("hasImage: " + hasImage + " imagenCambiada: " + imageHasChanged);
+            if(hasImage && imageHasChanged){
+                modifyCourseImg(courseId)
+            }
+            //console.log("navCourse: " + document.getElementById("navCourses").href);
+            modifiedCourseToast.show()
 
         })
         .catch(() => {console.log("Error en catch modifyCourse");//si el username ya existia
@@ -85,7 +89,8 @@ function modifyCourseImg(courseId){
         //document.querySelector("#coursePicture").src = img2.src;
         /* modalModifyCourseImg.hide(); */
         /* document.getElementById("navCourses").click() */
-        modifiedCourseToast.show()
+        let oldSrc = document.getElementById("oldImg")
+        oldSrc.value = img2.src
 
     }).catch(
         (e) =>{ //console.log("fallo: "+ Object.values(e))

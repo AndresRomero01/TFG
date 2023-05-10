@@ -14,7 +14,7 @@
     <header th:replace="fragments/nav.html :: nav"></header>
 
     <input type="hidden" th:value="${course.id}" id="courseId">
-    <input type="hidden" th:value="@{/img/courses/{id}.jpg(id=${course.id})}" id="oldImg">
+    <input type="hidden" th:value="@{http://localhost:8080/img/courses/{id}.jpg(id=${course.id})}" id="oldImg">
 
     <div class="bodyCol">
 

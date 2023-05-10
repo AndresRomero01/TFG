@@ -53,6 +53,7 @@ function createCourse(){
                 modifyCourseImg(d["courseId"])
             }
             //console.log("navCourse: " + document.getElementById("navCourses").href);
+            courseAddedToast.show()
             
         })
         .catch(() => {console.log("Error en catch createCourse");//si el username ya existia
@@ -100,7 +101,7 @@ function modifyCourseImg(courseId){
         //document.querySelector("#coursePicture").src = img2.src;
         /* modalModifyCourseImg.hide(); */
         /* document.getElementById("navCourses").click() */
-        courseAddedToast.show()
+        
 
     }).catch(
         (e) =>{ //console.log("fallo: "+ Object.values(e))
