@@ -101,7 +101,9 @@
 /* ----- DROPDOWN SELECT ----- */
 
 #dropdownCategories{
-    margin-left: 5em;
+    /* margin-left: 5em; */
+    /* margin-top: -30px; */
+    margin-top: 0.9vw;
 }
 
 #addCourseButton{
@@ -152,4 +154,40 @@
     object-fit: contain !important;
     object-position:50% !important;
     background-color: var(--bs-gray-200);
+}
+
+/* #coursesTitleDiv{
+    margin: auto;
+} */
+
+#categoryTitle{
+    margin: 0;
+    margin-left: 3vw;
+    
+    font-size: 2.5vw;
+    font-weight: bold;
+    padding: 0;
+    
+    /* position: absolute; */
+    /* top: 1vw; */
+}
+
+@media (max-width:740px) {
+    #categoryTitle{
+        font-size: x-large;
+        margin-top: 10em;
+    }
+
+    #dropdownCategories{
+        margin-left: -60px;
+        margin-bottom: 20px;
+    }
+
+    .headerRow{
+        margin-top: 0 !important;
+    }
+
+    #chatButton{
+        display: none;
+    }
 }

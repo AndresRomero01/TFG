@@ -11,7 +11,7 @@
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav"></header>
 
-    <div class="bodyCol">
+    <div class="mainContainer">
         <div class="col col-md-6">
             <div class="form__group field">
                 <input type="input" class="form__field" placeholder="Titular de la tarjeta" id='cardholder' required />
@@ -28,15 +28,19 @@
         
 
         <div class="row">
-            <div class="col">
-                <div class="form__group field">
+            <div class="col cvcCol">
+                <div class="form__group field cvcDesktop">
                     <input type="input" class="form__field" placeholder="Código de seguridad" id='securityCode' required />
                     <label for="securityCode" class="form__label">Código de seguridad</label>
+                </div>
+                <div class="form__group field cvcMobile">
+                    <input type="input" class="form__field" placeholder="CVC" id='securityCode' required />
+                    <label for="securityCode" class="form__label">CVC</label>
                 </div>
             </div>
 
             <div class="col">
-                <div class="form__group field">
+                <div class="form__group field expirationDate">
                     <input type="date" class="form__field" placeholder="Fecha de caducidad" id='expirationDate' required />
                     <label for="expirationDate" class="form__label">Fecha de caducidad</label>
                 </div>

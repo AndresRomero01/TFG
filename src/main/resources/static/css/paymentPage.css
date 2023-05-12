@@ -6,3 +6,45 @@
 .form__group{
     margin-top: 3em;
 }
+
+.cvcDesktop{
+    display: block;
+}
+
+.cvcMobile{
+    display: none;
+}
+
+@media (max-width:740px) {
+    .mainContainer{
+        margin: 0;
+        margin-bottom: 10vw;
+        margin-top: 10vw;
+    }
+
+    .col{
+        margin-left: 10vw !important;
+    }
+
+    #endPayment{
+        margin-top: 5em;
+    }
+
+    .cvcMobile{
+        display: block;
+        width: 60%;
+    }
+
+    .cvcDesktop{
+        display: none;
+    }
+
+    .cvcCol{
+        width: 10px !important;
+    }
+
+    .expirationDate{
+        width: 100%;
+        margin-left: -75px !important;
+    }
+}

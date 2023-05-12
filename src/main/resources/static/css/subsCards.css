@@ -35,7 +35,7 @@ transition: .5s;
 
 }
 
-.card::before{
+/* .card::before{
   content: '';
   position: absolute;
   bottom: 0;
@@ -45,8 +45,9 @@ transition: .5s;
   background: rgba(255, 255, 255, .1);
   z-index: 1;
   -webkit-transform: skewY(-5deg) scale(1.5);
-        transform: skewY(-5deg) scale(1.5);
-}
+  transform: skewY(-5deg) scale(1.5);
+} */
+
 .title .fa{
   color:#fff;
   font-size: 60px;
@@ -174,4 +175,10 @@ font-size: 16px;
     text-align: center;
     font-size: 17px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.12);
+}
+
+@media (max-width:740px) {
+  .sub1{
+    margin-bottom: 10vw;
+  }
 }
