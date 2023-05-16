@@ -363,9 +363,10 @@ public class RootController {
         Boolean isFree = o.get("isFree").asBoolean();
         Long catId = o.get("cat").asLong();
         Long courseId = o.get("courseId").asLong();
-        /* Boolean hasImage = o.get("hasImage").asBoolean(); */
+        Boolean hasImage = o.get("hasImage").asBoolean();
+        Boolean hasVideo = o.get("hasVideo").asBoolean();
 
-        db.modifyCourse(em, courseId, courseName, catId, desc, isFree);
+        db.modifyCourse(em, courseId, courseName, catId, desc, isFree, hasImage, hasVideo);
         
         return "{\"isok\": \"ok\"}";
     }
@@ -379,8 +380,9 @@ public class RootController {
         Boolean isFree = o.get("isFree").asBoolean();
         Long catId = o.get("cat").asLong();
         Boolean hasImage = o.get("hasImage").asBoolean();
+        Boolean hasVideo = o.get("hasVideo").asBoolean();
 
-        long id = db.createCourse(em, courseName, catId, desc, isFree, hasImage);
+        long id = db.createCourse(em, courseName, catId, desc, isFree, hasImage, hasVideo);
         
         return "{\"courseId\":" + id + "}";
     }
@@ -402,6 +404,31 @@ public class RootController {
               byte[] bytes = photo.getBytes();
               stream.write(bytes);
               log.info("la ruta es: " + img.getAbsolutePath());
+          } catch (Exception e) {
+              return null;
+          }
+      }
+
+      return "{\"isok\": \"todobien\"}";
+    }
+
+    @PostMapping("/uploadCourseVideo")
+    @Transactional
+    @ResponseBody 
+    public String uploadVideo(@RequestParam("courseVideo") MultipartFile courseVideo, @RequestParam("courseId") long courseId)
+    {
+        log.info("---- inside uploadCourseVideo ----");
+
+      File video = new File("src/main/resources/static/videos/courses", courseId + ".mp4");
+
+      if (courseVideo.isEmpty()) {
+        log.info("failed to upload video: emtpy file?");
+        return null;
+      } else {
+          try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(video))) {
+              byte[] bytes = courseVideo.getBytes();
+              stream.write(bytes);
+              /* log.info("la ruta es: " + video.getAbsolutePath()); */
           } catch (Exception e) {
               return null;
           }

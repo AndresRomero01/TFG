@@ -293,6 +293,11 @@ p.staffName{
   width: 6em;
 }
 
+.courseRow button{
+  margin-top: 0.7em;
+  width: 6em;
+}
+
 /* .addIcon{
   font-size: 2em !important;
   font-weight: 500 !important;

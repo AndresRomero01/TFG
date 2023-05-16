@@ -52,6 +52,8 @@ VALUES (9, 'STAFF', 'emp6',
 
 --Datos sobre cursos
 
+ALTER TABLE course ALTER COLUMN description TYPE text;--Para poder guardar textos largos en la descripcion
+
 INSERT INTO CATEGORY (id, name)
 VALUES (1, 'Cardio');
 
@@ -74,7 +76,7 @@ INSERT INTO CATEGORY (id, name)
 VALUES (7, 'Tren inferior');
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (1, 'Carrera 10km', FALSE, 'Prepárate para iniciarte en las maratones. Este curso te ayudará a conseguir superar la primera de ellas, la de 10km', 1, TRUE, FALSE);
+VALUES (1, 'Carrera 10km', FALSE, 'Prepárate para iniciarte en las maratones. Este curso te ayudará a conseguir superar la primera de ellas, la de 10km', 1, TRUE, TRUE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
 VALUES (2, 'Maratón 42km', FALSE, 'Una maratón no es fácil, y lo sabemos. Prepárate junto con nuestro entrenador especializado para lograr tu objetivo', 1, TRUE, FALSE);

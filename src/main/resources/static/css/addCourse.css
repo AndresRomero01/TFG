@@ -4,7 +4,8 @@
     width: 20em;
     /* background-color: bisque; */
     position: relative;
-    /* background-color: aqua; */
+    border-radius: 0.3em;
+    background-color: var(--bs-gray-300);
     
 }
 
@@ -17,8 +18,8 @@
     object-position:50%;
     width: 100%;
     height: 100%;
-    /* border: 6px solid;
-    border-color: var(--bs-gray-400); */
+    /* border: 6px solid; */
+    /* border-color: var(--bs-gray-400); */
     background: transparent;
     border-radius: 0.3em;
 }
@@ -77,10 +78,6 @@
     margin-top: 3em;
 }
 
-
-
-
-
 .toast-header{
     background-color: var(--bs-dark);
     color: white;
@@ -95,4 +92,25 @@
 #toastHeaderText{
     font-size: large;
     margin: auto;
+}
+
+
+/* ----- VIDEO ----- */
+
+#videoPreview{
+    width: 50em;
+    /* margin-left: 3.5em; */
+    border-radius: 0.3em;
+}
+
+#videoRow{
+    margin-top: 5em;
+    display: none !important;
+}
+
+#videoInput{
+    width: 50em;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 2em;
 }

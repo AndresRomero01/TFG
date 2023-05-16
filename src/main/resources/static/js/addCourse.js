@@ -7,6 +7,10 @@ function createCourse(){
     /* console.log("src: " + img.src); */
     let hasImage = img.src != "http://localhost:8080/img/drawing.jpg"
 
+    let videoInput = document.getElementById("videoInput")
+    let hasVideo = false
+    if(videoInput.files[0]) hasVideo = true
+
     let form = document.getElementById("createCourseForm");
     let input = document.getElementById("courseName");
     let cat = document.getElementById("catSelect")
@@ -45,12 +49,16 @@ function createCourse(){
                         "cat": catId,
                         "desc": desc,
                         "hasImage": hasImage,
+                        "hasBideo": hasVideo,
                         "isFree": checked}; 
 
         go(config.rootUrl + "/createCourse", 'POST', params)
         .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
             if(hasImage){
                 modifyCourseImg(d["courseId"])
+            }
+            if(hasVideo){
+                uploadVideo(d["courseId"])
             }
             //console.log("navCourse: " + document.getElementById("navCourses").href);
             courseAddedToast.show()
@@ -108,5 +116,48 @@ function modifyCourseImg(courseId){
         alert("Error al subir la imagen.\nPrueba subiendola en tamaños mas pequeños o en otros formatos")
     });
 
+}
+
+function videoPreview(){
+    let videoInput = document.getElementById("videoInput")
+    console.log("src: " + videoInput.src);
+    console.log("value: " + videoInput.value);
+    console.log("file: " + videoInput.files[0]);
+
+    let video = document.getElementById("videoPreview")
+    
+    let file = videoInput.files[0];
+    if (file) {
+        let url = URL.createObjectURL(file);
+        video.src = url;
+    }
+}
+
+function uploadVideo(courseId){
+    console.log("--- inside uploadVideo ---");
+    let video = document.getElementById("videoInput");
+    /* console.log("video : " + video.files[0]); */
+
+    let formData = new FormData();
+    formData.append("courseId", courseId)
+    formData.append("courseVideo", video.files[0])
+
+    go("/uploadCourseVideo", "POST", formData, {}).then(d => {
+
+    }).catch(
+        (e) =>{ //console.log("fallo: "+ Object.values(e))
+        alert("Error en uploadCourseVideo. Tiene que ser menor que 100MB y estar en formato .mp4")
+    });
+}
+
+function manageShowVideoRow(e){
+    console.log("--- inside manageShowVideo ---");
+    if(e.target.checked){
+        /* document.getElementById("videoRow").style.display = "none !important" */
+        document.getElementById("videoRow").style.setProperty("display", "block", "important");
+    } else {
+        /* document.getElementById("videoRow").style.display = "block !important" */
+        document.getElementById("videoRow").style.setProperty("display", "none", "important");
+    }
 }
 

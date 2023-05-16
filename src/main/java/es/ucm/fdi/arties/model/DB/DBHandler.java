@@ -208,11 +208,11 @@ public class DBHandler {
         return u;
     }
 
-    public long createCourse(EntityManager em, String name, Long catId, String desc, Boolean isFree, Boolean hasImage){
+    public long createCourse(EntityManager em, String name, Long catId, String desc, Boolean isFree, Boolean hasImage, Boolean hasVideo){
         long idDevolver = -1;
 
         Category cat = em.find(Category.class, catId);
-        Course c = new Course(name, cat, desc, isFree, hasImage);
+        Course c = new Course(name, cat, desc, isFree, hasImage, hasVideo);
             
         em.persist(c);
         em.flush();
@@ -222,7 +222,7 @@ public class DBHandler {
         return idDevolver;
     }
 
-    public long modifyCourse(EntityManager em, long courseId, String courseName, Long catId, String desc, Boolean isFree) {
+    public long modifyCourse(EntityManager em, long courseId, String courseName, Long catId, String desc, Boolean isFree, Boolean hasImage, Boolean hasVideo) {
         Course c = em.find(Course.class, courseId);
 
         Category cat = em.find(Category.class, catId);
@@ -231,6 +231,8 @@ public class DBHandler {
         c.setIsFree(isFree);
         c.setDescription(desc);
         c.setName(courseName);
+        c.setHasVideo(hasVideo);
+        c.setHasImage(hasImage);
 
         return 0;
     }

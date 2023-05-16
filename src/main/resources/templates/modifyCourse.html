@@ -24,10 +24,19 @@
                 <div class="col">
                     <div id="thumbnail">
                         <!-- <img class="courseImg" th:src="@{/img/courses/{id}.jpg(id=${course.id})}"> -->
-                        <img id="coursePicture" th:src="@{/img/courses/{id}.jpg(id=${course.id})}">
+                        <!-- <img id="coursePicture" th:src="@{/img/courses/{id}.jpg(id=${course.id})}"> -->
+                        <th:block th:if="${course.hasImage}">
+                            <div class="courseImgDiv">
+                                <img class="courseImg" id="coursePicture" th:src="@{/img/courses/{id}.jpg(id=${course.id})}">
+                            </div>
+                        </th:block>
+                        
+                        <th:block th:unless="${course.hasImage}">
+                            <img src="/img/drawing.jpg" id="coursePicture">
+                        </th:block>
                         <button type="button" class="btn customButton material-symbols-rounded" id="changeCoursePicture" onclick="openFileInput()" >
                             edit
-                            <input type="file" id="courseImgInput" style="display:none" onchange="changeImgPreview()">
+                            <input type="file" id="courseImgInput" accept="image/*" style="display:none" onchange="changeImgPreview()">
                         </button>
                     </div>
                 </div>
@@ -46,7 +55,8 @@
                     </div>
 
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="hasVideoSwitch">
+                        <input th:if="${course.hasVideo}" class="form-check-input" type="checkbox" role="switch" id="hasVideoSwitch"  onchange="manageShowVideoRow(event)" checked>
+                        <input th:unless="${course.hasVideo}" class="form-check-input" type="checkbox" role="switch" id="hasVideoSwitch"  onchange="manageShowVideoRow(event)">
                         <label class="form-check-label" for="hasVideoSwitch" id="isFreeSwitchLabel">Tiene video</label>
                     </div>
 
@@ -62,6 +72,21 @@
             <div class="row d-flex justify-content-center text-center descRow">
                 <h2>Información del curso</h2>
                 <textarea id="courseDescription" th:text="${course.description}" required></textarea>
+            </div>
+
+            <div th:if="${course.hasVideo}" class="row videoRow d-flex justify-content-center text-center" id="videoRow" style="display: block !important;">
+                <h2>Video en formato .mp4</h2>
+                <div id="videoDiv">
+                    <input type="file" accept="video/mp4" class="form-control" id="videoInput" onchange="videoPreview()">
+                    <video th:src="@{/videos/courses/{id}.mp4(id=${course.id})}" controls id="videoPreview"></video>
+                </div>
+            </div>
+            <div th:unless="${course.hasVideo}" class="row videoRow d-flex justify-content-center text-center" id="videoRow" style="display: none !important;">
+                <h2>Video en formato .mp4</h2>
+                <div id="videoDiv">
+                    <input type="file" accept="video/mp4" class="form-control" id="videoInput" onchange="videoPreview()">
+                    <video src="" controls id="videoPreview"></video>
+                </div>
             </div>
 
             <div class="row d-flex justify-content-center text-center">

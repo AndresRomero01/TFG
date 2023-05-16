@@ -22,3 +22,22 @@
     font-size: large;
     margin: auto;
 }
+
+/* --- VIDEO --- */
+/* #videoPreview{
+    width: 50em;
+    margin-left: 3.5em;
+    border-radius: 0.3em;
+} */
+
+#videoRow{
+    margin-top: 5em;
+    display: block !important;
+}
+
+/* #videoInput{
+    width: 50em;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 2em;
+} */

@@ -48,11 +48,12 @@ public class Course {
     @JsonIgnore
     private List<RelationUserCourse> coursesList;
 
-    public Course(String name, Category cat, String desc, Boolean isFree, Boolean hasImage){
+    public Course(String name, Category cat, String desc, Boolean isFree, Boolean hasImage, Boolean hasVideo){
         this.name = name;
         this.category = cat;
         this.description = desc;
         this.isFree = isFree;
         this.hasImage = hasImage;
+        this.hasVideo = hasVideo;
     }
 }
