@@ -136,7 +136,9 @@ public class UserController {
         model.addAttribute("user", target);
 		model.addAttribute("idUs", target.getId());
 
-        log.info(target.getAttendance());
+        log.info("lista clases asitidas: " +target.getAttendance());
+
+        log.info("lista items reservados: " + target.getHistoryLoans());
 
         return "user";
     }

@@ -78,10 +78,30 @@
 
 
 #btnUndoEndLoan{
-  background-color: var(--green1);
+  color: white;
+  background-color: var(--main-blue);
 }
 
 
 .lateLoanText{
   color: red;
+}
+
+.accordion-button{
+  color: white;
+  background-color: var(--dark);
+}
+
+.accordion-button::after{
+  background-color: white;
+  border-radius: 100%;
+  padding: 12px;
+
+  background-size: 80%;
+  background-position: center;
+
+}
+
+.toast{
+  background-color: rgba(255, 255, 255, 0.90);
 }

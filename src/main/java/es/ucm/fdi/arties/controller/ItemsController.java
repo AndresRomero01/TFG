@@ -70,8 +70,16 @@ public class ItemsController {
 
         log.info("los roles son "+ u2.getRoles());
 
+        List<ItemLoans> activeItemLoans = new ArrayList<>();
+
+        for (ItemLoans il : u2.getItemLoans()) {
+          log.info("loan: " + il.getItem().getName() + " end date: " + il.getLoanEnd());
+            if(il.isActive())
+              activeItemLoans.add(il);
+        } 
+
         
-        model.addAttribute("loans", u2.getItemLoans());
+        model.addAttribute("loans", activeItemLoans);
         
         for (ItemLoans il : u2.getItemLoans()) {
           log.info("loan: " + il.getItem().getName() + " end date: " + il.getLoanEnd());
@@ -143,34 +151,44 @@ public class ItemsController {
 
 //Si el loan es renovable y hay para reservar el dia actual se puede renovar
         int canRenovate = -1;
+
         ItemLoans itemLoan = u2.getOneItemLoan(itemId);
-        if(itemLoan != null)
-        {
-          if(itemLoan.isLate())
-          {
+        if(itemLoan != null) {
+          //Si la devolucion del alquiler estaba retrasado no se puede renovar
+          if(itemLoan.isLate()) {
             canRenovate = -2;
           }
-          else
-          {
+          else {
               log.info("fecha sig al loan: " + itemLoan.getLoanEnd().plusMinutes(1));
             //teniendo en cuenta que las reservas acaban a las 23:59, el dia sig empieza en un min mas
             LocalDateTime nextDayForLoan = itemLoan.getLoanEnd().plusMinutes(1);
-            if(itemLoan.isRenovable())
-            {
-              if(availableItemsPerDay(nextDayForLoan, itemId) >= itemLoan.getQuantity())
-              {
+            if(itemLoan.isRenovable()) {
+              boolean enoughQuantity = true;
+              //comprueba que haya cantidad suficiente en los 7 dias posteriores al fin del alquiler
+              //cuentan como unidades ya alquiladas, las que esten en alquiler dichos dias, las que empiecen
+              //alguno de esos dias o las que aun no se hayan devuelto hasta alguna de esas fechas
+              //Estos calculos se hacen en availableItemsPerDay
+              for(int i = 0; i < 7; i++) {
+                LocalDateTime dateOfInterval = nextDayForLoan.plusDays(i);
+                if(availableItemsPerDay(dateOfInterval, itemId) < itemLoan.getQuantity()) {
+                  enoughQuantity = false;
+                  break;
+                }
+              }
+
+              //if(availableItemsPerDay(nextDayForLoan, itemId) >= itemLoan.getQuantity())
+              if(enoughQuantity) {
+                log.info("disp despues:" +availableItemsPerDay(nextDayForLoan, itemId) );
+                log.info("cantidad a renovar: "+ itemLoan.getQuantity());
                 canRenovate = 1;
-                model.addAttribute("nextEnd", getDateStrESFormatHourMin(nextDayForLoan.plusDays(7).plusHours(23).plusMinutes(59)));
+                //plus 6 days porque ya se le sumo 1 al ver el dia sig
+                model.addAttribute("nextEnd", getDateStrESFormatHourMin(nextDayForLoan.plusDays(6).plusHours(23).plusMinutes(59)));
                 model.addAttribute("endLoan", getDateStrESFormatHourMin(itemLoan.getLoanEnd()));
               }          
               else
                 canRenovate = 0;
             }
-
-          }
-          
-  
-         
+          }   
         }
         //si ya tenia el item (hasItem = true) entonces:
     //canRenovate = 1 si 48 horas antes del fin del loan y cuando acaba su loan hay tantas unidades disponibles
@@ -195,33 +213,6 @@ public class ItemsController {
 
         List<Item> itemsToLoan = new ArrayList<Item>();
 
-     /*TODO
-      * Ahora mismo si un item tiene todas sus unidades alquiladas no se mete a la lista, y por tanto no
-        se muestra al cliente para reservar.
-        ¿Dejarlo asi, o mostrarlo pudiendo reservarlo para alquilarlo mas adelante?
-        Pensar sistema de reservas de materiales
-      */
-
-       /*  for (Item item : itemList) {
-            log.info("item :" + item.getName() + " Loans de este item: ");
-
-            int cantidadReservada = 0;
-             for (ItemLoans il : item.getItemLoans()) {
-                cantidadReservada += il.getQuantity();
-
-               // itemsToLoan[itemsToLoan.size()-1] = new Item(); 
-                log.info( "item loan: " + il.getItem().getName() +  " cantidad loan " + il.getQuantity() + " user " +il.getUser());
-            }
-            
-            if(cantidadReservada < item.getQuantity())
-            {
-                item.setQuantity(item.getQuantity() - cantidadReservada);
-                itemsToLoan.add(item);
-                log.info("Item can loan: " + item.getName() + " with quantity: "+ item.getQuantity());
-            }
-        }
-
-        model.addAttribute("itemsToLoan", itemsToLoan); */
         model.addAttribute("itemsToLoan",itemList);
 
          return "itemsToLoan";
@@ -367,10 +358,11 @@ public class ItemsController {
         u2 = commonDB.getUser(em, u.getId());
 
       if(!u2.hasAnySub())
-        return "";
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Peticion sin permisos");
+         
 
       if(u2.hasItemLoan(itemId))
-        return "";
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Peticion incorrecta");
 
 
       User updatedUser = db.makeLoan(em, itemId, u2.getId(), itemQuantity, time);
@@ -410,7 +402,14 @@ public class ItemsController {
       if(itemLoan.isLate()) return "{\"isok\": \"todomal\"}";
 
       LocalDateTime nextDayForLoan = itemLoan.getLoanEnd().plusMinutes(1);
-        if(availableItemsPerDay(nextDayForLoan, itemId) < itemLoan.getQuantity())  return "{\"isok\": \"todomal\"}";
+
+      for(int i = 0; i < 7; i++) {
+        LocalDateTime dateOfInterval = nextDayForLoan.plusDays(i);
+        if(availableItemsPerDay(dateOfInterval, itemId) < itemLoan.getQuantity()) {
+          return "{\"isok\": \"todomal\"}";
+        }
+      }
+      //  if(availableItemsPerDay(nextDayForLoan, itemId) < itemLoan.getQuantity())  return "{\"isok\": \"todomal\"}";
 //TODO esto revisa solo si el dia siguiente al fin del alquiler habia unidades. 
 //habria que revisar tambien los 6 dias siguientes, pues si al dia siguiente habia una unidad, pero en sig sig habia 0
 //no se deberia de poder ampliar 
@@ -423,24 +422,25 @@ public class ItemsController {
     @PostMapping("endLoan")
     @Transactional
     @ResponseBody 
-    public String endLoan(HttpSession session, @RequestParam("itemId") long itemId,  @RequestParam("userId") long userId)
+    public String endLoan(HttpSession session, @RequestParam("itemId") long itemId,  @RequestParam("userId") long userId, @RequestParam("loanId") long loanId)
     {
      
-      ItemLoans il = db.endLoan(em, itemId, userId);
+      ItemLoans il = db.endLoan(em, itemId, userId, loanId);
 
       return "{\"itemLoan\": \""+il.toString()+"\"}";
     }
 
-   /*  @PostMapping("undoEndLoan")
+     @PostMapping("undoEndLoan")
     @Transactional
     @ResponseBody 
-    public String undoEndLoan(HttpSession session, @RequestParam("itemLoan") ItemLoans il)
+    public String undoEndLoan(HttpSession session, @RequestParam("itemId") long itemId,  @RequestParam("userId") long userId, @RequestParam("loanId") long loanId)
     {
      
-      log.info("il recibido: "+ il.toString());
+      db.undoEndLoan(em, itemId, userId, loanId);
+      //log.info("il recibido: "+ il.toString());
 
       return "{\"itemLoan\": \""+"il.toString()"+"\"}";
-    } */
+    } 
 
     //@Transactional
     private int availableItemsPerDay(String date, long itemId)
@@ -467,6 +467,10 @@ public class ItemsController {
       log.info("fecha de hoy: "+ actualDate);
 
       for (ItemLoans il : item.getItemLoans()) {
+
+        if(!il.isActive())
+          continue;
+
         int compareStart = time.compareTo(il.getLoanStart());// > 0 time es mas tarde  <0  es antes  = 0 es igual
 
         

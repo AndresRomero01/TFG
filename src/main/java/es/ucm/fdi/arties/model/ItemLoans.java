@@ -7,10 +7,14 @@ import java.time.temporal.ChronoUnit;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,17 +33,37 @@ import lombok.Getter;
 }) */
 public class ItemLoans implements Transferable<ItemLoans.Transfer> {
     
-    @EmbeddedId private ItemLoansId id;
-    @ManyToOne
+   /*  @EmbeddedId private ItemLoansId id;
+     */
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen")
+    @SequenceGenerator(name = "gen", sequenceName = "gen")
+    private long id;
    
-    @MapsId("item") private Item item;
+    @ManyToOne
+    //@MapsId("item") private Item item;
+    private Item item;
 
     @ManyToOne
-    @MapsId("user")private User user;
+    //@MapsId("user")private User user;
+    private User user;
 
     private LocalDateTime loanStart;
     private LocalDateTime loanEnd;
     private int quantity;
+
+    private boolean isActive;
+
+    
+    public ItemLoans(Item item, User user, LocalDateTime loanStart, LocalDateTime loanEnd, int quantity, boolean isActive) {
+        this.item = item;
+        this.user = user;
+        this.loanStart = loanStart;
+        this.loanEnd = loanEnd;
+        this.quantity = quantity;
+        this.isActive = isActive;
+    }
 
     public ItemLoans(){ }
 

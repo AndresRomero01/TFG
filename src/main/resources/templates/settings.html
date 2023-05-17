@@ -414,9 +414,9 @@
                 <div class="col text-center titleData">Datos de usuario</div>
                 <div class="col-2"></div>
               </div>
-              <div class="">
+              <div class="loansOfItemContainer">
                 <th:block th:each="loan,iter: ${item.itemLoans}">
-                  <div th:id="${loan.item.id}+':'+${loan.user.id}" class="loanContainer row">
+                  <div th:if="${loan.isActive}" th:id="${loan.item.id}+':'+${loan.user.id}+':'+${loan.id}" class="loanContainer row">
                     <div class="col-5 loanData row">
                       
                       <div class="col">
@@ -446,40 +446,10 @@
 
                     <div class="col-2 btnEndLoanContainer">
                       <!-- id se loan= idItem:idUsuario -->
-                      <button th:value="${loan.item.id}+':'+${loan.user.id}" class="btn makeEndLoanBtn customButton">Finalizar Alquiler</button>
+                      <button th:value="${loan.item.id}+':'+${loan.user.id}+':'+${loan.id}" class="btn makeEndLoanBtn customButton">Finalizar Alquiler</button>
                     </div>
                   </div>
-                  <!-- <div class="loanContainer row">
-                    <div class="col-5 loanData row">
-                      <div class="col-3">
-                        <div class="text-center dataName">Datos Alquiler</div>
-                      </div>
-                      <div class="col">
-                        <div class="text-center">Fecha</div>
-                        <div class="text-center">10-04-2023 - 10-04-2023</div>
-                      </div>
-                      <div class="col-3 lastColLoanData">
-                        <div class="text-center">Cantidad</div>
-                        <div class="text-center">2</div>
-                      </div>
-
-                    </div>
-                    <div class="col userData row">
-                      <div class="col-2 dataNameCol">
-                        <div class="text-center dataName">Datos usuario</div>
-                      </div>
-                      <div class="col">
-                        <div class="text-center">Username</div>
-                        <div class="text-center">emaildeUsuario@mail.com</div>
-                      </div>
-                      <div class="col">
-                        <div class="text-center">Nombre y apellidos</div>
-                        <div class="text-center">658332350</div>
-                      </div>
-                      
-                    </div>
-                  </div> -->
-                 <!--  <div th:text="${loan.user.username}"></div> -->
+                  
                 </th:block>
               </div>
             </div>
@@ -903,13 +873,14 @@
 
        <!-- Toast -->
        <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
-        <div id="toastEndLoan" class="toast hide"  data-bs-delay="2000" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="toastEndLoan" class="toast hide"  data-bs-delay="4000" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
             <strong class="me-auto">❗  Alquiler finalizado con exito</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
           <div class="toast-body">
-          <!--   <button value="" id="btnUndoEndLoan" class="btn">Pulsa para deshacer la accion</button> -->
+             <button value="" id="btnUndoEndLoan" class="btn">Pulsa para deshacer la accion</button>
+             <div id="infoUndoRemoveLoan" style="display: none;">Se ha deshecho la finalizacion del alquiler</div>
           </div>
         </div>
       </div>

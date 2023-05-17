@@ -82,8 +82,16 @@ public class DBItemsHandler {
         Item i = em.find(Item.class, id);
 
         //si el item estaba alquilado no se puede eliminar
-        if(i.getItemLoans().size() > 0)
-            return false;
+
+        for(ItemLoans il: i.getItemLoans())
+        {
+            //si tenia algun loan activo es que esta en alquiler,y no se puede eliminar
+            if(il.isActive())
+                return false;
+        }
+
+       /*  if(i.getItemLoans().size() > 0)
+            return false; */
 
         em.remove(i);
         em.flush();
@@ -122,15 +130,25 @@ public class DBItemsHandler {
         LocalDateTime start = LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(),0, 0);
         LocalDateTime end = LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(),23, 59);
 
-        ItemLoansId itemLoansId = new ItemLoansId(idUser, idItem);
-        ItemLoans itemLoan = new ItemLoans(itemLoansId, item, user, start, end.plusDays(7), quantity);
+       // ItemLoansId itemLoansId = new ItemLoansId(idUser, idItem);
+     //   ItemLoans itemLoan = new ItemLoans(itemLoansId, item, user, start, end.plusDays(7), quantity, true);
+        ItemLoans itemLoan = new ItemLoans(item, user, start, end.plusDays(7), quantity, true);
+        log.info( "item name: " +itemLoan.getItem().getName() + "item id: "+itemLoan.getItem().getId());
+      
+        //em.flush(); 
 
         em.persist(itemLoan);
+        em.flush(); 
 
         user.addItemLoan(itemLoan, item);
 
+        em.flush(); 
 
-        em.flush();  
+   
+
+        long newId = itemLoan.getId();
+        log.info("nuevo id" + newId);
+        
 /*     for (ItemLoans il : user.getItemLoans()) {
         log.info("User il - item id: " + il.getItem().getId());
     }
@@ -163,7 +181,8 @@ public class DBItemsHandler {
         //probar esta solucion, y sino hacer la de arriba con una sobreescritura d ela lista completa
         //Si funciona
         for (ItemLoans itemLoans :  user.getItemLoans()) {
-            if(itemLoans.getItem().getId() == idItem)
+            //el usuario solo tiene un alquiler con ese objeto que este activo
+            if(itemLoans.isActive() && itemLoans.getItem().getId() == idItem)
             {
                 LocalDateTime updatedEnd =itemLoans.getLoanEnd().plusDays(7);
                 log.info("nuevo end: "+ updatedEnd);
@@ -176,18 +195,32 @@ public class DBItemsHandler {
         return true;
     }
 
-    public ItemLoans endLoan(EntityManager em, long idItem, long idUser)
+    public ItemLoans endLoan(EntityManager em, long idItem, long idUser, long idLoan)
     {
         Item item = em.find(Item.class, idItem);
         User user = em.find(User.class, idUser);
 
-        ItemLoans il = user.removeItemLoan(idItem);
-        item.removeItemLoan(idUser);
-
-        em.remove(il);
+        ItemLoans il = user.removeItemLoan(idItem, idLoan);
+        item.removeItemLoan(idUser, idLoan);
+        il.setActive(false);
+       // em.remove(il);
 
         em.flush();  
         return il;
+    }
+
+    public void undoEndLoan(EntityManager em, long idItem, long idUser, long idLoan)
+    {
+        Item item = em.find(Item.class, idItem);
+        User user = em.find(User.class, idUser);
+
+        ItemLoans il = user.undoRemoveItemLoan(idItem, idLoan);
+        item.undoRemoveItemLoan(idUser, idLoan);
+        il.setActive(true);
+       // em.remove(il);
+
+        em.flush();  
+       // return il;
     }
 
     

@@ -224,7 +224,7 @@ public class User implements Transferable<User.Transfer> {
         log.info("comprobando items loans del user " + id);
         for (ItemLoans il : itemLoans) {
             log.info("id item: "+ il.getItem().getId());
-            if(il.getItem().getId() == item.getId())
+            if(il.getItem().getId() == item.getId() && il.isActive())
             return true;
         }
 
@@ -237,36 +237,41 @@ public class User implements Transferable<User.Transfer> {
         log.info("comprobando items loans del user " + id);
         for (ItemLoans il : itemLoans) {
             log.info("id item: "+ il.getItem().getId());
-            if(il.getItem().getId() == itemId)
+            if(il.getItem().getId() == itemId && il.isActive())
             return true;
         }
 
         return false;
     }
 
+    @Transactional
     public void addItemLoan(ItemLoans itemLoan, Item item)
     {
         this.itemLoans.add(itemLoan);
         item.getItemLoans().add(itemLoan);
     }
 
+
+
+
     public ItemLoans getOneItemLoan(long itemId)
     {
         for (ItemLoans il : itemLoans) {
-            if(il.getItem().getId() == itemId)
+            if(il.getItem().getId() == itemId && il.isActive())
             return il;
         }
         return null;
     }
 
-    public ItemLoans removeItemLoan(long idItem)
+    public ItemLoans removeItemLoan(long idItem, long idLoan)
     {
         ItemLoans toRemove = null;
         for(ItemLoans il:itemLoans)
         {
-            if(il.getItem().getId() == idItem)
+            if(il.getId() == idLoan && il.getItem().getId() == idItem)
             {
                 toRemove = il;
+                il.setActive(false);
                 log.info("id encontrado en user");
             }
                 
@@ -274,7 +279,31 @@ public class User implements Transferable<User.Transfer> {
 
         if(toRemove != null)
         {
-            itemLoans.remove(toRemove);
+            //itemLoans.remove(toRemove);
+            
+        }
+
+        return toRemove;
+    }
+
+    public ItemLoans undoRemoveItemLoan(long idItem, long idLoan)
+    {
+        ItemLoans toRemove = null;
+        for(ItemLoans il:itemLoans)
+        {
+            if(il.getId() == idLoan && il.getItem().getId() == idItem)
+            {
+                toRemove = il;
+                il.setActive(true);
+                log.info("id encontrado en user");
+            }
+                
+        }
+
+        if(toRemove != null)
+        {
+            //itemLoans.remove(toRemove);
+            
         }
 
         return toRemove;
@@ -301,9 +330,7 @@ public class User implements Transferable<User.Transfer> {
 
     public List<AttendedLesson> getAttendance(){
         List<AttendedLesson> attendance = new ArrayList<>();
-
         HashMap<String, Integer> aux = new HashMap<>();
-
         LocalDateTime actual = LocalDateTime.now();
 
         for(SessionBookings sb : sessionBookings)
@@ -322,7 +349,6 @@ public class User implements Transferable<User.Transfer> {
             }
         }
 
-
         for (Map.Entry<String, Integer> entry : aux.entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
@@ -333,6 +359,39 @@ public class User implements Transferable<User.Transfer> {
 
 
         return attendance;
+    }
+
+
+    public List<TimesLoanedItem> getHistoryLoans(){
+        List<TimesLoanedItem> history = new ArrayList<>();
+        HashMap<String, Integer> aux = new HashMap<>();
+
+        for(ItemLoans il : itemLoans)
+        {
+            //si la clase fue antes de la fecha actual (asi no cuenta para estadisticas futuras reservas)
+            if(!il.isActive())
+            {
+                String itemName = il.getItem().getName();
+                if(aux.containsKey(itemName))
+                {
+                    Integer prev = aux.get(itemName);
+                    aux.put(itemName, (prev+1));
+                }
+                else
+                    aux.put(itemName, (1));
+            }
+        }
+
+        for (Map.Entry<String, Integer> entry : aux.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+
+            history.add(new TimesLoanedItem(key, value));
+            // Realizar operaciones con la clave y el valor...
+        }
+
+
+        return history;
     }
 }
 

@@ -149,39 +149,57 @@ INSERT INTO ITEM(id, name, quantity, max_loan, description)
 VALUES (4,'pesa 20kg', 4, 1, 'Una pesa para musculacion');
 
 INSERT INTO ITEM(id, name, quantity, max_loan, description)
-VALUES (5,'bicicleta basica', 6, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+VALUES (5,'bicicleta basica', 6, 1, 'Nuestra bicicleta básica es cómoda, resistente y se adapta a tus preferencias. Con diferentes niveles de resistencia y una pantalla digital, puedes hacer un entrenamiento cardiovascular efectivo y ver tu progreso. Es una opción confiable y segura para disfrutar del ejercicio al aire libre.');
 
 INSERT INTO ITEM(id, name, quantity, max_loan, description)
 VALUES (6,'bicicleta montaña', 4, 1, 'Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet. Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet');
 
 /* Para probar fecha de devolucion ya pasada o no unidades disponibles modificando fecha endLoand 
 y poniendo dia del start del siguiente al dia siguiente*/
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (1, 4, 2, '2023-03-20T10:00:00', '2023-04-9T23:59:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (1, 1, 4, 2, '2023-03-20T10:00:00', '2023-05-19T23:59:00',TRUE);
 
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (3, 4, 1, '2023-04-10T00:00:00', '2023-04-20T23:59:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (2, 3, 4, 3, '2023-05-21T00:00:00', '2023-05-25T23:59:00',TRUE);
 
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (3, 6, 4, '2023-03-20T10:00:00', '2023-04-6T10:00:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (3, 3, 6, 4, '2023-03-20T10:00:00', '2023-04-6T23:59:00',FALSE);
 
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (3, 1, 1, '2023-03-20T10:00:00', '2023-03-27T10:00:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (4, 3, 1, 1, '2023-03-20T10:00:00', '2023-03-27T23:59:00',TRUE);
 
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (2, 1, 2, '2023-04-04T00:00:00', '2023-04-13T00:00:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (5, 2, 1, 2, '2023-04-04T00:00:00', '2023-04-13T23:59:00',TRUE);
 /* Para probar fecha cercana a fin loan (modificandolo) */
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (1, 3, 1, '2023-04-04T00:00:00', '2023-04-11T23:59:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (6, 1, 3, 1, '2023-04-04T00:00:00', '2023-04-11T23:59:00',TRUE);
 
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (1, 2, 1, '2023-04-04T00:00:00', '2023-05-07T00:00:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (7, 1, 2, 1, '2023-04-04T00:00:00', '2023-05-19T23:59:00',TRUE);
 
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (3, 3, 1, '2023-04-04T00:00:00', '2023-05-07T00:00:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (8, 3, 3, 1, '2023-04-04T00:00:00', '2023-05-07T23:59:00',TRUE);
 
-INSERT INTO ITEM_LOANS(user_id, item_id, quantity, loan_start, loan_end)
-VALUES (3, 2, 1, '2023-04-04T00:00:00', '2023-05-07T00:00:00');
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (9, 3, 2, 1, '2023-04-04T00:00:00', '2023-05-07T23:59:00',TRUE);
+
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (10, 1, 1, 1, '2023-04-04T00:00:00', '2023-05-07T23:59:00',FALSE);
+
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (11, 1, 1, 2, '2023-03-04T00:00:00', '2023-03-07T23:59:00',FALSE);
+
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (12, 1, 5, 1, '2023-03-04T00:00:00', '2023-03-07T23:59:00',FALSE);
+
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (13, 1, 5, 2, '2023-02-03T00:00:00', '2023-02-07T23:59:00',FALSE);
+
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (14, 1, 5, 2, '2023-05-04T00:00:00', '2023-05-07T23:59:00',FALSE);
+
+INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
+VALUES (15, 1, 3, 1, '2023-03-04T00:00:00', '2023-03-07T23:59:00',FALSE);
 
 --- Data for chats ---
 

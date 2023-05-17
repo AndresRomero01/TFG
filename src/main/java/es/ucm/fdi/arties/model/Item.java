@@ -2,6 +2,7 @@ package es.ucm.fdi.arties.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -45,7 +46,7 @@ public class Item {
     // TO DO variables video/imagenes
 
     //por cada item, tenemos en esta var la lista de loans de ese item con el usuario que la tiene
-    @OneToMany (mappedBy = "item")/* , fetch=FetchType.EAGER) */
+    @OneToMany (mappedBy = "item", cascade = CascadeType.REMOVE)/* , fetch=FetchType.EAGER) */
     private List<ItemLoans> itemLoans;
 
  public Item(String name, String desc, Integer quant, Integer maxL)
@@ -57,21 +58,41 @@ public class Item {
  }
 
 
- public void removeItemLoan(long idUsr)
+ public void removeItemLoan(long idUsr, long idLoan)
     {
         ItemLoans toRemove = null;
         for(ItemLoans il:itemLoans)
         {
-            if(il.getUser().getId() == idUsr)
+            if(il.getId() == idLoan && il.getUser().getId() == idUsr)
             {
                 toRemove = il;
+                il.setActive(false);
                 log.info("id encontrado en user");
             }
                 
         }
         if(toRemove != null)
         {
-            itemLoans.remove(toRemove);
+          //  itemLoans.remove(toRemove);
+        }
+    }
+
+    public void undoRemoveItemLoan(long idUsr, long idLoan)
+    {
+        ItemLoans toRemove = null;
+        for(ItemLoans il:itemLoans)
+        {
+            if(il.getId() == idLoan && il.getUser().getId() == idUsr)
+            {
+                toRemove = il;
+                il.setActive(true);
+                log.info("id encontrado en user");
+            }
+                
+        }
+        if(toRemove != null)
+        {
+          //  itemLoans.remove(toRemove);
         }
     }
 
