@@ -52,8 +52,6 @@ VALUES (9, 'STAFF', 'emp6',
 
 --Datos sobre cursos
 
-ALTER TABLE course ALTER COLUMN description TYPE text;--Para poder guardar textos largos en la descripcion
-
 INSERT INTO CATEGORY (id, name)
 VALUES (1, 'Cardio');
 
@@ -76,7 +74,7 @@ INSERT INTO CATEGORY (id, name)
 VALUES (7, 'Tren inferior');
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (1, 'Carrera 10km', FALSE, 'Prepárate para iniciarte en las maratones. Este curso te ayudará a conseguir superar la primera de ellas, la de 10km', 1, TRUE, TRUE);
+VALUES (1, 'Carrera 10km', FALSE, 'Prepárate para iniciarte en las maratones. Este curso te ayudará a conseguir superar la primera de ellas, la de 10km', 1, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
 VALUES (2, 'Maratón 42km', FALSE, 'Una maratón no es fácil, y lo sabemos. Prepárate junto con nuestro entrenador especializado para lograr tu objetivo', 1, TRUE, FALSE);
@@ -260,17 +258,16 @@ ALTER TABLE lesson ALTER COLUMN period TYPE text;--Para poder guardar textos lar
 ALTER TABLE lesson ALTER COLUMN description TYPE text;--Para poder guardar textos largos en la descripcion
 
 INSERT INTO LESSON (id, name, period, capacity, price, description)
-VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 30, 1.00, 'Clase de baile muy animada, perfecta para para aquellos que les guste moverse con estilo.');
+VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 30, 12, 'Clase de baile muy animada, perfecta para para aquellos que les guste moverse con estilo.');
 
 INSERT INTO LESSON (id, name, period, capacity, price, description)
-VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 0.50, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
-
-
-INSERT INTO LESSON (id, name, period, capacity, price, description)
-VALUES (3, 'Yoga', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 1.20, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
+VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 10, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
 
 INSERT INTO LESSON (id, name, period, capacity, price, description)
-VALUES (4, 'Spinning', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 1.40, 'Ponte en forma con esta entretenida clase de spinning');
+VALUES (3, 'Yoga', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 10, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
+
+INSERT INTO LESSON (id, name, period, capacity, price, description)
+VALUES (4, 'Spinning', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 10, 'Ponte en forma con esta entretenida clase de spinning');
 
 -------------------------
 INSERT INTO SESSION (id, date, lesson_id)

@@ -40,6 +40,7 @@ var target = document.querySelector('#calendar')
 // Create an observer instance.
 var observer = new MutationObserver(function(mutations) {
     onlyBookDays();
+    
 });
 
 // Pass in the target node, as well as the observer options.
@@ -94,6 +95,7 @@ console.log("onlyBookDays")
                 //al ir por dias el reccorido y no por la respuesta esto no aporta nada
                 if(!days[i].classList.contains("bookable"))
                 {
+                    
                     bookClickableDays.push(days[i])
                     console.log("dia "+ dayNumber + "/"+ monthNumber +"/" + yearNumber + "no estaba")
                     days[i].classList.add("bookable")
@@ -147,7 +149,7 @@ function dayClicked(e)
     var dayNumber =  e.target.innerHTML//e.target.querySelector(".day-number").innerHTML//+days[index].querySelectorAll('.day-number')[0].innerText || +days[index].querySelectorAll('.day-number')[0].textContent;
     //console.log("valor " + e.target.innerHTML)
     console.log("dia "+ dayNumber + "/"+ monthNumber +"/" + yearNumber + " pulsado")
-
+    console.log("mes y anio actual: " +monthNumber + "/"+ yearNumber)
     let select = document.getElementById("sessionsOfDay")
 
     select.innerHTML = '<option value="null" selected>Selecciona una hora</option>'
@@ -156,11 +158,19 @@ function dayClicked(e)
     {
         let date = new Date(sessions[i]["date"]);
 
+        let dayStr = date.getDate() +""
+        if(dayStr.length == 1)
+            dayStr = "0"+dayStr;
+        
         console.log(date.getDate() + "  -  " + dayNumber)
-        if(date.getDate()+"" === dayNumber)
+        if(dayStr+"" === dayNumber)
         {
             console.log("iguales day")
-            if(date.getMonth()+1 == monthNumber)
+
+            let monthStr = (date.getMonth()+1) +""
+            if(monthStr.length == 1)
+                monthStr = "0"+monthStr;
+            if(monthStr == monthNumber)
             {
                 console.log("iguales mes")
                 if(date.getFullYear()+"" == yearNumber)
@@ -190,7 +200,7 @@ function dayClicked(e)
     console.log("html: "+select.innerHTML)
 
     let divQuant = document.getElementById("availableQuantity")
-            divQuant.querySelector("span").innerHTML = 'Plazas disponibles para la sesion seleccionada: ?'
+            divQuant.querySelector("div").innerHTML = 'Plazas disponibles para la sesion seleccionada: ?'
 
 }
 
@@ -209,7 +219,7 @@ function selectChanged(e)
         {
             console.log("iguales")
             let divQuant = document.getElementById("availableQuantity")
-            divQuant.querySelector("span").innerHTML = 'Plazas disponibles para la sesion seleccionada: '+sessions[i]["capa"]
+            divQuant.querySelector("div").innerHTML = 'Plazas disponibles para la sesion seleccionada: '+sessions[i]["capa"]
             idSessionSelected = sessions[i]["idSession"]
             capaSelected = sessions[i]["capa"]
             
@@ -249,13 +259,22 @@ function makeBook()
     go("/lessons/bookLessonSession", "POST", formData, {}).then(d => {
         console.log(d);
 
-        if(d["res"] == -1)
+        if(d["res"] == -7)
         {
-            alert("Error.\nYa tenías una reserva realizada para esta clase en el día y hora seleccionados.")
-            return;
+            window.location.replace("/lessons/payBooking?sessionId="+idSessionSelected);
         }
-            
-        window.location.replace("/lessons/myBookingLessons");
+        else{
+            if(d["res"] == -1)
+            {
+                alert("Error.\nYa tenías una reserva realizada para esta clase en el día y hora seleccionados.")
+                return;
+            }
+                
+            window.location.replace("/lessons/myBookingLessons");
+
+        }
+
+      
 
     
 

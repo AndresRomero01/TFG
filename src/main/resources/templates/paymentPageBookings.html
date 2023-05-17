@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <!-- <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css" type="text/css" /> -->
+    <link rel="stylesheet" href="css/paymentPage.css" type="text/css" />
+    <title>Pago</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+    <input id ="sessionId"type="hidden" th:value="${sessionId}">
+
+    <div class="bodyCol">
+        <div class="col col-md-6">
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Titular de la tarjeta" id='cardholder' required />
+                <label for="cardholder" class="form__label">Titular de la tarjeta</label>
+            </div>
+        </div>
+        
+        <div class="col col-md-6">
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Número de tarjeta" id='cardNumber' required />
+                <label for="cardNumber" class="form__label">Número de tarjeta</label>
+            </div>
+        </div>
+        
+
+        <div class="row">
+            <div class="col">
+                <div class="form__group field">
+                    <input type="input" class="form__field" placeholder="Código de seguridad" id='securityCode' required />
+                    <label for="securityCode" class="form__label">Código de seguridad</label>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form__group field">
+                    <input type="date" class="form__field" placeholder="Fecha de caducidad" id='expirationDate' required />
+                    <label for="expirationDate" class="form__label">Fecha de caducidad</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-md-6">
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Dirección" id='address' required />
+                <label for="address" class="form__label">Dirección</label>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a class="btn customButton" id="endPayment" >Finalizar pago</a>
+        </div>
+       
+
+    </div>
+
+</body>
+
+<th:block th:replace="fragments/footer.html :: footer" />
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelector("#endPayment").addEventListener("click", payBooking)
+});
+
+    function payBooking(e)
+    {
+        let formData = new FormData();
+
+       
+        formData.append("sessionId", document.getElementById("sessionId").value)
+
+
+        go("/lessons/paidBookingLessonSession", "POST", formData, {}).then(d => {
+            console.log(d);
+            //document.querySelector("#"+e.target.value).remove();
+            if(d["res"] == -1)
+            {
+                alert("Error.\nYa tenías una reserva realizada para esta clase en el día y hora seleccionados.")
+                return;
+            }
+                
+            window.location.replace("/lessons/myBookingLessons");
+
+        }).catch(() => console.log("fallo"));
+    }
+</script>
+</html>

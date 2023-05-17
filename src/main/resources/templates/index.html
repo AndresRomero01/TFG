@@ -6,6 +6,7 @@
     <title >Arties</title>
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/carrouselCard.css" />
+    <link rel="stylesheet" href="../css/generalCards.css" />
 </head>
 </head>
 
@@ -34,7 +35,14 @@
     </div> -->
 
     
-    
+   
+
+    <div th>
+
+    </div>
+    <th:block th:if="${#lists.size(freeCourses) == 5}">
+
+    <h1 class="text-center titleCourses">Prueba alguno de nuestros cursos gratuitos</h1>
 
     <div class="demoDiv">
         <div class="carouselDiv">
@@ -48,7 +56,7 @@
 
 
             <main id="carouselMain">
-                <div class="item">
+           <!--      <div class="item">
                     <div class="myContainer">
                         <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
                             <div class="myDetails">
@@ -57,9 +65,23 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="item">
+                <th:block th:each="course,iter: ${freeCourses}">
+                    <div class="item">
+                        <div class="myContainer">
+                            <div class="myCard" th:style="'background: url(img/courses/' + ${course.id}+'.jpg) center center / cover'" style="background: url(img/drawing.jpg) center center / cover">
+                                <div class="myDetails">
+                                    <h2 th:text="${course.name}">Lakes</h2>
+                                    <p class="myDescText" th:text="${course.description}">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet. Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </th:block>
+
+                <!-- <div class="item">
                     <div class="myContainer">
                         <div class="myCard" style="background: url(img/drawing.jpg) center center / cover">
                             <div class="myDetails">
@@ -101,25 +123,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- <div class="item" th:each="course,iter: ${freeCourses}">
-                   
-                    <div class="col d-flex">
-                        <div class="card text-white bg-dark " style="width: 18rem;">
-                            <img class="card-img-top" src="/img/drawing.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${course.name}">Card title</h5>
-                                <p class="card-text descField" th:text="${course.description}">Card description</p>
-                                
-                            </div>
-                            <div class="card-footer">
-                                <a href="${course.name}" class="btn btn-light">Ver curso</a>
-                            </div>
-                        </div>
-                    </div>
                 </div> -->
-            <main>
+                
+              
+            </main>
 
 
 
@@ -130,12 +137,203 @@
 
     </div>
 
-    <div class="bodyCol">
+    </th:block>
+   
+    
+
+ <!--    <div class="bodyCol">
 
         <a class="btn btn-dark" id="prevCourse">Anterior</a>
         <a class="btn btn-dark" id="nextCourse">Siguiente</a>     
     
+    </div> -->
+
+    <div class="row  w-100 itemsSection">
+        <div class="col-sm-6 text-center">
+            <div class="colDescLoan text-center">
+                <h1>Descubre nuestro material para alquilar</h1>
+                <h3>y disfruta de nuestras ventajas desde tu casa</h3>
+
+                <h5>• Con tu suscripción online o presencial podrás llevarte a casa el material disponible del gimnasio</h5>
+                <h5>• Tan sencillo como seleccionar el objeto que quieras y elegir el día que quieras pasarte a recogerlo</h5>
+                <h5>• Si hay disponibilidad, prolonga tu alquiler desde casa sin necesidad de pasar por el gimnasio</h5>
+                
+
+
+                <h2>Disfruta de tu material favorito o prueba cosas nuevas sin ningún gasto extra</h2>
+
+                <a href="/items/listToLoan">
+                    <button class="btn customButton">Ver mas</button>
+                </a>
+               
+
+            </div>
+            
+        </div>
+
+        <div class="col-sm-6 itemsContainerCol">
+            <div class="row justify-content-center itemsSeccionContainer itemsCards">
+                <th:block th:each="item,iter: ${items}">
+                        <div class="col-5 myColW">
+                            <div class="myContainerCard">
+                                <div class="card2">
+                                    <div class="itemCustomImgContainer">
+                                        <img  th:src="@{/img/items/{id}.jpg(id=${item.id})}" />
+                            
+ 
+                                    </div>
+                                    
+                                    <div class="myh100 "> 
+                                        <div class="titulo justify-content-center">
+                                            <h2 class="text-center" th:text="${item.name}">Zumba</h2>
+                                        </div>
+                                        <div class="texto">
+                                            <div>
+                                            
+                                            <p th:text="${item.description}">
+                                             gna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                           </p>
+                                            </div>
+                                        </div>
+            
+                                        <div th:if="${session.u}" class="boton justify-content-center">
+                                            <div class="ampliarContainer">
+                                          
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                           
+                                        
+            
+                                            
+            
+            
+                                        
+            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+        
+                
+        
+            </div>
+
+        </div>
+        
     </div>
+
+    <div class="lessonsSection">
+        <h1 class="text-center">Explora las clases que ofrecemos</h1>
+        
+
+        <div class="row justify-content-center noMarginRight">
+           
+            <th:block th:each="lesson,iter: ${lessons}">
+                <div class="col-5 myColW">
+                    <div class="myContainerCard">
+                        <div class="card2">
+                            <div class="lessonCustomImgContainer">
+                                <img  th:src="@{/img/lessons/{id}.jpg(id=${lesson.id})}" />
+                    
+                              
+                            </div>
+                            
+                            <div class="myh100 "> 
+                                <div class="titulo justify-content-center">
+                                    <h2 class="text-center" th:text="${lesson.name}">Zumba</h2>
+                                </div>
+                                <div class="texto">
+                                    <div>
+                                    
+                                    <p th:text="${lesson.description}">
+                                     gna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                   </p>
+                                    </div>
+                                </div>
+    
+                                <div th:if="${session.u}" class="boton justify-content-center">
+                                    <div class="ampliarContainer">
+                                     
+                                   
+    
+                                    </div>
+                                    
+                            
+                                    
+                                </div>
+                                   
+                                
+    
+                                    
+    
+    
+                                
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+            
+
+        </div>
+
+
+    </div>
+
+    <div class="row lessonExtraContainer noMarginRight">
+
+        
+        <div class="col-sm-7">
+            <h2 class="infoLessonTitle">Aprovecha las ventajas de nuestro sistema de reservas</h2>
+           <div class="lessonInfoContainer">
+            <div class="removeSkew">
+                <h4>• Paga solo por la clase a la que quieras ir</h4>
+                <h4>• Con tu suscripcion presencial podras ir a todas sin pagar nada más</h4>
+                <h4>• Usa nuestro sistema de reservas y no te quedes nunca sin tu plaza</h4>
+                <h4>• Prueba todas las clases que quieras y descubre tus favoritas</h4>
+
+                <div class="text-center">
+                    <a href="/lessons/lessonsToBook">
+                        <h4 class="buttonShowLessons">Ver más clases</h4>
+                    </a>
+                    
+                </div>
+
+                
+               
+            </div>
+              
+           </div>
+           
+        </div>
+
+        <div class="col">
+           
+            <div class="col h-100 row justify-content-center">
+                <div class="col extraInfoLesson2">
+                    <h2 class="text-center">Consigue alguna de nuestras suscripciones y consigue estas y más ventajas</h2>
+
+                    <a href="/subscriptions">
+                        <button class="btn customButton">Ver Suscripciones</button>
+                    </a>
+                    
+                </div>
+               
+            </div>
+           
+
+        </div>
+
+    </div>
+   
+   
+
+
 
     
 

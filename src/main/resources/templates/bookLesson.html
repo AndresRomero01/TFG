@@ -50,7 +50,7 @@
                 <div class="row"><!--Row de la toda la info, que contiene las dos cols-->
                     <div class="col-md-5"><!--Primera col con la card-->
                         <div class="card text-white bg-dark myCard">
-                                <img class="card-img-top imgCustom" th:src="@{/img/backgroundLessons.png}" src="/img/backgroundLessons.png" alt="Card image cap">
+                                <img class="card-img-top imgCustom" th:src="@{/img/lessons/{id}.jpg(id=${lesson.id})}" alt="Card image cap">
                                 <div class="newSeparator"></div>
                                 <div class="card-body hVSeparator">
                                     <div class="text-center">
@@ -60,6 +60,15 @@
                                         <div th:text="${lesson.description}">Descripcion del item</div>
                                     </div>
                                     <div class="row ">
+                                        <th:block th:unless="${session.u.isType('onsite')}">
+                                            <div class="col cardText">
+                                                <div>Precio de la clase</div>
+                                            </div>
+                                            <div class="col-2 cardText">
+                                                <div th:text="${lesson.price} + ' €'">2</div>
+                                            </div>
+                                        </th:block>
+                                      
                                         <div class="col cardText">
                                             <div>Aforo de la clase</div>
                                         </div>
@@ -86,15 +95,15 @@
                                     <div class="myForm text-center justify-content-center" role="form" id="myForm"> 
                                         <div class="row justify-content-center">
                                             <div class="col" id="availableQuantity" >
-                                                <span>Plazas disponibles para la sesion seleccionada: ?</span>
+                                                <div class="plazas">Plazas disponibles para la sesion seleccionada: ?</div>
                                             </div>
-                                            <div class="col">
-                                                <label class="form-label" for="sessionsOfDay">Hora a la que quieres reservar</label>
+                                            <div class="col-sm">
+                                                <label class="form-label labelSessions" for="sessionsOfDay">Hora a la que quieres reservar</label>
                                                 <select  id="sessionsOfDay" name="sessionDay" class="form-select">
                                                     <option value="null" selected>Selecciona una hora</option>
                                                   </select>
                                             </div>
-                                            <div class="col-2 row align-items-center"> <!--justify-content-end -->
+                                            <div class="col-sm-2 row align-items-center"> <!--justify-content-end -->
                                                 <button type="button" id ="buttonMakeBook" class="btn btn-primary">Alquilar</button>
                                             </div>
                                         </div>

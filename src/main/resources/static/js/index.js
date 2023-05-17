@@ -1,6 +1,6 @@
 
-document.getElementById("prevCourse").addEventListener("click", previousCourse);
-document.getElementById("nextCourse").addEventListener("click", nextCourse);
+/* document.getElementById("prevCourse").addEventListener("click", previousCourse);
+document.getElementById("nextCourse").addEventListener("click", nextCourse); */
 
 /* let actualChecked; */
 
@@ -43,12 +43,16 @@ function getChecked(){
             actualIndex = index+1;
         }
     });
+   
     return actualIndex;
 }
 
+
+enableDisableDetails();
+
 window.addEventListener("DOMContentLoaded", (event) => {
     console.log("DOM fully loaded and parsed");
-    setInterval(() => {nextCourse()}, 3000);
+    setInterval(() => {nextCourse()}, 4000);
     /* while(1){
         setTimeout(() => {
             nextCourse();

@@ -77,27 +77,36 @@ public class RootController {
     public String index(Model model, HttpSession session) {
         putComundDataInModel(model, session);
 
-         //para alimentar el carousel con 5 cursos gratis (si hay)
-         List<Course> coursesList = new ArrayList<Course>();
-         List<Course> freeCourses = new ArrayList<Course>();
-         List<Item> allItems = dbItems.getItemList(em);
-         if(allItems.size() >=2)
-             model.addAttribute("items", allItems.subList(0, 2));
-         else
-             model.addAttribute("items", allItems);
- 
-         List<Lesson> allLessons = dbLessons.getAllLessons(em);
-         if(allLessons.size() >=4)
-             model.addAttribute("lessons", allLessons.subList(0, 4));
-         else
-             model.addAttribute("lessons", allLessons);
- 
-         coursesList = db.getFreeCoursesList(em);
- 
-         if(coursesList.size() >= 5)
-             model.addAttribute("freeCourses", coursesList.subList(0, 5));
-         else
-             model.addAttribute("freeCourses", new ArrayList<Course>());
+        //para alimentar el carousel con 5 cursos gratis (si hay)
+        List<Course> coursesList = new ArrayList<Course>();
+        List<Course> freeCourses = new ArrayList<Course>();
+        List<Item> allItems = dbItems.getItemList(em);
+        if(allItems.size() >=2)
+            model.addAttribute("items", allItems.subList(0, 2));
+        else
+            model.addAttribute("items", allItems);
+
+        List<Lesson> allLessons = dbLessons.getAllLessons(em);
+        if(allLessons.size() >=4)
+            model.addAttribute("lessons", allLessons.subList(0, 4));
+        else
+            model.addAttribute("lessons", allLessons);
+
+        coursesList = db.getFreeCoursesList(em);
+
+        if(coursesList.size() >= 5)
+            model.addAttribute("freeCourses", coursesList.subList(0, 5));
+        else
+            model.addAttribute("freeCourses", new ArrayList<Course>());
+           
+
+      /*   if(coursesList.size() >= 5){
+            for(int i = 0; i < 5; i++){
+                freeCourses.add(coursesList.get(i));
+            }
+            model.addAttribute("freeCourses", freeCourses);
+            model.addAttribute("freeCoursesCount", freeCourses.size());
+        }  */
 
         return "index";
     }
@@ -374,10 +383,9 @@ public class RootController {
         Boolean isFree = o.get("isFree").asBoolean();
         Long catId = o.get("cat").asLong();
         Long courseId = o.get("courseId").asLong();
-        Boolean hasImage = o.get("hasImage").asBoolean();
-        Boolean hasVideo = o.get("hasVideo").asBoolean();
+        /* Boolean hasImage = o.get("hasImage").asBoolean(); */
 
-        db.modifyCourse(em, courseId, courseName, catId, desc, isFree, hasImage, hasVideo);
+        db.modifyCourse(em, courseId, courseName, catId, desc, isFree);
         
         return "{\"isok\": \"ok\"}";
     }
@@ -391,9 +399,8 @@ public class RootController {
         Boolean isFree = o.get("isFree").asBoolean();
         Long catId = o.get("cat").asLong();
         Boolean hasImage = o.get("hasImage").asBoolean();
-        Boolean hasVideo = o.get("hasVideo").asBoolean();
 
-        long id = db.createCourse(em, courseName, catId, desc, isFree, hasImage, hasVideo);
+        long id = db.createCourse(em, courseName, catId, desc, isFree, hasImage);
         
         return "{\"courseId\":" + id + "}";
     }
@@ -415,31 +422,6 @@ public class RootController {
               byte[] bytes = photo.getBytes();
               stream.write(bytes);
               log.info("la ruta es: " + img.getAbsolutePath());
-          } catch (Exception e) {
-              return null;
-          }
-      }
-
-      return "{\"isok\": \"todobien\"}";
-    }
-
-    @PostMapping("/uploadCourseVideo")
-    @Transactional
-    @ResponseBody 
-    public String uploadVideo(@RequestParam("courseVideo") MultipartFile courseVideo, @RequestParam("courseId") long courseId)
-    {
-        log.info("---- inside uploadCourseVideo ----");
-
-      File video = new File("src/main/resources/static/videos/courses", courseId + ".mp4");
-
-      if (courseVideo.isEmpty()) {
-        log.info("failed to upload video: emtpy file?");
-        return null;
-      } else {
-          try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(video))) {
-              byte[] bytes = courseVideo.getBytes();
-              stream.write(bytes);
-              /* log.info("la ruta es: " + video.getAbsolutePath()); */
           } catch (Exception e) {
               return null;
           }

@@ -23,9 +23,9 @@
                     <div class="myContainer">
                         <div class="card2">
                             <div class="lessonCustomImgContainer">
-                                <img  th:src="@{/img/backgroundLessons.png}" src="/img/backgroundLessons.png" />
+                                <img  th:src="@{/img/lessons/{id}.jpg(id=${booking.session.lesson.id})}" />
                     
-                                <div class="lessonTextOverImg" th:text="${booking.session.lesson.name}">clase super especial</div>
+                               <!--  <div class="lessonTextOverImg" th:text="${booking.session.lesson.name}">clase super especial</div> -->
                             </div>
                             
                             <div class="myh100 "> <!-- align-items-center justify-content-center -->

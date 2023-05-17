@@ -158,8 +158,11 @@
               <div class="lessonImgContainer">
                  
                 <span>
-                  <img th:src="@{/img/backgroundLessons.png}" src="/img/backgroundLessons.png" th:id="'lessonImg'+${lesson.id}" class="lessonImg" />
+                  <img th:src="@{/img/lessons/{id}.jpg(id=${lesson.id})}" src="/img/backgroundLessons.png" th:id="'lessonImg'+${lesson.id}" class="lessonImg" />
                   <!-- <button th:value="${item.id}" data-bs-toggle="modal" data-bs-target="#modalModifyItemImg" class="editImgButton">✏️</button> -->
+                  <button class="btn customButton material-symbols-rounded editImgButtonLesson" th:value="${lesson.id}"  data-bs-toggle="modal" data-bs-target="#modalModifyLessonImg">
+                    edit
+                </button>
                 </span>
                 
               </div>
@@ -186,16 +189,21 @@
                 <p th:id="'lessonDesc'+${lesson.id}" class="lessonDescText" th:text="${lesson.description}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
               </div>
 
-              <div class="row sessionLessonContainer">
+              <div class="row sessionLessonContainer" th:id="'lessonSessions'+${lesson.id}">
                 <th:block th:each="sessionStr,iter: ${lesson.getListPeriodStrEs}">
                     <span class="sessionLessonStr" th:text="${sessionStr}"></span>
-                  </th:block>
+                </th:block>
+                <th:block th:each="sessionStrEn,iter: ${lesson.getListPeriodStr}">
+                  <input type="hidden" th:value="${sessionStrEn}">
+                </th:block>
+                   
+                  
               </div>
             </div>
 
             <div class="col-1">
               <div class="lessonButtonsContainer">
-                <button class="btn lessonButtonModify" th:value="${lesson.id}" data-bs-toggle="modal" data-bs-target="#modalModifylesson">Modificar</button>
+                <button class="btn lessonButtonModify" th:value="${lesson.id}" data-bs-toggle="modal" data-bs-target="#modalModifyLesson">Modificar</button>
                 <button th:value="${lesson.id}" class="btn lessonButtonDelete deleteLesson">Eliminar</button>
               </div>        
             </div>
@@ -233,7 +241,7 @@
                 <span>
                   <img th:src="@{/img/items/{id}.jpg(id=${item.id})}"th:id="'itemImg'+${item.id}" class="itemImg" src="/img/drawing.jpg" />
                   <!-- <button th:value="${item.id}" data-bs-toggle="modal" data-bs-target="#modalModifyItemImg" class="editImgButton">✏️</button> -->
-                  <button class="btn customButton material-symbols-rounded editImgButton" th:value="${item.id}"  data-bs-toggle="modal" data-bs-target="#modalUserImg">
+                  <button class="btn customButton material-symbols-rounded editImgButton" th:value="${item.id}"  data-bs-toggle="modal" data-bs-target="#modalModifyItemImg">
                     edit
                 </button>
                 </span>
@@ -636,7 +644,7 @@
                   <label class="form-label" for="itemMaxLoanField">Cantidad maxima que un usuario podrá alquilar a la vez</label>
                   <input type="number" id="itemMaxLoanField" name="itemQuantity"  class="form-control" required/>
                   
-                  <label for="fileFieldImgItem" class="form-label">Imagen del plato</label>
+                  <label for="fileFieldImgItem" class="form-label">Imagen del item</label>
                   <img id="newImgItem" alt="Imagen nuevo Plato" class="img-thumbnail mw-100 miClase">
                   <input type="file" id="fileFieldImgItem" accept="image/jpeg,image/png" required>
                   <div class="modal-footer">
@@ -689,7 +697,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="modalModifyItemLabel">Modificar material</h5>
+                <h5 class="modal-title" id="modalModifyItemLabel">Modificar imagen material</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -730,28 +738,11 @@
                   <label class="form-label" for="lessonCapacity">Aforo de la clase</label>
                   <input type="number" id="lessonCapacity" name="lessonCapacity"  class="form-control" required/>
 
-                  <label class="form-label" for="lessonCapacity">Precio de la suscripción mensual</label>
+                  <label class="form-label" for="lessonPrice">Precio de una clase</label>
                   <input type="number" id="lessonPrice" step="0.01" name="lessonPrice"  class="form-control" required/>
                   
                   <label class="form-label">Sesiones</label>
-                  <div class="row justify-content-center" id="sessionListContainer">
-                    <!-- <div class="col-sm-4 addSessionContainer">
-                      <span class="sesionDate">Lunes-10:30</span>
-                      <span class="btn btnRemoveAddSession">❌</span>
-                    </div>
-                    <div class="col-sm-4 addSessionContainer">
-                      <span class="sesionDate">Lunes-10:30</span>
-                      <span class="btn btnRemoveAddSession">❌</span>
-                    </div>
-                    <div class="col-sm-4 addSessionContainer">
-                      <span class="sesionDate">Lunes-10:30</span>
-                      <span class="btn btnRemoveAddSession">❌</span>
-                    </div>
-                    <div class="col-sm-4 addSessionContainer">
-                      <span class="sesionDate">Lunes-10:30</span>
-                      <span class="btn btnRemoveAddSession">❌</span>
-                    </div> -->
-                  
+                  <div class="row justify-content-center" id="sessionListContainer">              
                   </div>
 
                   <div class="row newSessionRow">
@@ -789,6 +780,10 @@
                       ➕ Añadir sesion
                     </div> -->
                   </div>
+
+                  <label for="fileFieldImgLesson" class="form-label">Imagen de la clase</label>
+                  <img id="newImgLesson" alt="Imagen nuevo Plato" class="img-thumbnail mw-100 miClase">
+                  <input type="file" id="fileFieldImgLesson" accept="image/jpeg,image/png" required>
                 
 
                   <div class="modal-footer">
@@ -801,6 +796,109 @@
         </div>
      </div>
 
+
+<!-- Modal modify Lesson -->
+     <div class="modal fade" id="modalModifyLesson" tabindex="-1" aria-labelledby="modalModifyLessonLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalModifyLessonLabel">Modificar Clase</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form role="form" id="modifyLessonForm"> 
+                  <label for="lessonNameField" class="form-label">Nombre de la clase</label>
+                  <input type="text" class="form-control" name="LessonNameM" id="lessonNameFieldM" value="" required> 
+
+                  <label for="lessonDescFieldM" class="form-label">Descripcion de la clase</label>
+                  <textarea class="form-control" id="lessonDescFieldM" name="lessonDescM" rows="4" cols="60" required></textarea>
+
+                  <label class="form-label" for="lessonCapacityM">Aforo de la clase</label>
+                  <input type="number" id="lessonCapacityM" name="lessonCapacityM"  class="form-control" required/>
+
+                  <label class="form-label" for="lessonPriceM">Precio de una clase</label>
+                  <input type="number" id="lessonPriceM" step="0.01" name="lessonPriceM"  class="form-control" required/>
+                  
+                  <label class="form-label">Sesiones</label>
+                  <div class="row justify-content-center" id="sessionListContainerM">              
+                  </div>
+
+                  <div class="row newSessionRowM">
+                    <div class="row">
+                      <div class="col">Dia de la semana y hora</div>
+                     
+                    </div>
+                    <div class="row rowInputsSession">
+                   
+                        <select  id="sessionDayM" name="sessionDay" class="form-select col" aria-label="Default select example">
+                          <option value="MONDAY" selected>Lunes</option>
+                          <option value="TUESDAY">Martes</option>
+                          <option value="WEDNESDAY">Miercoles</option>
+                          <option value="THURSDAY">Jueves</option>
+                          <option value="FRIDAY">Viernes</option>
+                        </select>
+                      
+                     
+               
+                        <input class="form-control col" type="time" id="addSessionTimeM" name="addSessionTimeM">
+                      
+                     
+                      <button type="button" class="btn btn-secondary col cancelAddSessionM">Cancelar</button>
+                      <div class="btn customButton col addNewSessionM">Añadir</div>
+                    </div>
+                    
+
+                    
+
+                  </div>
+
+                  <div class="w-100 text-center">
+                    <button class="btn btnAddSessionM customButton">➕ Añadir sesion</button>
+                  <!--   <div class="btn btn-primary openStaffModalButton btnAddSession" data-bs-toggle="modal" data-bs-target="#modalAddSession">
+                      ➕ Añadir sesion
+                    </div> -->
+                  </div>
+
+                  <div class="warningLessonsM warning1">Has borrado alguna sesion. Se cancelaran todas las reservas asociadas a dichas sesiones</div>
+                  <div class="warningLessonsM">Si no quieres que esto suceda pulsa en cancelar y las horas se quedaran como estaban</div>
+
+  
+                
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id ="buttonFormConfirmLessonM" class="btn customButton">Confirmar</button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+     </div>
+
+
+     <!-- Modal modify item Img -->
+     <div class="modal fade" id="modalModifyLessonImg" tabindex="-1" aria-labelledby="modalAddLessonLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalModifyLessonLabel">Modificar imagen clase</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form role="form" id="modifyLessonFormImg"> 
+                 
+                  <label for="fileFieldImgLessonM" class="form-label">Imagen del material</label>
+                  <img id="newImgLessonM" alt="Imagen del material" class="img-thumbnail mw-100 miClase">
+                  <input type="file" id="fileFieldImgLessonM" accept="image/jpeg,image/png" required>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id ="buttonFormConfirmLessonImgM" class="btn customButton">Confirmar</button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+     </div>
 
 
        <!-- Toast -->

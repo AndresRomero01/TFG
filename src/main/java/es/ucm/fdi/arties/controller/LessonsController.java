@@ -25,6 +25,7 @@ import es.ucm.fdi.arties.model.SessionBookings;
 import es.ucm.fdi.arties.model.DB.DBHandler;
 import es.ucm.fdi.arties.model.DB.DBItemsHandler;
 import es.ucm.fdi.arties.model.DB.DBLessonsHandler;
+import es.ucm.fdi.arties.model.User.ClientType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -152,6 +153,7 @@ public class LessonsController {
     @Transactional
     @ResponseBody 
     public String addNewLesson(
+                            @RequestParam("lessonImg") MultipartFile photo,
                             @RequestParam("lessonName") String lessonName,
                             @RequestParam("lessonCapacity") Integer lessonCapacity,
                             @RequestParam("lessonPrice") float lessonPrice,
@@ -161,11 +163,90 @@ public class LessonsController {
 
       
       long id = dbLessons.addNewLesson(em, lessonName, lessonCapacity, period, description, lessonPrice);
+
+      if(id > 0)
+      {
+        File img = new File("src/main/resources/static/img/lessons", id + ".jpg");
+
+        if (photo.isEmpty()) {
+          log.info("failed to upload photo: emtpy file?");
+          return null;
+        } else {
+            try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(img))) {
+                byte[] bytes = photo.getBytes();
+                stream.write(bytes);
+                log.info("la ruta es: " + img.getAbsolutePath());
+            } catch (Exception e) {
+                return null;
+            }
+        }
+      }
       
         //return "{\"quant\": \"todomal\"}";
       
       //0 ha ido bien. mayor que 0 es que se deb tener al menos esa cantidad minima del item a modificar
       return "{\"newId\": \""+id+"\"}";
+
+    }
+
+    @PostMapping("deleteLesson")
+    @Transactional
+    @ResponseBody 
+    public String deletLesson(@RequestParam("lessonId") long idLesson)
+    {
+      dbLessons.deleteLesson(em, idLesson);
+      
+      return "{\"isok\": \"todobien\"}";
+
+    }
+
+    @PostMapping("modifyLesson")
+    @Transactional
+    @ResponseBody 
+    public String modifyLesson(
+                              @RequestParam("lessonName") String lessonName,
+                              @RequestParam("lessonCapacity") Integer lessonCapacity,
+                              @RequestParam("lessonPrice") float lessonPrice,
+                              @RequestParam("period") String period,
+                              @RequestParam("description") String description,
+                              @RequestParam("deletedSessions") String deletedSessions,
+                              @RequestParam("newSessions") String newSessions,
+                              @RequestParam("lessonId") long idLesson
+                              )   {
+
+    //  int quant = db.modifyItem(em, itemName, itemQuantity, itemDesc, itemMaxLoan, idItem);
+
+      int res = dbLessons.modifyLesson(em, lessonName, lessonCapacity, period, description, lessonPrice, deletedSessions, newSessions, idLesson);
+      
+        //return "{\"quant\": \"todomal\"}";
+      
+      //0 ha ido bien. mayor que 0 es que se deb tener al menos esa cantidad minima del item a modificar
+      return "{\"quant\": \""+res+"\"}";
+
+    }
+
+    @PostMapping("modifyLessonImg")
+    @Transactional
+    @ResponseBody 
+    public String modifyLessonImg(@RequestParam("lessonImg") MultipartFile photo, @RequestParam("lessonId") long idLesson)
+    {
+
+      File img = new File("src/main/resources/static/img/lessons", idLesson + ".jpg");
+
+      if (photo.isEmpty()) {
+        log.info("failed to upload photo: emtpy file?");
+        return null;
+      } else {
+          try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(img))) {
+              byte[] bytes = photo.getBytes();
+              stream.write(bytes);
+              log.info("la ruta es: " + img.getAbsolutePath());
+          } catch (Exception e) {
+              return null;
+          }
+      }
+
+      return "{\"isok\": \"todobien\"}";
 
     }
 
@@ -179,13 +260,39 @@ public class LessonsController {
       User u2;
       u2 = commonDB.getUser(em, u.getId());
 
-      
+      if(u2.isType(ClientType.NONE) || u2.isType(ClientType.ONLINE))
+        return "{\"res\": \""+(-7)+"\"}";
 
+      
       int res = dbLessons.makeBookLessonSession(em, u2, sessionid);
 
 
       return "{\"res\": \""+res+"\"}";
     }
+
+    @GetMapping("payBooking")
+    public String payLessonSession(Model model, @RequestParam("sessionId") long sessionid)
+    {
+        model.addAttribute("sessionId", sessionid);
+
+        return "paymentPageBookings";
+    }
+
+    @PostMapping("paidBookingLessonSession")
+    @Transactional
+    @ResponseBody 
+    public String paidBookingLessonSession(Model model, HttpSession session, @RequestParam("sessionId") long sessionid)
+    {
+      User u = (User) session.getAttribute("u");
+      User u2;
+      u2 = commonDB.getUser(em, u.getId());
+
+      int res = dbLessons.makeBookLessonSession(em, u2, sessionid);
+
+      return "{\"res\": \""+res+"\"}";
+    }
+
+
 
     @PostMapping("cancelBookSession")
     @Transactional

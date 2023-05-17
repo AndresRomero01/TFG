@@ -107,6 +107,7 @@
 
 .myForm{
    /*  width: 50%; */
+   width: 95%;
     margin-top: 1em;
    /*  height: 20em; */
     
@@ -148,5 +149,47 @@
     object-fit: cover;
     
 }
+
+#buttonMakeLoan{
+    margin-left: 20px;
+}
+
+
+@media (max-width:740px) {
+    .labelQuant{
+
+        width: 90%;
+        padding-top: 5px;
+        border-top-style: solid;
+        border-top-color: #4a4a4a88;
+        border-top-width: 2px;
+        margin-top: 20px;
+        }
+
+        .quantInf{
+            text-align: center;
+            width: 100%;
+            
+        }
+
+        .myForm{
+            width: 100%;
+        }
+
+        .myForm .col{
+            display: block;
+        }
+
+        #buttonMakeLoan{
+            margin-left:0px;
+            margin-top: 10px;
+        }
+
+        #calendar{
+            margin-top: 10px !important;
+          }
+
+  }
+
 
 

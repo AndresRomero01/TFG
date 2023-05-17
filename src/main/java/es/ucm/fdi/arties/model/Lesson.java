@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,7 +40,7 @@ public class Lesson {
     private int capacity;
     private float price = 0;
     
-    @OneToMany (mappedBy = "lesson")
+    @OneToMany (mappedBy = "lesson", cascade = CascadeType.REMOVE)
     private List<Session> sessionsList;
 
     public Lesson(String name, int capacity, String period, String description, float price)
@@ -105,6 +106,22 @@ public class Lesson {
         for (String session : sessions) {
             String[] partes = session.split("-");
             String s = Utils.weekDayEnToEs(partes[0])+"-"+partes[1];
+            res.add(s);
+        }
+
+        return res;
+    }
+
+
+    public List<String> getListPeriodStr()
+    {
+
+         String[] sessions = period.split(",");
+         List<String> res = new ArrayList<>();
+         
+        for (String session : sessions) {
+            String[] partes = session.split("-");
+            String s = partes[0]+"-"+partes[1];
             res.add(s);
         }
 

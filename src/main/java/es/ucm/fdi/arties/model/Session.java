@@ -3,11 +3,14 @@ package es.ucm.fdi.arties.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -19,6 +22,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+/* @NamedQueries({
+  @NamedQuery(name = "session.list", query = "select s from Session s")
+}) */
 public class Session {
 
 
@@ -34,7 +40,7 @@ public class Session {
 
     private LocalDateTime date;
 
-    @OneToMany (mappedBy = "session")/* , fetch=FetchType.EAGER) */
+    @OneToMany (mappedBy = "session", cascade = CascadeType.REMOVE)/* , fetch=FetchType.EAGER) */
     private List<SessionBookings> sessionBookings;
 
 

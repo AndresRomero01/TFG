@@ -95,3 +95,11 @@
 .myRadio{
     margin:10px;
 }
+
+@media (max-width: 740px) {
+
+    #carouselMain .myCard{
+        width: 20rem;
+    }
+
+}

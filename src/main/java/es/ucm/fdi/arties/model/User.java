@@ -16,10 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -71,9 +74,10 @@ public class User implements Transferable<User.Transfer> {
     }
 
     public enum ClientType {
+        NONE,
         ONLINE,			// normal users 
-        ONSITE,          // admin users
-        NONE
+        ONSITE          // admin users
+        
     }
 
     @Id
@@ -170,9 +174,31 @@ public class User implements Transferable<User.Transfer> {
         return false;
     }
 
+    public boolean hasAnySub()
+    {
+        log.info("las subs son: "+ clientType);
+        return clientType == ClientType.ONLINE || clientType == ClientType.ONSITE;
+    }
+
     public boolean isType(ClientType type)
     {
         return clientType == type;
+    }
+
+    public boolean isType(String type)
+    {
+        return clientType == strToClientType(type);
+    }
+
+    public ClientType strToClientType(String clientType)
+    {
+        if (clientType.equalsIgnoreCase("ONLINE")) {
+            return ClientType.ONLINE;
+        } else if (clientType.equalsIgnoreCase("ONSITE")) {
+            return ClientType.ONSITE;
+        } else {
+            return ClientType.NONE;
+        }
     }
 
     @Getter
@@ -270,6 +296,43 @@ public class User implements Transferable<User.Transfer> {
         {
             sessionBookings.remove(toRemove);
         }
+    }
+
+
+    public List<AttendedLesson> getAttendance(){
+        List<AttendedLesson> attendance = new ArrayList<>();
+
+        HashMap<String, Integer> aux = new HashMap<>();
+
+        LocalDateTime actual = LocalDateTime.now();
+
+        for(SessionBookings sb : sessionBookings)
+        {
+            //si la clase fue antes de la fecha actual (asi no cuenta para estadisticas futuras reservas)
+            if(sb.getSession().getDate().compareTo(actual) < 0)
+            {
+                String lessonName = sb.getSession().getLesson().getName();
+                if(aux.containsKey(lessonName))
+                {
+                    Integer prev = aux.get(lessonName);
+                    aux.put(lessonName, (prev+1));
+                }
+                else
+                    aux.put(lessonName, (1));
+            }
+        }
+
+
+        for (Map.Entry<String, Integer> entry : aux.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+
+            attendance.add(new AttendedLesson(key, value));
+            // Realizar operaciones con la clave y el valor...
+        }
+
+
+        return attendance;
     }
 }
 

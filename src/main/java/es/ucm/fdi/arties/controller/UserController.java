@@ -135,6 +135,9 @@ public class UserController {
 
         model.addAttribute("user", target);
 		model.addAttribute("idUs", target.getId());
+
+        log.info(target.getAttendance());
+
         return "user";
     }
 

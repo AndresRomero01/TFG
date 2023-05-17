@@ -62,7 +62,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	    log.info("Storing user info for {} in session {}", username, session.getId());
 		User u = entityManager.createNamedQuery("User.byUsername", User.class)
 		        .setParameter("username", username)
-		        .getSingleResult();		
+		        .getSingleResult();
+				
+				log.info("el usuario logeado tiene subs: " + u.getClientType());
 		session.setAttribute("u", u);
 
 		// add 'url' and 'ws' session variables

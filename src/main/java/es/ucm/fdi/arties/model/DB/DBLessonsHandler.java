@@ -12,9 +12,11 @@ import es.ucm.fdi.arties.model.SessionBookingsId;
 import es.ucm.fdi.arties.model.User;
 import lombok.Data;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -58,6 +60,130 @@ public class DBLessonsHandler {
         }
 
         return newId;
+    }
+
+    @Transactional
+    public void deleteLesson(EntityManager em, long id)
+    {
+        Lesson l = em.find(Lesson.class, id);
+        em.remove(l);
+        em.flush();
+
+    }
+
+    @Transactional
+    public int modifyLesson(EntityManager em, String lessonName, int capacity, String period,String description, float lessonPrice, String deletedSessions, String newSessions, long id)
+    {
+        Lesson l = em.find(Lesson.class, id);
+
+
+        l.setName(lessonName);
+        l.setPrice(lessonPrice);
+        l.setDescription(description);
+        l.setPeriod(period);
+        l.setCapacity(capacity);
+
+        List<Session> sessions = null;
+
+        sessions = l.getSessionsList();//em.createNamedQuery("session.list", Session.class).getResultList();
+
+
+        List<Session> sessionsToremove = new ArrayList<>();
+
+        if(deletedSessions.length() >1)
+        {
+            for(Session s : sessions)
+            {
+                if(s.getLesson().getId() == id)
+                {
+                    //si la fecha de la sesion es despues a la actual
+                    //no borra las antiguas por eficiencia y por mantenerlas para estadisticas
+                    if(s.getDate().compareTo( LocalDateTime.now()) > 0)
+                    {
+                        String toRemove= "";
+                        DayOfWeek dayOfWeek = s.getDate().getDayOfWeek();
+                        String hour = s.getDate().getHour() + "";
+                        if(hour.length()==1)
+                            hour = "0"+hour;
+                        String min = s.getDate().getMinute()+"";
+                        if(min.length() ==1)
+                            min = "0"+min;
+            
+                        toRemove = dayOfWeek.toString() + "-" + hour+":"+min;
+            
+                        if(deletedSessions.contains(toRemove))
+                        {
+                            log.info("a borrar: " + s.getId() + " con fecha "+ s.getDate().toString());
+                            sessionsToremove.add(s);
+                            em.remove(s);
+                        }
+                    }
+                   
+    
+                }
+               
+            }
+        }
+
+
+        LocalDate actualDate = LocalDate.now();
+        LocalDate date = actualDate;
+        String[] newSessionsArray = newSessions.split(",");
+        for (int i = 1; i <= 30; i++) {
+                DayOfWeek dw =date.getDayOfWeek();
+
+                for(int j = 0; j < newSessionsArray.length; j++)
+                {
+                    String[] parts = newSessionsArray[j].split("-");
+                    DayOfWeek sessionDay = DayOfWeek.valueOf(parts[0]);
+                    LocalTime sessionHour = LocalTime.parse(parts[1]);
+                    if(dw.toString() == sessionDay.toString())
+                    {
+                        LocalDateTime dateAndHour = date.atTime(sessionHour);
+                        addSessionOfLesson(em, l, dateAndHour);
+                    }
+
+                }
+
+          /*   log.info("date: "+ date.toString());
+            createNewSessionsInDay(em,date); */
+
+
+            date = actualDate.plusDays(i);	   
+      }
+       
+
+
+        sessions.removeAll(sessionsToremove);
+
+        for(Session s : sessions)
+        {
+            log.info("sesiones: " + s.getId());
+        }
+
+        if(sessionsToremove.size()>0)
+            l.setSessionsList(sessions);
+
+        em.flush();
+
+      /*   int loanedQuantity = 0;
+        for (ItemLoans il : i.getItemLoans()) {
+            loanedQuantity += il.getQuantity();
+        }
+
+        //cantidad nueva es menor que la actual disponible (cantidad actual total - reservados)
+        log.info("cantidad disp: "+ (i.getQuantity() - loanedQuantity) + " quantity to put "+ quantity);
+        if( quantity < loanedQuantity)
+            return loanedQuantity;
+
+        i.setQuantity(quantity);
+        i.setName(name);
+        i.setDescription(desc);
+        i.setMaxLoan(maxLoan);
+        em.flush(); */
+
+
+        return 0;
     }
 
 

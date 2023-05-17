@@ -50,7 +50,7 @@
                                
                                 </div>
                                 <th:block th:if="${session.u}">
-                                    <div class="boton justify-content-center">
+                                    <div th:if="${session.u.hasAnySub}" class="boton justify-content-center">
                                         <a  th:href="@{/items/loanItem?itemId=}+${item.id}">
                                             <button class="customButton">Alquilar</button>
                                         </a>
