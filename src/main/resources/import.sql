@@ -137,22 +137,28 @@ VALUES (1, 2, 3);
 ALTER TABLE item ALTER COLUMN description TYPE text;--Para poder guardar textos largos en la descripcion
 
 INSERT INTO ITEM(id, name, quantity, max_loan, description)
-VALUES (1,'pesa 5kg', 10, 2, 'Gna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+VALUES (1,'Pesa 5kg', 10, 2, '
+La pesa de 5 kg es una opción ligera y versátil para el entrenamiento físico. Ideal para principiantes y personas en rehabilitación, ofrece resistencia gradual y cómodo agarre. Es compacta y permite trabajar diferentes grupos musculares de forma efectiva.');
 
 INSERT INTO ITEM(id, name, quantity, max_loan, description)
-VALUES (2,'pesa 10kg',8, 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut en.');
+VALUES (2,'Pelota de pilates',12, 1, 'La pelota de Pilates es un accesorio versátil para fortalecer el cuerpo y mejorar la flexibilidad. Utilizada en una amplia gama de ejercicios, fortalece los músculos centrales, mejora la estabilidad y la postura. Es adecuada para personas de todos los niveles de condición física.');
 
 INSERT INTO ITEM(id, name, quantity, max_loan, description)
-VALUES (3,'pesa 15kg',6, 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+VALUES (3,'Step',6, 2, 'El step es un equipo versátil para entrenamiento cardiovascular y de fuerza. Consiste en una plataforma elevada ajustable en altura. Puedes realizar ejercicios de cardio y fortalecimiento muscular. Mejora la resistencia, quema calorías y fortalece piernas y glúteos. Es fácil de transportar y almacenar. Ideal para personas de todos los niveles de condición física.');
 
 INSERT INTO ITEM(id, name, quantity, max_loan, description)
-VALUES (4,'pesa 20kg', 4, 1, 'Una pesa para musculacion');
+VALUES (4,'Pesa 20kg', 4, 1, '
+La pesa de 20 kg es ideal para usuarios experimentados en el entrenamiento de fuerza. Su diseño duradero y agarre cómodo la hacen adecuada para levantamientos, sentadillas y otros ejercicios de fuerza. Ayuda a aumentar la masa muscular, promover la resistencia y mejorar la fuerza general del cuerpo.');
 
 INSERT INTO ITEM(id, name, quantity, max_loan, description)
-VALUES (5,'bicicleta basica', 6, 1, 'Nuestra bicicleta básica es cómoda, resistente y se adapta a tus preferencias. Con diferentes niveles de resistencia y una pantalla digital, puedes hacer un entrenamiento cardiovascular efectivo y ver tu progreso. Es una opción confiable y segura para disfrutar del ejercicio al aire libre.');
+VALUES (5,'Bicicleta basica', 6, 1, 'Nuestra bicicleta básica es cómoda, resistente y se adapta a tus preferencias. Con diferentes niveles de resistencia y una pantalla digital, puedes hacer un entrenamiento cardiovascular efectivo y ver tu progreso. Es una opción confiable y segura para disfrutar del ejercicio al aire libre.');
 
 INSERT INTO ITEM(id, name, quantity, max_loan, description)
-VALUES (6,'bicicleta montaña', 4, 1, 'Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet. Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet');
+VALUES (6,'Bicicleta montaña', 4, 1, '
+La bicicleta de montaña es resistente, versátil y perfecta para explorar senderos accidentados. Con su sistema de suspensión y neumáticos anchos, ofrece una conducción suave y estable en terrenos irregulares. Sus múltiples velocidades y frenos de calidad garantizan un control preciso. ¡Prepárate para disfrutar de emocionantes aventuras al aire libre!');
+
+INSERT INTO ITEM(id, name, quantity, max_loan, description)
+VALUES (7,'Esterilla de yoga', 30, 3, 'La esterilla de yoga es un accesorio esencial para practicar yoga y ejercicios en el suelo. Hecha de materiales duraderos y antideslizantes, brinda comodidad, estabilidad y protección para tus articulaciones. Es portátil y fácil de transportar. Ideal para yoga, pilates y estiramientos.');
 
 /* Para probar fecha de devolucion ya pasada o no unidades disponibles modificando fecha endLoand 
 y poniendo dia del start del siguiente al dia siguiente*/
@@ -278,17 +284,20 @@ ALTER TABLE lesson ALTER COLUMN period TYPE text;--Para poder guardar textos lar
 ALTER TABLE lesson ALTER COLUMN description TYPE text;--Para poder guardar textos largos en la descripcion
 
 INSERT INTO LESSON (id, name, period, capacity, price, description)
-VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 30, 1.00, 'Clase de baile muy animada, perfecta para para aquellos que les guste moverse con estilo.');
+VALUES (1, 'Zumba', 'MONDAY-10:30,MONDAY-17:15,THURSDAY-15:00', 20, 1.00, 'Disfruta de una sesión de baile energética y divertida al ritmo de la música latina y otros estilos musicales. Quemarás calorías, mejorarás tu coordinación y aumentarás tu estado de ánimo.');
 
 INSERT INTO LESSON (id, name, period, capacity, price, description)
-VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 0.50, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
+VALUES (2, 'Pilates', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 0.50, 'Enfocada en el fortalecimiento del núcleo y el control del cuerpo, esta clase te ayudará a mejorar tu postura, tonificar tus músculos y aumentar la flexibilidad y el equilibrio.');
 
 
 INSERT INTO LESSON (id, name, period, capacity, price, description)
-VALUES (3, 'Yoga', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 1.20, 'Una clase relajada que sirve para conocer mejor tu cuerpo y tus limites.');
+VALUES (3, 'Yoga', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 25, 1.20, 'Esta clase se centra en la conexión mente-cuerpo a través de posturas físicas, respiración y meditación. Mejorarás tu flexibilidad, equilibrio, fuerza muscular y reducirás el estrés.');
 
 INSERT INTO LESSON (id, name, period, capacity, price, description)
-VALUES (4, 'Spinning', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 30, 1.40, 'Ponte en forma con esta entretenida clase de spinning');
+VALUES (4, 'Spinning', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 15, 1.40, 'Esta clase de alta intensidad se realiza en bicicletas estáticas. Te guiará a través de un entrenamiento cardiovascular desafiante que fortalecerá tus piernas, mejorarás tu resistencia y quemarás calorías.');
+
+INSERT INTO LESSON (id, name, period, capacity, price, description)
+VALUES (5, 'Boxeo fitness', 'MONDAY-10:30,TUESDAY-12:15,THURSDAY-11:45', 10, 1.65, 'Esta clase combina ejercicios de boxeo y acondicionamiento físico. Golpearás sacos de boxeo, realizarás movimientos de boxeo y ejercicios cardiovasculares para mejorar la fuerza, la coordinación y el estado físico general.');
 
 -------------------------
 INSERT INTO SESSION (id, date, lesson_id)

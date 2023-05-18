@@ -73,6 +73,11 @@ public class RootController {
 
     private static final Logger log = LogManager.getLogger(RootController.class);
 
+    @GetMapping("/derechosImgs")
+    public String derechosImgs(Model model, HttpSession session) {
+        return "derechosImgs";
+    }
+
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
         putComundDataInModel(model, session);
