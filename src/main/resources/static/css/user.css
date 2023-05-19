@@ -134,7 +134,11 @@ textarea:focus{
 }
 
 #statsTitle{
-  margin-bottom: 1.3em;
+  margin-bottom: 1em;
+}
+
+.statsSectionTitle{
+  margin-bottom: 1em;
 }
 
 #bannerDiv{

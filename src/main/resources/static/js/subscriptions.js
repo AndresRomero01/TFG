@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         document.getElementById("onsiteRibbon").style.display = "none";
         document.getElementById("onlineRibbon").style.display = "block";
         
-    } else {
+    } else if(sub.value == "ONSITE"){
         document.getElementById("onlineRibbon").style.display = "none";
         document.getElementById("onsiteRibbon").style.display = "block";
     }

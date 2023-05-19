@@ -466,16 +466,24 @@ public class RootController {
     }
 
     @GetMapping("/seeCourse")
-    public String verPlato(Model model, HttpSession session, @RequestParam(required = true) Long chosenCourseId) {
+    public String seeCourse(Model model, HttpSession session, @RequestParam(required = true) Long chosenCourseId) {
         putComundDataInModel(model, session);
 
         Course c = db.getCourse(em, chosenCourseId);
+        if(c.getIsFree()){
+            model.addAttribute("course", c);
+            return "seeCourse";
+        }
 
-        log.info("@@@@ chosen course " + c.getName());
+        User u = (User) session.getAttribute("u");
+        if(u != null && u.hasAnySub()){
+            model.addAttribute("course", c);
+            return "seeCourse";
+        }
 
-        model.addAttribute("course", c);
+        courses(model, session);
 
-        return "seeCourse";
+        return "courses";
     }
 
     @GetMapping(path = "/getUser", produces = "application/json")

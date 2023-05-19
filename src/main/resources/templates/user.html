@@ -136,7 +136,9 @@
 
                 <div class="row profilePanel" id="personalDescriptionRow">
                     <div class="col text-center">
-                        <h2 id="statsTitle">Algunas estadísticas de tus cursos</h2>
+                        <h2 id="statsTitle">Algunas de tus estadísticas</h2>
+
+                        <h3 class="statsSectionTitle">Cursos realizados</h3>
                         <th:block th:if="${#lists.isEmpty(coursesList)}">
                             <h5 id="noCoursesMsg">Aun no has completado ningún curso. Te animamos a empezar!</h5>
                         </th:block>
@@ -153,6 +155,33 @@
                             </div>
                         </th:block>
                         
+                        <h3 class="statsSectionTitle">Clases asistidas</h3>
+                        <th:block th:unless="${#lists.isEmpty(user.getAttendance)}">
+                            <div class="d-flex justify-content-center">
+                                <div class="text-start">
+                                    <th:block th:each="lesson,iter: ${user.getAttendance}">
+                                        <div class="courseStatLine">
+                                            <span class="courseName" th:text="${lesson.nameLesson} + ' - '"> Name - </span>
+                                            <span th:text="'Has asistido ' + ${lesson.attendance} + ' veces'"></span>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </th:block>
+
+                        <h3 class="statsSectionTitle">Material alquilado</h3>
+                        <th:block th:unless="${#lists.isEmpty(user.getHistoryLoans)}">
+                            <div class="d-flex justify-content-center">
+                                <div class="text-start">
+                                    <th:block th:each="item,iter: ${user.getHistoryLoans}">
+                                        <div class="courseStatLine">
+                                            <span class="courseName" th:text="${item.name} + ' - '"> Name - </span>
+                                            <span th:text="'Has asistido ' + ${item.times} + ' veces'"></span>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </th:block>
                     </div>
                 </div>
 
