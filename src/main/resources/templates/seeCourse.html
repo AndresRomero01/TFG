@@ -15,7 +15,7 @@
     <div class="bodyCol">
         <div class="row">
             <div class="col thumbnailCol d-flex align-items-center justify-content-center">
-                <div id="thumbnailDiv">
+                <div id="thumbnail">
                     <!-- <div th:if="${course.isFree}" class="forFreeDiv">
                         <p class="forFreeTag">For free!</p>
                     </div> -->
@@ -34,7 +34,7 @@
             <div class="col d-flex flex-column align-items-center justify-content-between">
                 <h1 th:text="${course.name}" id="nameTitle">name</h1>
                 <h2 th:if="${course.isFree}" id="forWhoText">Curso gratuito</h2>
-                <h2 th:unless="${course.isFree}">Curso solo para socios</h2>
+                <h2 th:unless="${course.isFree}" id="forWhoText">Curso solo para socios</h2>
                 <div class="col text-center" id="descDiv">
                     <h2>Descripción del curso</h2>
                     <p th:text="${course.description}" id="description">description</p>

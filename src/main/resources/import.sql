@@ -85,22 +85,22 @@ INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_
 VALUES (3, 'Triceps', TRUE, 'Aprenderás de diferentes maneras a entrenar adecuadamente tus triceps, haciendo incapié en la técinca para evitar lesiones', 2, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (4, 'Biceps', TRUE, 'Aprenderás de diferentes maneras a entrenar adecuadamente tus biceps, haciendo incapié en la técinca para evitar lesiones', 2, FALSE, FALSE);
+VALUES (4, 'Biceps', TRUE, 'Aprenderás de diferentes maneras a entrenar adecuadamente tus biceps, haciendo incapié en la técinca para evitar lesiones', 2, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (5, 'Hombro', TRUE, 'Hay muchas maneras de entrenar hombros. En este curso te mostramos las mejores', 2, FALSE, FALSE);
+VALUES (5, 'Hombro', TRUE, 'Hay muchas maneras de entrenar hombros. En este curso te mostramos las mejores', 2, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (6, 'Abdominales', TRUE, 'Entrena tus abdominales y consigue resultados en tiempo record', 2, FALSE, FALSE);
+VALUES (6, 'Abdominales', TRUE, 'Entrena tus abdominales y consigue resultados en tiempo record', 2, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (7, 'Cinta', FALSE, 'La cinta de correr es lo más típico. Sin embargo, te enseñaremos algunos trucos que no sabías', 1, FALSE, FALSE);
+VALUES (7, 'Cinta', FALSE, 'La cinta de correr es lo más típico. Sin embargo, te enseñaremos algunos trucos que no sabías', 1, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (8, 'Elíptica', FALSE, 'Otro de las máquinas más comunes de cardio gracias a ser menos agresiva para tus rodillas. Te enseñaremos algunos ajustes para sacar el máximo provecho', 1, FALSE, FALSE);
+VALUES (8, 'Elíptica', FALSE, 'Otro de las máquinas más comunes de cardio gracias a ser menos agresiva para tus rodillas. Te enseñaremos algunos ajustes para sacar el máximo provecho', 1, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
-VALUES (9, 'Pecho', TRUE, 'En este curso aprenderás cuales son los mejores ejercicios tanto en eficiencia como en menor riesgo de lesión', 2, FALSE, FALSE);
+VALUES (9, 'Pecho', TRUE, 'En este curso aprenderás cuales son los mejores ejercicios tanto en eficiencia como en menor riesgo de lesión', 2, TRUE, FALSE);
 
 INSERT INTO COURSE (id, name, is_free, description, category_id, has_image, has_video)
 VALUES (10, 'Cuádriceps', TRUE, 'Aprende cómo funcionan los cuádriceps, además de la mejor manera de entrenarlos', 2, FALSE, FALSE);

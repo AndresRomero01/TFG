@@ -144,7 +144,7 @@ public class RootController {
         ArrayList<String> onlineInfo = new ArrayList<>();
         onlineInfo.add("Acceso a todos los cursos");
         onlineInfo.add("Alquiler de material");
-        onlineInfo.add("Ayuda por chat");
+        onlineInfo.add("Acceso a eventos exclusivos");
         gymSub.setOnlineInfo(onlineInfo);
 
         ArrayList<String> onsiteInfo = new ArrayList<>();
@@ -152,7 +152,7 @@ public class RootController {
         onsiteInfo.add("Acceso a todos los cursos");
         onsiteInfo.add("Alquiler de material");
         onsiteInfo.add("Acceso gratis a las clases");
-        onsiteInfo.add("Ayuda por chat");
+        onsiteInfo.add("Acceso a eventos exclusivos");
         gymSub.setOnsiteInfo(onsiteInfo);
 
         model.addAttribute("onlinePhrases", gymSub.getOnlineInfo());
