@@ -16,6 +16,13 @@
 
         <!-- <div class="col bodyCol"> -->
            <div class="mainContainer">
+
+            <th:block th:if="${#lists.size(loans) == 0}">
+                <h2 class="text-center">Actualmente no tienes ningun alquiler activo</h2>
+                <h5 class="text-center mt-3">Puedes alquilar nuevo material desde la página de alquiler</h5>
+                <div class="text-center mt-5"><a th:href="@{/items/listToLoan}"><button class="btn customButton">Ver material</button></a></div>
+                
+            </th:block>
         
                 <div class="row justify-content-center">
                     <th:block th:each="loan,iter: ${loans}">

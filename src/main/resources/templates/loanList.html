@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <title>Items</title>
+  <!--   <link rel="stylesheet" href="css/courses.css" /> -->
+  <link rel="stylesheet" href="../css/custom.css" />
+  <link rel="stylesheet" href="css/settingsLoans.css" />
+
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+
+    <div class="mainContainer">
+      <h2>Alquileres actuales</h2>
+      <div class="text-end"> <a th:href="@{/loanListHistory}"><button class="btn customButton">Historial de alquileres</button></a></div>
+
+
+        <th:block th:each="item,iter: ${items}">
+          <div class="containerItemLoan">
+  <!--           <button th:text="${item.name}" class="btn btn-primary" type="button" data-bs-toggle="collapse"
+            th:data-bs-target="'#collapseLoan'+${item.id}" aria-expanded="false" 
+            th:aria-controls="'#collapseLoan'+${item.id}"></button> -->
+            <div class="accordion-item">
+            <h2 class="accordion-header">
+            <button th:text="${item.name}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+            th:data-bs-target="'#collapseLoan'+${item.id}" aria-expanded="false"  th:aria-controls="'#collapseLoan'+${item.id}">
+              Accordion Item #1
+            </button>
+            </h2>
+            </div>
+          
+            
+            <div class="collapse" th:id="'collapseLoan'+${item.id}">
+              <div class="row rowTitle">
+                <div class="col-5 text-center titleData">Datos de alquiler</div>
+                <div class="col text-center titleData">Datos de usuario</div>
+                <div class="col-2"></div>
+              </div>
+              <div class="loansOfItemContainer">
+                <th:block th:each="loan,iter: ${item.itemLoans}">
+                  <div th:if="${loan.isActive}" th:id="${loan.item.id}+':'+${loan.user.id}+':'+${loan.id}" class="loanContainer row">
+                    <div class="col-5 loanData row">
+                      
+                      <div class="col">
+                        <div class="text-center">Fecha</div>
+                        
+                        <div th:if="${loan.isLate}" th:text="${loan.getLoanStartStrES}+' - '+${loan.getLoanEndStrES}" class="text-center lateLoanText">10-04-2023 - 10-04-2023</div>
+                        <div th:unless="${loan.isLate}" th:text="${loan.getLoanStartStrES}+' - '+${loan.getLoanEndStrES}" class="text-center">10-04-2023 - 10</div>
+                      </div>
+                      <div class="col-3">
+                        <div class="text-center">Cantidad</div>
+                        <div class="text-center" th:text="${loan.quantity}">x</div>
+                      </div>
+
+                    </div>
+                    <div class="col userLoanData row">
+                      
+                      <div class="col">
+                        <div class="text-center" th:text="${loan.user.username}">Username</div>
+                        <div class="text-center" th:text="${loan.user.email}">emaildeUsuario@mail.com</div>
+                      </div>
+                      <div class="col">
+                        <div class="text-center" th:text="${loan.user.firstName} + ' ' + ${loan.user.lastName}">Nombre y apellidos</div>
+                        <div class="text-center" th:text="${loan.user.phone}">658332350</div>
+                      </div>
+                      
+                    </div>
+
+                    <div class="col-2 btnEndLoanContainer">
+                      <!-- id se loan= idItem:idUsuario -->
+                      <button th:value="${loan.item.id}+':'+${loan.user.id}+':'+${loan.id}" class="btn makeEndLoanBtn customButton">Finalizar Alquiler</button>
+                    </div>
+                  </div>
+                  
+                </th:block>
+              </div>
+            </div>
+          </div>
+          
+            
+        </th:block>
+        
+        
+    </div>
+
+
+
+
+    <!-- Toast -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+        <div id="toastEndLoan" class="toast hide"  data-bs-delay="4000" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">❗  Alquiler finalizado con exito</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+             <button value="" id="btnUndoEndLoan" class="btn">Pulsa para deshacer la accion</button>
+             <div id="infoUndoRemoveLoan" style="display: none;">Se ha deshecho la finalizacion del alquiler</div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Pie de pagina -->
+    <th:block th:replace="fragments/footer.html :: footer" />
+
+    <script th:src="@{/js/userBookings.js}" src="js/userBokkings.js"></script>
+
+
+    <script th:src="@{/js/settingsLoans.js}" src="js/settingsLoans.js" ></script>
+    
+</body>
+</html>

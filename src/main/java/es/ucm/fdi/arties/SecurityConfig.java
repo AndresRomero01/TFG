@@ -55,12 +55,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/**", "/existeUsuario", "/getUser").hasRole("ADMIN")	   // <-- administration
 				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/createCourse", "/modifyCourseImg", "/modifyCourse", "/deleteCourse").hasRole("ADMIN")
 				//items admin
-				.antMatchers( "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem","/items/endLoan", "/items/undoEndLoan").hasRole("ADMIN")
+				.antMatchers( "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem").hasRole("ADMIN")
 				.antMatchers("/admin/**", "/existeUsuario", "/getUser", "/deletePhrase", "/addPhrase", "/changeGymSubPrice").hasRole("ADMIN")	   // <-- administration
 				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem").hasRole("ADMIN")
 				.antMatchers("/lessons/addNewLesson", "/lessons/modifyLessonImg", "/lessons/modifyLesson").hasRole("ADMIN")
 				.antMatchers("/user/**").hasAnyRole("USER", "STAFF", "ADMIN")	
-				.antMatchers("/chats").hasAnyRole("STAFF", "ADMIN")	   
+				.antMatchers("/chats", "/loanList","/items/endLoan", "/items/undoEndLoan", "/loanListHistory").hasAnyRole("STAFF", "ADMIN")	   
 				.antMatchers("/newQuestion", "/suscribe", "/updateUserDescription", "/paymentPage").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/subscriptions", "/lessons", "/items/myItems","/items/loanItem", "/items/makeLoan", "items/availableItemDay", "/modifyUser", "/getConversation", "/getStaffList").hasAnyRole("USER", "ADMIN", "STAFF")
 				.antMatchers("/lessons/myBookingLessons", "/lessons/bookLesson", "/lessons/getDaysOfLesson", "/lessons/bookLessonSession", "/lessons/cancelBookSession", "/lessons/payBooking", "/lessons/paidBookingLessonSession").hasAnyRole("USER", "ADMIN", "STAFF")

@@ -76,6 +76,10 @@
                                 <a class="nav-link" th:href="@{/settings}" id="navSettings">Configuracion</a>
                             </li>
 
+                            <li th:if="${session.u.hasAnyRole('STAFF')}" class="nav-item mx-2">
+                                <a class="nav-link"  th:href="@{/loanList}" id="navLoanList">Alquileres</a>
+                            </li>
+
                             <li th:if="${session.u.hasAnyRole('STAFF', 'ADMIN')}" class="nav-item mx-2">
                                 <a class="nav-link" th:href="@{/chats}" id="navChats">Chats</a>
                             </li>
