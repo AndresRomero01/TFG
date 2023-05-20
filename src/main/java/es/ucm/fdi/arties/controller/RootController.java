@@ -251,7 +251,7 @@ public class RootController {
             String password2 = o.get("password2").asText();
 
 
-            User u = new User(username, password1, firstName, lastName, email, address, phone, rol, ClientType.ONLINE);
+            User u = new User(username, password1, firstName, lastName, email, address, phone, rol, ClientType.NONE);
             String encodedPassword = passwordEncoder.encode(o.get("password1").asText());
             u.setPassword(encodedPassword);
 
@@ -732,4 +732,26 @@ public class RootController {
 
         return "{\"isok\": \"true\"}";// devuelve un json como un string
     }
+
+
+    @GetMapping("/loanList")
+    public String loanList(Model model, HttpSession session) {
+
+        List<Item> itemList = dbItems.getItemList(em);
+        model.addAttribute("items", itemList);
+
+        return "loanList";
+    }
+
+
+    @GetMapping("/loanListHistory")
+    public String loanListHistory(Model model, HttpSession session) {
+
+        List<Item> itemList = dbItems.getItemList(em);
+        model.addAttribute("items", itemList);
+
+        return "loanListHistory";
+    }
+
+
 }

@@ -18,6 +18,12 @@
         
         <div class="row justify-content-center">
 
+            <th:block th:if="${#lists.size(sessionBookings) == 0}">
+                <h2 class="text-center">Actualmente no tienes ninguna reserva de futuras clases</h2>
+                <h5 class="text-center mt-3">Puedes reservar plaza para cualquiera de nuestras clases desde la página de reservas</h5>
+                <div class="text-center mt-5"><a th:href="@{/lessons/lessonsToBook}"><button class="btn customButton">Ver clases</button></a></div>
+            </th:block>
+
             <th:block th:each="booking,iter: ${sessionBookings}">
                 <div class="col-5 myColW">
                     <div class="myContainer">

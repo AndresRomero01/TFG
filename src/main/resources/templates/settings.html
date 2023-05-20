@@ -393,6 +393,15 @@
 
       <div id="rentalPanel" class="customTab">
 
+        <div class="col d-flex justify-content-end">
+          <a th:href="@{/loanListHistory}">
+            <button type="button" class="btn customButton">
+              Historial de alquileres
+            </button> 
+          </a>
+       </div>
+        
+       
         <th:block th:each="item,iter: ${items}">
           <div class="containerItemLoan">
   <!--           <button th:text="${item.name}" class="btn btn-primary" type="button" data-bs-toggle="collapse"
