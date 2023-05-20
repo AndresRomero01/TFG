@@ -42,8 +42,12 @@
         
                     <div class="innerChatWindow" id="makeQuestionPanel">
                         <form id="makeGeneralQuestionForm">
-                            <label for="subject" class="formLabel">Asunto</label>
-                            <input type="text" id="subject" required>
+                            <!-- <label for="subject" class="formLabel">Asunto</label>
+                            <input type="text" id="subject" required> -->
+                            <div class="form__group field">
+                                <input type="input" class="form__field" placeholder="Asunto" id='subject' required />
+                                <label for="subject" class="form__label">Asunto</label>
+                            </div>
         
                             <label for="questionArea" class="formLabel">Pregunta</label>
                             <textarea type="text" id="questionArea" required></textarea>
@@ -84,6 +88,34 @@
                         
                     </div>
                 </div>
+
+                <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+                    <div id="questionSentToast" class="toast hide"  data-bs-delay="4000" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto">Pregunta recibida</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            Nuestros entrenadores te responderán lo antes posible
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+                    <div class="toast" style="position: fixed; top: 0; right: 0;" id="questionSentToast">
+                      <div class="toast-header">
+                        <strong class="mr-auto">Pregunta recibida</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="toast-body">
+                        Nuestros entrenadores te responderán lo antes posible
+                      </div>
+                    </div>
+                </div> -->
+
+                
             </th:block>
         </th:block>
 

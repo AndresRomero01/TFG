@@ -1,3 +1,4 @@
+const questionSentToast = new bootstrap.Toast(document.querySelector('#questionSentToast'));
 
 var toggleChat = false;
 var selectedStaffId;
@@ -114,7 +115,7 @@ function sendQuestion(){
     
         go(config.rootUrl + "/newQuestion", 'POST', params)
         .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
-    
+            questionSentToast.show()
         })
         .catch(() => {console.log("Error en catch newQuestion");
     

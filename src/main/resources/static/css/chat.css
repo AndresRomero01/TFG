@@ -98,7 +98,8 @@
 }
 
 .formLabel{
-    margin-top: 3em;
+    display: block;
+    margin-top: 2.5em;
     margin-bottom: 1em;
     font-size: 1.2em;
 }
@@ -111,7 +112,23 @@ button#makeQuestion{
     width: 80%;
     min-height: 12em;
     resize: none;
+    outline: none;
     overflow: auto;
+    border-radius: 0.3em;
+    border-color: #3f51b550;
+}
+
+/* #userDescription{
+    width: 80%;
+    height: 12em;
+    resize: none;
+    outline: none;
+    border-radius: 0.3em;
+    border-color: #3f51b550;
+} */
+
+#questionArea:focus{
+    border: 1px solid #3f51b5 !important;
 }
 
 #questionArea::-webkit-scrollbar {
@@ -169,12 +186,16 @@ button#seeChats{
     background-color: #284FC2;
 } */
 
-.formLabel{
-    display: block;
-}
 
-#subject{
+
+/* #subject{
     width: 80%;
+} */
+
+.form__group{
+    margin-top: 2em !important;
+    width: 60%;
+    margin: auto;
 }
 
 #seeChatsPanel{
