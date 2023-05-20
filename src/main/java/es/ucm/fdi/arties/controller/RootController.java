@@ -623,6 +623,22 @@ public class RootController {
         return "{\"isok\": \"true\"}";// devuelve un json como un string
     }
 
+    @PostMapping(path = "/cancelSub", produces = "application/json")
+    @Transactional // para no recibir resultados inconsistentes
+    @ResponseBody // no devuelve nombre de vista, sino objeto JSON
+    public String cancelSub(Model model, HttpSession session) {
+        log.info("---------- inside cancelSub -------------");
+
+        User u = (User) session.getAttribute("u");
+
+        u = db.suscribe(em, u, ClientType.NONE);
+
+        session.setAttribute("u", u);
+        log.info("@@@@ sub2: " + u.getClientType());
+
+        return "{\"isok\": \"true\"}";// devuelve un json como un string
+    }
+
     @PostMapping(path = "/updateUserDescription", produces = "application/json")
     @Transactional // para no recibir resultados inconsistentes
     @ResponseBody // no devuelve nombre de vista, sino objeto JSON

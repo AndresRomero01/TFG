@@ -34,3 +34,28 @@ function suscribe(event){
 
     })
 }
+
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+/* var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'), {
+    trigger: 'focus'
+  }) */
+
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+
+function cancelSub(){
+    go(config.rootUrl + "/cancelSub", 'POST')
+    .then(d => {console.log("todo ok") // va ok si el username no existe
+        document.getElementById("onsiteRibbon").style.display = "none";
+        document.getElementById("onlineRibbon").style.display = "none";
+        document.getElementById("cancelSubscriptionDiv").style.display = "none";
+    })
+    .catch(() => {console.log("Error en catch cancelSub");//si el username ya existia
+
+    })
+}

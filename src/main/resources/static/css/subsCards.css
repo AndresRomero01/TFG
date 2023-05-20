@@ -190,3 +190,48 @@ font-size: 16px;
     margin-top: 0em;
   }
 }
+
+#cancelSubscriptionDiv{
+  margin-top: 3vw !important;
+}
+
+#cancelSubscriptionButton{
+  width: 10vw;
+  height: 2.2vw;
+  margin: auto;
+}
+
+.ampliarContainer a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: transparent;
+}
+
+.infoIcon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  background-color: var(--bs-dark);
+  color: white;
+  margin-left: 20px !important;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 100%;
+  border-style: 5px solid !important;
+  border-color: var(--bs-dark) !important;
+  margin: auto;
+  margin-left: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+}
+.infoIcon p{
+  font-size: large;
+}
+
+.infoIcon p{
+  padding: 0 !important;
+  margin: 0;
+}

@@ -5,6 +5,7 @@
     <th:block th:replace="fragments/head :: header" />
     <!-- <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css" type="text/css" /> -->
     <link rel="stylesheet" th:href="@{/css/subsCards.css}" />
+    <link rel="stylesheet" th:href="@{/css/generalCards.css}" />
     <title>Suscripciones</title>
 </head>
 
@@ -80,9 +81,23 @@
             <!-- END Col two -->
             
           </div>
+
+          <div class="row" id="cancelSubscriptionDiv" th:if="${!session.u.isType('NONE')} ">
+            <div class="boton justify-content-center">
+              <div class="ampliarContainer">
+                <a >
+                    <button class="btn btn-danger" onclick="cancelSub()">Cancelar suscripción</button>
+                </a>
+                <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="Tu suscripción no se renovará el mes que viene">
+                    <p>i</p>
+                </span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
+  </div>
 
   <th:block th:replace="fragments/footer.html :: footer"></th:block>
 
