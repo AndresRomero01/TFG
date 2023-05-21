@@ -79,6 +79,16 @@ public class ItemLoans implements Transferable<ItemLoans.Transfer> {
         return false;
     }
 
+    public boolean isCancelable()
+    {
+        LocalDateTime actualDate = LocalDateTime.now();
+
+        //loan start es despues de la fecha actual
+        if(loanStart.compareTo(actualDate) > 0)
+            return true;
+        return false;
+    }
+
     public boolean isLate()
     {
         LocalDateTime actualDate = LocalDateTime.now();
@@ -99,6 +109,11 @@ public class ItemLoans implements Transferable<ItemLoans.Transfer> {
     public String getLoanEndStrESHourMin()
     {
         return ItemsController.getDateStrESFormatHourMin(loanEnd);
+    }
+
+    public String getLoanStartStrESHourMin()
+    {
+        return Utils.getDateStrESFormatHourMin(loanStart);
     }
 
     @Getter

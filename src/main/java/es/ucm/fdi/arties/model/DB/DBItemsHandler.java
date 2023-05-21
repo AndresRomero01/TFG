@@ -195,6 +195,24 @@ public class DBItemsHandler {
         return true;
     }
 
+    public void cancelLoan(EntityManager em, long idLoan)
+    {
+       /*  Item item = em.find(Item.class, idItem);
+        User user = em.find(User.class, idUser); */
+
+        ItemLoans il = em.find(ItemLoans.class, idLoan);
+        em.remove(il);
+        em.flush();
+
+        /* ItemLoans il = user.removeItemLoan(idItem, idLoan);
+        item.removeItemLoan(idUser, idLoan);
+        il.setActive(false);
+       // em.remove(il);
+
+        em.flush();  
+        return il;*/
+    } 
+
     public ItemLoans endLoan(EntityManager em, long idItem, long idUser, long idLoan)
     {
         Item item = em.find(Item.class, idItem);

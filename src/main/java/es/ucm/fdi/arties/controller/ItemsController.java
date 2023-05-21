@@ -419,6 +419,26 @@ public class ItemsController {
       return "{\"isok\": \"todomal\"}";
     }
 
+
+    @PostMapping("cancelLoan")
+    @Transactional
+    @ResponseBody 
+    public String cancelLoan(HttpSession session, @RequestParam("loanId") long loanId)
+    {
+
+      User u = (User) session.getAttribute("u");
+      User u2;
+      u2 = commonDB.getUser(em, u.getId());
+
+      //el usuario no tenia ese alquiler. Se trata de una peticion maliciosa y se ignora
+      if(!u2.hasItemLoanId(loanId))
+        return  "";
+     
+      db.cancelLoan(em, loanId);
+
+      return "{\"itemLoan\": \""+"ok"+"\"}";
+    }
+
     @PostMapping("endLoan")
     @Transactional
     @ResponseBody 

@@ -13,6 +13,36 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 
 
 
+let buttonsCancelLoan = []
+
+buttonsCancelLoan = document.querySelectorAll(".btnCancelLoan")
+
+for(let i = 0; i < buttonsCancelLoan.length; i++)
+{
+  buttonsCancelLoan[i].addEventListener("click", cancelLoan);
+}
 
 
-  console.log("aqui")
+
+function cancelLoan(e)
+{
+  console.log("loan a borrar id: "+e.target.value)
+
+  let formData = new FormData();
+
+ formData.append("loanId", e.target.value);
+
+
+ go("/items/cancelLoan", "POST", formData, {}).then(d => {
+      console.log(d);
+
+
+      e.target.closest(".myColW").remove();
+
+     
+     // document.querySelector("#availableQuantity").innerHTML = "Cantidad disponible del item el dia seleccionado: " + quantity;
+
+  }).catch(() => console.log("fallo"));
+}
+
+

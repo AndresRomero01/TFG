@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/**", "/existeUsuario", "/getUser", "/deletePhrase", "/addPhrase", "/changeGymSubPrice").hasRole("ADMIN")	   // <-- administration
 				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem").hasRole("ADMIN")
 				.antMatchers("/lessons/addNewLesson", "/lessons/modifyLessonImg", "/lessons/modifyLesson").hasRole("ADMIN")
-				.antMatchers("/user/**").hasAnyRole("USER", "STAFF", "ADMIN")	
+				.antMatchers("/user/**", "/items/cancelLoan").hasAnyRole("USER", "STAFF", "ADMIN")	
 				.antMatchers("/chats", "/loanList","/items/endLoan", "/items/undoEndLoan", "/loanListHistory", "/coursesStaff", "/addCourse", "/createCourse", "/modifyCourseImg", "/modifyCourse", "/deleteCourse","/uploadCourseVideo").hasAnyRole("STAFF", "ADMIN")	   
 				.antMatchers("/newQuestion", "/suscribe", "/updateUserDescription", "/paymentPage", "/cancelSub").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/subscriptions", "/lessons", "/items/myItems","/items/loanItem", "/items/makeLoan", "items/availableItemDay", "/modifyUser", "/getConversation", "/getStaffList").hasAnyRole("USER", "ADMIN", "STAFF")

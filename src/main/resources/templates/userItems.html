@@ -37,6 +37,7 @@
                                         <div class="texto">
                                             <div>
                                                 <!--  <h3>Type: Residential rental</h3> --> <!-- Subtitulo si necesario -->
+                                                <p th:text="'Inicio del alquiler: '+${loan.getLoanStartStrESHourMin}"></p>
                                                 <p th:text="'Fin del alquiler: '+${loan.getLoanEndStrESHourMin}"></p>
                                                 <p th:text="'Cantidad alquilada: '+${loan.quantity}"></p>
                                             </div>
@@ -49,6 +50,24 @@
                                         </th:block>
             
                                         <th:block th:unless="${loan.isLate}">
+
+                                            <th:block th:if="${loan.isCancelable}">
+                                                <div class="boton justify-content-center">
+                                                    <div class="ampliarContainer">
+                                                        
+                                                            <button th:value="${loan.id}" class="customButton btnCancelLoan">Cancelar Alquiler</button>
+                                                        
+                                                        <span tabindex="0" class="infoIcon" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="Puedes cancelar el alquiler antes de que llegue la fecha de su comienzo">
+                                                            <p>i</p>
+                                                        </span>
+
+                                                    </div>
+
+                                                    
+                                                </div>
+
+                                            </th:block>
+                                            <th:block th:unless="${loan.isCancelable}">
 
                                             <th:block th:unless="${loan.isRenovable}">
                                                 <div class="boton justify-content-center">
@@ -82,6 +101,11 @@
                                                 </div>
                                                 
                                             </th:block>
+
+
+                                            </th:block>
+
+                                            
 
 
                                         </th:block>

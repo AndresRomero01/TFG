@@ -244,6 +244,18 @@ public class User implements Transferable<User.Transfer> {
         return false;
     }
 
+    public boolean hasItemLoanId(long loanId)
+    {
+        log.info("comprobando items loans del user " + id);
+        for (ItemLoans il : itemLoans) {
+            log.info("id item: "+ il.getItem().getId());
+            if(il.getId() == loanId && il.isActive())
+            return true;
+        }
+
+        return false;
+    }
+
     @Transactional
     public void addItemLoan(ItemLoans itemLoan, Item item)
     {
