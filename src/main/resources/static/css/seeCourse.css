@@ -85,3 +85,13 @@
 .courseImgDiv{
 
 }
+
+
+
+@media (max-width: 740px) {
+    #videoPreview  {
+       width: 100%;
+    }
+  
+  }
+
