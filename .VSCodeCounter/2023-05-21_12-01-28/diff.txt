@@ -1,0 +1,135 @@
+Date : 2023-05-21 12:01:28
+Directory : d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\java\es\ucm\fdi\arties
+Total : 89 files,  -24572 codes, -2486 comments, -6153 blanks, all -33211 lines
+
+Languages
++-----------------+------------+------------+------------+------------+------------+
+| language        | files      | code       | comment    | blank      | total      |
++-----------------+------------+------------+------------+------------+------------+
+| Java Properties |          1 |        -24 |        -17 |        -10 |        -51 |
+| XML             |          1 |       -116 |         -1 |         -6 |       -123 |
+| SQL             |          1 |       -204 |        -54 |        -97 |       -355 |
+| HTML            |         29 |     -2,929 |       -497 |       -975 |     -4,401 |
+| JavaScript      |         25 |     -8,417 |     -1,056 |     -2,434 |    -11,907 |
+| CSS             |         32 |    -12,882 |       -861 |     -2,631 |    -16,374 |
++-----------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                      | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                         |         89 |    -24,572 |     -2,486 |     -6,153 |    -33,211 |
+| ..                                                                                                                                        |         89 |    -24,572 |     -2,486 |     -6,153 |    -33,211 |
+| ..\..                                                                                                                                     |         89 |    -24,572 |     -2,486 |     -6,153 |    -33,211 |
+| ..\..\..                                                                                                                                  |         89 |    -24,572 |     -2,486 |     -6,153 |    -33,211 |
+| ..\..\..\..                                                                                                                               |         89 |    -24,572 |     -2,486 |     -6,153 |    -33,211 |
+| ..\..\..\..\..                                                                                                                            |         89 |    -24,572 |     -2,486 |     -6,153 |    -33,211 |
+| ..\..\..\..\..\..                                                                                                                         |          1 |       -116 |         -1 |         -6 |       -123 |
+| ..\..\..\..\..\..\..                                                                                                                      |          1 |       -116 |         -1 |         -6 |       -123 |
+| ..\..\..\..\..\resources                                                                                                                  |         88 |    -24,456 |     -2,485 |     -6,147 |    -33,088 |
+| ..\..\..\..\..\resources (Files)                                                                                                          |          2 |       -228 |        -71 |       -107 |       -406 |
+| ..\..\..\..\..\resources\static                                                                                                           |         57 |    -21,299 |     -1,917 |     -5,065 |    -28,281 |
+| ..\..\..\..\..\resources\static\css                                                                                                       |         32 |    -12,882 |       -861 |     -2,631 |    -16,374 |
+| ..\..\..\..\..\resources\static\css (Files)                                                                                               |         31 |    -12,830 |       -857 |     -2,629 |    -16,316 |
+| ..\..\..\..\..\resources\static\css\elements                                                                                              |          1 |        -52 |         -4 |         -2 |        -58 |
+| ..\..\..\..\..\resources\static\js                                                                                                        |         25 |     -8,417 |     -1,056 |     -2,434 |    -11,907 |
+| ..\..\..\..\..\resources\templates                                                                                                        |         29 |     -2,929 |       -497 |       -975 |     -4,401 |
+| ..\..\..\..\..\resources\templates (Files)                                                                                                |         26 |     -2,688 |       -476 |       -916 |     -4,080 |
+| ..\..\..\..\..\resources\templates\fragments                                                                                              |          3 |       -241 |        -21 |        -59 |       -321 |
++-------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| filename                                                                                                                                  | language        | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\pom.xml                                                | XML             |       -116 |         -1 |         -6 |       -123 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\application.properties              | Java Properties |        -24 |        -17 |        -10 |        -51 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\import.sql                          | SQL             |       -204 |        -54 |        -97 |       -355 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\addCourse.css            | CSS             |        -87 |         -8 |        -21 |       -116 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\bookLesson.css           | CSS             |       -125 |        -14 |        -49 |       -188 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\bootstrap-5.1.3.css      | CSS             |     -9,497 |        -27 |     -1,742 |    -11,266 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\calendar.css             | CSS             |       -346 |       -315 |        -65 |       -726 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\carrouselCard.css        | CSS             |        -57 |        -33 |        -15 |       -105 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\chat.css                 | CSS             |       -303 |        -35 |        -58 |       -396 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\chats.css                | CSS             |       -179 |        -18 |        -32 |       -229 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\courses.css              | CSS             |       -115 |        -38 |        -42 |       -195 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\coursesStaff.css         | CSS             |         -3 |          0 |          0 |         -3 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\custom.css               | CSS             |        -72 |        -22 |        -38 |       -132 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\elements\textInputs.css  | CSS             |        -52 |         -4 |         -2 |        -58 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\generalCards.css         | CSS             |       -195 |        -71 |        -53 |       -319 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\index.css                | CSS             |       -352 |        -38 |       -110 |       -500 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\items.css                | CSS             |        -31 |        -13 |         -9 |        -53 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\itemsToLoan.css          | CSS             |       -144 |        -66 |        -39 |       -249 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\lessonsToBook.css        | CSS             |        -13 |         -6 |         -7 |        -26 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\loanItem.css             | CSS             |       -128 |        -14 |        -54 |       -196 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\loanList.css             | CSS             |         -6 |          0 |         -4 |        -10 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\login.css                | CSS             |        -27 |          0 |         -5 |        -32 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\modifyCourse.css         | CSS             |        -23 |        -13 |         -8 |        -44 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\nav.css                  | CSS             |        -10 |          0 |         -2 |        -12 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\paymentPage.css          | CSS             |        -40 |          0 |        -10 |        -50 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\seeCourse.css            | CSS             |        -69 |         -8 |        -21 |        -98 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\settings.css             | CSS             |       -231 |        -41 |        -53 |       -325 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\settingsItems.css        | CSS             |        -87 |         -6 |        -22 |       -115 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\settingsLessons.css      | CSS             |       -149 |        -10 |        -46 |       -205 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\settingsLoans.css        | CSS             |        -72 |        -12 |        -23 |       -107 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\signup.css               | CSS             |        -38 |          0 |         -7 |        -45 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\subsCards.css            | CSS             |       -195 |        -14 |        -28 |       -237 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\user.css                 | CSS             |       -159 |        -25 |        -35 |       -219 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\userBookings.css         | CSS             |        -31 |         -6 |        -10 |        -47 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\css\userItems.css            | CSS             |        -46 |         -4 |        -21 |        -71 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\addCourse.js              | JavaScript      |       -116 |        -18 |        -35 |       -169 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\arties.js                 | JavaScript      |       -228 |        -92 |        -30 |       -350 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\bookLesson.js             | JavaScript      |       -180 |        -19 |        -84 |       -283 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\bootstrap.bundle-5.1.3.js | JavaScript      |     -4,855 |       -600 |     -1,358 |     -6,813 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\calendar.js               | JavaScript      |       -348 |       -118 |       -118 |       -584 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\calendarExtra.js          | JavaScript      |        -43 |        -14 |        -21 |        -78 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\chat.js                   | JavaScript      |       -269 |        -13 |        -78 |       -360 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\chats.js                  | JavaScript      |       -163 |         -5 |        -39 |       -207 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\courses.js                | JavaScript      |        -16 |          0 |         -7 |        -23 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\coursesStaff.js           | JavaScript      |        -12 |          0 |         -5 |        -17 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\index.js                  | JavaScript      |        -58 |        -12 |        -39 |       -109 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\loanItem.js               | JavaScript      |        -98 |        -23 |        -59 |       -180 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\main.js                   | JavaScript      |        -37 |         -3 |        -11 |        -51 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\modalAddItem.js           | JavaScript      |        -40 |         -3 |        -22 |        -65 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\modifyCourse.js           | JavaScript      |       -115 |         -9 |        -28 |       -152 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\settings.js               | JavaScript      |       -308 |        -22 |        -74 |       -404 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\settingsItems.js          | JavaScript      |       -213 |        -18 |       -103 |       -334 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\settingsLessons.js        | JavaScript      |       -445 |        -32 |       -186 |       -663 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\settingsLoans.js          | JavaScript      |        -61 |        -33 |        -31 |       -125 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\signup.js                 | JavaScript      |        -46 |         -4 |        -11 |        -61 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\stomp.js                  | JavaScript      |       -611 |         -8 |        -42 |       -661 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\subscriptions.js          | JavaScript      |        -47 |         -3 |        -11 |        -61 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\user.js                   | JavaScript      |        -84 |         -4 |        -22 |       -110 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\userBookings.js           | JavaScript      |        -15 |          0 |        -14 |        -29 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\static\js\userItems.js              | JavaScript      |         -9 |         -3 |         -6 |        -18 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\addCourse.html            | HTML            |        -73 |         -6 |        -24 |       -103 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\allItems.html             | HTML            |        -39 |        -14 |        -24 |        -77 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\bookLesson.html           | HTML            |        -87 |        -27 |        -39 |       -153 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\chats.html                | HTML            |       -112 |         -2 |        -18 |       -132 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\courses.html              | HTML            |       -171 |         -6 |        -45 |       -222 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\coursesStaff.html         | HTML            |        -77 |         -3 |        -18 |        -98 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\derechosImgs.html         | HTML            |        -41 |         -5 |        -32 |        -78 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\error.html                | HTML            |        -91 |         -3 |        -13 |       -107 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\fragments\footer.html     | HTML            |        -98 |         -6 |        -24 |       -128 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\fragments\head.html       | HTML            |        -36 |          0 |         -5 |        -41 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\fragments\nav.html        | HTML            |       -107 |        -15 |        -30 |       -152 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\index.html                | HTML            |       -156 |        -71 |       -118 |       -345 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\itemsToLoan.html          | HTML            |        -46 |        -14 |        -25 |        -85 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\lessons.html              | HTML            |        -11 |         -1 |         -6 |        -18 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\lessonsToBook.html        | HTML            |        -48 |        -20 |        -33 |       -101 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\loanItem.html             | HTML            |       -118 |       -203 |        -63 |       -384 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\loanList.html             | HTML            |        -81 |         -7 |        -30 |       -118 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\loanListHistory.html      | HTML            |        -79 |         -8 |        -30 |       -117 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\login.html                | HTML            |        -26 |          0 |         -5 |        -31 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\modifyCourse.html         | HTML            |        -91 |         -7 |        -25 |       -123 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\paymentPage.html          | HTML            |        -53 |         -1 |        -13 |        -67 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\paymentPageBookings.html  | HTML            |        -70 |         -1 |        -23 |        -94 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\seeCourse.html            | HTML            |        -43 |         -3 |        -16 |        -62 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\settings.html             | HTML            |       -691 |        -29 |       -189 |       -909 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\signup.html               | HTML            |        -77 |          0 |        -13 |        -90 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\subscriptions.html        | HTML            |        -87 |        -10 |        -12 |       -109 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\user.html                 | HTML            |       -193 |         -3 |        -33 |       -229 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\userBookings.html         | HTML            |        -52 |        -28 |        -33 |       -113 |
+| d:\OneDrive - Universidad Complutense de Madrid (UCM)\Uni\Cuarto\2oCuatri\TFG2\TFG\src\main\resources\templates\userItems.html            | HTML            |        -75 |         -4 |        -36 |       -115 |
+| Total                                                                                                                                     |                 |    -24,572 |     -2,486 |     -6,153 |    -33,211 |
++-------------------------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+

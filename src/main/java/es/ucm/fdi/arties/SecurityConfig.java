@@ -53,14 +53,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/css/**", "/js/**", "/img/**", "/", "/error", "/signup", "/courses", "/seeCourse", "/items/listToLoan", "/lessons/lessonsToBook", "/derechosImgs").permitAll()
 				.antMatchers("/api/**").permitAll()            // <-- public api access
 				.antMatchers("/admin/**", "/existeUsuario", "/getUser").hasRole("ADMIN")	   // <-- administration
-				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/createCourse", "/modifyCourseImg", "/modifyCourse", "/deleteCourse").hasRole("ADMIN")
+				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff").hasRole("ADMIN")
 				//items admin
 				.antMatchers( "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem").hasRole("ADMIN")
 				.antMatchers("/admin/**", "/existeUsuario", "/getUser", "/deletePhrase", "/addPhrase", "/changeGymSubPrice").hasRole("ADMIN")	   // <-- administration
-				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/addCourse", "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem").hasRole("ADMIN")
+				.antMatchers("/settings", "/user/deleteUser", "/user/addStaff", "/items/addNewItem", "/items/modifyItem", "/items/modifyItemImg","/items/deleteItem").hasRole("ADMIN")
 				.antMatchers("/lessons/addNewLesson", "/lessons/modifyLessonImg", "/lessons/modifyLesson").hasRole("ADMIN")
 				.antMatchers("/user/**").hasAnyRole("USER", "STAFF", "ADMIN")	
-				.antMatchers("/chats", "/loanList","/items/endLoan", "/items/undoEndLoan", "/loanListHistory").hasAnyRole("STAFF", "ADMIN")	   
+				.antMatchers("/chats", "/loanList","/items/endLoan", "/items/undoEndLoan", "/loanListHistory", "/coursesStaff", "/addCourse", "/createCourse", "/modifyCourseImg", "/modifyCourse", "/deleteCourse","/uploadCourseVideo").hasAnyRole("STAFF", "ADMIN")	   
 				.antMatchers("/newQuestion", "/suscribe", "/updateUserDescription", "/paymentPage", "/cancelSub").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/subscriptions", "/lessons", "/items/myItems","/items/loanItem", "/items/makeLoan", "items/availableItemDay", "/modifyUser", "/getConversation", "/getStaffList").hasAnyRole("USER", "ADMIN", "STAFF")
 				.antMatchers("/lessons/myBookingLessons", "/lessons/bookLesson", "/lessons/getDaysOfLesson", "/lessons/bookLessonSession", "/lessons/cancelBookSession", "/lessons/payBooking", "/lessons/paidBookingLessonSession").hasAnyRole("USER", "ADMIN", "STAFF")

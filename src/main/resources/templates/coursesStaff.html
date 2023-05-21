@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <title>Gestión cursos</title>
+  <!--   <link rel="stylesheet" href="css/courses.css" /> -->
+  <link rel="stylesheet" href="../css/custom.css" />
+  <link rel="stylesheet" href="css/settings.css" />
+  <link rel="stylesheet" href="css/coursesStaff.css" />
+
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+
+    <div class="mainContainer">
+
+        <div class="row">
+            <div class="col col-md-4 offset-2 text-center">
+                <div class="col dropdown">
+                    <button class="btn customButton dropdown-toggle" type="button" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="dropdownCategoriesText"> Todos los cursos </span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
+                        <button class="dropdown-item" type="button" onclick="manageCoursesTabs(event)" id="allCourses">Todos los cursos</button>
+                        <button class="dropdown-item" type="button" 
+                            th:each="cat,iter: ${categories}" onclick="manageCoursesTabs(event)" th:id="${cat.id}" th:text="${cat.name}">cat name
+                        </button>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col col-md-4 text-center">
+                <a class="btn customButton" id="addCourseButton" th:href="@{/addCourse}">Añadir curso</a>
+            </div>
+        </div>
+        
+
+        <div th:id="allCoursesPanel" class="firstTab coursesTab">
+            <div class="row justify-content-center">
+                <th:block th:each="course,iter: ${coursesList}">
+                    <div  th:class="${course.id}+ ' row courseRow'">
+                        <div class="col col-md-7">
+                            <p th:text="${course.name}" class="courseName"></p>
+                        </div>
+
+                        <div class="col">
+                            <a class="btn customButton" th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}">Ver curso</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-secondary" th:href="@{/modifyCourse?courseId={id} (id=${course.id})}">Modificar</a>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-danger"  onclick="deleteCourse(event)" th:value="${course.id}">Eliminar</button>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+        <!-- --- create dynamic tab panels --- -->
+        
+        <th:block th:each="cat,iter: ${categories}">
+            <div th:id="${cat.id} + 'Panel'" class="coursesTab">
+                <div class="row justify-content-center">
+                    <th:block th:each="course,iter: ${cat.coursesList}">
+                    <div th:class="${course.id}+ ' row courseRow'">
+                        <div class="col col-md-7">
+                            <p th:text="${course.name}" class="courseName"></p>
+                        </div>
+
+                        <div class="col">
+                            <a class="btn customButton" th:href="@{/seeCourse?chosenCourseId={id} (id=${course.id})}">Ver curso</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-secondary" th:href="@{/modifyCourse?courseId={id} (id=${course.id})}">Modificar</a>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-danger" onclick="deleteCourse(event)" th:value="${course.id}">Eliminar</button>
+                        </div>
+                            
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+    <!-- Pie de pagina -->
+    <th:block th:replace="fragments/footer.html :: footer" />
+
+
+    <script th:src="@{/js/coursesStaff.js}" src="js/coursesStaff.js" ></script>
+    
+</body>
+</html>

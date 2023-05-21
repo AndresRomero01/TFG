@@ -77,6 +77,10 @@
                             </li>
 
                             <li th:if="${session.u.hasAnyRole('STAFF')}" class="nav-item mx-2">
+                                <a class="nav-link"  th:href="@{/coursesStaff}" id="navLoanList">Gestionar cursos</a>
+                            </li>
+
+                            <li th:if="${session.u.hasAnyRole('STAFF')}" class="nav-item mx-2">
                                 <a class="nav-link"  th:href="@{/loanList}" id="navLoanList">Alquileres</a>
                             </li>
 

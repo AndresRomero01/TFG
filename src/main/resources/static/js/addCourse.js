@@ -49,19 +49,24 @@ function createCourse(){
                         "cat": catId,
                         "desc": desc,
                         "hasImage": hasImage,
-                        "hasBideo": hasVideo,
+                        "hasVideo": hasVideo,
                         "isFree": checked}; 
 
         go(config.rootUrl + "/createCourse", 'POST', params)
         .then(d => {console.log("todo ok") // va ok si el username no existe o si existe pero era el del user correspondiente
+            console.log("al ppio");
             if(hasImage){
+                
                 modifyCourseImg(d["courseId"])
+                console.log("despues modify img");
             }
             if(hasVideo){
                 uploadVideo(d["courseId"])
+                console.log("despues upload video");
             }
             //console.log("navCourse: " + document.getElementById("navCourses").href);
             courseAddedToast.show()
+            console.log("despues toast");
             
         })
         .catch(() => {console.log("Error en catch createCourse");//si el username ya existia

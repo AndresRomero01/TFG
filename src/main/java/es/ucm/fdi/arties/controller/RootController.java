@@ -327,6 +327,16 @@ public class RootController {
         return "courses";
     }
 
+    @GetMapping("/coursesStaff")
+    public String coursesStaff(Model model, HttpSession session) {
+        List<Course> coursesList = new ArrayList<Course>();
+        List<Category> lc = db.getCoursesCatogories(em);
+        coursesList = db.getCoursesList(em);
+        model.addAttribute("categories", lc);
+        model.addAttribute("coursesList", coursesList);
+        return "coursesStaff";
+    }
+
     /* @GetMapping(path = "/getCoursesList", produces = "application/json")
     @ResponseBody
     public List<Course> getCoursesList(HttpSession session) {
