@@ -389,6 +389,10 @@ a:hover{
   all: unset;
 } */
 
+.item a{
+  color: white;
+}
+
 
 
 @media (min-width:1600px) {

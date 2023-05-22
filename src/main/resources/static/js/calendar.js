@@ -370,7 +370,7 @@ function translateDays()
 function transalateOneDay(dayStr)
 {
 var w = window.innerWidth;
-if(w <=600)
+if(w <=740)
 {
   dayStr = dayStr.replace("Mon", "L");
   dayStr = dayStr.replace("Tue", "M");

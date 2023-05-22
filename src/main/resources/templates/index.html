@@ -69,14 +69,17 @@
 
                 <th:block th:each="course,iter: ${freeCourses}">
                     <div class="item">
-                        <div class="myContainer">
-                            <div class="myCard" th:style="'background: url(img/courses/' + ${course.id}+'.jpg) center center / cover'" style="background: url(img/drawing.jpg) center center / cover">
-                                <div class="myDetails">
-                                    <h2 th:text="${course.name}">Lakes</h2>
-                                    <p class="myDescText" th:text="${course.description}">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet. Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet</p>
+                        <a th:href="'/seeCourse?chosenCourseId='+${course.id}">
+                            <div class="myContainer">
+                                <div class="myCard" th:style="'background: url(img/courses/' + ${course.id}+'.jpg) center center / cover'" style="background: url(img/drawing.jpg) center center / cover">
+                                    <div class="myDetails">
+                                        <h2 th:text="${course.name}">Lakes</h2>
+                                        <p class="myDescText" th:text="${course.description}">Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet. Lorem impsum dolor sit amet consecteuit adipiscining elit. Nobis, sit impsum dolor sit amet</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+                        
                     </div>
 
                 </th:block>
