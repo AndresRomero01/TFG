@@ -487,17 +487,20 @@ public class RootController {
         }
 
         User u = (User) session.getAttribute("u");
+
+        if(u != null)
+        {
+            db.incrementCourseTimesDone(em, u.getId(), chosenCourseId);
+          
+        }
+
+       
         if(u != null && u.hasAnySub()){
             model.addAttribute("course", c);
             return "seeCourse";
         }
 
-        if(u != null)
-        {
-            User u2;
-            u2 = db.getUser(em, u.getId());
-            
-        }
+      
 
         courses(model, session);
 

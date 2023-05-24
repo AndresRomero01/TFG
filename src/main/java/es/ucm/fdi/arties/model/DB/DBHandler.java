@@ -19,6 +19,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import es.ucm.fdi.arties.model.Category;
 import es.ucm.fdi.arties.model.ChatMessage;
 import es.ucm.fdi.arties.model.Course;
+import es.ucm.fdi.arties.model.RelationUserCourse;
+import es.ucm.fdi.arties.model.RelationUserCourseId;
 import es.ucm.fdi.arties.model.User;
 import es.ucm.fdi.arties.model.User.ClientType;
 
@@ -250,5 +252,38 @@ public class DBHandler {
         query.executeUpdate();
     }
 
+
+    @Transactional
+    public void incrementCourseTimesDone(EntityManager em, long idUsr, long idCourse)
+    {
+
+        User u2;
+        u2 = getUser(em, idUsr);
+
+
+        RelationUserCourse courseDone = null;
+        for(RelationUserCourse ruc: u2.getCoursesList())
+        {
+            if(ruc.getCourse().getId() == idCourse)
+            {
+                ruc.setTimesDone(ruc.getTimesDone()+1);
+                courseDone = ruc;
+                break;
+            }      
+        }
+
+        if(courseDone == null)
+        {
+            Course c = em.find(Course.class, idCourse);
+            RelationUserCourseId idRel = new RelationUserCourseId(idUsr, idCourse);
+            courseDone = new RelationUserCourse(idRel,c,u2,1);
+            em.persist(courseDone);
+            u2.getCoursesList().add(courseDone);
+            c.getCoursesList().add(courseDone);
+            em.flush();
+
+        }
+
+    }
 
 }
