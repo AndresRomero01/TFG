@@ -13,8 +13,8 @@
 }
 
 #successToast{
-    position: absolute;
-    top: 10%;
+    position: fixed;
+    top: 6%;
     left: 45%;
 }
 

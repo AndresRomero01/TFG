@@ -1,6 +1,6 @@
 
 const modalModifyUserImg = new bootstrap.Modal(document.querySelector('#modalUserImg'));
-
+const infoModifiedToast = new bootstrap.Toast(document.querySelector('#infoModifiedToast'));
 
 function applyChanges(){
     console.log("-- dentro de apply changes --");
@@ -46,6 +46,7 @@ function applyChanges(){
             username.setCustomValidity("");
             document.getElementById("password1").value="";
             document.getElementById("password2").value="";
+            infoModifiedToast.show();
             //document.getElementById('closeProfileModal').click(); // cutre, pero lo de arriba no me ha funcionado
         })
         .catch(() => {console.log("Error en catch apply changes");//si el username ya existia
@@ -63,7 +64,7 @@ function updateDescription(){
 
     go(config.rootUrl + "/updateUserDescription", 'POST', params)
     .then(d => {console.log("all ok") 
-
+        infoModifiedToast.show();
     })
     .catch(() => {console.log("Error in catch update description");
 

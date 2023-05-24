@@ -14,9 +14,9 @@ VALUES (1, TRUE, 'ADMIN', 'a',
 INSERT INTO ARTIESUser (id, enabled, roles, username, password,address, email, phone, first_name, last_name)
 VALUES (2, TRUE, 'USER', 'user',
     'u', 'calla jefazo', 'user@gmail.es', '1234123555', 'user', 'user'); */
-INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type, description)
-VALUES (1, 'ADMIN', 'a',
-    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'calla jefazo', 'admin@faq.es', '123456321', 'admin', 'admin', 2, 'Dentro de la descripcion del admin: me lesione de la rodilla');
+INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
+VALUES (1, 'ADMIN', 'admin',
+    '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'c/ Acacias 31', 'admin@arties.es', '123 456 321', 'admin', 'admin', 2);
 
 INSERT INTO ARTIESUser (id, roles, username, password,address, email, phone, first_name, last_name, client_type)
 VALUES (2, 'USER', 'b',
@@ -116,7 +116,7 @@ INSERT INTO RELATION_USER_COURSE(course_id, user_id, times_done)
 VALUES (2, 1, 1);
 
 INSERT INTO RELATION_USER_COURSE(course_id, user_id, times_done)
-VALUES (3, 1, 1000);
+VALUES (3, 1, 10);
 
 INSERT INTO RELATION_USER_COURSE(course_id, user_id, times_done)
 VALUES (1, 2, 3);
@@ -152,7 +152,7 @@ VALUES (7,'Esterilla de yoga', 30, 3, 'La esterilla de yoga es un accesorio esen
 /* Para probar fecha de devolucion ya pasada o no unidades disponibles modificando fecha endLoand 
 y poniendo dia del start del siguiente al dia siguiente*/
 INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
-VALUES (1, 1, 4, 2, '2023-03-20T10:00:00', '2023-05-19T23:59:00',TRUE);
+VALUES (1, 1, 4, 2, '2023-03-20T10:00:00', '2023-05-25T23:59:00',TRUE);
 
 INSERT INTO ITEM_LOANS(id, user_id, item_id, quantity, loan_start, loan_end, is_active)
 VALUES (2, 3, 4, 3, '2023-05-21T00:00:00', '2023-05-25T23:59:00',TRUE);
