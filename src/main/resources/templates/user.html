@@ -140,7 +140,7 @@
 
                         <h3 class="statsSectionTitle">Cursos realizados</h3>
                         <th:block th:if="${#lists.isEmpty(coursesList)}">
-                            <h5 id="noCoursesMsg">Aun no has completado ningún curso. Te animamos a empezar!</h5>
+                            <h5 class="emptyListMsg">Aun no has completado ningún curso. Te animamos a empezar!</h5>
                         </th:block>
                         <th:block th:unless="${#lists.isEmpty(coursesList)}">
                             <div class="d-flex justify-content-center">
@@ -157,7 +157,7 @@
                         
                         <h3 class="statsSectionTitle">Clases asistidas</h3>
                         <th:block th:if="${#lists.isEmpty(user.getAttendance)}">
-                            <h5>Aun no has asistido a ninguna clase</h5>
+                            <h5 class="emptyListMsg">Aun no has asistido a ninguna clase</h5>
                         </th:block>
                         <th:block th:unless="${#lists.isEmpty(user.getAttendance)}">
                             <div class="d-flex justify-content-center">
@@ -174,7 +174,7 @@
 
                         <h3 class="statsSectionTitle">Material alquilado</h3>
                         <th:block th:if="${#lists.isEmpty(user.getHistoryLoans)}">
-                            <h5 >Aun no has alquilado ningun material</h5>
+                            <h5 class="emptyListMsg">Aun no has alquilado ningun material</h5>
                         </th:block>
                         <th:block th:unless="${#lists.isEmpty(user.getHistoryLoans)}">
                             <div class="d-flex justify-content-center">
