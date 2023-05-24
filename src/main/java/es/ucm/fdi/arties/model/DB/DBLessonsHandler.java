@@ -125,34 +125,38 @@ public class DBLessonsHandler {
             }
         }
 
+        log.info("new sessions: " + newSessions);
 
-        LocalDate actualDate = LocalDate.now();
-        LocalDate date = actualDate;
-        String[] newSessionsArray = newSessions.split(",");
-        for (int i = 1; i <= 30; i++) {
-                DayOfWeek dw =date.getDayOfWeek();
+         if(newSessions.length() >1)
+        {
+            LocalDate actualDate = LocalDate.now();
+            LocalDate date = actualDate;
+            String[] newSessionsArray = newSessions.split(",");
+            for (int i = 1; i <= 30; i++) {
+                    DayOfWeek dw =date.getDayOfWeek();
 
-                for(int j = 0; j < newSessionsArray.length; j++)
-                {
-                    String[] parts = newSessionsArray[j].split("-");
-                    DayOfWeek sessionDay = DayOfWeek.valueOf(parts[0]);
-                    LocalTime sessionHour = LocalTime.parse(parts[1]);
-                    if(dw.toString() == sessionDay.toString())
+                    for(int j = 0; j < newSessionsArray.length; j++)
                     {
-                        LocalDateTime dateAndHour = date.atTime(sessionHour);
-                        addSessionOfLesson(em, l, dateAndHour);
+                        String[] parts = newSessionsArray[j].split("-");
+                        log.info("partes:" + parts[0] + " - " +parts[1]);
+                        DayOfWeek sessionDay = DayOfWeek.valueOf(parts[0]);
+                        LocalTime sessionHour = LocalTime.parse(parts[1]);
+                        if(dw.toString() == sessionDay.toString())
+                        {
+                            LocalDateTime dateAndHour = date.atTime(sessionHour);
+                            addSessionOfLesson(em, l, dateAndHour);
+                        }
+
                     }
 
-                }
-
-          /*   log.info("date: "+ date.toString());
-            createNewSessionsInDay(em,date); */
+            /*   log.info("date: "+ date.toString());
+                createNewSessionsInDay(em,date); */
 
 
-            date = actualDate.plusDays(i);	   
-      }
+                date = actualDate.plusDays(i);	   
+        }
        
-
+    }
 
         sessions.removeAll(sessionsToremove);
 

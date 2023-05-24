@@ -405,5 +405,13 @@ public class User implements Transferable<User.Transfer> {
 
         return history;
     }
+
+ /*    public void incrementCourseTimesDone(long idCourse)
+    {
+        for(RelationUserCourse ruc: coursesList)
+        {
+            if(ruc.getCourse().get)
+        }
+    } */
 }
 

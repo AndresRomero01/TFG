@@ -476,6 +476,7 @@ public class RootController {
     }
 
     @GetMapping("/seeCourse")
+    @Transactional
     public String seeCourse(Model model, HttpSession session, @RequestParam(required = true) Long chosenCourseId) {
         putComundDataInModel(model, session);
 
@@ -489,6 +490,13 @@ public class RootController {
         if(u != null && u.hasAnySub()){
             model.addAttribute("course", c);
             return "seeCourse";
+        }
+
+        if(u != null)
+        {
+            User u2;
+            u2 = db.getUser(em, u.getId());
+            
         }
 
         courses(model, session);

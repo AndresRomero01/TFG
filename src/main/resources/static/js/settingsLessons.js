@@ -371,6 +371,8 @@ function openModalModifyLesson(e)
 
     let lessonToModifyContainer =  e.target.closest(".lessonRow");
 
+    document.querySelector("#sessionListContainerM").innerHTML = "";
+
     console.log("closest: " + lessonToModifyContainer)
 
     let desc = document.querySelector("#lessonDesc"+id).textContent
@@ -396,6 +398,9 @@ function openModalModifyLesson(e)
 
     initialSessionsToModify = []
     initialSessionsToModifyEs = []
+
+    sessionsToModify = []
+    sessionsToModifyEs =[]
     
     console.log("initial:" + initialSessionsToModify)
     for(let i = 0; i < sessionListAux.length; i++)
